@@ -76,6 +76,32 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     }
 
     /// <summary>
+    /// Minimum filtering score (between 0 and 1) for AML suspicions to be considered.
+    /// </summary>
+    public float? FilteringScoreAmlSuspicions
+    {
+        get
+        {
+            if (
+                !this.Properties.TryGetValue(
+                    "filtering_score_aml_suspicions",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Preferred language for responses or notifications (e.g., "eng", "fra").
     /// </summary>
     public string? Language
@@ -122,6 +148,7 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
         _ = this.ActiveAmlSuspicions;
         _ = this.CallbackURL;
         _ = this.CallbackURLNotification;
+        _ = this.FilteringScoreAmlSuspicions;
         _ = this.Language;
         _ = this.RawData;
     }
