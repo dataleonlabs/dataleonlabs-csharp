@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0 (2025-09-10)
+
+Full Changelog: [v0.0.2...v0.1.0](https://github.com/dataleonlabs/dataleonlabs-csharp/compare/v0.0.2...v0.1.0)
+
+### Features
+
+* **api:** api update ([22da706](https://github.com/dataleonlabs/dataleonlabs-csharp/commit/22da706cfaa59cbebe44df1f19632f2bb9428675))
+
 ## 0.0.2 (2025-08-28)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/dataleonlabs/dataleonlabs-csharp/compare/v0.0.1...v0.0.2)
