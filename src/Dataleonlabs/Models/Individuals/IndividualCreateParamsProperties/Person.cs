@@ -142,6 +142,27 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     }
 
     /// <summary>
+    /// Nationality of the individual (ISO 3166-1 alpha-3 country code).
+    /// </summary>
+    public string? Nationality
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("nationality", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["nationality"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Phone number of the individual.
     /// </summary>
     public string? PhoneNumber
@@ -170,6 +191,7 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
         this.Gender?.Validate();
         _ = this.LastName;
         _ = this.MaidenName;
+        _ = this.Nationality;
         _ = this.PhoneNumber;
     }
 
