@@ -149,6 +149,9 @@ public abstract record class ParamsBase
 
     protected static void AddDefaultHeaders(HttpRequestMessage request, IDataleonlabsClient client)
     {
-        request.Headers.Add("Api-Key", client.APIKey);
+        if (client.APIKey != null)
+        {
+            request.Headers.Add("Api-Key", client.APIKey);
+        }
     }
 }
