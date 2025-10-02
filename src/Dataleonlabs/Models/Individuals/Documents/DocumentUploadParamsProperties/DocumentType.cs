@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 
 namespace Dataleonlabs.Models.Individuals.Documents.DocumentUploadParamsProperties;
 
@@ -135,7 +136,9 @@ sealed class DocumentTypeConverter : JsonConverter<DocumentType>
                 DocumentType.ProofOfSourceFunds => "proof_of_source_funds",
                 DocumentType.OrganizationalChart => "organizational_chart",
                 DocumentType.RiskPolicies => "risk_policies",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

@@ -1,4 +1,4 @@
-namespace Dataleonlabs;
+namespace Dataleonlabs.Core;
 
 interface IVariant<TVariant, TValue>
     where TVariant : IVariant<TVariant, TValue>

@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 
 namespace Dataleonlabs.Models.Individuals.IndividualUpdateParamsProperties.PersonProperties;
 
@@ -38,7 +39,9 @@ sealed class GenderConverter : JsonConverter<Gender>
             {
                 Gender.M => "M",
                 Gender.F => "F",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

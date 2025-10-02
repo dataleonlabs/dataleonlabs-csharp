@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.CompanyProperties.CompanyProperties;
 
 namespace Dataleonlabs.Models.Companies.CompanyProperties;
