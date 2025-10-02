@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 using System = System;
 
 namespace Dataleonlabs.Models.Companies.AmlSuspicionProperties;
@@ -48,7 +49,9 @@ sealed class TypeConverter : JsonConverter<Type>
                 AmlSuspicionProperties.Type.Pep => "pep",
                 AmlSuspicionProperties.Type.AdverseNews => "adverse_news",
                 AmlSuspicionProperties.Type.Other => "other",
-                _ => throw new System::ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

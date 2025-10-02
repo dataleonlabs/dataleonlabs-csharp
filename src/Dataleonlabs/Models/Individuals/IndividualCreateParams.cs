@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Individuals.IndividualCreateParamsProperties;
 
 namespace Dataleonlabs.Models.Individuals;
@@ -22,10 +24,16 @@ public sealed record class IndividualCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("workspace_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("workspace_id", "Missing required argument");
+                throw new DataleonlabsInvalidDataException(
+                    "'workspace_id' cannot be null",
+                    new ArgumentOutOfRangeException("workspace_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("workspace_id");
+                ?? throw new DataleonlabsInvalidDataException(
+                    "'workspace_id' cannot be null",
+                    new ArgumentNullException("workspace_id")
+                );
         }
         set
         {
@@ -107,7 +115,7 @@ public sealed record class IndividualCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -116,7 +124,10 @@ public sealed record class IndividualCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDataleonlabsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDataleonlabsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
+using Dataleonlabs.Core;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -63,7 +64,10 @@ public sealed record class CompanyRetrieveParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDataleonlabsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDataleonlabsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

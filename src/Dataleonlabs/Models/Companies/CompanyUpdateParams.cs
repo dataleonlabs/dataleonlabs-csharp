@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using CompanyUpdateParamsProperties = Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties;
 
 namespace Dataleonlabs.Models.Companies;
@@ -24,12 +26,19 @@ public sealed record class CompanyUpdateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("company", out JsonElement element))
-                throw new ArgumentOutOfRangeException("company", "Missing required argument");
+                throw new DataleonlabsInvalidDataException(
+                    "'company' cannot be null",
+                    new ArgumentOutOfRangeException("company", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<CompanyUpdateParamsProperties::Company>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("company");
+                )
+                ?? throw new DataleonlabsInvalidDataException(
+                    "'company' cannot be null",
+                    new ArgumentNullException("company")
+                );
         }
         set
         {
@@ -48,10 +57,16 @@ public sealed record class CompanyUpdateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("workspace_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("workspace_id", "Missing required argument");
+                throw new DataleonlabsInvalidDataException(
+                    "'workspace_id' cannot be null",
+                    new ArgumentOutOfRangeException("workspace_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("workspace_id");
+                ?? throw new DataleonlabsInvalidDataException(
+                    "'workspace_id' cannot be null",
+                    new ArgumentNullException("workspace_id")
+                );
         }
         set
         {
@@ -118,7 +133,7 @@ public sealed record class CompanyUpdateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -127,7 +142,10 @@ public sealed record class CompanyUpdateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDataleonlabsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDataleonlabsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 
 namespace Dataleonlabs.Models.Companies.CompanyListParamsProperties;
 
@@ -59,7 +60,9 @@ sealed class StateConverter : JsonConverter<State>
                 State.Aborted => "ABORTED",
                 State.Expired => "EXPIRED",
                 State.Deleted => "DELETED",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );
