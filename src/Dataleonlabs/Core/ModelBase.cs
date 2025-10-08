@@ -9,7 +9,7 @@ using IndividualListParamsProperties = Dataleonlabs.Models.Individuals.Individua
 using MemberProperties = Dataleonlabs.Models.Companies.CompanyProperties.MemberProperties;
 using PersonProperties = Dataleonlabs.Models.Individuals.IndividualUpdateParamsProperties.PersonProperties;
 
-namespace Dataleonlabs;
+namespace Dataleonlabs.Core;
 
 public abstract record class ModelBase
 {

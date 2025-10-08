@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 using System = System;
 
 namespace Dataleonlabs.Models.Companies.AmlSuspicionProperties;
@@ -42,7 +43,9 @@ sealed class StatusConverter : JsonConverter<Status>
                 Status.TruePositive => "true_positive",
                 Status.FalsePositive => "false_positive",
                 Status.Pending => "pending",
-                _ => throw new System::ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

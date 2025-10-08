@@ -1,5 +1,7 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Dataleonlabs.Core;
 using Dataleonlabs.Services.Companies;
 using Dataleonlabs.Services.Individuals;
 
@@ -20,4 +22,7 @@ public interface IDataleonlabsClient
     ICompanyService Companies { get; }
 
     IIndividualService Individuals { get; }
+
+    Task<HttpResponse> Execute<T>(HttpRequest<T> request)
+        where T : ParamsBase;
 }

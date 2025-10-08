@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0 (2025-10-08)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/dataleonlabs/dataleonlabs-csharp/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **client:** refactor exceptions ([9324b91](https://github.com/dataleonlabs/dataleonlabs-csharp/commit/9324b91a8d78779735965bfba2567e3d79c55661))
+* **client:** refactor unions ([e0c65a1](https://github.com/dataleonlabs/dataleonlabs-csharp/commit/e0c65a14e6f1236177eb4f33afc25a4c67047024))
+* **internal:** add dev container ([2749d0e](https://github.com/dataleonlabs/dataleonlabs-csharp/commit/2749d0eb197c183d94e202c3b4c324f6597b4de9))
+
+
+### Bug Fixes
+
+* **internal:** remove example csproj ([14b5d39](https://github.com/dataleonlabs/dataleonlabs-csharp/commit/14b5d395a0c4d2b35eb60c0d8bc883ffe7eaf422))
+
 ## 0.1.1 (2025-09-11)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/dataleonlabs/dataleonlabs-csharp/compare/v0.1.0...v0.1.1)

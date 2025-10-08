@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies.Documents.DocumentUploadParamsProperties;
 
 namespace Dataleonlabs.Models.Companies.Documents;
@@ -24,7 +26,10 @@ public sealed record class DocumentUploadParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("document_type", out JsonElement element))
-                throw new ArgumentOutOfRangeException("document_type", "Missing required argument");
+                throw new DataleonlabsInvalidDataException(
+                    "'document_type' cannot be null",
+                    new ArgumentOutOfRangeException("document_type", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
                 element,
@@ -93,7 +98,7 @@ public sealed record class DocumentUploadParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -102,7 +107,10 @@ public sealed record class DocumentUploadParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDataleonlabsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDataleonlabsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

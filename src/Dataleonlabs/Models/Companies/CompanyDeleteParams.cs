@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using Dataleonlabs.Core;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -20,7 +21,10 @@ public sealed record class CompanyDeleteParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDataleonlabsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDataleonlabsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

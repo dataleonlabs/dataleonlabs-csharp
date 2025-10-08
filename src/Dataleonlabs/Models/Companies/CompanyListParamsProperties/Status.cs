@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 
 namespace Dataleonlabs.Models.Companies.CompanyListParamsProperties;
 
@@ -41,7 +42,9 @@ sealed class StatusConverter : JsonConverter<Status>
                 Status.Rejected => "rejected",
                 Status.NeedReview => "need_review",
                 Status.Approved => "approved",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

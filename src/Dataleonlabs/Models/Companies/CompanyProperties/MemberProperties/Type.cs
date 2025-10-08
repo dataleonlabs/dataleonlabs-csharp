@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dataleonlabs.Exceptions;
 using System = System;
 
 namespace Dataleonlabs.Models.Companies.CompanyProperties.MemberProperties;
@@ -38,7 +39,9 @@ sealed class TypeConverter : JsonConverter<Type>
             {
                 MemberProperties.Type.Person => "person",
                 MemberProperties.Type.Company => "company",
-                _ => throw new System::ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );
