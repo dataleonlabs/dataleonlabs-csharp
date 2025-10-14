@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
+using Dataleonlabs.Models.Companies.TechnicalDataProperties;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -335,6 +336,30 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     }
 
     /// <summary>
+    /// List of steps to include in the portal workflow.
+    /// </summary>
+    public List<ApiEnum<string, PortalStep>>? PortalSteps
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("portal_steps", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep>>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        set
+        {
+            this.Properties["portal_steps"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Indicates whether QR code is enabled ("true" or "false").
     /// </summary>
     public string? QrCode
@@ -498,6 +523,10 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
         _ = this.LocationIP;
         _ = this.NeedReviewAt;
         _ = this.NotificationConfirmation;
+        foreach (var item in this.PortalSteps ?? [])
+        {
+            item.Validate();
+        }
         _ = this.QrCode;
         _ = this.RawData;
         _ = this.RejectedAt;
