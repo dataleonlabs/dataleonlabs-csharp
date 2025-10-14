@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
+using Dataleonlabs.Models.Individuals.IndividualUpdateParamsProperties.TechnicalDataProperties;
 
 namespace Dataleonlabs.Models.Individuals.IndividualUpdateParamsProperties;
 
@@ -124,6 +125,30 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     }
 
     /// <summary>
+    /// List of steps to include in the portal workflow.
+    /// </summary>
+    public List<ApiEnum<string, PortalStep>>? PortalSteps
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("portal_steps", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep>>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        set
+        {
+            this.Properties["portal_steps"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Flag indicating whether to include raw data in the response.
     /// </summary>
     public bool? RawData
@@ -151,6 +176,10 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
         _ = this.CallbackURLNotification;
         _ = this.FilteringScoreAmlSuspicions;
         _ = this.Language;
+        foreach (var item in this.PortalSteps ?? [])
+        {
+            item.Validate();
+        }
         _ = this.RawData;
     }
 
