@@ -10,8 +10,12 @@ namespace Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties;
 /// <summary>
 /// Technical metadata and callback configuration.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalData>))]
-public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
+[JsonConverter(
+    typeof(ModelConverter<global::Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties.TechnicalData>)
+)]
+public sealed record class TechnicalData
+    : ModelBase,
+        IFromRaw<global::Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties.TechnicalData>
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -193,7 +197,9 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     }
 #pragma warning restore CS8618
 
-    public static TechnicalData FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static global::Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties.TechnicalData FromRawUnchecked(
+        Dictionary<string, JsonElement> properties
+    )
     {
         return new(properties);
     }
