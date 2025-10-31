@@ -11,8 +11,12 @@ namespace Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties;
 /// <summary>
 /// Main information about the company being registered.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Company>))]
-public sealed record class Company : ModelBase, IFromRaw<Company>
+[JsonConverter(
+    typeof(ModelConverter<global::Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties.Company>)
+)]
+public sealed record class Company
+    : ModelBase,
+        IFromRaw<global::Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties.Company>
 {
     /// <summary>
     /// Legal name of the company.
@@ -370,7 +374,9 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     }
 #pragma warning restore CS8618
 
-    public static Company FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static global::Dataleonlabs.Models.Companies.CompanyUpdateParamsProperties.Company FromRawUnchecked(
+        Dictionary<string, JsonElement> properties
+    )
     {
         return new(properties);
     }
