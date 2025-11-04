@@ -23,7 +23,12 @@ public sealed class DocumentService : IDocumentService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<DocumentResponse>().ConfigureAwait(false);
+        var documentResponse = await response.Deserialize<DocumentResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            documentResponse.Validate();
+        }
+        return documentResponse;
     }
 
     public async Task<GenericDocument> Upload(Documents::DocumentUploadParams parameters)
@@ -34,6 +39,11 @@ public sealed class DocumentService : IDocumentService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<GenericDocument>().ConfigureAwait(false);
+        var genericDocument = await response.Deserialize<GenericDocument>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            genericDocument.Validate();
+        }
+        return genericDocument;
     }
 }

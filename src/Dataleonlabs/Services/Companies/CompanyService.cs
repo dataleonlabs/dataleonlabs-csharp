@@ -32,7 +32,12 @@ public sealed class CompanyService : ICompanyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Company>().ConfigureAwait(false);
+        var company = await response.Deserialize<Company>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            company.Validate();
+        }
+        return company;
     }
 
     public async Task<Company> Retrieve(CompanyRetrieveParams parameters)
@@ -43,7 +48,12 @@ public sealed class CompanyService : ICompanyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Company>().ConfigureAwait(false);
+        var company = await response.Deserialize<Company>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            company.Validate();
+        }
+        return company;
     }
 
     public async Task<Company> Update(CompanyUpdateParams parameters)
@@ -54,7 +64,12 @@ public sealed class CompanyService : ICompanyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Company>().ConfigureAwait(false);
+        var company = await response.Deserialize<Company>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            company.Validate();
+        }
+        return company;
     }
 
     public async Task<List<Company>> List(CompanyListParams? parameters = null)
@@ -67,7 +82,15 @@ public sealed class CompanyService : ICompanyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<List<Company>>().ConfigureAwait(false);
+        var companies = await response.Deserialize<List<Company>>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            foreach (var item in companies)
+            {
+                item.Validate();
+            }
+        }
+        return companies;
     }
 
     public async Task Delete(CompanyDeleteParams parameters)
@@ -78,6 +101,5 @@ public sealed class CompanyService : ICompanyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 }
