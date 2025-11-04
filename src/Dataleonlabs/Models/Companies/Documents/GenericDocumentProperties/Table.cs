@@ -35,10 +35,7 @@ public sealed record class Table : ModelBase, IFromRaw<Table>
 
     public override void Validate()
     {
-        foreach (var item in this.Operation ?? [])
-        {
-            _ = item;
-        }
+        _ = this.Operation;
     }
 
     public Table() { }

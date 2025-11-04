@@ -76,10 +76,7 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
     {
         _ = this.Confidence;
         _ = this.Name;
-        foreach (var item in this.Value1 ?? [])
-        {
-            _ = item;
-        }
+        _ = this.Value1;
     }
 
     public Value() { }
