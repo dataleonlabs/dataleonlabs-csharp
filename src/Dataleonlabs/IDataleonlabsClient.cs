@@ -13,6 +13,8 @@ public interface IDataleonlabsClient
 
     Uri BaseUrl { get; init; }
 
+    TimeSpan Timeout { get; init; }
+
     /// <summary>
     /// API key needed to authorize requests.  You must provide a valid API key in
     /// the `Api-Key` header. Get your API key from the Dataleon dashboard.
