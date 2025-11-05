@@ -33,7 +33,6 @@ See the [`examples`](examples) directory for complete and runnable examples.
 using System;
 using Dataleonlabs;
 
-// Configured using the DATALEONLABS_API_KEY and DATALEONLABS_BASE_URL environment variables
 DataleonlabsClient client = new();
 
 var companies = await client.Companies.List();
@@ -41,7 +40,7 @@ var companies = await client.Companies.List();
 Console.WriteLine(companies);
 ```
 
-## Client Configuration
+## Client configuration
 
 Configure the client using environment variables:
 
@@ -75,15 +74,18 @@ To temporarily use a modified client configuration, while reusing the same conne
 
 ```csharp
 using System;
-using Dataleonlabs;
 
-IDataleonlabsClient clientWithOptions = client.WithOptions(options =>
-    options with
-    {
-        BaseUrl = new("https://example.com"),
-        Timeout = TimeSpan.FromSeconds(42),
-    }
-);
+var companies = await client
+    .WithOptions(options =>
+        options with
+        {
+            BaseUrl = new("https://example.com"),
+            Timeout = TimeSpan.FromSeconds(42),
+        }
+    )
+    .Companies.List();
+
+Console.WriteLine(companies);
 ```
 
 Using a [`with` expression](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/with-expression) makes it easy to construct the modified options.
@@ -122,6 +124,38 @@ false
 - `DataleonlabsInvalidDataException`: Failure to interpret successfully parsed data. For example, when accessing a property that's supposed to be required, but the API unexpectedly omitted it from the response.
 
 - `DataleonlabsException`: Base class for all exceptions.
+
+## Network options
+
+### Timeouts
+
+Requests time out after 1 minute by default.
+
+To set a custom timeout, configure the client using the `Timeout` option:
+
+```csharp
+using System;
+using Dataleonlabs;
+
+DataleonlabsClient client = new() { Timeout = TimeSpan.FromSeconds(42) };
+```
+
+Or configure a single method call using [`WithOptions`](#modifying-configuration):
+
+```csharp
+using System;
+
+var companies = await client
+    .WithOptions(options =>
+        options with
+        {
+            Timeout = TimeSpan.FromSeconds(42)
+        }
+    )
+    .Companies.List();
+
+Console.WriteLine(companies);
+```
 
 ## Semantic versioning
 
