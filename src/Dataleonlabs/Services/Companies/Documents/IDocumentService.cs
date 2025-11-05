@@ -1,10 +1,14 @@
+using System;
 using System.Threading.Tasks;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Companies.Documents;
 
 public interface IDocumentService
 {
+    IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     /// <summary>
     /// Get documents to an company
     /// </summary>

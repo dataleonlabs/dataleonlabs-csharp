@@ -23,6 +23,8 @@ public interface IDataleonlabsClient
     /// </summary>
     string APIKey { get; init; }
 
+    IDataleonlabsClient WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     ICompanyService Companies { get; }
 
     IIndividualService Individuals { get; }

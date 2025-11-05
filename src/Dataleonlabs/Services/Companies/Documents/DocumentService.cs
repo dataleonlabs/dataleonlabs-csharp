@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
@@ -7,6 +8,11 @@ namespace Dataleonlabs.Services.Companies.Documents;
 
 public sealed class DocumentService : IDocumentService
 {
+    public IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new DocumentService(this._client.WithOptions(modifier));
+    }
+
     readonly IDataleonlabsClient _client;
 
     public DocumentService(IDataleonlabsClient client)

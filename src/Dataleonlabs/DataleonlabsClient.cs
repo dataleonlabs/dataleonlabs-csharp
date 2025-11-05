@@ -11,7 +11,7 @@ namespace Dataleonlabs;
 
 public sealed class DataleonlabsClient : IDataleonlabsClient
 {
-    readonly ClientOptions _options = new();
+    readonly ClientOptions _options;
 
     public HttpClient HttpClient
     {
@@ -41,6 +41,11 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
     {
         get { return this._options.APIKey; }
         init { this._options.APIKey = value; }
+    }
+
+    public IDataleonlabsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new DataleonlabsClient(modifier(this._options));
     }
 
     readonly Lazy<ICompanyService> _companies;
@@ -102,7 +107,15 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
 
     public DataleonlabsClient()
     {
+        _options = new();
+
         _companies = new(() => new CompanyService(this));
         _individuals = new(() => new IndividualService(this));
+    }
+
+    public DataleonlabsClient(ClientOptions options)
+        : this()
+    {
+        _options = options;
     }
 }
