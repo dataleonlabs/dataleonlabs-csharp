@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Individuals;
 using Dataleonlabs.Services.Individuals.Documents;
 
@@ -7,6 +9,8 @@ namespace Dataleonlabs.Services.Individuals;
 
 public interface IIndividualService
 {
+    IIndividualService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     IDocumentService Documents { get; }
 
     /// <summary>

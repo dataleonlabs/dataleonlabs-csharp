@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Services.Companies.Documents;
 
@@ -7,6 +9,8 @@ namespace Dataleonlabs.Services.Companies;
 
 public interface ICompanyService
 {
+    ICompanyService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     IDocumentService Documents { get; }
 
     /// <summary>

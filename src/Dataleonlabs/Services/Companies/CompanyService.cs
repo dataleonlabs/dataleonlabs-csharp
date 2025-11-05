@@ -10,6 +10,11 @@ namespace Dataleonlabs.Services.Companies;
 
 public sealed class CompanyService : ICompanyService
 {
+    public ICompanyService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new CompanyService(this._client.WithOptions(modifier));
+    }
+
     readonly IDataleonlabsClient _client;
 
     public CompanyService(IDataleonlabsClient client)

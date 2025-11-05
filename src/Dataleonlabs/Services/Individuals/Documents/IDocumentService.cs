@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
 using Documents = Dataleonlabs.Models.Individuals.Documents;
 
@@ -6,6 +8,8 @@ namespace Dataleonlabs.Services.Individuals.Documents;
 
 public interface IDocumentService
 {
+    IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     /// <summary>
     /// Get documents to an individuals
     /// </summary>

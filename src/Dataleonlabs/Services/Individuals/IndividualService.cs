@@ -10,6 +10,11 @@ namespace Dataleonlabs.Services.Individuals;
 
 public sealed class IndividualService : IIndividualService
 {
+    public IIndividualService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new IndividualService(this._client.WithOptions(modifier));
+    }
+
     readonly IDataleonlabsClient _client;
 
     public IndividualService(IDataleonlabsClient client)
