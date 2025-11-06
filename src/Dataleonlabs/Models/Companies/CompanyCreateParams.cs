@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
@@ -15,7 +16,11 @@ namespace Dataleonlabs.Models.Companies;
 /// </summary>
 public sealed record class CompanyCreateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     /// <summary>
     /// Main information about the company being registered.
@@ -24,7 +29,7 @@ public sealed record class CompanyCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("company", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("company", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'company' cannot be null",
                     new System::ArgumentOutOfRangeException("company", "Missing required argument")
@@ -36,9 +41,9 @@ public sealed record class CompanyCreateParams : ParamsBase
                     new System::ArgumentNullException("company")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["company"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["company"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -52,7 +57,7 @@ public sealed record class CompanyCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("workspace_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("workspace_id", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'workspace_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -67,9 +72,9 @@ public sealed record class CompanyCreateParams : ParamsBase
                     new System::ArgumentNullException("workspace_id")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["workspace_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["workspace_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -84,14 +89,14 @@ public sealed record class CompanyCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("source_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("source_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["source_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["source_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -105,18 +110,58 @@ public sealed record class CompanyCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("technical_data", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("technical_data", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<TechnicalData?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["technical_data"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["technical_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public CompanyCreateParams() { }
+
+    public CompanyCreateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CompanyCreateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static CompanyCreateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDataleonlabsClient client)
@@ -162,7 +207,7 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'name' cannot be null",
                     new System::ArgumentOutOfRangeException("name", "Missing required argument")
@@ -174,9 +219,9 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
                     new System::ArgumentNullException("name")
                 );
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -190,14 +235,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("address", out JsonElement element))
+            if (!this._properties.TryGetValue("address", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["address"] = JsonSerializer.SerializeToElement(
+            this._properties["address"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -211,14 +256,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("commercial_name", out JsonElement element))
+            if (!this._properties.TryGetValue("commercial_name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["commercial_name"] = JsonSerializer.SerializeToElement(
+            this._properties["commercial_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -232,14 +277,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("country", out JsonElement element))
+            if (!this._properties.TryGetValue("country", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["country"] = JsonSerializer.SerializeToElement(
+            this._properties["country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -253,14 +298,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("email", out JsonElement element))
+            if (!this._properties.TryGetValue("email", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["email"] = JsonSerializer.SerializeToElement(
+            this._properties["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -275,7 +320,7 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
         get
         {
             if (
-                !this.Properties.TryGetValue(
+                !this._properties.TryGetValue(
                     "employer_identification_number",
                     out JsonElement element
                 )
@@ -284,9 +329,9 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["employer_identification_number"] = JsonSerializer.SerializeToElement(
+            this._properties["employer_identification_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -300,14 +345,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("legal_form", out JsonElement element))
+            if (!this._properties.TryGetValue("legal_form", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["legal_form"] = JsonSerializer.SerializeToElement(
+            this._properties["legal_form"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -321,14 +366,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("phone_number", out JsonElement element))
+            if (!this._properties.TryGetValue("phone_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["phone_number"] = JsonSerializer.SerializeToElement(
+            this._properties["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -342,14 +387,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("registration_date", out JsonElement element))
+            if (!this._properties.TryGetValue("registration_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["registration_date"] = JsonSerializer.SerializeToElement(
+            this._properties["registration_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -363,14 +408,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("registration_id", out JsonElement element))
+            if (!this._properties.TryGetValue("registration_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["registration_id"] = JsonSerializer.SerializeToElement(
+            this._properties["registration_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -384,14 +429,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("share_capital", out JsonElement element))
+            if (!this._properties.TryGetValue("share_capital", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["share_capital"] = JsonSerializer.SerializeToElement(
+            this._properties["share_capital"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -405,14 +450,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("status", out JsonElement element))
+            if (!this._properties.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["status"] = JsonSerializer.SerializeToElement(
+            this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -426,14 +471,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("tax_identification_number", out JsonElement element))
+            if (!this._properties.TryGetValue("tax_identification_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["tax_identification_number"] = JsonSerializer.SerializeToElement(
+            this._properties["tax_identification_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -447,14 +492,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("type", out JsonElement element))
+            if (!this._properties.TryGetValue("type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["type"] = JsonSerializer.SerializeToElement(
+            this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -468,14 +513,14 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
     {
         get
         {
-            if (!this.Properties.TryGetValue("website_url", out JsonElement element))
+            if (!this._properties.TryGetValue("website_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["website_url"] = JsonSerializer.SerializeToElement(
+            this._properties["website_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -503,17 +548,22 @@ public sealed record class Company : ModelBase, IFromRaw<Company>
 
     public Company() { }
 
+    public Company(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Company(Dictionary<string, JsonElement> properties)
+    Company(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Company FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Company FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]
@@ -538,14 +588,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("active_aml_suspicions", out JsonElement element))
+            if (!this._properties.TryGetValue("active_aml_suspicions", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
+            this._properties["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -559,14 +609,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("callback_url", out JsonElement element))
+            if (!this._properties.TryGetValue("callback_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["callback_url"] = JsonSerializer.SerializeToElement(
+            this._properties["callback_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -580,14 +630,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("callback_url_notification", out JsonElement element))
+            if (!this._properties.TryGetValue("callback_url_notification", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["callback_url_notification"] = JsonSerializer.SerializeToElement(
+            this._properties["callback_url_notification"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -602,7 +652,7 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
         get
         {
             if (
-                !this.Properties.TryGetValue(
+                !this._properties.TryGetValue(
                     "filtering_score_aml_suspicions",
                     out JsonElement element
                 )
@@ -611,9 +661,9 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
 
             return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
+            this._properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -627,14 +677,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("language", out JsonElement element))
+            if (!this._properties.TryGetValue("language", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["language"] = JsonSerializer.SerializeToElement(
+            this._properties["language"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -648,7 +698,7 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("portal_steps", out JsonElement element))
+            if (!this._properties.TryGetValue("portal_steps", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep>>?>(
@@ -656,9 +706,9 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["portal_steps"] = JsonSerializer.SerializeToElement(
+            this._properties["portal_steps"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -672,14 +722,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("raw_data", out JsonElement element))
+            if (!this._properties.TryGetValue("raw_data", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["raw_data"] = JsonSerializer.SerializeToElement(
+            this._properties["raw_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -702,17 +752,24 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
 
     public TechnicalData() { }
 
+    public TechnicalData(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TechnicalData(Dictionary<string, JsonElement> properties)
+    TechnicalData(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static TechnicalData FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static TechnicalData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 

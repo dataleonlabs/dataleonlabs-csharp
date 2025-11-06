@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -20,14 +21,14 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
     {
         get
         {
-            if (!this.Properties.TryGetValue("code", out JsonElement element))
+            if (!this._properties.TryGetValue("code", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["code"] = JsonSerializer.SerializeToElement(
+            this._properties["code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,14 +42,14 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
     {
         get
         {
-            if (!this.Properties.TryGetValue("reason", out JsonElement element))
+            if (!this._properties.TryGetValue("reason", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["reason"] = JsonSerializer.SerializeToElement(
+            this._properties["reason"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -62,14 +63,14 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
     {
         get
         {
-            if (!this.Properties.TryGetValue("score", out JsonElement element))
+            if (!this._properties.TryGetValue("score", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["score"] = JsonSerializer.SerializeToElement(
+            this._properties["score"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -85,16 +86,21 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
 
     public Risk() { }
 
+    public Risk(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Risk(Dictionary<string, JsonElement> properties)
+    Risk(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Risk FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Risk FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

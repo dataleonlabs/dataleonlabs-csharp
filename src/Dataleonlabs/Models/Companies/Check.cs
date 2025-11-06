@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -19,14 +20,14 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this.Properties.TryGetValue("masked", out JsonElement element))
+            if (!this._properties.TryGetValue("masked", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["masked"] = JsonSerializer.SerializeToElement(
+            this._properties["masked"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,14 +41,14 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this.Properties.TryGetValue("message", out JsonElement element))
+            if (!this._properties.TryGetValue("message", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["message"] = JsonSerializer.SerializeToElement(
+            this._properties["message"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -61,14 +62,14 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -82,14 +83,14 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this.Properties.TryGetValue("validate", out JsonElement element))
+            if (!this._properties.TryGetValue("validate", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["validate"] = JsonSerializer.SerializeToElement(
+            this._properties["validate"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -103,14 +104,14 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this.Properties.TryGetValue("weight", out JsonElement element))
+            if (!this._properties.TryGetValue("weight", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["weight"] = JsonSerializer.SerializeToElement(
+            this._properties["weight"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -128,16 +129,21 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
 
     public Check() { }
 
+    public Check(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Check(Dictionary<string, JsonElement> properties)
+    Check(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Check FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

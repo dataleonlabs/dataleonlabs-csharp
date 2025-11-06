@@ -1,4 +1,6 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -14,9 +16,13 @@ namespace Dataleonlabs.Models.Individuals.Documents;
 /// </summary>
 public sealed record class DocumentUploadParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
-    public required string IndividualID;
+    public required string IndividualID { get; init; }
 
     /// <summary>
     /// Filter by document type for upload (must be one of the allowed values)
@@ -25,7 +31,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("document_type", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("document_type", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'document_type' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -39,9 +45,9 @@ public sealed record class DocumentUploadParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["document_type"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -55,14 +61,14 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("file", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("file", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["file"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["file"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -76,18 +82,58 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("url", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["url"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public DocumentUploadParams() { }
+
+    public DocumentUploadParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DocumentUploadParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static DocumentUploadParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDataleonlabsClient client)
