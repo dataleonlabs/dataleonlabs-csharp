@@ -147,10 +147,7 @@ using System;
 
 var companies = await client
     .WithOptions(options =>
-        options with
-        {
-            Timeout = TimeSpan.FromSeconds(42)
-        }
+        options with { Timeout = TimeSpan.FromSeconds(42) }
     )
     .Companies.List();
 
@@ -189,10 +186,7 @@ using System;
 
 var company = await client
     .WithOptions(options =>
-        options with
-        {
-            ResponseValidation = true
-        }
+        options with { ResponseValidation = true }
     )
     .Companies.Create(parameters);
 
