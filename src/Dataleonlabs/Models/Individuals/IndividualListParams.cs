@@ -1,3 +1,6 @@
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -19,7 +22,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("end_date", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("end_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateOnly?>(
@@ -27,9 +30,9 @@ public sealed record class IndividualListParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.QueryProperties["end_date"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["end_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -43,14 +46,14 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("limit", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["limit"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -64,14 +67,14 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("offset", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("offset", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["offset"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["offset"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -85,14 +88,14 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("source_id", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("source_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["source_id"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["source_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -106,7 +109,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("start_date", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("start_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateOnly?>(
@@ -114,9 +117,9 @@ public sealed record class IndividualListParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.QueryProperties["start_date"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["start_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -130,7 +133,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("state", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("state", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, State>?>(
@@ -138,9 +141,9 @@ public sealed record class IndividualListParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.QueryProperties["state"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -154,7 +157,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("status", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
@@ -162,9 +165,9 @@ public sealed record class IndividualListParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.QueryProperties["status"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -178,18 +181,52 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("workspace_id", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("workspace_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["workspace_id"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["workspace_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public IndividualListParams() { }
+
+    public IndividualListParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IndividualListParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static IndividualListParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override System::Uri Url(IDataleonlabsClient client)

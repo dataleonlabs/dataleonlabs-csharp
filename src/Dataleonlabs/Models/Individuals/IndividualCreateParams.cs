@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
@@ -15,7 +16,11 @@ namespace Dataleonlabs.Models.Individuals;
 /// </summary>
 public sealed record class IndividualCreateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     /// <summary>
     /// Unique identifier of the workspace where the individual is being registered.
@@ -24,7 +29,7 @@ public sealed record class IndividualCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("workspace_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("workspace_id", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'workspace_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -39,9 +44,9 @@ public sealed record class IndividualCreateParams : ParamsBase
                     new System::ArgumentNullException("workspace_id")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["workspace_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["workspace_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -55,14 +60,14 @@ public sealed record class IndividualCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("person", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("person", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Person?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["person"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["person"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -76,14 +81,14 @@ public sealed record class IndividualCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("source_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("source_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["source_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["source_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -97,18 +102,58 @@ public sealed record class IndividualCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("technical_data", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("technical_data", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<TechnicalData?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["technical_data"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["technical_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public IndividualCreateParams() { }
+
+    public IndividualCreateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IndividualCreateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static IndividualCreateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDataleonlabsClient client)
@@ -154,14 +199,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("birthday", out JsonElement element))
+            if (!this._properties.TryGetValue("birthday", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["birthday"] = JsonSerializer.SerializeToElement(
+            this._properties["birthday"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -175,14 +220,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("email", out JsonElement element))
+            if (!this._properties.TryGetValue("email", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["email"] = JsonSerializer.SerializeToElement(
+            this._properties["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -196,14 +241,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("first_name", out JsonElement element))
+            if (!this._properties.TryGetValue("first_name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["first_name"] = JsonSerializer.SerializeToElement(
+            this._properties["first_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -217,7 +262,7 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("gender", out JsonElement element))
+            if (!this._properties.TryGetValue("gender", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Gender>?>(
@@ -225,9 +270,9 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["gender"] = JsonSerializer.SerializeToElement(
+            this._properties["gender"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -241,14 +286,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("last_name", out JsonElement element))
+            if (!this._properties.TryGetValue("last_name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["last_name"] = JsonSerializer.SerializeToElement(
+            this._properties["last_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -262,14 +307,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("maiden_name", out JsonElement element))
+            if (!this._properties.TryGetValue("maiden_name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["maiden_name"] = JsonSerializer.SerializeToElement(
+            this._properties["maiden_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -283,14 +328,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("nationality", out JsonElement element))
+            if (!this._properties.TryGetValue("nationality", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["nationality"] = JsonSerializer.SerializeToElement(
+            this._properties["nationality"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -304,14 +349,14 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     {
         get
         {
-            if (!this.Properties.TryGetValue("phone_number", out JsonElement element))
+            if (!this._properties.TryGetValue("phone_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["phone_number"] = JsonSerializer.SerializeToElement(
+            this._properties["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -332,17 +377,22 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
 
     public Person() { }
 
+    public Person(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Person(Dictionary<string, JsonElement> properties)
+    Person(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Person FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Person FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -403,14 +453,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("active_aml_suspicions", out JsonElement element))
+            if (!this._properties.TryGetValue("active_aml_suspicions", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
+            this._properties["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -424,14 +474,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("callback_url", out JsonElement element))
+            if (!this._properties.TryGetValue("callback_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["callback_url"] = JsonSerializer.SerializeToElement(
+            this._properties["callback_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -445,14 +495,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("callback_url_notification", out JsonElement element))
+            if (!this._properties.TryGetValue("callback_url_notification", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["callback_url_notification"] = JsonSerializer.SerializeToElement(
+            this._properties["callback_url_notification"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -467,7 +517,7 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
         get
         {
             if (
-                !this.Properties.TryGetValue(
+                !this._properties.TryGetValue(
                     "filtering_score_aml_suspicions",
                     out JsonElement element
                 )
@@ -476,9 +526,9 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
 
             return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
+            this._properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -492,14 +542,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("language", out JsonElement element))
+            if (!this._properties.TryGetValue("language", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["language"] = JsonSerializer.SerializeToElement(
+            this._properties["language"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -513,7 +563,7 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("portal_steps", out JsonElement element))
+            if (!this._properties.TryGetValue("portal_steps", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep>>?>(
@@ -521,9 +571,9 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["portal_steps"] = JsonSerializer.SerializeToElement(
+            this._properties["portal_steps"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -537,14 +587,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         get
         {
-            if (!this.Properties.TryGetValue("raw_data", out JsonElement element))
+            if (!this._properties.TryGetValue("raw_data", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["raw_data"] = JsonSerializer.SerializeToElement(
+            this._properties["raw_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -567,17 +617,24 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
 
     public TechnicalData() { }
 
+    public TechnicalData(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TechnicalData(Dictionary<string, JsonElement> properties)
+    TechnicalData(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static TechnicalData FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static TechnicalData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 

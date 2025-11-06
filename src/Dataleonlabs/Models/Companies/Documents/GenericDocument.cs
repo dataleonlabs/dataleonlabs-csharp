@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -20,14 +21,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("id", out JsonElement element))
+            if (!this._properties.TryGetValue("id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["id"] = JsonSerializer.SerializeToElement(
+            this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,14 +42,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("checks", out JsonElement element))
+            if (!this._properties.TryGetValue("checks", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Check>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["checks"] = JsonSerializer.SerializeToElement(
+            this._properties["checks"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -62,14 +63,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -83,14 +84,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("document_type", out JsonElement element))
+            if (!this._properties.TryGetValue("document_type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["document_type"] = JsonSerializer.SerializeToElement(
+            this._properties["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -104,14 +105,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -125,14 +126,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("signed_url", out JsonElement element))
+            if (!this._properties.TryGetValue("signed_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["signed_url"] = JsonSerializer.SerializeToElement(
+            this._properties["signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -146,14 +147,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("state", out JsonElement element))
+            if (!this._properties.TryGetValue("state", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["state"] = JsonSerializer.SerializeToElement(
+            this._properties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -167,14 +168,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("status", out JsonElement element))
+            if (!this._properties.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["status"] = JsonSerializer.SerializeToElement(
+            this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -188,14 +189,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("tables", out JsonElement element))
+            if (!this._properties.TryGetValue("tables", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Table>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["tables"] = JsonSerializer.SerializeToElement(
+            this._properties["tables"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -209,14 +210,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("values", out JsonElement element))
+            if (!this._properties.TryGetValue("values", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Value>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["values"] = JsonSerializer.SerializeToElement(
+            this._properties["values"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -248,17 +249,24 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
 
     public GenericDocument() { }
 
+    public GenericDocument(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    GenericDocument(Dictionary<string, JsonElement> properties)
+    GenericDocument(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static GenericDocument FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static GenericDocument FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -272,7 +280,7 @@ public sealed record class Table : ModelBase, IFromRaw<Table>
     {
         get
         {
-            if (!this.Properties.TryGetValue("operation", out JsonElement element))
+            if (!this._properties.TryGetValue("operation", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<JsonElement>?>(
@@ -280,9 +288,9 @@ public sealed record class Table : ModelBase, IFromRaw<Table>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["operation"] = JsonSerializer.SerializeToElement(
+            this._properties["operation"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -296,17 +304,22 @@ public sealed record class Table : ModelBase, IFromRaw<Table>
 
     public Table() { }
 
+    public Table(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Table(Dictionary<string, JsonElement> properties)
+    Table(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Table FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Table FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -320,14 +333,14 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
     {
         get
         {
-            if (!this.Properties.TryGetValue("confidence", out JsonElement element))
+            if (!this._properties.TryGetValue("confidence", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<double?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["confidence"] = JsonSerializer.SerializeToElement(
+            this._properties["confidence"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -341,14 +354,14 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -362,14 +375,14 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
     {
         get
         {
-            if (!this.Properties.TryGetValue("value", out JsonElement element))
+            if (!this._properties.TryGetValue("value", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<long>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["value"] = JsonSerializer.SerializeToElement(
+            this._properties["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -385,16 +398,21 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
 
     public Value() { }
 
+    public Value(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Value(Dictionary<string, JsonElement> properties)
+    Value(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Value FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Value FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -16,7 +17,7 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
     {
         get
         {
-            if (!this.Properties.TryGetValue("documents", out JsonElement element))
+            if (!this._properties.TryGetValue("documents", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Document>?>(
@@ -24,9 +25,9 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["documents"] = JsonSerializer.SerializeToElement(
+            this._properties["documents"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,14 +41,14 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
     {
         get
         {
-            if (!this.Properties.TryGetValue("total_document", out JsonElement element))
+            if (!this._properties.TryGetValue("total_document", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["total_document"] = JsonSerializer.SerializeToElement(
+            this._properties["total_document"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -65,17 +66,24 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
 
     public DocumentResponse() { }
 
+    public DocumentResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DocumentResponse(Dictionary<string, JsonElement> properties)
+    DocumentResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static DocumentResponse FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static DocumentResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -93,14 +101,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("id", out JsonElement element))
+            if (!this._properties.TryGetValue("id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["id"] = JsonSerializer.SerializeToElement(
+            this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -114,14 +122,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("document_type", out JsonElement element))
+            if (!this._properties.TryGetValue("document_type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["document_type"] = JsonSerializer.SerializeToElement(
+            this._properties["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -135,14 +143,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("filename", out JsonElement element))
+            if (!this._properties.TryGetValue("filename", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["filename"] = JsonSerializer.SerializeToElement(
+            this._properties["filename"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -156,14 +164,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -177,14 +185,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("signed_url", out JsonElement element))
+            if (!this._properties.TryGetValue("signed_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["signed_url"] = JsonSerializer.SerializeToElement(
+            this._properties["signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -198,14 +206,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("state", out JsonElement element))
+            if (!this._properties.TryGetValue("state", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["state"] = JsonSerializer.SerializeToElement(
+            this._properties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -219,14 +227,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("status", out JsonElement element))
+            if (!this._properties.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["status"] = JsonSerializer.SerializeToElement(
+            this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -240,14 +248,14 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         get
         {
-            if (!this.Properties.TryGetValue("workspace_id", out JsonElement element))
+            if (!this._properties.TryGetValue("workspace_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["workspace_id"] = JsonSerializer.SerializeToElement(
+            this._properties["workspace_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -268,16 +276,21 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
 
     public Document() { }
 
+    public Document(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Document(Dictionary<string, JsonElement> properties)
+    Document(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Document FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Document FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using Dataleonlabs.Core;
@@ -10,7 +13,7 @@ namespace Dataleonlabs.Models.Individuals;
 /// </summary>
 public sealed record class IndividualRetrieveParams : ParamsBase
 {
-    public required string IndividualID;
+    public required string IndividualID { get; init; }
 
     /// <summary>
     /// Include document information
@@ -19,14 +22,14 @@ public sealed record class IndividualRetrieveParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("document", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("document", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["document"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["document"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,18 +43,52 @@ public sealed record class IndividualRetrieveParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("scope", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("scope", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["scope"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["scope"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public IndividualRetrieveParams() { }
+
+    public IndividualRetrieveParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IndividualRetrieveParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static IndividualRetrieveParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override Uri Url(IDataleonlabsClient client)

@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
+using System.Text.Json;
 using Dataleonlabs.Core;
 
 namespace Dataleonlabs.Models.Individuals;
@@ -9,7 +13,41 @@ namespace Dataleonlabs.Models.Individuals;
 /// </summary>
 public sealed record class IndividualDeleteParams : ParamsBase
 {
-    public required string IndividualID;
+    public required string IndividualID { get; init; }
+
+    public IndividualDeleteParams() { }
+
+    public IndividualDeleteParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IndividualDeleteParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static IndividualDeleteParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
+    }
 
     public override Uri Url(IDataleonlabsClient client)
     {

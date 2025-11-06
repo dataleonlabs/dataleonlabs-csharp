@@ -9,7 +9,12 @@ namespace Dataleonlabs.Core;
 
 public abstract record class ModelBase
 {
-    public Dictionary<string, JsonElement> Properties { get; set; } = [];
+    private protected FreezableDictionary<string, JsonElement> _properties = [];
+
+    public IReadOnlyDictionary<string, JsonElement> Properties
+    {
+        get { return this._properties.Freeze(); }
+    }
 
     internal static readonly JsonSerializerOptions SerializerOptions = new()
     {
@@ -50,5 +55,5 @@ public abstract record class ModelBase
 
 interface IFromRaw<T>
 {
-    static abstract T FromRawUnchecked(Dictionary<string, JsonElement> properties);
+    static abstract T FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties);
 }
