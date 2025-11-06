@@ -1,7 +1,7 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
 using Dataleonlabs.Core;
+using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -54,9 +54,9 @@ public sealed record class CompanyRetrieveParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDataleonlabsClient client)
+    public override System::Uri Url(IDataleonlabsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/companies/{0}", this.CompanyID)
         )
         {

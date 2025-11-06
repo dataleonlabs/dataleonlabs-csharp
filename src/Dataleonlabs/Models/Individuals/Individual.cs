@@ -4,9 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Models.Companies.Documents;
-using Dataleonlabs.Models.Individuals.IndividualProperties;
+using Companies = Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Models.Individuals;
 
@@ -41,14 +40,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the individual.
     /// </summary>
-    public List<AmlSuspicion>? AmlSuspicions
+    public List<Companies::AmlSuspicion>? AmlSuspicions
     {
         get
         {
             if (!this.Properties.TryGetValue("aml_suspicions", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<AmlSuspicion>?>(
+            return JsonSerializer.Deserialize<List<Companies::AmlSuspicion>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -86,14 +85,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Digital certificate associated with the individual, if any.
     /// </summary>
-    public Certificat? Certificat
+    public Companies::Certificat? Certificat
     {
         get
         {
             if (!this.Properties.TryGetValue("certificat", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Certificat?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<Companies::Certificat?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -107,14 +109,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// List of verification or validation checks applied to the individual.
     /// </summary>
-    public List<Check>? Checks
+    public List<Companies::Check>? Checks
     {
         get
         {
             if (!this.Properties.TryGetValue("checks", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<Check>?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<List<Companies::Check>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -215,14 +220,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Personal details of the individual, such as name, date of birth, and contact info.
     /// </summary>
-    public Person? Person
+    public Person1? Person
     {
         get
         {
             if (!this.Properties.TryGetValue("person", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Person?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<Person1?>(element, ModelBase.SerializerOptions);
         }
         set
         {
@@ -257,14 +262,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Custom key-value metadata fields associated with the individual.
     /// </summary>
-    public List<Property>? Properties1
+    public List<Companies::Property>? Properties1
     {
         get
         {
             if (!this.Properties.TryGetValue("properties", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<Property>?>(
+            return JsonSerializer.Deserialize<List<Companies::Property>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -281,14 +286,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Risk assessment associated with the individual.
     /// </summary>
-    public Risk? Risk
+    public Companies::Risk? Risk
     {
         get
         {
             if (!this.Properties.TryGetValue("risk", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Risk?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<Companies::Risk?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -386,14 +394,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Technical metadata related to the request (e.g., QR code settings, language).
     /// </summary>
-    public TechnicalData? TechnicalData
+    public Companies::TechnicalData1? TechnicalData
     {
         get
         {
             if (!this.Properties.TryGetValue("technical_data", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<TechnicalData?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<Companies::TechnicalData1?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -496,6 +507,723 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
 #pragma warning restore CS8618
 
     public static Individual FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    {
+        return new(properties);
+    }
+}
+
+/// <summary>
+/// Reference to the individual's identity document.
+/// </summary>
+[JsonConverter(typeof(ModelConverter<IdentityCard>))]
+public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
+{
+    /// <summary>
+    /// Unique identifier for the document.
+    /// </summary>
+    public string? ID
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("id", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Signed URL linking to the back image of the document.
+    /// </summary>
+    public string? BackDocumentSignedURL
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("back_document_signed_url", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["back_document_signed_url"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Place of birth as indicated on the document.
+    /// </summary>
+    public string? BirthPlace
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("birth_place", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["birth_place"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Date of birth in DD/MM/YYYY format as shown on the document.
+    /// </summary>
+    public string? Birthday
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("birthday", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["birthday"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Country code issuing the document (ISO 3166-1 alpha-2).
+    /// </summary>
+    public string? Country
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("country", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["country"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Expiration date of the document, in YYYY-MM-DD format.
+    /// </summary>
+    public string? ExpirationDate
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("expiration_date", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["expiration_date"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// First name as shown on the document.
+    /// </summary>
+    public string? FirstName
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("first_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["first_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Signed URL linking to the front image of the document.
+    /// </summary>
+    public string? FrontDocumentSignedURL
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("front_document_signed_url", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["front_document_signed_url"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Gender indicated on the document (e.g., "M" or "F").
+    /// </summary>
+    public string? Gender
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("gender", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["gender"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Date when the document was issued, in YYYY-MM-DD format.
+    /// </summary>
+    public string? IssueDate
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("issue_date", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["issue_date"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Last name as shown on the document.
+    /// </summary>
+    public string? LastName
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("last_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["last_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// First line of the Machine Readable Zone (MRZ) on the document.
+    /// </summary>
+    public string? MrzLine1
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("mrz_line_1", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["mrz_line_1"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Second line of the MRZ on the document.
+    /// </summary>
+    public string? MrzLine2
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("mrz_line_2", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["mrz_line_2"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Third line of the MRZ if applicable; otherwise null.
+    /// </summary>
+    public string? MrzLine3
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("mrz_line_3", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["mrz_line_3"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Type of document (e.g., passport, identity card).
+    /// </summary>
+    public string? Type
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("type", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["type"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.BackDocumentSignedURL;
+        _ = this.BirthPlace;
+        _ = this.Birthday;
+        _ = this.Country;
+        _ = this.ExpirationDate;
+        _ = this.FirstName;
+        _ = this.FrontDocumentSignedURL;
+        _ = this.Gender;
+        _ = this.IssueDate;
+        _ = this.LastName;
+        _ = this.MrzLine1;
+        _ = this.MrzLine2;
+        _ = this.MrzLine3;
+        _ = this.Type;
+    }
+
+    public IdentityCard() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IdentityCard(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static IdentityCard FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    {
+        return new(properties);
+    }
+}
+
+/// <summary>
+/// Personal details of the individual, such as name, date of birth, and contact info.
+/// </summary>
+[JsonConverter(typeof(ModelConverter<Person1>))]
+public sealed record class Person1 : ModelBase, IFromRaw<Person1>
+{
+    /// <summary>
+    /// Date of birth, formatted as DD/MM/YYYY.
+    /// </summary>
+    public string? Birthday
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("birthday", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["birthday"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Email address of the individual.
+    /// </summary>
+    public string? Email
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("email", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["email"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Signed URL linking to the person’s face image.
+    /// </summary>
+    public string? FaceImageSignedURL
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("face_image_signed_url", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["face_image_signed_url"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// First (given) name of the person.
+    /// </summary>
+    public string? FirstName
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("first_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["first_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Full name of the person, typically concatenation of first and last names.
+    /// </summary>
+    public string? FullName
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("full_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["full_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Gender of the individual (e.g., "M" for male, "F" for female).
+    /// </summary>
+    public string? Gender
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("gender", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["gender"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Last (family) name of the person.
+    /// </summary>
+    public string? LastName
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("last_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["last_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Maiden name of the person, if applicable.
+    /// </summary>
+    public string? MaidenName
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("maiden_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["maiden_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Nationality of the individual (ISO 3166-1 alpha-3 country code).
+    /// </summary>
+    public string? Nationality
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("nationality", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["nationality"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Contact phone number including country code.
+    /// </summary>
+    public string? PhoneNumber
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("phone_number", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["phone_number"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.Birthday;
+        _ = this.Email;
+        _ = this.FaceImageSignedURL;
+        _ = this.FirstName;
+        _ = this.FullName;
+        _ = this.Gender;
+        _ = this.LastName;
+        _ = this.MaidenName;
+        _ = this.Nationality;
+        _ = this.PhoneNumber;
+    }
+
+    public Person1() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Person1(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static Person1 FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    {
+        return new(properties);
+    }
+}
+
+/// <summary>
+/// Represents a key-value metadata tag that can be associated with entities such
+/// as individuals or companies.
+/// </summary>
+[JsonConverter(typeof(ModelConverter<Tag>))]
+public sealed record class Tag : ModelBase, IFromRaw<Tag>
+{
+    /// <summary>
+    /// Name of the tag used to identify the metadata field.
+    /// </summary>
+    public string? Key
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("key", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["key"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Indicates whether the tag is private (not visible to external users).
+    /// </summary>
+    public bool? Private
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("private", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["private"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Data type of the tag value (e.g., "string", "number", "boolean").
+    /// </summary>
+    public string? Type
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("type", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["type"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Value assigned to the tag.
+    /// </summary>
+    public string? Value
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("value", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["value"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.Key;
+        _ = this.Private;
+        _ = this.Type;
+        _ = this.Value;
+    }
+
+    public Tag() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Tag(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static Tag FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
     }

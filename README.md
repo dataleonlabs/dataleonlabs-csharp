@@ -96,7 +96,7 @@ The `WithOptions` method does not affect the original client or service.
 
 To send a request to the Dataleonlabs API, build an instance of some `Params` class and pass it to the corresponding client method. When the response is received, it will be deserialized into an instance of a C# class.
 
-For example, `client.Companies.List` should be called with an instance of `CompanyListParams`, and it will return an instance of `Task<List<Company>>`.
+For example, `client.Companies.List` should be called with an instance of `CompanyListParams`, and it will return an instance of `Task<List<Company1>>`.
 
 ## Error handling
 

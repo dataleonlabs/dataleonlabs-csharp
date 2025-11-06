@@ -1,18 +1,18 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies.TechnicalDataProperties;
+using Dataleonlabs.Exceptions;
+using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
 /// <summary>
 /// Contains technical metadata related to processing and communication of an entity.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalData>))]
-public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
+[JsonConverter(typeof(ModelConverter<TechnicalData1>))]
+public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -60,14 +60,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Timestamp when the request or process was approved.
     /// </summary>
-    public DateTime? ApprovedAt
+    public System::DateTime? ApprovedAt
     {
         get
         {
             if (!this.Properties.TryGetValue("approved_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -144,14 +147,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Timestamp when notifications were disabled; null if never disabled.
     /// </summary>
-    public DateTime? DisableNotificationDate
+    public System::DateTime? DisableNotificationDate
     {
         get
         {
             if (!this.Properties.TryGetValue("disable_notification_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -212,14 +218,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Timestamp when the process finished.
     /// </summary>
-    public DateTime? FinishedAt
+    public System::DateTime? FinishedAt
     {
         get
         {
             if (!this.Properties.TryGetValue("finished_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -296,14 +305,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Timestamp indicating when the request or process needs review; null if none.
     /// </summary>
-    public DateTime? NeedReviewAt
+    public System::DateTime? NeedReviewAt
     {
         get
         {
             if (!this.Properties.TryGetValue("need_review_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -338,14 +350,14 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// List of steps to include in the portal workflow.
     /// </summary>
-    public List<ApiEnum<string, PortalStep>>? PortalSteps
+    public List<ApiEnum<string, PortalStep1>>? PortalSteps
     {
         get
         {
             if (!this.Properties.TryGetValue("portal_steps", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep>>?>(
+            return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep1>>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -404,14 +416,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Timestamp when the request or process was rejected; null if not rejected.
     /// </summary>
-    public DateTime? RejectedAt
+    public System::DateTime? RejectedAt
     {
         get
         {
             if (!this.Properties.TryGetValue("rejected_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -446,14 +461,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Timestamp when the process started.
     /// </summary>
-    public DateTime? StartedAt
+    public System::DateTime? StartedAt
     {
         get
         {
             if (!this.Properties.TryGetValue("started_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -467,14 +485,17 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     /// <summary>
     /// Date/time of data transfer.
     /// </summary>
-    public DateTime? TransferAt
+    public System::DateTime? TransferAt
     {
         get
         {
             if (!this.Properties.TryGetValue("transfer_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -536,18 +557,71 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
         _ = this.TransferMode;
     }
 
-    public TechnicalData() { }
+    public TechnicalData1() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TechnicalData(Dictionary<string, JsonElement> properties)
+    TechnicalData1(Dictionary<string, JsonElement> properties)
     {
         Properties = properties;
     }
 #pragma warning restore CS8618
 
-    public static TechnicalData FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static TechnicalData1 FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
+    }
+}
+
+[JsonConverter(typeof(PortalStep1Converter))]
+public enum PortalStep1
+{
+    IdentityVerification,
+    DocumentSigning,
+    ProofOfAddress,
+    Selfie,
+    FaceMatch,
+}
+
+sealed class PortalStep1Converter : JsonConverter<PortalStep1>
+{
+    public override PortalStep1 Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "identity_verification" => PortalStep1.IdentityVerification,
+            "document_signing" => PortalStep1.DocumentSigning,
+            "proof_of_address" => PortalStep1.ProofOfAddress,
+            "selfie" => PortalStep1.Selfie,
+            "face_match" => PortalStep1.FaceMatch,
+            _ => (PortalStep1)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PortalStep1 value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PortalStep1.IdentityVerification => "identity_verification",
+                PortalStep1.DocumentSigning => "document_signing",
+                PortalStep1.ProofOfAddress => "proof_of_address",
+                PortalStep1.Selfie => "selfie",
+                PortalStep1.FaceMatch => "face_match",
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }
