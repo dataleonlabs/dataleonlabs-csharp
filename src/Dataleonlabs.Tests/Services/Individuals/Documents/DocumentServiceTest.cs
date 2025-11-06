@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Dataleonlabs.Models.Individuals.Documents.DocumentUploadParamsProperties;
+using Dataleonlabs.Models.Individuals.Documents;
 
 namespace Dataleonlabs.Tests.Services.Individuals.Documents;
 

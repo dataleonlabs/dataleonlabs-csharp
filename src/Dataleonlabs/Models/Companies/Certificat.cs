@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
+using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -37,14 +37,17 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
     /// <summary>
     /// Timestamp when the certificate was created.
     /// </summary>
-    public DateTime? CreatedAt
+    public System::DateTime? CreatedAt
     {
         get
         {
             if (!this.Properties.TryGetValue("created_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {

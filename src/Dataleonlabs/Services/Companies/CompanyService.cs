@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Services.Companies.Documents;
+using Companies = Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Services.Companies;
 
@@ -29,15 +29,15 @@ public sealed class CompanyService : ICompanyService
         get { return _documents.Value; }
     }
 
-    public async Task<Company> Create(CompanyCreateParams parameters)
+    public async Task<Companies::Company1> Create(Companies::CompanyCreateParams parameters)
     {
-        HttpRequest<CompanyCreateParams> request = new()
+        HttpRequest<Companies::CompanyCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var company = await response.Deserialize<Company>().ConfigureAwait(false);
+        var company = await response.Deserialize<Companies::Company1>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -45,15 +45,15 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<Company> Retrieve(CompanyRetrieveParams parameters)
+    public async Task<Companies::Company1> Retrieve(Companies::CompanyRetrieveParams parameters)
     {
-        HttpRequest<CompanyRetrieveParams> request = new()
+        HttpRequest<Companies::CompanyRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var company = await response.Deserialize<Company>().ConfigureAwait(false);
+        var company = await response.Deserialize<Companies::Company1>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -61,15 +61,15 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<Company> Update(CompanyUpdateParams parameters)
+    public async Task<Companies::Company1> Update(Companies::CompanyUpdateParams parameters)
     {
-        HttpRequest<CompanyUpdateParams> request = new()
+        HttpRequest<Companies::CompanyUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var company = await response.Deserialize<Company>().ConfigureAwait(false);
+        var company = await response.Deserialize<Companies::Company1>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -77,17 +77,21 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<List<Company>> List(CompanyListParams? parameters = null)
+    public async Task<List<Companies::Company1>> List(
+        Companies::CompanyListParams? parameters = null
+    )
     {
         parameters ??= new();
 
-        HttpRequest<CompanyListParams> request = new()
+        HttpRequest<Companies::CompanyListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var companies = await response.Deserialize<List<Company>>().ConfigureAwait(false);
+        var companies = await response
+            .Deserialize<List<Companies::Company1>>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             foreach (var item in companies)
@@ -98,9 +102,9 @@ public sealed class CompanyService : ICompanyService
         return companies;
     }
 
-    public async Task Delete(CompanyDeleteParams parameters)
+    public async Task Delete(Companies::CompanyDeleteParams parameters)
     {
-        HttpRequest<CompanyDeleteParams> request = new()
+        HttpRequest<Companies::CompanyDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,

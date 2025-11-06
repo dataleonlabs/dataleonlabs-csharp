@@ -3,7 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies.AmlSuspicionProperties;
+using Dataleonlabs.Exceptions;
+using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -166,14 +167,14 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     /// Status of the suspicion review process. Possible values: "true_positive",
     /// "false_positive", "pending".
     /// </summary>
-    public ApiEnum<string, Status>? Status
+    public ApiEnum<string, StatusModel>? Status
     {
         get
         {
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
+            return JsonSerializer.Deserialize<ApiEnum<string, StatusModel>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -191,17 +192,17 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     /// Category of the suspicion. Possible values: "crime", "sanction", "pep", "adverse_news",
     /// "other".
     /// </summary>
-    public ApiEnum<string, Type>? Type
+    public ApiEnum<string, global::Dataleonlabs.Models.Companies.Type>? Type
     {
         get
         {
             if (!this.Properties.TryGetValue("type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                global::Dataleonlabs.Models.Companies.Type
+            >?>(element, ModelBase.SerializerOptions);
         }
         set
         {
@@ -238,5 +239,113 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     public static AmlSuspicion FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
+    }
+}
+
+/// <summary>
+/// Status of the suspicion review process. Possible values: "true_positive", "false_positive",
+/// "pending".
+/// </summary>
+[JsonConverter(typeof(StatusModelConverter))]
+public enum StatusModel
+{
+    TruePositive,
+    FalsePositive,
+    Pending,
+}
+
+sealed class StatusModelConverter : JsonConverter<StatusModel>
+{
+    public override StatusModel Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "true_positive" => StatusModel.TruePositive,
+            "false_positive" => StatusModel.FalsePositive,
+            "pending" => StatusModel.Pending,
+            _ => (StatusModel)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        StatusModel value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                StatusModel.TruePositive => "true_positive",
+                StatusModel.FalsePositive => "false_positive",
+                StatusModel.Pending => "pending",
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Category of the suspicion. Possible values: "crime", "sanction", "pep", "adverse_news",
+/// "other".
+/// </summary>
+[JsonConverter(typeof(TypeConverter))]
+public enum Type
+{
+    Crime,
+    Sanction,
+    Pep,
+    AdverseNews,
+    Other,
+}
+
+sealed class TypeConverter : JsonConverter<global::Dataleonlabs.Models.Companies.Type>
+{
+    public override global::Dataleonlabs.Models.Companies.Type Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "crime" => global::Dataleonlabs.Models.Companies.Type.Crime,
+            "sanction" => global::Dataleonlabs.Models.Companies.Type.Sanction,
+            "pep" => global::Dataleonlabs.Models.Companies.Type.Pep,
+            "adverse_news" => global::Dataleonlabs.Models.Companies.Type.AdverseNews,
+            "other" => global::Dataleonlabs.Models.Companies.Type.Other,
+            _ => (global::Dataleonlabs.Models.Companies.Type)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        global::Dataleonlabs.Models.Companies.Type value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                global::Dataleonlabs.Models.Companies.Type.Crime => "crime",
+                global::Dataleonlabs.Models.Companies.Type.Sanction => "sanction",
+                global::Dataleonlabs.Models.Companies.Type.Pep => "pep",
+                global::Dataleonlabs.Models.Companies.Type.AdverseNews => "adverse_news",
+                global::Dataleonlabs.Models.Companies.Type.Other => "other",
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

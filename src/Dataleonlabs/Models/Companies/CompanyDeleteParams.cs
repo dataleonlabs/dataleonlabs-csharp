@@ -1,6 +1,6 @@
-using System;
 using System.Net.Http;
 using Dataleonlabs.Core;
+using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
@@ -11,9 +11,9 @@ public sealed record class CompanyDeleteParams : ParamsBase
 {
     public required string CompanyID;
 
-    public override Uri Url(IDataleonlabsClient client)
+    public override System::Uri Url(IDataleonlabsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/companies/{0}", this.CompanyID)
         )
         {
