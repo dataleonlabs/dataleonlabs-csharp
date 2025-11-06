@@ -157,6 +157,48 @@ var companies = await client
 Console.WriteLine(companies);
 ```
 
+## Undocumented API functionality
+
+The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
+
+### Response validation
+
+In rare cases, the API may return a response that doesn't match the expected type. For example, the SDK may expect a property to contain a `string`, but the API could return something else.
+
+By default, the SDK will not throw an exception in this case. It will throw `DataleonlabsInvalidDataException` only if you directly access the property.
+
+If you would prefer to check that the response is completely well-typed upfront, then either call `Validate`:
+
+```csharp
+var company = client.Companies.Create(parameters);
+company.Validate();
+```
+
+Or configure the client using the `ResponseValidation` option:
+
+```csharp
+using Dataleonlabs;
+
+DataleonlabsClient client = new() { ResponseValidation = true };
+```
+
+Or configure a single method call using [`WithOptions`](#modifying-configuration):
+
+```csharp
+using System;
+
+var company = await client
+    .WithOptions(options =>
+        options with
+        {
+            ResponseValidation = true
+        }
+    )
+    .Companies.Create(parameters);
+
+Console.WriteLine(company);
+```
+
 ## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
