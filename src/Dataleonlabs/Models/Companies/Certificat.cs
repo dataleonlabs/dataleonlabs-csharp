@@ -28,6 +28,11 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -52,6 +57,11 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -73,6 +83,11 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["filename"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

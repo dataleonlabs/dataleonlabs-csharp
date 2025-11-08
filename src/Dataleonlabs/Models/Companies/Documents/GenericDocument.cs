@@ -28,6 +28,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -49,6 +54,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["checks"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -70,6 +80,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -91,6 +106,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -112,6 +132,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -133,6 +158,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -154,6 +184,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -175,6 +210,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -196,6 +236,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["tables"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -217,6 +262,11 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["values"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -290,6 +340,11 @@ public sealed record class Table : ModelBase, IFromRaw<Table>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["operation"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -340,6 +395,11 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["confidence"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -361,6 +421,11 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -382,6 +447,11 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

@@ -28,6 +28,11 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -49,6 +54,11 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["reason"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -70,6 +80,11 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["score"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

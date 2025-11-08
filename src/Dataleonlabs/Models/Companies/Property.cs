@@ -27,6 +27,11 @@ public sealed record class Property : ModelBase, IFromRaw<Property>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -48,6 +53,11 @@ public sealed record class Property : ModelBase, IFromRaw<Property>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -69,6 +79,11 @@ public sealed record class Property : ModelBase, IFromRaw<Property>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

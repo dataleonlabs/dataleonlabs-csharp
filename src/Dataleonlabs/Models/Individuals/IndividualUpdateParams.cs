@@ -69,6 +69,11 @@ public sealed record class IndividualUpdateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["person"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -90,6 +95,11 @@ public sealed record class IndividualUpdateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["source_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -114,6 +124,11 @@ public sealed record class IndividualUpdateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["technical_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -214,6 +229,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["birthday"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -235,6 +255,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -256,6 +281,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["first_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -280,6 +310,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["gender"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -301,6 +336,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["last_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -322,6 +362,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["maiden_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -343,6 +388,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["nationality"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -364,6 +414,11 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -472,6 +527,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -493,6 +553,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["callback_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -514,6 +579,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["callback_url_notification"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -540,6 +610,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -561,6 +636,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["language"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -585,6 +665,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["portal_steps"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -606,6 +691,11 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["raw_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

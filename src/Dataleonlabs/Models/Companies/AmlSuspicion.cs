@@ -30,6 +30,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["caption"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -51,6 +56,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -72,6 +82,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["gender"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -94,6 +109,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["relation"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -115,6 +135,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["schema"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -136,6 +161,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["score"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -157,6 +187,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["source"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -182,6 +217,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -207,6 +247,11 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

@@ -27,6 +27,11 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["documents"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -48,6 +53,11 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["total_document"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -108,6 +118,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -129,6 +144,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -150,6 +170,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["filename"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -171,6 +196,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -192,6 +222,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -213,6 +248,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -234,6 +274,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -255,6 +300,11 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["workspace_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

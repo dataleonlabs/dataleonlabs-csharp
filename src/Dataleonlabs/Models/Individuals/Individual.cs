@@ -31,6 +31,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -55,6 +60,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -76,6 +86,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["auth_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -100,6 +115,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["certificat"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -124,6 +144,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["checks"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -145,6 +170,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -169,6 +199,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["documents"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -190,6 +225,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["identity_card"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -211,6 +251,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -232,6 +277,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["person"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -253,6 +303,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["portal_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -277,6 +332,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["properties"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -301,6 +361,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["risk"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -322,6 +387,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["source_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -343,6 +413,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -364,6 +439,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -385,6 +465,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["tags"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -409,6 +494,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["technical_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -430,6 +520,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["webview_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -451,6 +546,11 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["workspace_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -538,6 +638,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -559,6 +664,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["back_document_signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -580,6 +690,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["birth_place"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -601,6 +716,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["birthday"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -622,6 +742,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -643,6 +768,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["expiration_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -664,6 +794,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["first_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -685,6 +820,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["front_document_signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -706,6 +846,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["gender"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -727,6 +872,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["issue_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -748,6 +898,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["last_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -769,6 +924,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["mrz_line_1"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -790,6 +950,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["mrz_line_2"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -832,6 +997,11 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -899,6 +1069,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["birthday"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -920,6 +1095,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -941,6 +1121,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["face_image_signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -962,6 +1147,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["first_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -983,6 +1173,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["full_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1004,6 +1199,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["gender"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1025,6 +1225,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["last_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1046,6 +1251,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["maiden_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1067,6 +1277,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["nationality"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1088,6 +1303,11 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1151,6 +1371,11 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1172,6 +1397,11 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["private"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1193,6 +1423,11 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1214,6 +1449,11 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

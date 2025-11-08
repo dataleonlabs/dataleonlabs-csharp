@@ -68,6 +68,11 @@ public sealed record class DocumentUploadParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["file"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -89,6 +94,11 @@ public sealed record class DocumentUploadParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
