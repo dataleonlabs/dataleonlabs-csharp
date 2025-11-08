@@ -11,8 +11,7 @@ using Companies = Dataleonlabs.Models.Companies;
 namespace Dataleonlabs.Models.Individuals;
 
 /// <summary>
-/// Represents a single individual record, including identification, status, and
-/// associated metadata.
+/// Represents a single individual record, including identification, status, and associated metadata.
 /// </summary>
 [JsonConverter(typeof(ModelConverter<Individual>))]
 public sealed record class Individual : ModelBase, IFromRaw<Individual>

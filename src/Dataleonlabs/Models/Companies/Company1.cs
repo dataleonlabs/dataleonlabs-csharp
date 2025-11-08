@@ -1397,8 +1397,8 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
     }
 
     /// <summary>
-    /// Indicates whether the member is a delegator, meaning they have authority
-    /// to act on behalf of the company.
+    /// Indicates whether the member is a delegator, meaning they have authority to
+    /// act on behalf of the company.
     /// </summary>
     public bool? IsDelegator
     {
@@ -1556,8 +1556,7 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
     }
 
     /// <summary>
-    /// Postal code of the member's address, typically a numeric or alphanumeric
-    /// code.
+    /// Postal code of the member's address, typically a numeric or alphanumeric code.
     /// </summary>
     public string? PostalCode
     {
@@ -1583,8 +1582,8 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
     }
 
     /// <summary>
-    /// Official registration identifier of the member, such as a national ID or company
-    /// registration number.
+    /// Official registration identifier of the member, such as a national ID or
+    /// company registration number.
     /// </summary>
     public string? RegistrationID
     {
@@ -1721,7 +1720,8 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
 
     /// <summary>
     /// Status of the member in the system, indicating whether they are approved,
-    /// pending, or rejected. Possible values include "approved", "need_review", "rejected".
+    /// pending, or rejected. Possible values include "approved", "need_review",
+    /// "rejected".
     /// </summary>
     public string? Status
     {

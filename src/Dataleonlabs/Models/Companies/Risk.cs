@@ -8,8 +8,8 @@ using Dataleonlabs.Core;
 namespace Dataleonlabs.Models.Companies;
 
 /// <summary>
-/// Represents a risk assessment result, including a risk code, explanation, and
-/// a confidence score.
+/// Represents a risk assessment result, including a risk code, explanation, and a
+/// confidence score.
 /// </summary>
 [JsonConverter(typeof(ModelConverter<Risk>))]
 public sealed record class Risk : ModelBase, IFromRaw<Risk>
