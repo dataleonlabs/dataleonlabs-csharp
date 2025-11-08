@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
@@ -21,15 +22,22 @@ public sealed class DocumentService : IDocumentService
         _client = client;
     }
 
-    public async Task<DocumentResponse> List(Documents::DocumentListParams parameters)
+    public async Task<DocumentResponse> List(
+        Documents::DocumentListParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Documents::DocumentListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var documentResponse = await response.Deserialize<DocumentResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var documentResponse = await response
+            .Deserialize<DocumentResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             documentResponse.Validate();
@@ -37,15 +45,22 @@ public sealed class DocumentService : IDocumentService
         return documentResponse;
     }
 
-    public async Task<GenericDocument> Upload(Documents::DocumentUploadParams parameters)
+    public async Task<GenericDocument> Upload(
+        Documents::DocumentUploadParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Documents::DocumentUploadParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var genericDocument = await response.Deserialize<GenericDocument>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var genericDocument = await response
+            .Deserialize<GenericDocument>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             genericDocument.Validate();
