@@ -42,16 +42,16 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
         init { this._options.ResponseValidation = value; }
     }
 
-    public TimeSpan Timeout
-    {
-        get { return this._options.Timeout; }
-        init { this._options.Timeout = value; }
-    }
-
     public int MaxRetries
     {
         get { return this._options.MaxRetries; }
         init { this._options.MaxRetries = value; }
+    }
+
+    public TimeSpan Timeout
+    {
+        get { return this._options.Timeout; }
+        init { this._options.Timeout = value; }
     }
 
     public string APIKey

@@ -16,9 +16,9 @@ public interface IDataleonlabsClient
 
     bool ResponseValidation { get; init; }
 
-    TimeSpan Timeout { get; init; }
-
     int MaxRetries { get; init; }
+
+    TimeSpan Timeout { get; init; }
 
     /// <summary>
     /// API key needed to authorize requests.  You must provide a valid API key in
