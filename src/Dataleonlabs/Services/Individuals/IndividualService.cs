@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Models.Individuals;
@@ -29,15 +30,22 @@ public sealed class IndividualService : IIndividualService
         get { return _documents.Value; }
     }
 
-    public async Task<Individual> Create(IndividualCreateParams parameters)
+    public async Task<Individual> Create(
+        IndividualCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<IndividualCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var individual = await response.Deserialize<Individual>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var individual = await response
+            .Deserialize<Individual>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             individual.Validate();
@@ -45,15 +53,22 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
-    public async Task<Individual> Retrieve(IndividualRetrieveParams parameters)
+    public async Task<Individual> Retrieve(
+        IndividualRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<IndividualRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var individual = await response.Deserialize<Individual>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var individual = await response
+            .Deserialize<Individual>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             individual.Validate();
@@ -61,15 +76,22 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
-    public async Task<Individual> Update(IndividualUpdateParams parameters)
+    public async Task<Individual> Update(
+        IndividualUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<IndividualUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var individual = await response.Deserialize<Individual>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var individual = await response
+            .Deserialize<Individual>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             individual.Validate();
@@ -77,7 +99,10 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
-    public async Task<List<Individual>> List(IndividualListParams? parameters = null)
+    public async Task<List<Individual>> List(
+        IndividualListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -86,8 +111,12 @@ public sealed class IndividualService : IIndividualService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var individuals = await response.Deserialize<List<Individual>>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var individuals = await response
+            .Deserialize<List<Individual>>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             foreach (var item in individuals)
@@ -98,13 +127,18 @@ public sealed class IndividualService : IIndividualService
         return individuals;
     }
 
-    public async Task Delete(IndividualDeleteParams parameters)
+    public async Task Delete(
+        IndividualDeleteParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<IndividualDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 }
