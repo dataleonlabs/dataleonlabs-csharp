@@ -27,6 +27,11 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["masked"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -48,6 +53,11 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["message"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -69,6 +79,11 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -90,6 +105,11 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["validate"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -111,6 +131,11 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["weight"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
