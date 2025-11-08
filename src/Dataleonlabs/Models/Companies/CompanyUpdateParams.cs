@@ -179,13 +179,14 @@ public sealed record class CompanyUpdateParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(IDataleonlabsClient client)
+    public override System::Uri Url(ClientOptions options)
     {
         return new System::UriBuilder(
-            client.BaseUrl.ToString().TrimEnd('/') + string.Format("/companies/{0}", this.CompanyID)
+            options.BaseUrl.ToString().TrimEnd('/')
+                + string.Format("/companies/{0}", this.CompanyID)
         )
         {
-            Query = this.QueryString(client),
+            Query = this.QueryString(options),
         }.Uri;
     }
 
@@ -198,12 +199,9 @@ public sealed record class CompanyUpdateParams : ParamsBase
         );
     }
 
-    internal override void AddHeadersToRequest(
-        HttpRequestMessage request,
-        IDataleonlabsClient client
-    )
+    internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
-        ParamsBase.AddDefaultHeaders(request, client);
+        ParamsBase.AddDefaultHeaders(request, options);
         foreach (var item in this.HeaderProperties)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
