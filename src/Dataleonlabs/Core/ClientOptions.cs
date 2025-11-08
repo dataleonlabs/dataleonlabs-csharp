@@ -24,6 +24,8 @@ public struct ClientOptions()
 
     public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes(1);
 
+    public int MaxRetries { get; set; } = 2;
+
     /// <summary>
     /// API key needed to authorize requests.  You must provide a valid API key in
     /// the `Api-Key` header. Get your API key from the Dataleon dashboard.
