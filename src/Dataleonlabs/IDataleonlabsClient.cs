@@ -18,6 +18,8 @@ public interface IDataleonlabsClient
 
     TimeSpan Timeout { get; init; }
 
+    int MaxRetries { get; init; }
+
     /// <summary>
     /// API key needed to authorize requests.  You must provide a valid API key in
     /// the `Api-Key` header. Get your API key from the Dataleon dashboard.
