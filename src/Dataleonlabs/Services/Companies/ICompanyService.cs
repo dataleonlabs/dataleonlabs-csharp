@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
+using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Services.Companies.Documents;
-using Companies = Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Services.Companies;
 
@@ -17,40 +17,37 @@ public interface ICompanyService
     /// <summary>
     /// Create a new company
     /// </summary>
-    Task<Companies::Company1> Create(
-        Companies::CompanyCreateParams parameters,
+    Task<Company1> Create(
+        CompanyCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Get a company by ID
     /// </summary>
-    Task<Companies::Company1> Retrieve(
-        Companies::CompanyRetrieveParams parameters,
+    Task<Company1> Retrieve(
+        CompanyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Update a company by ID
     /// </summary>
-    Task<Companies::Company1> Update(
-        Companies::CompanyUpdateParams parameters,
+    Task<Company1> Update(
+        CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Get all companies
     /// </summary>
-    Task<List<Companies::Company1>> List(
-        Companies::CompanyListParams? parameters = null,
+    Task<List<Company1>> List(
+        CompanyListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Delete a company by ID
     /// </summary>
-    Task Delete(
-        Companies::CompanyDeleteParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    Task Delete(CompanyDeleteParams parameters, CancellationToken cancellationToken = default);
 }
