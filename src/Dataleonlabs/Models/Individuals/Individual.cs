@@ -5,8 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
+using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Models.Companies.Documents;
-using Companies = Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Models.Individuals;
 
@@ -45,14 +45,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the individual.
     /// </summary>
-    public List<Companies::AmlSuspicion>? AmlSuspicions
+    public List<AmlSuspicion>? AmlSuspicions
     {
         get
         {
             if (!this._properties.TryGetValue("aml_suspicions", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<Companies::AmlSuspicion>?>(
+            return JsonSerializer.Deserialize<List<AmlSuspicion>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -100,17 +100,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Digital certificate associated with the individual, if any.
     /// </summary>
-    public Companies::Certificat? Certificat
+    public Certificat? Certificat
     {
         get
         {
             if (!this._properties.TryGetValue("certificat", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Companies::Certificat?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<Certificat?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -129,17 +126,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// List of verification or validation checks applied to the individual.
     /// </summary>
-    public List<Companies::Check>? Checks
+    public List<Check>? Checks
     {
         get
         {
             if (!this._properties.TryGetValue("checks", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<Companies::Check>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<List<Check>?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -317,14 +311,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Custom key-value metadata fields associated with the individual.
     /// </summary>
-    public List<Companies::Property>? Properties1
+    public List<Property>? Properties1
     {
         get
         {
             if (!this._properties.TryGetValue("properties", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<Companies::Property>?>(
+            return JsonSerializer.Deserialize<List<Property>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -346,17 +340,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Risk assessment associated with the individual.
     /// </summary>
-    public Companies::Risk? Risk
+    public Risk? Risk
     {
         get
         {
             if (!this._properties.TryGetValue("risk", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Companies::Risk?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<Risk?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -479,14 +470,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Technical metadata related to the request (e.g., QR code settings, language).
     /// </summary>
-    public Companies::TechnicalData1? TechnicalData
+    public TechnicalData1? TechnicalData
     {
         get
         {
             if (!this._properties.TryGetValue("technical_data", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Companies::TechnicalData1?>(
+            return JsonSerializer.Deserialize<TechnicalData1?>(
                 element,
                 ModelBase.SerializerOptions
             );

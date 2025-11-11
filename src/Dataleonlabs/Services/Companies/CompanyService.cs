@@ -4,8 +4,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
+using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Services.Companies.Documents;
-using Companies = Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Services.Companies;
 
@@ -30,12 +30,12 @@ public sealed class CompanyService : ICompanyService
         get { return _documents.Value; }
     }
 
-    public async Task<Companies::Company1> Create(
-        Companies::CompanyCreateParams parameters,
+    public async Task<Company1> Create(
+        CompanyCreateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Companies::CompanyCreateParams> request = new()
+        HttpRequest<CompanyCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -43,9 +43,7 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response
-            .Deserialize<Companies::Company1>(cancellationToken)
-            .ConfigureAwait(false);
+        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -53,12 +51,12 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<Companies::Company1> Retrieve(
-        Companies::CompanyRetrieveParams parameters,
+    public async Task<Company1> Retrieve(
+        CompanyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Companies::CompanyRetrieveParams> request = new()
+        HttpRequest<CompanyRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -66,9 +64,7 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response
-            .Deserialize<Companies::Company1>(cancellationToken)
-            .ConfigureAwait(false);
+        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -76,12 +72,12 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<Companies::Company1> Update(
-        Companies::CompanyUpdateParams parameters,
+    public async Task<Company1> Update(
+        CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Companies::CompanyUpdateParams> request = new()
+        HttpRequest<CompanyUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
@@ -89,9 +85,7 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response
-            .Deserialize<Companies::Company1>(cancellationToken)
-            .ConfigureAwait(false);
+        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -99,14 +93,14 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<List<Companies::Company1>> List(
-        Companies::CompanyListParams? parameters = null,
+    public async Task<List<Company1>> List(
+        CompanyListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
         parameters ??= new();
 
-        HttpRequest<Companies::CompanyListParams> request = new()
+        HttpRequest<CompanyListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -115,7 +109,7 @@ public sealed class CompanyService : ICompanyService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var companies = await response
-            .Deserialize<List<Companies::Company1>>(cancellationToken)
+            .Deserialize<List<Company1>>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -128,11 +122,11 @@ public sealed class CompanyService : ICompanyService
     }
 
     public async Task Delete(
-        Companies::CompanyDeleteParams parameters,
+        CompanyDeleteParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Companies::CompanyDeleteParams> request = new()
+        HttpRequest<CompanyDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
