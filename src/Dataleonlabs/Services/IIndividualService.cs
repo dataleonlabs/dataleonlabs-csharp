@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Models.Individuals;
-using Dataleonlabs.Services.Individuals.Documents;
+using Dataleonlabs.Services.Individuals;
 
-namespace Dataleonlabs.Services.Individuals;
+namespace Dataleonlabs.Services;
 
 public interface IIndividualService
 {

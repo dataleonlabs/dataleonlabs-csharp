@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Dataleonlabs.Models.Companies.Documents;
 
-namespace Dataleonlabs.Tests.Services.Companies.Documents;
+namespace Dataleonlabs.Tests.Services.Companies;
 
 public class DocumentServiceTest : TestBase
 {

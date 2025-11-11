@@ -4,9 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
-using Documents = Dataleonlabs.Models.Individuals.Documents;
 
-namespace Dataleonlabs.Services.Individuals.Documents;
+namespace Dataleonlabs.Services.Companies;
 
 public sealed class DocumentService : IDocumentService
 {
@@ -23,11 +22,11 @@ public sealed class DocumentService : IDocumentService
     }
 
     public async Task<DocumentResponse> List(
-        Documents::DocumentListParams parameters,
+        DocumentListParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Documents::DocumentListParams> request = new()
+        HttpRequest<DocumentListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -46,11 +45,11 @@ public sealed class DocumentService : IDocumentService
     }
 
     public async Task<GenericDocument> Upload(
-        Documents::DocumentUploadParams parameters,
+        DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Documents::DocumentUploadParams> request = new()
+        HttpRequest<DocumentUploadParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,

@@ -4,21 +4,21 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies;
-using Dataleonlabs.Services.Companies.Documents;
+using Dataleonlabs.Models.Individuals;
+using Dataleonlabs.Services.Individuals;
 
-namespace Dataleonlabs.Services.Companies;
+namespace Dataleonlabs.Services;
 
-public sealed class CompanyService : ICompanyService
+public sealed class IndividualService : IIndividualService
 {
-    public ICompanyService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    public IIndividualService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
-        return new CompanyService(this._client.WithOptions(modifier));
+        return new IndividualService(this._client.WithOptions(modifier));
     }
 
     readonly IDataleonlabsClient _client;
 
-    public CompanyService(IDataleonlabsClient client)
+    public IndividualService(IDataleonlabsClient client)
     {
         _client = client;
         _documents = new(() => new DocumentService(client));
@@ -30,12 +30,12 @@ public sealed class CompanyService : ICompanyService
         get { return _documents.Value; }
     }
 
-    public async Task<Company1> Create(
-        CompanyCreateParams parameters,
+    public async Task<Individual> Create(
+        IndividualCreateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<CompanyCreateParams> request = new()
+        HttpRequest<IndividualCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -43,20 +43,22 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
+        var individual = await response
+            .Deserialize<Individual>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
-            company.Validate();
+            individual.Validate();
         }
-        return company;
+        return individual;
     }
 
-    public async Task<Company1> Retrieve(
-        CompanyRetrieveParams parameters,
+    public async Task<Individual> Retrieve(
+        IndividualRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<CompanyRetrieveParams> request = new()
+        HttpRequest<IndividualRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -64,20 +66,22 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
+        var individual = await response
+            .Deserialize<Individual>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
-            company.Validate();
+            individual.Validate();
         }
-        return company;
+        return individual;
     }
 
-    public async Task<Company1> Update(
-        CompanyUpdateParams parameters,
+    public async Task<Individual> Update(
+        IndividualUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<CompanyUpdateParams> request = new()
+        HttpRequest<IndividualUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
@@ -85,22 +89,24 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
+        var individual = await response
+            .Deserialize<Individual>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
-            company.Validate();
+            individual.Validate();
         }
-        return company;
+        return individual;
     }
 
-    public async Task<List<Company1>> List(
-        CompanyListParams? parameters = null,
+    public async Task<List<Individual>> List(
+        IndividualListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
         parameters ??= new();
 
-        HttpRequest<CompanyListParams> request = new()
+        HttpRequest<IndividualListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -108,25 +114,25 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var companies = await response
-            .Deserialize<List<Company1>>(cancellationToken)
+        var individuals = await response
+            .Deserialize<List<Individual>>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
-            foreach (var item in companies)
+            foreach (var item in individuals)
             {
                 item.Validate();
             }
         }
-        return companies;
+        return individuals;
     }
 
     public async Task Delete(
-        CompanyDeleteParams parameters,
+        IndividualDeleteParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<CompanyDeleteParams> request = new()
+        HttpRequest<IndividualDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,

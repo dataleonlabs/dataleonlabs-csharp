@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
-using Dataleonlabs.Services.Companies.Documents;
+using Dataleonlabs.Services.Companies;
 
-namespace Dataleonlabs.Services.Companies;
+namespace Dataleonlabs.Services;
 
 public interface ICompanyService
 {
