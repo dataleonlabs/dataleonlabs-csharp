@@ -5,7 +5,7 @@ using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
 using Documents = Dataleonlabs.Models.Individuals.Documents;
 
-namespace Dataleonlabs.Services.Individuals.Documents;
+namespace Dataleonlabs.Services.Individuals;
 
 public interface IDocumentService
 {

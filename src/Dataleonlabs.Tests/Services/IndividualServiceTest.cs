@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Dataleonlabs.Tests.Services.Individuals;
+namespace Dataleonlabs.Tests.Services;
 
 public class IndividualServiceTest : TestBase
 {

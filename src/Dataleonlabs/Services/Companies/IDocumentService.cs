@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
 
-namespace Dataleonlabs.Services.Companies.Documents;
+namespace Dataleonlabs.Services.Companies;
 
 public interface IDocumentService
 {

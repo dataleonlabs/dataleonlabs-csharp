@@ -8,8 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
 using Dataleonlabs.Exceptions;
-using Dataleonlabs.Services.Companies;
-using Dataleonlabs.Services.Individuals;
+using Dataleonlabs.Services;
 
 namespace Dataleonlabs;
 
