@@ -71,14 +71,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Timestamp when the request or process was approved.
     /// </summary>
-    public System::DateTime? ApprovedAt
+    public System::DateTimeOffset? ApprovedAt
     {
         get
         {
             if (!this._properties.TryGetValue("approved_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -178,14 +178,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Timestamp when notifications were disabled; null if never disabled.
     /// </summary>
-    public System::DateTime? DisableNotificationDate
+    public System::DateTimeOffset? DisableNotificationDate
     {
         get
         {
             if (!this._properties.TryGetValue("disable_notification_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -259,14 +259,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Timestamp when the process finished.
     /// </summary>
-    public System::DateTime? FinishedAt
+    public System::DateTimeOffset? FinishedAt
     {
         get
         {
             if (!this._properties.TryGetValue("finished_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -366,14 +366,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Timestamp indicating when the request or process needs review; null if none.
     /// </summary>
-    public System::DateTime? NeedReviewAt
+    public System::DateTimeOffset? NeedReviewAt
     {
         get
         {
             if (!this._properties.TryGetValue("need_review_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -497,14 +497,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Timestamp when the request or process was rejected; null if not rejected.
     /// </summary>
-    public System::DateTime? RejectedAt
+    public System::DateTimeOffset? RejectedAt
     {
         get
         {
             if (!this._properties.TryGetValue("rejected_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -547,14 +547,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Timestamp when the process started.
     /// </summary>
-    public System::DateTime? StartedAt
+    public System::DateTimeOffset? StartedAt
     {
         get
         {
             if (!this._properties.TryGetValue("started_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -576,14 +576,14 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
     /// <summary>
     /// Date/time of data transfer.
     /// </summary>
-    public System::DateTime? TransferAt
+    public System::DateTimeOffset? TransferAt
     {
         get
         {
             if (!this._properties.TryGetValue("transfer_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
