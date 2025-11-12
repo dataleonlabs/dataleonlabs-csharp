@@ -69,14 +69,17 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     /// <summary>
     /// Timestamp when the document was created or uploaded.
     /// </summary>
-    public DateTime? CreatedAt
+    public DateTimeOffset? CreatedAt
     {
         get
         {
             if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

@@ -152,14 +152,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Timestamp of the individual's creation in ISO 8601 format.
     /// </summary>
-    public DateTime? CreatedAt
+    public DateTimeOffset? CreatedAt
     {
         get
         {
             if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

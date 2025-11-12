@@ -1208,14 +1208,14 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
     /// <summary>
     /// Birthday (available only if type = person)
     /// </summary>
-    public System::DateTime? Birthday
+    public System::DateTimeOffset? Birthday
     {
         get
         {
             if (!this._properties.TryGetValue("birthday", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
