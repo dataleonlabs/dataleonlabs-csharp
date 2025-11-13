@@ -194,7 +194,10 @@ public abstract record class ParamsBase
         {
             request.Headers.Add("Api-Key", options.APIKey);
         }
-        request.Headers.Add("X-Stainless-Timeout", options.Timeout.TotalSeconds.ToString());
+        request.Headers.Add(
+            "X-Stainless-Timeout",
+            (options.Timeout ?? ClientOptions.DefaultTimeout).TotalSeconds.ToString()
+        );
     }
 
     static string GetUserAgent() => $"{typeof(DataleonlabsClient).Name}/C# {GetPackageVersion()}";
