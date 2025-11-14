@@ -12,8 +12,8 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Contains technical metadata related to processing and communication of an entity.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalData1>))]
-public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
+[JsonConverter(typeof(ModelConverter<CompanyTechnicalData>))]
+public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTechnicalData>
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -658,22 +658,22 @@ public sealed record class TechnicalData1 : ModelBase, IFromRaw<TechnicalData1>
         _ = this.TransferMode;
     }
 
-    public TechnicalData1() { }
+    public CompanyTechnicalData() { }
 
-    public TechnicalData1(IReadOnlyDictionary<string, JsonElement> properties)
+    public CompanyTechnicalData(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TechnicalData1(FrozenDictionary<string, JsonElement> properties)
+    CompanyTechnicalData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static TechnicalData1 FromRawUnchecked(
+    public static CompanyTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {

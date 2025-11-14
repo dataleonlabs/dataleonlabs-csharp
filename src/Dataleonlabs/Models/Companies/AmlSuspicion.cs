@@ -203,14 +203,14 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     /// Status of the suspicion review process. Possible values: "true_positive",
     /// "false_positive", "pending".
     /// </summary>
-    public ApiEnum<string, StatusModel>? Status
+    public ApiEnum<string, AmlSuspicionStatus>? Status
     {
         get
         {
             if (!this._properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, StatusModel>?>(
+            return JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -297,17 +297,17 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
 /// Status of the suspicion review process. Possible values: "true_positive", "false_positive",
 /// "pending".
 /// </summary>
-[JsonConverter(typeof(StatusModelConverter))]
-public enum StatusModel
+[JsonConverter(typeof(AmlSuspicionStatusConverter))]
+public enum AmlSuspicionStatus
 {
     TruePositive,
     FalsePositive,
     Pending,
 }
 
-sealed class StatusModelConverter : JsonConverter<StatusModel>
+sealed class AmlSuspicionStatusConverter : JsonConverter<AmlSuspicionStatus>
 {
-    public override StatusModel Read(
+    public override AmlSuspicionStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -315,16 +315,16 @@ sealed class StatusModelConverter : JsonConverter<StatusModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "true_positive" => StatusModel.TruePositive,
-            "false_positive" => StatusModel.FalsePositive,
-            "pending" => StatusModel.Pending,
-            _ => (StatusModel)(-1),
+            "true_positive" => AmlSuspicionStatus.TruePositive,
+            "false_positive" => AmlSuspicionStatus.FalsePositive,
+            "pending" => AmlSuspicionStatus.Pending,
+            _ => (AmlSuspicionStatus)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        StatusModel value,
+        AmlSuspicionStatus value,
         JsonSerializerOptions options
     )
     {
@@ -332,9 +332,9 @@ sealed class StatusModelConverter : JsonConverter<StatusModel>
             writer,
             value switch
             {
-                StatusModel.TruePositive => "true_positive",
-                StatusModel.FalsePositive => "false_positive",
-                StatusModel.Pending => "pending",
+                AmlSuspicionStatus.TruePositive => "true_positive",
+                AmlSuspicionStatus.FalsePositive => "false_positive",
+                AmlSuspicionStatus.Pending => "pending",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

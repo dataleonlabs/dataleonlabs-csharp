@@ -17,7 +17,7 @@ public interface ICompanyService
     /// <summary>
     /// Create a new company
     /// </summary>
-    Task<Company1> Create(
+    Task<CompanyCompany> Create(
         CompanyCreateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -25,7 +25,7 @@ public interface ICompanyService
     /// <summary>
     /// Get a company by ID
     /// </summary>
-    Task<Company1> Retrieve(
+    Task<CompanyCompany> Retrieve(
         CompanyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -33,7 +33,7 @@ public interface ICompanyService
     /// <summary>
     /// Update a company by ID
     /// </summary>
-    Task<Company1> Update(
+    Task<CompanyCompany> Update(
         CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -41,7 +41,7 @@ public interface ICompanyService
     /// <summary>
     /// Get all companies
     /// </summary>
-    Task<List<Company1>> List(
+    Task<List<CompanyCompany>> List(
         CompanyListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

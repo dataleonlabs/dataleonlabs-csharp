@@ -30,7 +30,7 @@ public sealed class CompanyService : ICompanyService
         get { return _documents.Value; }
     }
 
-    public async Task<Company1> Create(
+    public async Task<CompanyCompany> Create(
         CompanyCreateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -43,7 +43,9 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
+        var company = await response
+            .Deserialize<CompanyCompany>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -51,7 +53,7 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<Company1> Retrieve(
+    public async Task<CompanyCompany> Retrieve(
         CompanyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -64,7 +66,9 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
+        var company = await response
+            .Deserialize<CompanyCompany>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -72,7 +76,7 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<Company1> Update(
+    public async Task<CompanyCompany> Update(
         CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -85,7 +89,9 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        var company = await response.Deserialize<Company1>(cancellationToken).ConfigureAwait(false);
+        var company = await response
+            .Deserialize<CompanyCompany>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             company.Validate();
@@ -93,7 +99,7 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
-    public async Task<List<Company1>> List(
+    public async Task<List<CompanyCompany>> List(
         CompanyListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -109,7 +115,7 @@ public sealed class CompanyService : ICompanyService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var companies = await response
-            .Deserialize<List<Company1>>(cancellationToken)
+            .Deserialize<List<CompanyCompany>>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

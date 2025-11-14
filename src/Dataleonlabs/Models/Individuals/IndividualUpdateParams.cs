@@ -293,14 +293,14 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
     /// <summary>
     /// Gender of the individual (M for male, F for female).
     /// </summary>
-    public ApiEnum<string, GenderModel>? Gender
+    public ApiEnum<string, PersonModelGender>? Gender
     {
         get
         {
             if (!this._properties.TryGetValue("gender", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, GenderModel>?>(
+            return JsonSerializer.Deserialize<ApiEnum<string, PersonModelGender>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -459,16 +459,16 @@ public sealed record class PersonModel : ModelBase, IFromRaw<PersonModel>
 /// <summary>
 /// Gender of the individual (M for male, F for female).
 /// </summary>
-[JsonConverter(typeof(GenderModelConverter))]
-public enum GenderModel
+[JsonConverter(typeof(PersonModelGenderConverter))]
+public enum PersonModelGender
 {
     M,
     F,
 }
 
-sealed class GenderModelConverter : JsonConverter<GenderModel>
+sealed class PersonModelGenderConverter : JsonConverter<PersonModelGender>
 {
-    public override GenderModel Read(
+    public override PersonModelGender Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -476,15 +476,15 @@ sealed class GenderModelConverter : JsonConverter<GenderModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "M" => GenderModel.M,
-            "F" => GenderModel.F,
-            _ => (GenderModel)(-1),
+            "M" => PersonModelGender.M,
+            "F" => PersonModelGender.F,
+            _ => (PersonModelGender)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        GenderModel value,
+        PersonModelGender value,
         JsonSerializerOptions options
     )
     {
@@ -492,8 +492,8 @@ sealed class GenderModelConverter : JsonConverter<GenderModel>
             writer,
             value switch
             {
-                GenderModel.M => "M",
-                GenderModel.F => "F",
+                PersonModelGender.M => "M",
+                PersonModelGender.F => "F",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

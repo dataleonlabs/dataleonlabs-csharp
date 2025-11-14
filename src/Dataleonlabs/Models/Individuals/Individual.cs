@@ -262,14 +262,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Personal details of the individual, such as name, date of birth, and contact info.
     /// </summary>
-    public Person1? Person
+    public IndividualPerson? Person
     {
         get
         {
             if (!this._properties.TryGetValue("person", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Person1?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<IndividualPerson?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -473,14 +476,14 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     /// <summary>
     /// Technical metadata related to the request (e.g., QR code settings, language).
     /// </summary>
-    public TechnicalData1? TechnicalData
+    public CompanyTechnicalData? TechnicalData
     {
         get
         {
             if (!this._properties.TryGetValue("technical_data", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<TechnicalData1?>(
+            return JsonSerializer.Deserialize<CompanyTechnicalData?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1045,8 +1048,8 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
 /// <summary>
 /// Personal details of the individual, such as name, date of birth, and contact info.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Person1>))]
-public sealed record class Person1 : ModelBase, IFromRaw<Person1>
+[JsonConverter(typeof(ModelConverter<IndividualPerson>))]
+public sealed record class IndividualPerson : ModelBase, IFromRaw<IndividualPerson>
 {
     /// <summary>
     /// Date of birth, formatted as DD/MM/YYYY.
@@ -1322,22 +1325,24 @@ public sealed record class Person1 : ModelBase, IFromRaw<Person1>
         _ = this.PhoneNumber;
     }
 
-    public Person1() { }
+    public IndividualPerson() { }
 
-    public Person1(IReadOnlyDictionary<string, JsonElement> properties)
+    public IndividualPerson(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Person1(FrozenDictionary<string, JsonElement> properties)
+    IndividualPerson(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Person1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static IndividualPerson FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }

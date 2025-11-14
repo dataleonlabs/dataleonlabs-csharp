@@ -3,8 +3,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies.Documents;
-using Documents = Dataleonlabs.Models.Individuals.Documents;
+using Dataleonlabs.Models.Individuals.Documents;
+using Documents = Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Individuals;
 
@@ -22,12 +22,12 @@ public sealed class DocumentService : IDocumentService
         _client = client;
     }
 
-    public async Task<DocumentResponse> List(
-        Documents::DocumentListParams parameters,
+    public async Task<Documents::DocumentResponse> List(
+        DocumentListParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Documents::DocumentListParams> request = new()
+        HttpRequest<DocumentListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -36,7 +36,7 @@ public sealed class DocumentService : IDocumentService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var documentResponse = await response
-            .Deserialize<DocumentResponse>(cancellationToken)
+            .Deserialize<Documents::DocumentResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -45,12 +45,12 @@ public sealed class DocumentService : IDocumentService
         return documentResponse;
     }
 
-    public async Task<GenericDocument> Upload(
-        Documents::DocumentUploadParams parameters,
+    public async Task<Documents::GenericDocument> Upload(
+        DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Documents::DocumentUploadParams> request = new()
+        HttpRequest<DocumentUploadParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -59,7 +59,7 @@ public sealed class DocumentService : IDocumentService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var genericDocument = await response
-            .Deserialize<GenericDocument>(cancellationToken)
+            .Deserialize<Documents::GenericDocument>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

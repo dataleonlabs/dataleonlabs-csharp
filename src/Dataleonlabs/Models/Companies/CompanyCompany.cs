@@ -10,8 +10,8 @@ using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
-[JsonConverter(typeof(ModelConverter<Company1>))]
-public sealed record class Company1 : ModelBase, IFromRaw<Company1>
+[JsonConverter(typeof(ModelConverter<CompanyCompany>))]
+public sealed record class CompanyCompany : ModelBase, IFromRaw<CompanyCompany>
 {
     /// <summary>
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the company,
@@ -101,14 +101,17 @@ public sealed record class Company1 : ModelBase, IFromRaw<Company1>
     /// Main information about the company being registered, including legal name,
     /// registration ID, and address.
     /// </summary>
-    public Company2? Company
+    public CompanyCompanyCompany? Company
     {
         get
         {
             if (!this._properties.TryGetValue("company", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Company2?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<CompanyCompanyCompany?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -296,14 +299,14 @@ public sealed record class Company1 : ModelBase, IFromRaw<Company1>
     /// Technical metadata related to the request, such as IP address, QR code settings,
     /// and callback URLs.
     /// </summary>
-    public TechnicalData1? TechnicalData
+    public CompanyTechnicalData? TechnicalData
     {
         get
         {
             if (!this._properties.TryGetValue("technical_data", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<TechnicalData1?>(
+            return JsonSerializer.Deserialize<CompanyTechnicalData?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -380,22 +383,24 @@ public sealed record class Company1 : ModelBase, IFromRaw<Company1>
         _ = this.WebviewURL;
     }
 
-    public Company1() { }
+    public CompanyCompany() { }
 
-    public Company1(IReadOnlyDictionary<string, JsonElement> properties)
+    public CompanyCompany(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Company1(FrozenDictionary<string, JsonElement> properties)
+    CompanyCompany(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Company1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static CompanyCompany FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
@@ -405,8 +410,8 @@ public sealed record class Company1 : ModelBase, IFromRaw<Company1>
 /// Main information about the company being registered, including legal name, registration
 /// ID, and address.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Company2>))]
-public sealed record class Company2 : ModelBase, IFromRaw<Company2>
+[JsonConverter(typeof(ModelConverter<CompanyCompanyCompany>))]
+public sealed record class CompanyCompanyCompany : ModelBase, IFromRaw<CompanyCompanyCompany>
 {
     /// <summary>
     /// Full registered address of the company.
@@ -963,22 +968,24 @@ public sealed record class Company2 : ModelBase, IFromRaw<Company2>
         _ = this.WebsiteURL;
     }
 
-    public Company2() { }
+    public CompanyCompanyCompany() { }
 
-    public Company2(IReadOnlyDictionary<string, JsonElement> properties)
+    public CompanyCompanyCompany(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Company2(FrozenDictionary<string, JsonElement> properties)
+    CompanyCompanyCompany(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Company2 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static CompanyCompanyCompany FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
@@ -1749,14 +1756,14 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
     /// <summary>
     /// Member type (person or company)
     /// </summary>
-    public ApiEnum<string, TypeModel>? Type
+    public ApiEnum<string, MemberType>? Type
     {
         get
         {
             if (!this._properties.TryGetValue("type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, TypeModel>?>(
+            return JsonSerializer.Deserialize<ApiEnum<string, MemberType>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1903,16 +1910,16 @@ sealed class SourceConverter : JsonConverter<Source>
 /// <summary>
 /// Member type (person or company)
 /// </summary>
-[JsonConverter(typeof(TypeModelConverter))]
-public enum TypeModel
+[JsonConverter(typeof(MemberTypeConverter))]
+public enum MemberType
 {
     Person,
     Company,
 }
 
-sealed class TypeModelConverter : JsonConverter<TypeModel>
+sealed class MemberTypeConverter : JsonConverter<MemberType>
 {
-    public override TypeModel Read(
+    public override MemberType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1920,15 +1927,15 @@ sealed class TypeModelConverter : JsonConverter<TypeModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "person" => TypeModel.Person,
-            "company" => TypeModel.Company,
-            _ => (TypeModel)(-1),
+            "person" => MemberType.Person,
+            "company" => MemberType.Company,
+            _ => (MemberType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        TypeModel value,
+        MemberType value,
         JsonSerializerOptions options
     )
     {
@@ -1936,8 +1943,8 @@ sealed class TypeModelConverter : JsonConverter<TypeModel>
             writer,
             value switch
             {
-                TypeModel.Person => "person",
-                TypeModel.Company => "company",
+                MemberType.Person => "person",
+                MemberType.Company => "company",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
