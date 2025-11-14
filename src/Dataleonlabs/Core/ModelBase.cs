@@ -20,10 +20,10 @@ public abstract record class ModelBase
     {
         Converters =
         {
-            new ApiEnumConverter<string, StatusModel>(),
+            new ApiEnumConverter<string, AmlSuspicionStatus>(),
             new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, Source>(),
-            new ApiEnumConverter<string, TypeModel>(),
+            new ApiEnumConverter<string, MemberType>(),
             new ApiEnumConverter<string, PortalStep1>(),
             new ApiEnumConverter<string, PortalStep>(),
             new ApiEnumConverter<string, PortalStepModel>(),
@@ -32,7 +32,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, DocumentType>(),
             new ApiEnumConverter<string, Individuals::Gender>(),
             new ApiEnumConverter<string, Individuals::PortalStep>(),
-            new ApiEnumConverter<string, Individuals::GenderModel>(),
+            new ApiEnumConverter<string, Individuals::PersonModelGender>(),
             new ApiEnumConverter<string, Individuals::PortalStepModel>(),
             new ApiEnumConverter<string, Individuals::State>(),
             new ApiEnumConverter<string, Individuals::Status>(),

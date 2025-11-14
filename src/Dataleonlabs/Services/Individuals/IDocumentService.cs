@@ -2,8 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies.Documents;
-using Documents = Dataleonlabs.Models.Individuals.Documents;
+using Dataleonlabs.Models.Individuals.Documents;
+using Documents = Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Individuals;
 
@@ -14,16 +14,16 @@ public interface IDocumentService
     /// <summary>
     /// Get documents to an individuals
     /// </summary>
-    Task<DocumentResponse> List(
-        Documents::DocumentListParams parameters,
+    Task<Documents::DocumentResponse> List(
+        DocumentListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Upload documents to an individual
     /// </summary>
-    Task<GenericDocument> Upload(
-        Documents::DocumentUploadParams parameters,
+    Task<Documents::GenericDocument> Upload(
+        DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
     );
 }
