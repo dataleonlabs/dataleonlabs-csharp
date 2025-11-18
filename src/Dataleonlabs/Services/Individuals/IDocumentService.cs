@@ -7,6 +7,11 @@ using Documents = Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Individuals;
 
+/// <summary>
+/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
+/// changes in non-major versions. We may add new methods in the future that cause
+/// existing derived classes to break.
+/// </summary>
 public interface IDocumentService
 {
     IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
