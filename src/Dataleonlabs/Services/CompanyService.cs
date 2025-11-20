@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Services.Companies;
 
@@ -58,6 +59,11 @@ public sealed class CompanyService : ICompanyService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CompanyID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.CompanyID' cannot be null");
+        }
+
         HttpRequest<CompanyRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -76,11 +82,27 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
+    public async Task<CompanyCompany> Retrieve(
+        string companyID,
+        CompanyRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { CompanyID = companyID }, cancellationToken);
+    }
+
     public async Task<CompanyCompany> Update(
         CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CompanyID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.CompanyID' cannot be null");
+        }
+
         HttpRequest<CompanyUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
@@ -97,6 +119,15 @@ public sealed class CompanyService : ICompanyService
             company.Validate();
         }
         return company;
+    }
+
+    public async Task<CompanyCompany> Update(
+        string companyID,
+        CompanyUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.Update(parameters with { CompanyID = companyID }, cancellationToken);
     }
 
     public async Task<List<CompanyCompany>> List(
@@ -132,6 +163,11 @@ public sealed class CompanyService : ICompanyService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CompanyID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.CompanyID' cannot be null");
+        }
+
         HttpRequest<CompanyDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
@@ -140,5 +176,16 @@ public sealed class CompanyService : ICompanyService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    public async Task Delete(
+        string companyID,
+        CompanyDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Delete(parameters with { CompanyID = companyID }, cancellationToken);
     }
 }

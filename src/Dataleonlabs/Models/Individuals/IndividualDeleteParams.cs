@@ -13,7 +13,7 @@ namespace Dataleonlabs.Models.Individuals;
 /// </summary>
 public sealed record class IndividualDeleteParams : ParamsBase
 {
-    public required string IndividualID { get; init; }
+    public string? IndividualID { get; init; }
 
     public IndividualDeleteParams() { }
 

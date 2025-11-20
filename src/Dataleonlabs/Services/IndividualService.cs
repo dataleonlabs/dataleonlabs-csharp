@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Individuals;
 using Dataleonlabs.Services.Individuals;
 
@@ -58,6 +59,11 @@ public sealed class IndividualService : IIndividualService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.IndividualID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.IndividualID' cannot be null");
+        }
+
         HttpRequest<IndividualRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -76,11 +82,33 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
+    public async Task<Individual> Retrieve(
+        string individualID,
+        IndividualRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(
+            parameters with
+            {
+                IndividualID = individualID,
+            },
+            cancellationToken
+        );
+    }
+
     public async Task<Individual> Update(
         IndividualUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.IndividualID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.IndividualID' cannot be null");
+        }
+
         HttpRequest<IndividualUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
@@ -97,6 +125,21 @@ public sealed class IndividualService : IIndividualService
             individual.Validate();
         }
         return individual;
+    }
+
+    public async Task<Individual> Update(
+        string individualID,
+        IndividualUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.Update(
+            parameters with
+            {
+                IndividualID = individualID,
+            },
+            cancellationToken
+        );
     }
 
     public async Task<List<Individual>> List(
@@ -132,6 +175,11 @@ public sealed class IndividualService : IIndividualService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.IndividualID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.IndividualID' cannot be null");
+        }
+
         HttpRequest<IndividualDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
@@ -140,5 +188,16 @@ public sealed class IndividualService : IIndividualService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    public async Task Delete(
+        string individualID,
+        IndividualDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Delete(parameters with { IndividualID = individualID }, cancellationToken);
     }
 }

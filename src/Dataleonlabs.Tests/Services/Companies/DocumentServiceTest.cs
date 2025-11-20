@@ -8,9 +8,7 @@ public class DocumentServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task List_Works()
     {
-        var documentResponse = await this.client.Companies.Documents.List(
-            new() { CompanyID = "company_id" }
-        );
+        var documentResponse = await this.client.Companies.Documents.List("company_id");
         documentResponse.Validate();
     }
 
@@ -18,7 +16,8 @@ public class DocumentServiceTest : TestBase
     public async Task Upload_Works()
     {
         var genericDocument = await this.client.Companies.Documents.Upload(
-            new() { CompanyID = "company_id", DocumentType = DocumentType.LiasseFiscale }
+            "company_id",
+            new() { DocumentType = DocumentType.LiasseFiscale }
         );
         genericDocument.Validate();
     }

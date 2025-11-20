@@ -25,9 +25,27 @@ public interface IDocumentService
     );
 
     /// <summary>
+    /// Get documents to an individuals
+    /// </summary>
+    Task<Documents::DocumentResponse> List(
+        string individualID,
+        DocumentListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Upload documents to an individual
     /// </summary>
     Task<Documents::GenericDocument> Upload(
+        DocumentUploadParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Upload documents to an individual
+    /// </summary>
+    Task<Documents::GenericDocument> Upload(
+        string individualID,
         DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
     );
