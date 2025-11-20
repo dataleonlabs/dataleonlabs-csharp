@@ -13,7 +13,7 @@ namespace Dataleonlabs.Models.Companies;
 /// </summary>
 public sealed record class CompanyDeleteParams : ParamsBase
 {
-    public required string CompanyID { get; init; }
+    public string? CompanyID { get; init; }
 
     public CompanyDeleteParams() { }
 

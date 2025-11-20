@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Companies;
@@ -26,6 +27,11 @@ public sealed class DocumentService : IDocumentService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CompanyID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.CompanyID' cannot be null");
+        }
+
         HttpRequest<DocumentListParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -44,11 +50,27 @@ public sealed class DocumentService : IDocumentService
         return documentResponse;
     }
 
+    public async Task<DocumentResponse> List(
+        string companyID,
+        DocumentListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.List(parameters with { CompanyID = companyID }, cancellationToken);
+    }
+
     public async Task<GenericDocument> Upload(
         DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CompanyID == null)
+        {
+            throw new DataleonlabsInvalidDataException("'parameters.CompanyID' cannot be null");
+        }
+
         HttpRequest<DocumentUploadParams> request = new()
         {
             Method = HttpMethod.Post,
@@ -65,5 +87,14 @@ public sealed class DocumentService : IDocumentService
             genericDocument.Validate();
         }
         return genericDocument;
+    }
+
+    public async Task<GenericDocument> Upload(
+        string companyID,
+        DocumentUploadParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.Upload(parameters with { CompanyID = companyID }, cancellationToken);
     }
 }

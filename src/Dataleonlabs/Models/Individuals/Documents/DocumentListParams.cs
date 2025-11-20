@@ -13,7 +13,7 @@ namespace Dataleonlabs.Models.Individuals.Documents;
 /// </summary>
 public sealed record class DocumentListParams : ParamsBase
 {
-    public required string IndividualID { get; init; }
+    public string? IndividualID { get; init; }
 
     public DocumentListParams() { }
 

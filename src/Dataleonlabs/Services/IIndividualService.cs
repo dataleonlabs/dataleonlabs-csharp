@@ -36,9 +36,27 @@ public interface IIndividualService
     );
 
     /// <summary>
+    /// Get an individual by ID
+    /// </summary>
+    Task<Individual> Retrieve(
+        string individualID,
+        IndividualRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Update an individual by ID
     /// </summary>
     Task<Individual> Update(
+        IndividualUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Update an individual by ID
+    /// </summary>
+    Task<Individual> Update(
+        string individualID,
         IndividualUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -55,4 +73,13 @@ public interface IIndividualService
     /// Delete an individual by ID
     /// </summary>
     Task Delete(IndividualDeleteParams parameters, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Delete an individual by ID
+    /// </summary>
+    Task Delete(
+        string individualID,
+        IndividualDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

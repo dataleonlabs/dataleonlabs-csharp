@@ -22,7 +22,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string IndividualID { get; init; }
+    public string? IndividualID { get; init; }
 
     /// <summary>
     /// Unique identifier of the workspace where the individual is being registered.

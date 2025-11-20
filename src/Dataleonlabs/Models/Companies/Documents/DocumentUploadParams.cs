@@ -22,7 +22,7 @@ public sealed record class DocumentUploadParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string CompanyID { get; init; }
+    public string? CompanyID { get; init; }
 
     /// <summary>
     /// Filter by document type for upload (must be one of the allowed values)

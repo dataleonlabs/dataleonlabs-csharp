@@ -37,7 +37,7 @@ public class CompanyServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Retrieve_Works()
     {
-        var company = await this.client.Companies.Retrieve(new() { CompanyID = "company_id" });
+        var company = await this.client.Companies.Retrieve("company_id");
         company.Validate();
     }
 
@@ -45,9 +45,9 @@ public class CompanyServiceTest : TestBase
     public async Task Update_Works()
     {
         var company = await this.client.Companies.Update(
+            "company_id",
             new()
             {
-                CompanyID = "company_id",
                 Company = new()
                 {
                     Name = "ACME Corp",
@@ -85,6 +85,6 @@ public class CompanyServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Delete_Works()
     {
-        await this.client.Companies.Delete(new() { CompanyID = "company_id" });
+        await this.client.Companies.Delete("company_id");
     }
 }

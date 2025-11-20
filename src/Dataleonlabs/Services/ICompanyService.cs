@@ -36,9 +36,27 @@ public interface ICompanyService
     );
 
     /// <summary>
+    /// Get a company by ID
+    /// </summary>
+    Task<CompanyCompany> Retrieve(
+        string companyID,
+        CompanyRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Update a company by ID
     /// </summary>
     Task<CompanyCompany> Update(
+        CompanyUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Update a company by ID
+    /// </summary>
+    Task<CompanyCompany> Update(
+        string companyID,
         CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -55,4 +73,13 @@ public interface ICompanyService
     /// Delete a company by ID
     /// </summary>
     Task Delete(CompanyDeleteParams parameters, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Delete a company by ID
+    /// </summary>
+    Task Delete(
+        string companyID,
+        CompanyDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

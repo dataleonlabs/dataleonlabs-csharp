@@ -13,7 +13,7 @@ namespace Dataleonlabs.Models.Companies;
 /// </summary>
 public sealed record class CompanyRetrieveParams : ParamsBase
 {
-    public required string CompanyID { get; init; }
+    public string? CompanyID { get; init; }
 
     /// <summary>
     /// Include document signed url

@@ -22,7 +22,7 @@ public sealed record class CompanyUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string CompanyID { get; init; }
+    public string? CompanyID { get; init; }
 
     /// <summary>
     /// Main information about the company being registered.

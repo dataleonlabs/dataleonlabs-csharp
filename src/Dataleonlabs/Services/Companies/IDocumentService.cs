@@ -24,9 +24,27 @@ public interface IDocumentService
     );
 
     /// <summary>
+    /// Get documents to an company
+    /// </summary>
+    Task<DocumentResponse> List(
+        string companyID,
+        DocumentListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Upload documents to an company
     /// </summary>
     Task<GenericDocument> Upload(
+        DocumentUploadParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Upload documents to an company
+    /// </summary>
+    Task<GenericDocument> Upload(
+        string companyID,
         DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
     );

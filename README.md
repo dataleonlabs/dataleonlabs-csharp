@@ -32,10 +32,13 @@ See the [`examples`](examples) directory for complete and runnable examples.
 ```csharp
 using System;
 using Dataleonlabs;
+using Dataleonlabs.Models.Companies;
 
 DataleonlabsClient client = new();
 
-var companies = await client.Companies.List();
+CompanyListParams parameters = new();
+
+var companies = await client.Companies.List(parameters);
 
 Console.WriteLine(companies);
 ```
@@ -83,7 +86,7 @@ var companies = await client
             Timeout = TimeSpan.FromSeconds(42),
         }
     )
-    .Companies.List();
+    .Companies.List(parameters);
 
 Console.WriteLine(companies);
 ```
@@ -158,7 +161,7 @@ var companies = await client
     .WithOptions(options =>
         options with { MaxRetries = 3 }
     )
-    .Companies.List();
+    .Companies.List(parameters);
 
 Console.WriteLine(companies);
 ```
@@ -185,7 +188,7 @@ var companies = await client
     .WithOptions(options =>
         options with { Timeout = TimeSpan.FromSeconds(42) }
     )
-    .Companies.List();
+    .Companies.List(parameters);
 
 Console.WriteLine(companies);
 ```
