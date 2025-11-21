@@ -1,10 +1,10 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
-using Dataleonlabs.Models.Companies.Documents.GenericDocumentProperties;
 
 namespace Dataleonlabs.Models.Companies.Documents;
 
@@ -21,14 +21,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("id", out JsonElement element))
+            if (!this._rawData.TryGetValue("id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["id"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -42,14 +47,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("checks", out JsonElement element))
+            if (!this._rawData.TryGetValue("checks", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Check>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["checks"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["checks"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -59,18 +69,26 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     /// <summary>
     /// Timestamp when the document was created or uploaded.
     /// </summary>
-    public DateTime? CreatedAt
+    public DateTimeOffset? CreatedAt
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -84,14 +102,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("document_type", out JsonElement element))
+            if (!this._rawData.TryGetValue("document_type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["document_type"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -105,14 +128,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -126,14 +154,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("signed_url", out JsonElement element))
+            if (!this._rawData.TryGetValue("signed_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["signed_url"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["signed_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -147,14 +180,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("state", out JsonElement element))
+            if (!this._rawData.TryGetValue("state", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["state"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -168,14 +206,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("status", out JsonElement element))
+            if (!this._rawData.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["status"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -189,14 +232,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("tables", out JsonElement element))
+            if (!this._rawData.TryGetValue("tables", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Table>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["tables"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["tables"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -210,14 +258,19 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     {
         get
         {
-            if (!this.Properties.TryGetValue("values", out JsonElement element))
+            if (!this._rawData.TryGetValue("values", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<Value>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["values"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["values"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -249,16 +302,188 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
 
     public GenericDocument() { }
 
+    public GenericDocument(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = [.. rawData];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    GenericDocument(Dictionary<string, JsonElement> properties)
+    GenericDocument(FrozenDictionary<string, JsonElement> rawData)
     {
-        Properties = properties;
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static GenericDocument FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static GenericDocument FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+[JsonConverter(typeof(ModelConverter<Table>))]
+public sealed record class Table : ModelBase, IFromRaw<Table>
+{
+    /// <summary>
+    /// List of operations or actions associated with the table.
+    /// </summary>
+    public List<JsonElement>? Operation
+    {
+        get
+        {
+            if (!this._rawData.TryGetValue("operation", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<List<JsonElement>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["operation"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.Operation;
+    }
+
+    public Table() { }
+
+    public Table(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = [.. rawData];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Table(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = [.. rawData];
+    }
+#pragma warning restore CS8618
+
+    public static Table FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+[JsonConverter(typeof(ModelConverter<Value>))]
+public sealed record class Value : ModelBase, IFromRaw<Value>
+{
+    /// <summary>
+    /// Confidence score (between 0 and 1) for the extracted value.
+    /// </summary>
+    public double? Confidence
+    {
+        get
+        {
+            if (!this._rawData.TryGetValue("confidence", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<double?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["confidence"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Name or label of the extracted field.
+    /// </summary>
+    public string? Name
+    {
+        get
+        {
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// List of integer values related to the field (e.g., bounding box coordinates).
+    /// </summary>
+    public List<long>? Value1
+    {
+        get
+        {
+            if (!this._rawData.TryGetValue("value", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<List<long>?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData["value"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.Confidence;
+        _ = this.Name;
+        _ = this.Value1;
+    }
+
+    public Value() { }
+
+    public Value(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = [.. rawData];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Value(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = [.. rawData];
+    }
+#pragma warning restore CS8618
+
+    public static Value FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

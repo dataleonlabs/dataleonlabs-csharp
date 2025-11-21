@@ -1,11 +1,13 @@
-using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
 using Dataleonlabs.Exceptions;
-using Dataleonlabs.Models.Companies.Documents.DocumentUploadParamsProperties;
+using System = System;
 
 namespace Dataleonlabs.Models.Companies.Documents;
 
@@ -14,9 +16,13 @@ namespace Dataleonlabs.Models.Companies.Documents;
 /// </summary>
 public sealed record class DocumentUploadParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
+    {
+        get { return this._rawBodyData.Freeze(); }
+    }
 
-    public required string CompanyID;
+    public string? CompanyID { get; init; }
 
     /// <summary>
     /// Filter by document type for upload (must be one of the allowed values)
@@ -25,10 +31,13 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("document_type", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("document_type", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'document_type' cannot be null",
-                    new ArgumentOutOfRangeException("document_type", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "document_type",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
@@ -36,9 +45,9 @@ public sealed record class DocumentUploadParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["document_type"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["document_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -52,14 +61,19 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("file", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("file", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["file"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData["file"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -73,49 +87,227 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("url", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["url"] = JsonSerializer.SerializeToElement(
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
     }
 
-    public override Uri Url(IDataleonlabsClient client)
+    public DocumentUploadParams() { }
+
+    public DocumentUploadParams(
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
+    )
     {
-        return new UriBuilder(
-            client.BaseUrl.ToString().TrimEnd('/')
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DocumentUploadParams(
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
+    )
+    {
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
+    }
+#pragma warning restore CS8618
+
+    public static DocumentUploadParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
+        );
+    }
+
+    public override System::Uri Url(ClientOptions options)
+    {
+        return new System::UriBuilder(
+            options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/companies/{0}/documents", this.CompanyID)
         )
         {
-            Query = this.QueryString(client),
+            Query = this.QueryString(options),
         }.Uri;
     }
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
-    internal override void AddHeadersToRequest(
-        HttpRequestMessage request,
-        IDataleonlabsClient client
-    )
+    internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
-        ParamsBase.AddDefaultHeaders(request, client);
-        foreach (var item in this.HeaderProperties)
+        ParamsBase.AddDefaultHeaders(request, options);
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Filter by document type for upload (must be one of the allowed values)
+/// </summary>
+[JsonConverter(typeof(DocumentTypeConverter))]
+public enum DocumentType
+{
+    LiasseFiscale,
+    AmortisedLoanSchedule,
+    Invoice,
+    Receipt,
+    CompanyStatuts,
+    RegistrationCompanyCertificate,
+    Kbis,
+    Rib,
+    LivretFamille,
+    BirthCertificate,
+    Payslip,
+    SocialSecurityCard,
+    VehicleRegistrationCertificate,
+    CarteGrise,
+    CriminalRecordExtract,
+    ProofOfAddress,
+    IdentityCardFront,
+    IdentityCardBack,
+    DriverLicenseFront,
+    DriverLicenseBack,
+    IdentityDocument,
+    DriverLicense,
+    Passport,
+    Tax,
+    CertificateOfIncorporation,
+    CertificateOfGoodStanding,
+    LcbFtLabAmlPolicies,
+    NiuEntreprise,
+    FinancialStatements,
+    Rccm,
+    ProofOfSourceFunds,
+    OrganizationalChart,
+    RiskPolicies,
+}
+
+sealed class DocumentTypeConverter : JsonConverter<DocumentType>
+{
+    public override DocumentType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "liasse_fiscale" => DocumentType.LiasseFiscale,
+            "amortised_loan_schedule" => DocumentType.AmortisedLoanSchedule,
+            "invoice" => DocumentType.Invoice,
+            "receipt" => DocumentType.Receipt,
+            "company_statuts" => DocumentType.CompanyStatuts,
+            "registration_company_certificate" => DocumentType.RegistrationCompanyCertificate,
+            "kbis" => DocumentType.Kbis,
+            "rib" => DocumentType.Rib,
+            "livret_famille" => DocumentType.LivretFamille,
+            "birth_certificate" => DocumentType.BirthCertificate,
+            "payslip" => DocumentType.Payslip,
+            "social_security_card" => DocumentType.SocialSecurityCard,
+            "vehicle_registration_certificate" => DocumentType.VehicleRegistrationCertificate,
+            "carte_grise" => DocumentType.CarteGrise,
+            "criminal_record_extract" => DocumentType.CriminalRecordExtract,
+            "proof_of_address" => DocumentType.ProofOfAddress,
+            "identity_card_front" => DocumentType.IdentityCardFront,
+            "identity_card_back" => DocumentType.IdentityCardBack,
+            "driver_license_front" => DocumentType.DriverLicenseFront,
+            "driver_license_back" => DocumentType.DriverLicenseBack,
+            "identity_document" => DocumentType.IdentityDocument,
+            "driver_license" => DocumentType.DriverLicense,
+            "passport" => DocumentType.Passport,
+            "tax" => DocumentType.Tax,
+            "certificate_of_incorporation" => DocumentType.CertificateOfIncorporation,
+            "certificate_of_good_standing" => DocumentType.CertificateOfGoodStanding,
+            "lcb_ft_lab_aml_policies" => DocumentType.LcbFtLabAmlPolicies,
+            "niu_entreprise" => DocumentType.NiuEntreprise,
+            "financial_statements" => DocumentType.FinancialStatements,
+            "rccm" => DocumentType.Rccm,
+            "proof_of_source_funds" => DocumentType.ProofOfSourceFunds,
+            "organizational_chart" => DocumentType.OrganizationalChart,
+            "risk_policies" => DocumentType.RiskPolicies,
+            _ => (DocumentType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DocumentType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DocumentType.LiasseFiscale => "liasse_fiscale",
+                DocumentType.AmortisedLoanSchedule => "amortised_loan_schedule",
+                DocumentType.Invoice => "invoice",
+                DocumentType.Receipt => "receipt",
+                DocumentType.CompanyStatuts => "company_statuts",
+                DocumentType.RegistrationCompanyCertificate => "registration_company_certificate",
+                DocumentType.Kbis => "kbis",
+                DocumentType.Rib => "rib",
+                DocumentType.LivretFamille => "livret_famille",
+                DocumentType.BirthCertificate => "birth_certificate",
+                DocumentType.Payslip => "payslip",
+                DocumentType.SocialSecurityCard => "social_security_card",
+                DocumentType.VehicleRegistrationCertificate => "vehicle_registration_certificate",
+                DocumentType.CarteGrise => "carte_grise",
+                DocumentType.CriminalRecordExtract => "criminal_record_extract",
+                DocumentType.ProofOfAddress => "proof_of_address",
+                DocumentType.IdentityCardFront => "identity_card_front",
+                DocumentType.IdentityCardBack => "identity_card_back",
+                DocumentType.DriverLicenseFront => "driver_license_front",
+                DocumentType.DriverLicenseBack => "driver_license_back",
+                DocumentType.IdentityDocument => "identity_document",
+                DocumentType.DriverLicense => "driver_license",
+                DocumentType.Passport => "passport",
+                DocumentType.Tax => "tax",
+                DocumentType.CertificateOfIncorporation => "certificate_of_incorporation",
+                DocumentType.CertificateOfGoodStanding => "certificate_of_good_standing",
+                DocumentType.LcbFtLabAmlPolicies => "lcb_ft_lab_aml_policies",
+                DocumentType.NiuEntreprise => "niu_entreprise",
+                DocumentType.FinancialStatements => "financial_statements",
+                DocumentType.Rccm => "rccm",
+                DocumentType.ProofOfSourceFunds => "proof_of_source_funds",
+                DocumentType.OrganizationalChart => "organizational_chart",
+                DocumentType.RiskPolicies => "risk_policies",
+                _ => throw new DataleonlabsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

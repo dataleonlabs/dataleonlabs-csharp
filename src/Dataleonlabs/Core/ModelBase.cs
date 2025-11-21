@@ -1,36 +1,42 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using Dataleonlabs.Models.Companies.AmlSuspicionProperties;
-using Dataleonlabs.Models.Companies.Documents.DocumentUploadParamsProperties;
-using Dataleonlabs.Models.Individuals.IndividualCreateParamsProperties.PersonProperties;
-using CompanyListParamsProperties = Dataleonlabs.Models.Companies.CompanyListParamsProperties;
-using DocumentUploadParamsProperties = Dataleonlabs.Models.Individuals.Documents.DocumentUploadParamsProperties;
-using IndividualListParamsProperties = Dataleonlabs.Models.Individuals.IndividualListParamsProperties;
-using MemberProperties = Dataleonlabs.Models.Companies.CompanyProperties.MemberProperties;
-using PersonProperties = Dataleonlabs.Models.Individuals.IndividualUpdateParamsProperties.PersonProperties;
+using Dataleonlabs.Models.Companies;
+using Dataleonlabs.Models.Companies.Documents;
+using Documents = Dataleonlabs.Models.Individuals.Documents;
+using Individuals = Dataleonlabs.Models.Individuals;
 
 namespace Dataleonlabs.Core;
 
 public abstract record class ModelBase
 {
-    public Dictionary<string, JsonElement> Properties { get; set; } = [];
+    private protected FreezableDictionary<string, JsonElement> _rawData = [];
+
+    public IReadOnlyDictionary<string, JsonElement> RawData
+    {
+        get { return this._rawData.Freeze(); }
+    }
 
     internal static readonly JsonSerializerOptions SerializerOptions = new()
     {
         Converters =
         {
-            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, AmlSuspicionStatus>(),
             new ApiEnumConverter<string, Type>(),
-            new ApiEnumConverter<string, MemberProperties::Source>(),
-            new ApiEnumConverter<string, MemberProperties::Type>(),
-            new ApiEnumConverter<string, CompanyListParamsProperties::State>(),
-            new ApiEnumConverter<string, CompanyListParamsProperties::Status>(),
+            new ApiEnumConverter<string, Source>(),
+            new ApiEnumConverter<string, MemberType>(),
+            new ApiEnumConverter<string, PortalStep1>(),
+            new ApiEnumConverter<string, PortalStep>(),
+            new ApiEnumConverter<string, PortalStepModel>(),
+            new ApiEnumConverter<string, State>(),
+            new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, DocumentType>(),
-            new ApiEnumConverter<string, Gender>(),
-            new ApiEnumConverter<string, PersonProperties::Gender>(),
-            new ApiEnumConverter<string, IndividualListParamsProperties::State>(),
-            new ApiEnumConverter<string, IndividualListParamsProperties::Status>(),
-            new ApiEnumConverter<string, DocumentUploadParamsProperties::DocumentType>(),
+            new ApiEnumConverter<string, Individuals::Gender>(),
+            new ApiEnumConverter<string, Individuals::PortalStep>(),
+            new ApiEnumConverter<string, Individuals::PersonModelGender>(),
+            new ApiEnumConverter<string, Individuals::PortalStepModel>(),
+            new ApiEnumConverter<string, Individuals::State>(),
+            new ApiEnumConverter<string, Individuals::Status>(),
+            new ApiEnumConverter<string, Documents::DocumentType>(),
         },
     };
 
@@ -41,13 +47,18 @@ public abstract record class ModelBase
 
     public sealed override string? ToString()
     {
-        return JsonSerializer.Serialize(this.Properties, _toStringSerializerOptions);
+        return JsonSerializer.Serialize(this.RawData, _toStringSerializerOptions);
     }
 
     public abstract void Validate();
 }
 
+/// <summary>
+/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
+/// changes in non-major versions. We may add new methods in the future that cause
+/// existing derived classes to break.
+/// </summary>
 interface IFromRaw<T>
 {
-    static abstract T FromRawUnchecked(Dictionary<string, JsonElement> properties);
+    static abstract T FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData);
 }
