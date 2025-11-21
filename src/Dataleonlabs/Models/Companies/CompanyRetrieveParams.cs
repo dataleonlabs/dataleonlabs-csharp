@@ -22,7 +22,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("document", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("document", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -34,7 +34,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["document"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["document"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +48,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("scope", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("scope", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -60,7 +60,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["scope"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["scope"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -70,34 +70,34 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     public CompanyRetrieveParams() { }
 
     public CompanyRetrieveParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CompanyRetrieveParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
     }
 #pragma warning restore CS8618
 
     public static CompanyRetrieveParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData)
         );
     }
 
@@ -115,7 +115,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }

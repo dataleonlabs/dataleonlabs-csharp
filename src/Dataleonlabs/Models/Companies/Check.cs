@@ -20,7 +20,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this._properties.TryGetValue("masked", out JsonElement element))
+            if (!this._rawData.TryGetValue("masked", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -32,7 +32,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
                 return;
             }
 
-            this._properties["masked"] = JsonSerializer.SerializeToElement(
+            this._rawData["masked"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -46,7 +46,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this._properties.TryGetValue("message", out JsonElement element))
+            if (!this._rawData.TryGetValue("message", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -58,7 +58,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
                 return;
             }
 
-            this._properties["message"] = JsonSerializer.SerializeToElement(
+            this._rawData["message"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -72,7 +72,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this._properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -84,7 +84,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
                 return;
             }
 
-            this._properties["name"] = JsonSerializer.SerializeToElement(
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -98,7 +98,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this._properties.TryGetValue("validate", out JsonElement element))
+            if (!this._rawData.TryGetValue("validate", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -110,7 +110,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
                 return;
             }
 
-            this._properties["validate"] = JsonSerializer.SerializeToElement(
+            this._rawData["validate"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -124,7 +124,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         get
         {
-            if (!this._properties.TryGetValue("weight", out JsonElement element))
+            if (!this._rawData.TryGetValue("weight", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
@@ -136,7 +136,7 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
                 return;
             }
 
-            this._properties["weight"] = JsonSerializer.SerializeToElement(
+            this._rawData["weight"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -154,21 +154,21 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
 
     public Check() { }
 
-    public Check(IReadOnlyDictionary<string, JsonElement> properties)
+    public Check(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Check(FrozenDictionary<string, JsonElement> properties)
+    Check(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

@@ -23,7 +23,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("active_aml_suspicions", out JsonElement element))
+            if (!this._rawData.TryGetValue("active_aml_suspicions", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -35,7 +35,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
+            this._rawData["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -49,7 +49,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("api_version", out JsonElement element))
+            if (!this._rawData.TryGetValue("api_version", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
@@ -61,7 +61,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["api_version"] = JsonSerializer.SerializeToElement(
+            this._rawData["api_version"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,7 +75,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("approved_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("approved_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -90,7 +90,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["approved_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["approved_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -104,7 +104,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("callback_url", out JsonElement element))
+            if (!this._rawData.TryGetValue("callback_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -116,7 +116,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["callback_url"] = JsonSerializer.SerializeToElement(
+            this._rawData["callback_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -130,7 +130,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("callback_url_notification", out JsonElement element))
+            if (!this._rawData.TryGetValue("callback_url_notification", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -142,7 +142,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["callback_url_notification"] = JsonSerializer.SerializeToElement(
+            this._rawData["callback_url_notification"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -156,7 +156,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("disable_notification", out JsonElement element))
+            if (!this._rawData.TryGetValue("disable_notification", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -168,7 +168,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["disable_notification"] = JsonSerializer.SerializeToElement(
+            this._rawData["disable_notification"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -182,7 +182,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("disable_notification_date", out JsonElement element))
+            if (!this._rawData.TryGetValue("disable_notification_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -192,7 +192,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
         }
         init
         {
-            this._properties["disable_notification_date"] = JsonSerializer.SerializeToElement(
+            this._rawData["disable_notification_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -206,7 +206,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("export_type", out JsonElement element))
+            if (!this._rawData.TryGetValue("export_type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -218,7 +218,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["export_type"] = JsonSerializer.SerializeToElement(
+            this._rawData["export_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -233,7 +233,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
         get
         {
             if (
-                !this._properties.TryGetValue(
+                !this._rawData.TryGetValue(
                     "filtering_score_aml_suspicions",
                     out JsonElement element
                 )
@@ -249,7 +249,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
+            this._rawData["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -263,7 +263,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("finished_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("finished_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -278,7 +278,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["finished_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["finished_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -292,7 +292,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("ip", out JsonElement element))
+            if (!this._rawData.TryGetValue("ip", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -304,7 +304,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["ip"] = JsonSerializer.SerializeToElement(
+            this._rawData["ip"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -318,7 +318,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("language", out JsonElement element))
+            if (!this._rawData.TryGetValue("language", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -330,7 +330,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["language"] = JsonSerializer.SerializeToElement(
+            this._rawData["language"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -344,7 +344,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("location_ip", out JsonElement element))
+            if (!this._rawData.TryGetValue("location_ip", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -356,7 +356,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["location_ip"] = JsonSerializer.SerializeToElement(
+            this._rawData["location_ip"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -370,7 +370,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("need_review_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("need_review_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -380,7 +380,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
         }
         init
         {
-            this._properties["need_review_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["need_review_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -394,7 +394,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("notification_confirmation", out JsonElement element))
+            if (!this._rawData.TryGetValue("notification_confirmation", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -406,7 +406,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["notification_confirmation"] = JsonSerializer.SerializeToElement(
+            this._rawData["notification_confirmation"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -420,7 +420,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("portal_steps", out JsonElement element))
+            if (!this._rawData.TryGetValue("portal_steps", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep1>>?>(
@@ -435,7 +435,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["portal_steps"] = JsonSerializer.SerializeToElement(
+            this._rawData["portal_steps"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -449,7 +449,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("qr_code", out JsonElement element))
+            if (!this._rawData.TryGetValue("qr_code", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -461,7 +461,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["qr_code"] = JsonSerializer.SerializeToElement(
+            this._rawData["qr_code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -471,11 +471,11 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     /// <summary>
     /// Flag indicating whether to include raw data in the response.
     /// </summary>
-    public bool? RawData
+    public bool? RawData1
     {
         get
         {
-            if (!this._properties.TryGetValue("raw_data", out JsonElement element))
+            if (!this._rawData.TryGetValue("raw_data", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -487,7 +487,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["raw_data"] = JsonSerializer.SerializeToElement(
+            this._rawData["raw_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -501,7 +501,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("rejected_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("rejected_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -511,7 +511,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
         }
         init
         {
-            this._properties["rejected_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["rejected_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -525,7 +525,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("session_duration", out JsonElement element))
+            if (!this._rawData.TryGetValue("session_duration", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
@@ -537,7 +537,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["session_duration"] = JsonSerializer.SerializeToElement(
+            this._rawData["session_duration"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -551,7 +551,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("started_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("started_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -566,7 +566,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["started_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["started_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -580,7 +580,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("transfer_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("transfer_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -595,7 +595,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["transfer_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["transfer_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -609,7 +609,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         get
         {
-            if (!this._properties.TryGetValue("transfer_mode", out JsonElement element))
+            if (!this._rawData.TryGetValue("transfer_mode", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -621,7 +621,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
                 return;
             }
 
-            this._properties["transfer_mode"] = JsonSerializer.SerializeToElement(
+            this._rawData["transfer_mode"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -650,7 +650,7 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
             item.Validate();
         }
         _ = this.QrCode;
-        _ = this.RawData;
+        _ = this.RawData1;
         _ = this.RejectedAt;
         _ = this.SessionDuration;
         _ = this.StartedAt;
@@ -660,24 +660,24 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
 
     public CompanyTechnicalData() { }
 
-    public CompanyTechnicalData(IReadOnlyDictionary<string, JsonElement> properties)
+    public CompanyTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CompanyTechnicalData(FrozenDictionary<string, JsonElement> properties)
+    CompanyTechnicalData(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CompanyTechnicalData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

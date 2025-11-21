@@ -23,7 +23,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("caption", out JsonElement element))
+            if (!this._rawData.TryGetValue("caption", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -35,7 +35,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["caption"] = JsonSerializer.SerializeToElement(
+            this._rawData["caption"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -49,7 +49,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("country", out JsonElement element))
+            if (!this._rawData.TryGetValue("country", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -61,7 +61,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["country"] = JsonSerializer.SerializeToElement(
+            this._rawData["country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,7 +75,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("gender", out JsonElement element))
+            if (!this._rawData.TryGetValue("gender", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -87,7 +87,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["gender"] = JsonSerializer.SerializeToElement(
+            this._rawData["gender"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -102,7 +102,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("relation", out JsonElement element))
+            if (!this._rawData.TryGetValue("relation", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -114,7 +114,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["relation"] = JsonSerializer.SerializeToElement(
+            this._rawData["relation"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -128,7 +128,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("schema", out JsonElement element))
+            if (!this._rawData.TryGetValue("schema", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -140,7 +140,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["schema"] = JsonSerializer.SerializeToElement(
+            this._rawData["schema"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -154,7 +154,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("score", out JsonElement element))
+            if (!this._rawData.TryGetValue("score", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
@@ -166,7 +166,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["score"] = JsonSerializer.SerializeToElement(
+            this._rawData["score"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -180,7 +180,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("source", out JsonElement element))
+            if (!this._rawData.TryGetValue("source", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -192,7 +192,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["source"] = JsonSerializer.SerializeToElement(
+            this._rawData["source"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -207,7 +207,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("status", out JsonElement element))
+            if (!this._rawData.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>?>(
@@ -222,7 +222,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["status"] = JsonSerializer.SerializeToElement(
+            this._rawData["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -237,7 +237,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         get
         {
-            if (!this._properties.TryGetValue("type", out JsonElement element))
+            if (!this._rawData.TryGetValue("type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<
@@ -252,7 +252,7 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
                 return;
             }
 
-            this._properties["type"] = JsonSerializer.SerializeToElement(
+            this._rawData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -274,22 +274,22 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
 
     public AmlSuspicion() { }
 
-    public AmlSuspicion(IReadOnlyDictionary<string, JsonElement> properties)
+    public AmlSuspicion(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AmlSuspicion(FrozenDictionary<string, JsonElement> properties)
+    AmlSuspicion(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static AmlSuspicion FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static AmlSuspicion FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

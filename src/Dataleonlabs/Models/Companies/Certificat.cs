@@ -21,7 +21,7 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
     {
         get
         {
-            if (!this._properties.TryGetValue("id", out JsonElement element))
+            if (!this._rawData.TryGetValue("id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -33,7 +33,7 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
                 return;
             }
 
-            this._properties["id"] = JsonSerializer.SerializeToElement(
+            this._rawData["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +47,7 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
     {
         get
         {
-            if (!this._properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTimeOffset?>(
@@ -62,7 +62,7 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
                 return;
             }
 
-            this._properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -76,7 +76,7 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
     {
         get
         {
-            if (!this._properties.TryGetValue("filename", out JsonElement element))
+            if (!this._rawData.TryGetValue("filename", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -88,7 +88,7 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
                 return;
             }
 
-            this._properties["filename"] = JsonSerializer.SerializeToElement(
+            this._rawData["filename"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -104,21 +104,21 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
 
     public Certificat() { }
 
-    public Certificat(IReadOnlyDictionary<string, JsonElement> properties)
+    public Certificat(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Certificat(FrozenDictionary<string, JsonElement> properties)
+    Certificat(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Certificat FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Certificat FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
