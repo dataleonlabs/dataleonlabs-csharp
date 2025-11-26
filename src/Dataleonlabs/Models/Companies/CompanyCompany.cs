@@ -446,17 +446,26 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// <summary>
     /// Closure date of the company, if applicable.
     /// </summary>
-    public System::DateOnly? ClosureDate
+    public
+#if NET
+    System::DateOnly
+#else
+    System::DateTimeOffset
+#endif
+    ? ClosureDate
     {
         get
         {
             if (!this._rawData.TryGetValue("closure_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateOnly?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<
+#if NET
+            System::DateOnly
+#else
+            System::DateTimeOffset
+#endif
+            ?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -766,17 +775,26 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// <summary>
     /// Date when the company was officially registered.
     /// </summary>
-    public System::DateOnly? RegistrationDate
+    public
+#if NET
+    System::DateOnly
+#else
+    System::DateTimeOffset
+#endif
+    ? RegistrationDate
     {
         get
         {
             if (!this._rawData.TryGetValue("registration_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateOnly?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<
+#if NET
+            System::DateOnly
+#else
+            System::DateTimeOffset
+#endif
+            ?>(element, ModelBase.SerializerOptions);
         }
         init
         {

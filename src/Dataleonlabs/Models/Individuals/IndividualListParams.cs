@@ -18,17 +18,26 @@ public sealed record class IndividualListParams : ParamsBase
     /// <summary>
     /// Filter individuals created before this date (format YYYY-MM-DD)
     /// </summary>
-    public System::DateOnly? EndDate
+    public
+#if NET
+    System::DateOnly
+#else
+    System::DateTimeOffset
+#endif
+    ? EndDate
     {
         get
         {
             if (!this._rawQueryData.TryGetValue("end_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateOnly?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<
+#if NET
+            System::DateOnly
+#else
+            System::DateTimeOffset
+#endif
+            ?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -125,17 +134,26 @@ public sealed record class IndividualListParams : ParamsBase
     /// <summary>
     /// Filter individuals created after this date (format YYYY-MM-DD)
     /// </summary>
-    public System::DateOnly? StartDate
+    public
+#if NET
+    System::DateOnly
+#else
+    System::DateTimeOffset
+#endif
+    ? StartDate
     {
         get
         {
             if (!this._rawQueryData.TryGetValue("start_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateOnly?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<
+#if NET
+            System::DateOnly
+#else
+            System::DateTimeOffset
+#endif
+            ?>(element, ModelBase.SerializerOptions);
         }
         init
         {
