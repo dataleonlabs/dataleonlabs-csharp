@@ -10,8 +10,8 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Represents a generic property key-value pair with a specified type.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Property>))]
-public sealed record class Property : ModelBase, IFromRaw<Property>
+[JsonConverter(typeof(ModelConverter<Property, PropertyFromRaw>))]
+public sealed record class Property : ModelBase
 {
     /// <summary>
     /// Name/key of the property.
@@ -117,4 +117,10 @@ public sealed record class Property : ModelBase, IFromRaw<Property>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class PropertyFromRaw : IFromRaw<Property>
+{
+    public Property FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Property.FromRawUnchecked(rawData);
 }

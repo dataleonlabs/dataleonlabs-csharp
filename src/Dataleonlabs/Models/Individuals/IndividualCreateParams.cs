@@ -197,8 +197,8 @@ public sealed record class IndividualCreateParams : ParamsBase
 /// <summary>
 /// Personal information about the individual.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Person>))]
-public sealed record class Person : ModelBase, IFromRaw<Person>
+[JsonConverter(typeof(ModelConverter<Person, PersonFromRaw>))]
+public sealed record class Person : ModelBase
 {
     /// <summary>
     /// Date of birth in DD/MM/YYYY format.
@@ -444,6 +444,12 @@ public sealed record class Person : ModelBase, IFromRaw<Person>
     }
 }
 
+class PersonFromRaw : IFromRaw<Person>
+{
+    public Person FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Person.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Gender of the individual (M for male, F for female).
 /// </summary>
@@ -490,8 +496,8 @@ sealed class GenderConverter : JsonConverter<Gender>
 /// <summary>
 /// Technical metadata related to the request or processing.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalData>))]
-public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
+[JsonConverter(typeof(ModelConverter<TechnicalData, TechnicalDataFromRaw>))]
+public sealed record class TechnicalData : ModelBase
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -717,6 +723,12 @@ public sealed record class TechnicalData : ModelBase, IFromRaw<TechnicalData>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class TechnicalDataFromRaw : IFromRaw<TechnicalData>
+{
+    public TechnicalData FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        TechnicalData.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(PortalStepConverter))]

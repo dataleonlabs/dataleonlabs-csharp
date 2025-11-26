@@ -208,8 +208,8 @@ public sealed record class CompanyUpdateParams : ParamsBase
 /// <summary>
 /// Main information about the company being registered.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CompanyModel>))]
-public sealed record class CompanyModel : ModelBase, IFromRaw<CompanyModel>
+[JsonConverter(typeof(ModelConverter<CompanyModel, CompanyModelFromRaw>))]
+public sealed record class CompanyModel : ModelBase
 {
     /// <summary>
     /// Legal name of the company.
@@ -655,11 +655,17 @@ public sealed record class CompanyModel : ModelBase, IFromRaw<CompanyModel>
     }
 }
 
+class CompanyModelFromRaw : IFromRaw<CompanyModel>
+{
+    public CompanyModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CompanyModel.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Technical metadata and callback configuration.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalDataModel>))]
-public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDataModel>
+[JsonConverter(typeof(ModelConverter<TechnicalDataModel, TechnicalDataModelFromRaw>))]
+public sealed record class TechnicalDataModel : ModelBase
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -887,6 +893,12 @@ public sealed record class TechnicalDataModel : ModelBase, IFromRaw<TechnicalDat
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class TechnicalDataModelFromRaw : IFromRaw<TechnicalDataModel>
+{
+    public TechnicalDataModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        TechnicalDataModel.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(PortalStepModelConverter))]

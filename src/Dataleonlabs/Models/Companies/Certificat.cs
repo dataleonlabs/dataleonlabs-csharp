@@ -11,8 +11,8 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Represents a certificate file associated with an individual or company.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Certificat>))]
-public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
+[JsonConverter(typeof(ModelConverter<Certificat, CertificatFromRaw>))]
+public sealed record class Certificat : ModelBase
 {
     /// <summary>
     /// Unique identifier for the certificate.
@@ -121,4 +121,10 @@ public sealed record class Certificat : ModelBase, IFromRaw<Certificat>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CertificatFromRaw : IFromRaw<Certificat>
+{
+    public Certificat FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Certificat.FromRawUnchecked(rawData);
 }

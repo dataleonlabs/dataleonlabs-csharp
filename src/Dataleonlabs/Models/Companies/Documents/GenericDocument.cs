@@ -11,8 +11,8 @@ namespace Dataleonlabs.Models.Companies.Documents;
 /// <summary>
 /// Represents a general document with metadata, verification checks, and extracted data.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<GenericDocument>))]
-public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument>
+[JsonConverter(typeof(ModelConverter<GenericDocument, GenericDocumentFromRaw>))]
+public sealed record class GenericDocument : ModelBase
 {
     /// <summary>
     /// Unique identifier of the document.
@@ -321,8 +321,14 @@ public sealed record class GenericDocument : ModelBase, IFromRaw<GenericDocument
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Table>))]
-public sealed record class Table : ModelBase, IFromRaw<Table>
+class GenericDocumentFromRaw : IFromRaw<GenericDocument>
+{
+    public GenericDocument FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        GenericDocument.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Table, TableFromRaw>))]
+public sealed record class Table : ModelBase
 {
     /// <summary>
     /// List of operations or actions associated with the table.
@@ -379,8 +385,14 @@ public sealed record class Table : ModelBase, IFromRaw<Table>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Value>))]
-public sealed record class Value : ModelBase, IFromRaw<Value>
+class TableFromRaw : IFromRaw<Table>
+{
+    public Table FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Table.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Value, ValueFromRaw>))]
+public sealed record class Value : ModelBase
 {
     /// <summary>
     /// Confidence score (between 0 and 1) for the extracted value.
@@ -486,4 +498,10 @@ public sealed record class Value : ModelBase, IFromRaw<Value>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ValueFromRaw : IFromRaw<Value>
+{
+    public Value FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Value.FromRawUnchecked(rawData);
 }

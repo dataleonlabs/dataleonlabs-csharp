@@ -13,8 +13,8 @@ namespace Dataleonlabs.Models.Individuals;
 /// <summary>
 /// Represents a single individual record, including identification, status, and associated metadata.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Individual>))]
-public sealed record class Individual : ModelBase, IFromRaw<Individual>
+[JsonConverter(typeof(ModelConverter<Individual, IndividualFromRaw>))]
+public sealed record class Individual : ModelBase
 {
     /// <summary>
     /// Unique identifier of the individual.
@@ -614,11 +614,17 @@ public sealed record class Individual : ModelBase, IFromRaw<Individual>
     }
 }
 
+class IndividualFromRaw : IFromRaw<Individual>
+{
+    public Individual FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Individual.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Reference to the individual's identity document.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<IdentityCard>))]
-public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
+[JsonConverter(typeof(ModelConverter<IdentityCard, IdentityCardFromRaw>))]
+public sealed record class IdentityCard : ModelBase
 {
     /// <summary>
     /// Unique identifier for the document.
@@ -1045,11 +1051,17 @@ public sealed record class IdentityCard : ModelBase, IFromRaw<IdentityCard>
     }
 }
 
+class IdentityCardFromRaw : IFromRaw<IdentityCard>
+{
+    public IdentityCard FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        IdentityCard.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Personal details of the individual, such as name, date of birth, and contact info.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<IndividualPerson>))]
-public sealed record class IndividualPerson : ModelBase, IFromRaw<IndividualPerson>
+[JsonConverter(typeof(ModelConverter<IndividualPerson, IndividualPersonFromRaw>))]
+public sealed record class IndividualPerson : ModelBase
 {
     /// <summary>
     /// Date of birth, formatted as DD/MM/YYYY.
@@ -1348,12 +1360,18 @@ public sealed record class IndividualPerson : ModelBase, IFromRaw<IndividualPers
     }
 }
 
+class IndividualPersonFromRaw : IFromRaw<IndividualPerson>
+{
+    public IndividualPerson FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        IndividualPerson.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Represents a key-value metadata tag that can be associated with entities such
 /// as individuals or companies.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Tag>))]
-public sealed record class Tag : ModelBase, IFromRaw<Tag>
+[JsonConverter(typeof(ModelConverter<Tag, TagFromRaw>))]
+public sealed record class Tag : ModelBase
 {
     /// <summary>
     /// Name of the tag used to identify the metadata field.
@@ -1486,4 +1504,10 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class TagFromRaw : IFromRaw<Tag>
+{
+    public Tag FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Tag.FromRawUnchecked(rawData);
 }

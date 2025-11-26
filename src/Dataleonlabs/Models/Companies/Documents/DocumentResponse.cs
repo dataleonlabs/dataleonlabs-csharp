@@ -7,8 +7,8 @@ using Dataleonlabs.Core;
 
 namespace Dataleonlabs.Models.Companies.Documents;
 
-[JsonConverter(typeof(ModelConverter<DocumentResponse>))]
-public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentResponse>
+[JsonConverter(typeof(ModelConverter<DocumentResponse, DocumentResponseFromRaw>))]
+public sealed record class DocumentResponse : ModelBase
 {
     /// <summary>
     /// List of documents associated with the response.
@@ -97,12 +97,18 @@ public sealed record class DocumentResponse : ModelBase, IFromRaw<DocumentRespon
     }
 }
 
+class DocumentResponseFromRaw : IFromRaw<DocumentResponse>
+{
+    public DocumentResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DocumentResponse.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Represents a document stored and processed by the system, such as an identity
 /// card or a PDF contract.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Document>))]
-public sealed record class Document : ModelBase, IFromRaw<Document>
+[JsonConverter(typeof(ModelConverter<Document, DocumentFromRaw>))]
+public sealed record class Document : ModelBase
 {
     /// <summary>
     /// Unique identifier of the document.
@@ -343,4 +349,10 @@ public sealed record class Document : ModelBase, IFromRaw<Document>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class DocumentFromRaw : IFromRaw<Document>
+{
+    public Document FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Document.FromRawUnchecked(rawData);
 }

@@ -12,8 +12,8 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Contains technical metadata related to processing and communication of an entity.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CompanyTechnicalData>))]
-public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTechnicalData>
+[JsonConverter(typeof(ModelConverter<CompanyTechnicalData, CompanyTechnicalDataFromRaw>))]
+public sealed record class CompanyTechnicalData : ModelBase
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -679,6 +679,13 @@ public sealed record class CompanyTechnicalData : ModelBase, IFromRaw<CompanyTec
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CompanyTechnicalDataFromRaw : IFromRaw<CompanyTechnicalData>
+{
+    public CompanyTechnicalData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CompanyTechnicalData.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(PortalStep1Converter))]

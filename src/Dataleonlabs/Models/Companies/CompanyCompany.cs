@@ -10,8 +10,8 @@ using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
-[JsonConverter(typeof(ModelConverter<CompanyCompany>))]
-public sealed record class CompanyCompany : ModelBase, IFromRaw<CompanyCompany>
+[JsonConverter(typeof(ModelConverter<CompanyCompany, CompanyCompanyFromRaw>))]
+public sealed record class CompanyCompany : ModelBase
 {
     /// <summary>
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the company,
@@ -404,12 +404,18 @@ public sealed record class CompanyCompany : ModelBase, IFromRaw<CompanyCompany>
     }
 }
 
+class CompanyCompanyFromRaw : IFromRaw<CompanyCompany>
+{
+    public CompanyCompany FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CompanyCompany.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Main information about the company being registered, including legal name, registration
 /// ID, and address.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CompanyCompanyCompany>))]
-public sealed record class CompanyCompanyCompany : ModelBase, IFromRaw<CompanyCompanyCompany>
+[JsonConverter(typeof(ModelConverter<CompanyCompanyCompany, CompanyCompanyCompanyFromRaw>))]
+public sealed record class CompanyCompanyCompany : ModelBase
 {
     /// <summary>
     /// Full registered address of the company.
@@ -989,11 +995,18 @@ public sealed record class CompanyCompanyCompany : ModelBase, IFromRaw<CompanyCo
     }
 }
 
+class CompanyCompanyCompanyFromRaw : IFromRaw<CompanyCompanyCompany>
+{
+    public CompanyCompanyCompany FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CompanyCompanyCompany.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Contact information for the company, including email, phone number, and address.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Contact>))]
-public sealed record class Contact : ModelBase, IFromRaw<Contact>
+[JsonConverter(typeof(ModelConverter<Contact, ContactFromRaw>))]
+public sealed record class Contact : ModelBase
 {
     /// <summary>
     /// Department of the contact person.
@@ -1155,11 +1168,17 @@ public sealed record class Contact : ModelBase, IFromRaw<Contact>
     }
 }
 
+class ContactFromRaw : IFromRaw<Contact>
+{
+    public Contact FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Contact.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Represents a member or actor of a company, including personal and ownership information.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Member>))]
-public sealed record class Member : ModelBase, IFromRaw<Member>
+[JsonConverter(typeof(ModelConverter<Member, MemberFromRaw>))]
+public sealed record class Member : ModelBase
 {
     public string? ID
     {
@@ -1857,6 +1876,12 @@ public sealed record class Member : ModelBase, IFromRaw<Member>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MemberFromRaw : IFromRaw<Member>
+{
+    public Member FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Member.FromRawUnchecked(rawData);
 }
 
 /// <summary>

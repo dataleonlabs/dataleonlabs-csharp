@@ -13,8 +13,8 @@ namespace Dataleonlabs.Models.Companies;
 /// Represents a record of suspicion raised during Anti-Money Laundering (AML) screening.
 /// Includes metadata such as risk score, origin, and linked watchlist types.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<AmlSuspicion>))]
-public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
+[JsonConverter(typeof(ModelConverter<AmlSuspicion, AmlSuspicionFromRaw>))]
+public sealed record class AmlSuspicion : ModelBase
 {
     /// <summary>
     /// Human-readable description or title for the suspicious finding.
@@ -291,6 +291,12 @@ public sealed record class AmlSuspicion : ModelBase, IFromRaw<AmlSuspicion>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class AmlSuspicionFromRaw : IFromRaw<AmlSuspicion>
+{
+    public AmlSuspicion FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        AmlSuspicion.FromRawUnchecked(rawData);
 }
 
 /// <summary>

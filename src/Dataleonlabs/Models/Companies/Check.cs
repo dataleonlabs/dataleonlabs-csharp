@@ -10,8 +10,8 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Represents a verification check result.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Check>))]
-public sealed record class Check : ModelBase, IFromRaw<Check>
+[JsonConverter(typeof(ModelConverter<Check, CheckFromRaw>))]
+public sealed record class Check : ModelBase
 {
     /// <summary>
     /// Indicates whether the result or data is masked/hidden.
@@ -171,4 +171,10 @@ public sealed record class Check : ModelBase, IFromRaw<Check>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CheckFromRaw : IFromRaw<Check>
+{
+    public Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Check.FromRawUnchecked(rawData);
 }

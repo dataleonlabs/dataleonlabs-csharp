@@ -11,8 +11,8 @@ namespace Dataleonlabs.Models.Companies;
 /// Represents a risk assessment result, including a risk code, explanation, and a
 /// confidence score.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Risk>))]
-public sealed record class Risk : ModelBase, IFromRaw<Risk>
+[JsonConverter(typeof(ModelConverter<Risk, RiskFromRaw>))]
+public sealed record class Risk : ModelBase
 {
     /// <summary>
     /// Risk category or code identifier.
@@ -118,4 +118,10 @@ public sealed record class Risk : ModelBase, IFromRaw<Risk>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class RiskFromRaw : IFromRaw<Risk>
+{
+    public Risk FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Risk.FromRawUnchecked(rawData);
 }
