@@ -8,8 +8,10 @@ using Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Companies;
 
+/// <inheritdoc />
 public sealed class DocumentService : IDocumentService
 {
+    /// <inheritdoc/>
     public IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new DocumentService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class DocumentService : IDocumentService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<DocumentResponse> List(
         DocumentListParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class DocumentService : IDocumentService
         return documentResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<DocumentResponse> List(
         string companyID,
         DocumentListParams? parameters = null,
@@ -61,6 +65,7 @@ public sealed class DocumentService : IDocumentService
         return await this.List(parameters with { CompanyID = companyID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<GenericDocument> Upload(
         DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
@@ -89,6 +94,7 @@ public sealed class DocumentService : IDocumentService
         return genericDocument;
     }
 
+    /// <inheritdoc/>
     public async Task<GenericDocument> Upload(
         string companyID,
         DocumentUploadParams parameters,

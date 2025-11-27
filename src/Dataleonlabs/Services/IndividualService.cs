@@ -10,8 +10,10 @@ using Dataleonlabs.Services.Individuals;
 
 namespace Dataleonlabs.Services;
 
+/// <inheritdoc />
 public sealed class IndividualService : IIndividualService
 {
+    /// <inheritdoc/>
     public IIndividualService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new IndividualService(this._client.WithOptions(modifier));
@@ -31,6 +33,7 @@ public sealed class IndividualService : IIndividualService
         get { return _documents.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<Individual> Create(
         IndividualCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -54,6 +57,7 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
+    /// <inheritdoc/>
     public async Task<Individual> Retrieve(
         IndividualRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -82,6 +86,7 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
+    /// <inheritdoc/>
     public async Task<Individual> Retrieve(
         string individualID,
         IndividualRetrieveParams? parameters = null,
@@ -99,6 +104,7 @@ public sealed class IndividualService : IIndividualService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<Individual> Update(
         IndividualUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -127,6 +133,7 @@ public sealed class IndividualService : IIndividualService
         return individual;
     }
 
+    /// <inheritdoc/>
     public async Task<Individual> Update(
         string individualID,
         IndividualUpdateParams parameters,
@@ -142,6 +149,7 @@ public sealed class IndividualService : IIndividualService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<List<Individual>> List(
         IndividualListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -170,6 +178,7 @@ public sealed class IndividualService : IIndividualService
         return individuals;
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         IndividualDeleteParams parameters,
         CancellationToken cancellationToken = default
@@ -190,6 +199,7 @@ public sealed class IndividualService : IIndividualService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         string individualID,
         IndividualDeleteParams? parameters = null,

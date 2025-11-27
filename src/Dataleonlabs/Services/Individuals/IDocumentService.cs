@@ -14,6 +14,11 @@ namespace Dataleonlabs.Services.Individuals;
 /// </summary>
 public interface IDocumentService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
@@ -24,9 +29,7 @@ public interface IDocumentService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get documents to an individuals
-    /// </summary>
+    /// <inheritdoc cref="List(DocumentListParams, CancellationToken)"/>
     Task<Documents::DocumentResponse> List(
         string individualID,
         DocumentListParams? parameters = null,
@@ -41,9 +44,7 @@ public interface IDocumentService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Upload documents to an individual
-    /// </summary>
+    /// <inheritdoc cref="Upload(DocumentUploadParams, CancellationToken)"/>
     Task<Documents::GenericDocument> Upload(
         string individualID,
         DocumentUploadParams parameters,

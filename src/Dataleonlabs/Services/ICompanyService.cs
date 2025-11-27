@@ -15,6 +15,11 @@ namespace Dataleonlabs.Services;
 /// </summary>
 public interface ICompanyService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ICompanyService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IDocumentService Documents { get; }
@@ -35,9 +40,7 @@ public interface ICompanyService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get a company by ID
-    /// </summary>
+    /// <inheritdoc cref="Retrieve(CompanyRetrieveParams, CancellationToken)"/>
     Task<CompanyCompany> Retrieve(
         string companyID,
         CompanyRetrieveParams? parameters = null,
@@ -52,9 +55,7 @@ public interface ICompanyService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Update a company by ID
-    /// </summary>
+    /// <inheritdoc cref="Update(CompanyUpdateParams, CancellationToken)"/>
     Task<CompanyCompany> Update(
         string companyID,
         CompanyUpdateParams parameters,
@@ -74,9 +75,7 @@ public interface ICompanyService
     /// </summary>
     Task Delete(CompanyDeleteParams parameters, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Delete a company by ID
-    /// </summary>
+    /// <inheritdoc cref="Delete(CompanyDeleteParams, CancellationToken)"/>
     Task Delete(
         string companyID,
         CompanyDeleteParams? parameters = null,

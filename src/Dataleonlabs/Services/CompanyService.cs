@@ -10,8 +10,10 @@ using Dataleonlabs.Services.Companies;
 
 namespace Dataleonlabs.Services;
 
+/// <inheritdoc />
 public sealed class CompanyService : ICompanyService
 {
+    /// <inheritdoc/>
     public ICompanyService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new CompanyService(this._client.WithOptions(modifier));
@@ -31,6 +33,7 @@ public sealed class CompanyService : ICompanyService
         get { return _documents.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<CompanyCompany> Create(
         CompanyCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -54,6 +57,7 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
+    /// <inheritdoc/>
     public async Task<CompanyCompany> Retrieve(
         CompanyRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -82,6 +86,7 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
+    /// <inheritdoc/>
     public async Task<CompanyCompany> Retrieve(
         string companyID,
         CompanyRetrieveParams? parameters = null,
@@ -93,6 +98,7 @@ public sealed class CompanyService : ICompanyService
         return await this.Retrieve(parameters with { CompanyID = companyID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<CompanyCompany> Update(
         CompanyUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -121,6 +127,7 @@ public sealed class CompanyService : ICompanyService
         return company;
     }
 
+    /// <inheritdoc/>
     public async Task<CompanyCompany> Update(
         string companyID,
         CompanyUpdateParams parameters,
@@ -130,6 +137,7 @@ public sealed class CompanyService : ICompanyService
         return await this.Update(parameters with { CompanyID = companyID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<List<CompanyCompany>> List(
         CompanyListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -158,6 +166,7 @@ public sealed class CompanyService : ICompanyService
         return companies;
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         CompanyDeleteParams parameters,
         CancellationToken cancellationToken = default
@@ -178,6 +187,7 @@ public sealed class CompanyService : ICompanyService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         string companyID,
         CompanyDeleteParams? parameters = null,

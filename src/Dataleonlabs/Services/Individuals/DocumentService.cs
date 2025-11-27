@@ -9,8 +9,10 @@ using Documents = Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Individuals;
 
+/// <inheritdoc />
 public sealed class DocumentService : IDocumentService
 {
+    /// <inheritdoc/>
     public IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new DocumentService(this._client.WithOptions(modifier));
@@ -23,6 +25,7 @@ public sealed class DocumentService : IDocumentService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<Documents::DocumentResponse> List(
         DocumentListParams parameters,
         CancellationToken cancellationToken = default
@@ -51,6 +54,7 @@ public sealed class DocumentService : IDocumentService
         return documentResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<Documents::DocumentResponse> List(
         string individualID,
         DocumentListParams? parameters = null,
@@ -62,6 +66,7 @@ public sealed class DocumentService : IDocumentService
         return await this.List(parameters with { IndividualID = individualID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<Documents::GenericDocument> Upload(
         DocumentUploadParams parameters,
         CancellationToken cancellationToken = default
@@ -90,6 +95,7 @@ public sealed class DocumentService : IDocumentService
         return genericDocument;
     }
 
+    /// <inheritdoc/>
     public async Task<Documents::GenericDocument> Upload(
         string individualID,
         DocumentUploadParams parameters,

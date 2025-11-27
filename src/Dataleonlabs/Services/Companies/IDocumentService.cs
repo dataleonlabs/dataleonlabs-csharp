@@ -13,6 +13,11 @@ namespace Dataleonlabs.Services.Companies;
 /// </summary>
 public interface IDocumentService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IDocumentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
@@ -23,9 +28,7 @@ public interface IDocumentService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get documents to an company
-    /// </summary>
+    /// <inheritdoc cref="List(DocumentListParams, CancellationToken)"/>
     Task<DocumentResponse> List(
         string companyID,
         DocumentListParams? parameters = null,
@@ -40,9 +43,7 @@ public interface IDocumentService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Upload documents to an company
-    /// </summary>
+    /// <inheritdoc cref="Upload(DocumentUploadParams, CancellationToken)"/>
     Task<GenericDocument> Upload(
         string companyID,
         DocumentUploadParams parameters,

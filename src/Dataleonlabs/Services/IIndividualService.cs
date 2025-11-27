@@ -15,6 +15,11 @@ namespace Dataleonlabs.Services;
 /// </summary>
 public interface IIndividualService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IIndividualService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IDocumentService Documents { get; }
@@ -35,9 +40,7 @@ public interface IIndividualService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get an individual by ID
-    /// </summary>
+    /// <inheritdoc cref="Retrieve(IndividualRetrieveParams, CancellationToken)"/>
     Task<Individual> Retrieve(
         string individualID,
         IndividualRetrieveParams? parameters = null,
@@ -52,9 +55,7 @@ public interface IIndividualService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Update an individual by ID
-    /// </summary>
+    /// <inheritdoc cref="Update(IndividualUpdateParams, CancellationToken)"/>
     Task<Individual> Update(
         string individualID,
         IndividualUpdateParams parameters,
@@ -74,9 +75,7 @@ public interface IIndividualService
     /// </summary>
     Task Delete(IndividualDeleteParams parameters, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Delete an individual by ID
-    /// </summary>
+    /// <inheritdoc cref="Delete(IndividualDeleteParams, CancellationToken)"/>
     Task Delete(
         string individualID,
         IndividualDeleteParams? parameters = null,
