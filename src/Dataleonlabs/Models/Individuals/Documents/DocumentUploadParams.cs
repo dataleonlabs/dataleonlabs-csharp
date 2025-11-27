@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -7,7 +8,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
 using Dataleonlabs.Exceptions;
-using System = System;
 
 namespace Dataleonlabs.Models.Individuals.Documents;
 
@@ -34,10 +34,7 @@ public sealed record class DocumentUploadParams : ParamsBase
             if (!this._rawBodyData.TryGetValue("document_type", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'document_type' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "document_type",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("document_type", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
@@ -146,9 +143,9 @@ public sealed record class DocumentUploadParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/individuals/{0}/documents", this.IndividualID)
         )
@@ -217,7 +214,7 @@ sealed class DocumentTypeConverter : JsonConverter<DocumentType>
 {
     public override DocumentType Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -7,7 +8,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
 using Dataleonlabs.Exceptions;
-using System = System;
 
 namespace Dataleonlabs.Models.Individuals;
 
@@ -32,16 +32,13 @@ public sealed record class IndividualCreateParams : ParamsBase
             if (!this._rawBodyData.TryGetValue("workspace_id", out JsonElement element))
                 throw new DataleonlabsInvalidDataException(
                     "'workspace_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "workspace_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("workspace_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DataleonlabsInvalidDataException(
                     "'workspace_id' cannot be null",
-                    new System::ArgumentNullException("workspace_id")
+                    new ArgumentNullException("workspace_id")
                 );
         }
         init
@@ -171,9 +168,9 @@ public sealed record class IndividualCreateParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/individuals")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/individuals")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -464,7 +461,7 @@ sealed class GenderConverter : JsonConverter<Gender>
 {
     public override Gender Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -745,7 +742,7 @@ sealed class PortalStepConverter : JsonConverter<PortalStep>
 {
     public override PortalStep Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
