@@ -43,7 +43,7 @@ public sealed record class GenericDocument : ModelBase
     /// <summary>
     /// List of verification checks performed on the document.
     /// </summary>
-    public List<Check>? Checks
+    public IReadOnlyList<Check>? Checks
     {
         get
         {
@@ -228,7 +228,7 @@ public sealed record class GenericDocument : ModelBase
     /// <summary>
     /// List of tables extracted from the document, each containing operations.
     /// </summary>
-    public List<Table>? Tables
+    public IReadOnlyList<Table>? Tables
     {
         get
         {
@@ -254,7 +254,7 @@ public sealed record class GenericDocument : ModelBase
     /// <summary>
     /// Extracted key-value pairs from the document, including confidence scores.
     /// </summary>
-    public List<Value>? Values
+    public IReadOnlyList<Value>? Values
     {
         get
         {
@@ -333,7 +333,7 @@ public sealed record class Table : ModelBase
     /// <summary>
     /// List of operations or actions associated with the table.
     /// </summary>
-    public List<JsonElement>? Operation
+    public IReadOnlyList<JsonElement>? Operation
     {
         get
         {
@@ -449,7 +449,7 @@ public sealed record class Value : ModelBase
     /// <summary>
     /// List of integer values related to the field (e.g., bounding box coordinates).
     /// </summary>
-    public List<long>? Value1
+    public IReadOnlyList<long>? Value1
     {
         get
         {

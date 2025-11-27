@@ -13,7 +13,7 @@ public sealed record class DocumentResponse : ModelBase
     /// <summary>
     /// List of documents associated with the response.
     /// </summary>
-    public List<Document>? Documents
+    public IReadOnlyList<Document>? Documents
     {
         get
         {

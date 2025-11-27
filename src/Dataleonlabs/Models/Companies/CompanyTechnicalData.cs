@@ -416,7 +416,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// <summary>
     /// List of steps to include in the portal workflow.
     /// </summary>
-    public List<ApiEnum<string, PortalStep1>>? PortalSteps
+    public IReadOnlyList<ApiEnum<string, PortalStep1>>? PortalSteps
     {
         get
         {

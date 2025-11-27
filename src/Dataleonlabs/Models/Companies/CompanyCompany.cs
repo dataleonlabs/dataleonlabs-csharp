@@ -17,7 +17,7 @@ public sealed record class CompanyCompany : ModelBase
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the company,
     /// including their details.
     /// </summary>
-    public List<AmlSuspicion>? AmlSuspicions
+    public IReadOnlyList<AmlSuspicion>? AmlSuspicions
     {
         get
         {
@@ -74,7 +74,7 @@ public sealed record class CompanyCompany : ModelBase
     /// List of verification or validation checks applied to the company, including
     /// their results and messages.
     /// </summary>
-    public List<Check>? Checks
+    public IReadOnlyList<Check>? Checks
     {
         get
         {
@@ -131,7 +131,7 @@ public sealed record class CompanyCompany : ModelBase
     /// All documents submitted or associated with the company, including their metadata
     /// and processing status.
     /// </summary>
-    public List<GenericDocument>? Documents
+    public IReadOnlyList<GenericDocument>? Documents
     {
         get
         {
@@ -161,7 +161,7 @@ public sealed record class CompanyCompany : ModelBase
     /// List of members or actors associated with the company, including personal
     /// and ownership information.
     /// </summary>
-    public List<Member>? Members
+    public IReadOnlyList<Member>? Members
     {
         get
         {
@@ -215,7 +215,7 @@ public sealed record class CompanyCompany : ModelBase
     /// Custom key-value metadata fields associated with the company, allowing for
     /// flexible data storage.
     /// </summary>
-    public List<Property>? Properties
+    public IReadOnlyList<Property>? Properties
     {
         get
         {
@@ -1332,7 +1332,7 @@ public sealed record class Member : ModelBase
     /// List of documents associated with the member, including their metadata and
     /// processing status.
     /// </summary>
-    public List<GenericDocument>? Documents
+    public IReadOnlyList<GenericDocument>? Documents
     {
         get
         {

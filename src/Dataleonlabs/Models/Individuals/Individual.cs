@@ -45,7 +45,7 @@ public sealed record class Individual : ModelBase
     /// <summary>
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the individual.
     /// </summary>
-    public List<AmlSuspicion>? AmlSuspicions
+    public IReadOnlyList<AmlSuspicion>? AmlSuspicions
     {
         get
         {
@@ -126,7 +126,7 @@ public sealed record class Individual : ModelBase
     /// <summary>
     /// List of verification or validation checks applied to the individual.
     /// </summary>
-    public List<Check>? Checks
+    public IReadOnlyList<Check>? Checks
     {
         get
         {
@@ -181,7 +181,7 @@ public sealed record class Individual : ModelBase
     /// <summary>
     /// All documents submitted or associated with the individual.
     /// </summary>
-    public List<GenericDocument>? Documents
+    public IReadOnlyList<GenericDocument>? Documents
     {
         get
         {
@@ -317,7 +317,7 @@ public sealed record class Individual : ModelBase
     /// <summary>
     /// Custom key-value metadata fields associated with the individual.
     /// </summary>
-    public List<Property>? Properties
+    public IReadOnlyList<Property>? Properties
     {
         get
         {
@@ -450,7 +450,7 @@ public sealed record class Individual : ModelBase
     /// <summary>
     /// List of tags assigned to the individual for categorization or metadata purposes.
     /// </summary>
-    public List<Tag>? Tags
+    public IReadOnlyList<Tag>? Tags
     {
         get
         {

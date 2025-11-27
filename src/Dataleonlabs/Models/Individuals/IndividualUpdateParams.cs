@@ -650,7 +650,7 @@ public sealed record class TechnicalDataModel : ModelBase
     /// <summary>
     /// List of steps to include in the portal workflow.
     /// </summary>
-    public List<ApiEnum<string, PortalStepModel>>? PortalSteps
+    public IReadOnlyList<ApiEnum<string, PortalStepModel>>? PortalSteps
     {
         get
         {
