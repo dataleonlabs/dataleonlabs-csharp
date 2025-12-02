@@ -41,9 +41,13 @@ public sealed record class DocumentUploadParams : ParamsBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DataleonlabsInvalidDataException(
+                    "'document_type' cannot be null",
+                    new System::ArgumentNullException("document_type")
+                );
         }
         init
         {
