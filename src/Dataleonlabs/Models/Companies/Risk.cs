@@ -19,13 +19,7 @@ public sealed record class Risk : ModelBase
     /// </summary>
     public string? Code
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("code", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "code"); }
         init
         {
             if (value == null)
@@ -33,10 +27,7 @@ public sealed record class Risk : ModelBase
                 return;
             }
 
-            this._rawData["code"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "code", value);
         }
     }
 
@@ -45,13 +36,7 @@ public sealed record class Risk : ModelBase
     /// </summary>
     public string? Reason
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("reason", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
         init
         {
             if (value == null)
@@ -59,10 +44,7 @@ public sealed record class Risk : ModelBase
                 return;
             }
 
-            this._rawData["reason"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "reason", value);
         }
     }
 
@@ -71,13 +53,7 @@ public sealed record class Risk : ModelBase
     /// </summary>
     public float? Score
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("score", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<float>(this.RawData, "score"); }
         init
         {
             if (value == null)
@@ -85,10 +61,7 @@ public sealed record class Risk : ModelBase
                 return;
             }
 
-            this._rawData["score"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "score", value);
         }
     }
 

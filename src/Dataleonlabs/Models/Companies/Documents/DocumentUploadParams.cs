@@ -31,31 +31,12 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("document_type", out JsonElement element))
-                throw new DataleonlabsInvalidDataException(
-                    "'document_type' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "document_type",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DataleonlabsInvalidDataException(
-                    "'document_type' cannot be null",
-                    new System::ArgumentNullException("document_type")
-                );
-        }
-        init
-        {
-            this._rawBodyData["document_type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, DocumentType>>(
+                this.RawBodyData,
+                "document_type"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "document_type", value); }
     }
 
     /// <summary>
@@ -63,13 +44,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     /// </summary>
     public string? File
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("file", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "file"); }
         init
         {
             if (value == null)
@@ -77,10 +52,7 @@ public sealed record class DocumentUploadParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData["file"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawBodyData, "file", value);
         }
     }
 
@@ -89,13 +61,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     /// </summary>
     public string? URL
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("url", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "url"); }
         init
         {
             if (value == null)
@@ -103,10 +69,7 @@ public sealed record class DocumentUploadParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData["url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawBodyData, "url", value);
         }
     }
 

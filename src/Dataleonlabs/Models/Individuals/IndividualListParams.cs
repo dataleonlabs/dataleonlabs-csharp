@@ -26,19 +26,13 @@ public sealed record class IndividualListParams : ParamsBase
 #endif
     ? EndDate
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("end_date", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<
+        get { return ModelBase.GetNullableStruct<
 #if NET
             DateOnly
 #else
             DateTimeOffset
 #endif
-            ?>(element, ModelBase.SerializerOptions);
-        }
+            >(this.RawQueryData, "end_date"); }
         init
         {
             if (value == null)
@@ -46,10 +40,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["end_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "end_date", value);
         }
     }
 
@@ -58,13 +49,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public long? Limit
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("limit", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<long>(this.RawQueryData, "limit"); }
         init
         {
             if (value == null)
@@ -72,10 +57,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["limit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "limit", value);
         }
     }
 
@@ -84,13 +66,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public long? Offset
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("offset", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<long>(this.RawQueryData, "offset"); }
         init
         {
             if (value == null)
@@ -98,10 +74,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["offset"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "offset", value);
         }
     }
 
@@ -110,13 +83,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? SourceID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("source_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "source_id"); }
         init
         {
             if (value == null)
@@ -124,10 +91,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["source_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "source_id", value);
         }
     }
 
@@ -142,19 +106,13 @@ public sealed record class IndividualListParams : ParamsBase
 #endif
     ? StartDate
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("start_date", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<
+        get { return ModelBase.GetNullableStruct<
 #if NET
             DateOnly
 #else
             DateTimeOffset
 #endif
-            ?>(element, ModelBase.SerializerOptions);
-        }
+            >(this.RawQueryData, "start_date"); }
         init
         {
             if (value == null)
@@ -162,10 +120,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["start_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "start_date", value);
         }
     }
 
@@ -176,13 +131,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this._rawQueryData.TryGetValue("state", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, State>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableClass<ApiEnum<string, State>>(this.RawQueryData, "state");
         }
         init
         {
@@ -191,10 +140,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["state"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "state", value);
         }
     }
 
@@ -205,13 +151,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            if (!this._rawQueryData.TryGetValue("status", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
         }
         init
         {
@@ -220,10 +160,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["status"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "status", value);
         }
     }
 
@@ -232,13 +169,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? WorkspaceID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("workspace_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "workspace_id"); }
         init
         {
             if (value == null)
@@ -246,10 +177,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["workspace_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "workspace_id", value);
         }
     }
 

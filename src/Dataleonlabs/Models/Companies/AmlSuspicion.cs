@@ -21,13 +21,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Caption
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("caption", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "caption"); }
         init
         {
             if (value == null)
@@ -35,10 +29,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["caption"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "caption", value);
         }
     }
 
@@ -47,13 +38,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Country
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("country", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "country"); }
         init
         {
             if (value == null)
@@ -61,10 +46,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["country"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "country", value);
         }
     }
 
@@ -73,13 +55,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Gender
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("gender", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "gender"); }
         init
         {
             if (value == null)
@@ -87,10 +63,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["gender"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "gender", value);
         }
     }
 
@@ -100,13 +73,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Relation
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("relation", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "relation"); }
         init
         {
             if (value == null)
@@ -114,10 +81,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["relation"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "relation", value);
         }
     }
 
@@ -126,13 +90,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Schema
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("schema", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "schema"); }
         init
         {
             if (value == null)
@@ -140,10 +98,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["schema"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "schema", value);
         }
     }
 
@@ -152,13 +107,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public float? Score
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("score", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<float>(this.RawData, "score"); }
         init
         {
             if (value == null)
@@ -166,10 +115,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["score"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "score", value);
         }
     }
 
@@ -178,13 +124,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Source
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("source", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "source"); }
         init
         {
             if (value == null)
@@ -192,10 +132,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["source"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "source", value);
         }
     }
 
@@ -207,12 +144,9 @@ public sealed record class AmlSuspicion : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("status", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, AmlSuspicionStatus>>(
+                this.RawData,
+                "status"
             );
         }
         init
@@ -222,10 +156,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["status"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "status", value);
         }
     }
 
@@ -237,13 +168,9 @@ public sealed record class AmlSuspicion : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("type", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<
-                string,
-                global::Dataleonlabs.Models.Companies.Type
-            >?>(element, ModelBase.SerializerOptions);
+            return ModelBase.GetNullableClass<
+                ApiEnum<string, global::Dataleonlabs.Models.Companies.Type>
+            >(this.RawData, "type");
         }
         init
         {
@@ -252,10 +179,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            this._rawData["type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "type", value);
         }
     }
 

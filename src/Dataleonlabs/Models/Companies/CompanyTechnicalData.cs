@@ -21,13 +21,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? ActiveAmlSuspicions
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("active_aml_suspicions", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "active_aml_suspicions"); }
         init
         {
             if (value == null)
@@ -35,10 +29,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["active_aml_suspicions"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "active_aml_suspicions", value);
         }
     }
 
@@ -47,13 +38,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public long? APIVersion
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("api_version", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<long>(this.RawData, "api_version"); }
         init
         {
             if (value == null)
@@ -61,10 +46,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["api_version"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "api_version", value);
         }
     }
 
@@ -75,13 +57,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("approved_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "approved_at");
         }
         init
         {
@@ -90,10 +66,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["approved_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "approved_at", value);
         }
     }
 
@@ -102,13 +75,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? CallbackURL
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("callback_url", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "callback_url"); }
         init
         {
             if (value == null)
@@ -116,10 +83,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["callback_url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "callback_url", value);
         }
     }
 
@@ -130,10 +94,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("callback_url_notification", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return ModelBase.GetNullableClass<string>(this.RawData, "callback_url_notification");
         }
         init
         {
@@ -142,10 +103,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["callback_url_notification"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "callback_url_notification", value);
         }
     }
 
@@ -154,13 +112,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? DisableNotification
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("disable_notification", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "disable_notification"); }
         init
         {
             if (value == null)
@@ -168,10 +120,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["disable_notification"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "disable_notification", value);
         }
     }
 
@@ -182,21 +131,12 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("disable_notification_date", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(
+                this.RawData,
+                "disable_notification_date"
             );
         }
-        init
-        {
-            this._rawData["disable_notification_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "disable_notification_date", value); }
     }
 
     /// <summary>
@@ -204,13 +144,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? ExportType
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("export_type", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "export_type"); }
         init
         {
             if (value == null)
@@ -218,10 +152,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["export_type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "export_type", value);
         }
     }
 
@@ -232,15 +163,10 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (
-                !this._rawData.TryGetValue(
-                    "filtering_score_aml_suspicions",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<float?>(element, ModelBase.SerializerOptions);
+            return ModelBase.GetNullableStruct<float>(
+                this.RawData,
+                "filtering_score_aml_suspicions"
+            );
         }
         init
         {
@@ -249,10 +175,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["filtering_score_aml_suspicions"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "filtering_score_aml_suspicions", value);
         }
     }
 
@@ -263,13 +186,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("finished_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "finished_at");
         }
         init
         {
@@ -278,10 +195,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["finished_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "finished_at", value);
         }
     }
 
@@ -290,13 +204,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? IP
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("ip", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "ip"); }
         init
         {
             if (value == null)
@@ -304,10 +212,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["ip"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "ip", value);
         }
     }
 
@@ -316,13 +221,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? Language
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("language", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "language"); }
         init
         {
             if (value == null)
@@ -330,10 +229,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["language"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "language", value);
         }
     }
 
@@ -342,13 +238,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? LocationIP
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("location_ip", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "location_ip"); }
         init
         {
             if (value == null)
@@ -356,10 +246,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["location_ip"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "location_ip", value);
         }
     }
 
@@ -370,21 +257,12 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("need_review_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(
+                this.RawData,
+                "need_review_at"
             );
         }
-        init
-        {
-            this._rawData["need_review_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "need_review_at", value); }
     }
 
     /// <summary>
@@ -392,13 +270,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? NotificationConfirmation
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("notification_confirmation", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "notification_confirmation"); }
         init
         {
             if (value == null)
@@ -406,10 +278,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["notification_confirmation"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "notification_confirmation", value);
         }
     }
 
@@ -420,12 +289,9 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("portal_steps", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<List<ApiEnum<string, PortalStep1>>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<List<ApiEnum<string, PortalStep1>>>(
+                this.RawData,
+                "portal_steps"
             );
         }
         init
@@ -435,10 +301,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["portal_steps"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "portal_steps", value);
         }
     }
 
@@ -447,13 +310,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? QrCode
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("qr_code", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "qr_code"); }
         init
         {
             if (value == null)
@@ -461,10 +318,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["qr_code"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "qr_code", value);
         }
     }
 
@@ -473,13 +327,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? RawData1
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("raw_data", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
         {
             if (value == null)
@@ -487,10 +335,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["raw_data"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "raw_data", value);
         }
     }
 
@@ -501,21 +346,9 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("rejected_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "rejected_at");
         }
-        init
-        {
-            this._rawData["rejected_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "rejected_at", value); }
     }
 
     /// <summary>
@@ -523,13 +356,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public long? SessionDuration
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("session_duration", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<long>(this.RawData, "session_duration"); }
         init
         {
             if (value == null)
@@ -537,10 +364,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["session_duration"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "session_duration", value);
         }
     }
 
@@ -551,13 +375,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("started_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "started_at");
         }
         init
         {
@@ -566,10 +384,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["started_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "started_at", value);
         }
     }
 
@@ -580,13 +395,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("transfer_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "transfer_at");
         }
         init
         {
@@ -595,10 +404,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["transfer_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "transfer_at", value);
         }
     }
 
@@ -607,13 +413,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? TransferMode
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("transfer_mode", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "transfer_mode"); }
         init
         {
             if (value == null)
@@ -621,10 +421,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            this._rawData["transfer_mode"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "transfer_mode", value);
         }
     }
 

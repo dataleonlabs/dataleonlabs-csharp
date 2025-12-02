@@ -18,13 +18,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public bool? Masked
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("masked", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "masked"); }
         init
         {
             if (value == null)
@@ -32,10 +26,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            this._rawData["masked"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "masked", value);
         }
     }
 
@@ -44,13 +35,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public string? Message
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("message", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "message"); }
         init
         {
             if (value == null)
@@ -58,10 +43,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            this._rawData["message"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "message", value);
         }
     }
 
@@ -70,13 +52,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public string? Name
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -84,10 +60,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            this._rawData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "name", value);
         }
     }
 
@@ -96,13 +69,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public bool? Validate1
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("validate", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "validate"); }
         init
         {
             if (value == null)
@@ -110,10 +77,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            this._rawData["validate"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "validate", value);
         }
     }
 
@@ -122,13 +86,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public long? Weight
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("weight", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<long>(this.RawData, "weight"); }
         init
         {
             if (value == null)
@@ -136,10 +94,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            this._rawData["weight"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "weight", value);
         }
     }
 

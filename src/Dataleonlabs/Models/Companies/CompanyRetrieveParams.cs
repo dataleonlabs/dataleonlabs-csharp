@@ -20,13 +20,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     /// </summary>
     public bool? Document
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("document", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "document"); }
         init
         {
             if (value == null)
@@ -34,10 +28,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["document"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "document", value);
         }
     }
 
@@ -46,13 +37,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     /// </summary>
     public string? Scope
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("scope", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "scope"); }
         init
         {
             if (value == null)
@@ -60,10 +45,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["scope"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "scope", value);
         }
     }
 
