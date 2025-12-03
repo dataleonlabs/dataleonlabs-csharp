@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -27,5 +28,133 @@ public class CheckTest : TestBase
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedValidate1, model.Validate1);
         Assert.Equal(expectedWeight, model.Weight);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Check
+        {
+            Masked = false,
+            Message = "Name matched successfully",
+            Name = "name_match",
+            Validate1 = true,
+            Weight = 1,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Check>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Check
+        {
+            Masked = false,
+            Message = "Name matched successfully",
+            Name = "name_match",
+            Validate1 = true,
+            Weight = 1,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Check>(json);
+        Assert.NotNull(deserialized);
+
+        bool expectedMasked = false;
+        string expectedMessage = "Name matched successfully";
+        string expectedName = "name_match";
+        bool expectedValidate1 = true;
+        long expectedWeight = 1;
+
+        Assert.Equal(expectedMasked, deserialized.Masked);
+        Assert.Equal(expectedMessage, deserialized.Message);
+        Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedValidate1, deserialized.Validate1);
+        Assert.Equal(expectedWeight, deserialized.Weight);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Check
+        {
+            Masked = false,
+            Message = "Name matched successfully",
+            Name = "name_match",
+            Validate1 = true,
+            Weight = 1,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Check { };
+
+        Assert.Null(model.Masked);
+        Assert.False(model.RawData.ContainsKey("masked"));
+        Assert.Null(model.Message);
+        Assert.False(model.RawData.ContainsKey("message"));
+        Assert.Null(model.Name);
+        Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.Validate1);
+        Assert.False(model.RawData.ContainsKey("validate"));
+        Assert.Null(model.Weight);
+        Assert.False(model.RawData.ContainsKey("weight"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Check { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Check
+        {
+            // Null should be interpreted as omitted for these properties
+            Masked = null,
+            Message = null,
+            Name = null,
+            Validate1 = null,
+            Weight = null,
+        };
+
+        Assert.Null(model.Masked);
+        Assert.False(model.RawData.ContainsKey("masked"));
+        Assert.Null(model.Message);
+        Assert.False(model.RawData.ContainsKey("message"));
+        Assert.Null(model.Name);
+        Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.Validate1);
+        Assert.False(model.RawData.ContainsKey("validate"));
+        Assert.Null(model.Weight);
+        Assert.False(model.RawData.ContainsKey("weight"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Check
+        {
+            // Null should be interpreted as omitted for these properties
+            Masked = null,
+            Message = null,
+            Name = null,
+            Validate1 = null,
+            Weight = null,
+        };
+
+        model.Validate();
     }
 }
