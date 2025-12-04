@@ -56,6 +56,9 @@ public sealed record class DocumentResponse : ModelBase
 
     public DocumentResponse() { }
 
+    public DocumentResponse(DocumentResponse documentResponse)
+        : base(documentResponse) { }
+
     public DocumentResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -242,6 +245,9 @@ public sealed record class Document : ModelBase
     }
 
     public Document() { }
+
+    public Document(Document document)
+        : base(document) { }
 
     public Document(IReadOnlyDictionary<string, JsonElement> rawData)
     {

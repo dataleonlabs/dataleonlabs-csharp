@@ -199,6 +199,9 @@ public sealed record class AmlSuspicion : ModelBase
 
     public AmlSuspicion() { }
 
+    public AmlSuspicion(AmlSuspicion amlSuspicion)
+        : base(amlSuspicion) { }
+
     public AmlSuspicion(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

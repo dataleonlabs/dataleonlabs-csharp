@@ -51,6 +51,9 @@ public sealed record class IndividualRetrieveParams : ParamsBase
 
     public IndividualRetrieveParams() { }
 
+    public IndividualRetrieveParams(IndividualRetrieveParams individualRetrieveParams)
+        : base(individualRetrieveParams) { }
+
     public IndividualRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

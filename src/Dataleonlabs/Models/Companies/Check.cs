@@ -110,6 +110,9 @@ public sealed record class Check : ModelBase
 
     public Check() { }
 
+    public Check(Check check)
+        : base(check) { }
+
     public Check(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

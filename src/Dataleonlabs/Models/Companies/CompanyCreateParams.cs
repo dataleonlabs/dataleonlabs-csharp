@@ -80,6 +80,12 @@ public sealed record class CompanyCreateParams : ParamsBase
 
     public CompanyCreateParams() { }
 
+    public CompanyCreateParams(CompanyCreateParams companyCreateParams)
+        : base(companyCreateParams)
+    {
+        this._rawBodyData = [.. companyCreateParams._rawBodyData];
+    }
+
     public CompanyCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -426,6 +432,9 @@ public sealed record class Company : ModelBase
 
     public Company() { }
 
+    public Company(Company company)
+        : base(company) { }
+
     public Company(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -617,6 +626,9 @@ public sealed record class TechnicalData : ModelBase
     }
 
     public TechnicalData() { }
+
+    public TechnicalData(TechnicalData technicalData)
+        : base(technicalData) { }
 
     public TechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

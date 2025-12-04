@@ -269,6 +269,9 @@ public sealed record class CompanyCompany : ModelBase
 
     public CompanyCompany() { }
 
+    public CompanyCompany(CompanyCompany companyCompany)
+        : base(companyCompany) { }
+
     public CompanyCompany(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -706,6 +709,9 @@ public sealed record class CompanyCompanyCompany : ModelBase
 
     public CompanyCompanyCompany() { }
 
+    public CompanyCompanyCompany(CompanyCompanyCompany companyCompanyCompany)
+        : base(companyCompanyCompany) { }
+
     public CompanyCompanyCompany(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -838,6 +844,9 @@ public sealed record class Contact : ModelBase
     }
 
     public Contact() { }
+
+    public Contact(Contact contact)
+        : base(contact) { }
 
     public Contact(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1329,6 +1338,9 @@ public sealed record class Member : ModelBase
     }
 
     public Member() { }
+
+    public Member(Member member)
+        : base(member) { }
 
     public Member(IReadOnlyDictionary<string, JsonElement> rawData)
     {

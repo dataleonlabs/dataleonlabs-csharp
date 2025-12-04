@@ -75,6 +75,9 @@ public sealed record class Certificat : ModelBase
 
     public Certificat() { }
 
+    public Certificat(Certificat certificat)
+        : base(certificat) { }
+
     public Certificat(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

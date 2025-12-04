@@ -51,6 +51,9 @@ public sealed record class CompanyRetrieveParams : ParamsBase
 
     public CompanyRetrieveParams() { }
 
+    public CompanyRetrieveParams(CompanyRetrieveParams companyRetrieveParams)
+        : base(companyRetrieveParams) { }
+
     public CompanyRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

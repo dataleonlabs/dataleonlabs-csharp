@@ -17,6 +17,9 @@ public sealed record class DocumentListParams : ParamsBase
 
     public DocumentListParams() { }
 
+    public DocumentListParams(DocumentListParams documentListParams)
+        : base(documentListParams) { }
+
     public DocumentListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

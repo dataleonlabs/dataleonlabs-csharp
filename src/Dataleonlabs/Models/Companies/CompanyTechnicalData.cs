@@ -457,6 +457,9 @@ public sealed record class CompanyTechnicalData : ModelBase
 
     public CompanyTechnicalData() { }
 
+    public CompanyTechnicalData(CompanyTechnicalData companyTechnicalData)
+        : base(companyTechnicalData) { }
+
     public CompanyTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

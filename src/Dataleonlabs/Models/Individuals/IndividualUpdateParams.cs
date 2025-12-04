@@ -98,6 +98,12 @@ public sealed record class IndividualUpdateParams : ParamsBase
 
     public IndividualUpdateParams() { }
 
+    public IndividualUpdateParams(IndividualUpdateParams individualUpdateParams)
+        : base(individualUpdateParams)
+    {
+        this._rawBodyData = [.. individualUpdateParams._rawBodyData];
+    }
+
     public IndividualUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -327,6 +333,9 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     }
 
     public IndividualUpdateParamsPerson() { }
+
+    public IndividualUpdateParamsPerson(IndividualUpdateParamsPerson individualUpdateParamsPerson)
+        : base(individualUpdateParamsPerson) { }
 
     public IndividualUpdateParamsPerson(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -569,6 +578,11 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     }
 
     public IndividualUpdateParamsTechnicalData() { }
+
+    public IndividualUpdateParamsTechnicalData(
+        IndividualUpdateParamsTechnicalData individualUpdateParamsTechnicalData
+    )
+        : base(individualUpdateParamsTechnicalData) { }
 
     public IndividualUpdateParamsTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

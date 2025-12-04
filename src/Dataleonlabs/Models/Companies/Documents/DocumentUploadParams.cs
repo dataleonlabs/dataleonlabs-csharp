@@ -75,6 +75,12 @@ public sealed record class DocumentUploadParams : ParamsBase
 
     public DocumentUploadParams() { }
 
+    public DocumentUploadParams(DocumentUploadParams documentUploadParams)
+        : base(documentUploadParams)
+    {
+        this._rawBodyData = [.. documentUploadParams._rawBodyData];
+    }
+
     public DocumentUploadParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

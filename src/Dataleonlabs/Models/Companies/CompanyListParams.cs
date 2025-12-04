@@ -186,6 +186,9 @@ public sealed record class CompanyListParams : ParamsBase
 
     public CompanyListParams() { }
 
+    public CompanyListParams(CompanyListParams companyListParams)
+        : base(companyListParams) { }
+
     public CompanyListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

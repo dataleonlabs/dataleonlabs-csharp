@@ -183,6 +183,9 @@ public sealed record class IndividualListParams : ParamsBase
 
     public IndividualListParams() { }
 
+    public IndividualListParams(IndividualListParams individualListParams)
+        : base(individualListParams) { }
+
     public IndividualListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

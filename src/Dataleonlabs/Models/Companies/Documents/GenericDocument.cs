@@ -210,6 +210,9 @@ public sealed record class GenericDocument : ModelBase
 
     public GenericDocument() { }
 
+    public GenericDocument(GenericDocument genericDocument)
+        : base(genericDocument) { }
+
     public GenericDocument(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -264,6 +267,9 @@ public sealed record class Table : ModelBase
     }
 
     public Table() { }
+
+    public Table(Table table)
+        : base(table) { }
 
     public Table(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -355,6 +361,9 @@ public sealed record class Value : ModelBase
     }
 
     public Value() { }
+
+    public Value(Value value)
+        : base(value) { }
 
     public Value(IReadOnlyDictionary<string, JsonElement> rawData)
     {

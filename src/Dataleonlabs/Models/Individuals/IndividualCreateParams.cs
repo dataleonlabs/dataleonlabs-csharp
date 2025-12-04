@@ -87,6 +87,12 @@ public sealed record class IndividualCreateParams : ParamsBase
 
     public IndividualCreateParams() { }
 
+    public IndividualCreateParams(IndividualCreateParams individualCreateParams)
+        : base(individualCreateParams)
+    {
+        this._rawBodyData = [.. individualCreateParams._rawBodyData];
+    }
+
     public IndividualCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -305,6 +311,9 @@ public sealed record class Person : ModelBase
     }
 
     public Person() { }
+
+    public Person(Person person)
+        : base(person) { }
 
     public Person(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -533,6 +542,9 @@ public sealed record class TechnicalData : ModelBase
     }
 
     public TechnicalData() { }
+
+    public TechnicalData(TechnicalData technicalData)
+        : base(technicalData) { }
 
     public TechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

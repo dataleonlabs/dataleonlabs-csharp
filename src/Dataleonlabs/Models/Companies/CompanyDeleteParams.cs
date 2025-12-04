@@ -17,6 +17,9 @@ public sealed record class CompanyDeleteParams : ParamsBase
 
     public CompanyDeleteParams() { }
 
+    public CompanyDeleteParams(CompanyDeleteParams companyDeleteParams)
+        : base(companyDeleteParams) { }
+
     public CompanyDeleteParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

@@ -75,6 +75,9 @@ public sealed record class Risk : ModelBase
 
     public Risk() { }
 
+    public Risk(Risk risk)
+        : base(risk) { }
+
     public Risk(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

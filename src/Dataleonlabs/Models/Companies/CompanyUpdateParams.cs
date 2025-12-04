@@ -91,6 +91,12 @@ public sealed record class CompanyUpdateParams : ParamsBase
 
     public CompanyUpdateParams() { }
 
+    public CompanyUpdateParams(CompanyUpdateParams companyUpdateParams)
+        : base(companyUpdateParams)
+    {
+        this._rawBodyData = [.. companyUpdateParams._rawBodyData];
+    }
+
     public CompanyUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -442,6 +448,9 @@ public sealed record class CompanyUpdateParamsCompany : ModelBase
 
     public CompanyUpdateParamsCompany() { }
 
+    public CompanyUpdateParamsCompany(CompanyUpdateParamsCompany companyUpdateParamsCompany)
+        : base(companyUpdateParamsCompany) { }
+
     public CompanyUpdateParamsCompany(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -640,6 +649,11 @@ public sealed record class CompanyUpdateParamsTechnicalData : ModelBase
     }
 
     public CompanyUpdateParamsTechnicalData() { }
+
+    public CompanyUpdateParamsTechnicalData(
+        CompanyUpdateParamsTechnicalData companyUpdateParamsTechnicalData
+    )
+        : base(companyUpdateParamsTechnicalData) { }
 
     public CompanyUpdateParamsTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

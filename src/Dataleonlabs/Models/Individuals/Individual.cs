@@ -404,6 +404,9 @@ public sealed record class Individual : ModelBase
 
     public Individual() { }
 
+    public Individual(Individual individual)
+        : base(individual) { }
+
     public Individual(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -709,6 +712,9 @@ public sealed record class IdentityCard : ModelBase
 
     public IdentityCard() { }
 
+    public IdentityCard(IdentityCard identityCard)
+        : base(identityCard) { }
+
     public IdentityCard(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -929,6 +935,9 @@ public sealed record class IndividualPerson : ModelBase
 
     public IndividualPerson() { }
 
+    public IndividualPerson(IndividualPerson individualPerson)
+        : base(individualPerson) { }
+
     public IndividualPerson(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1043,6 +1052,9 @@ public sealed record class Tag : ModelBase
     }
 
     public Tag() { }
+
+    public Tag(Tag tag)
+        : base(tag) { }
 
     public Tag(IReadOnlyDictionary<string, JsonElement> rawData)
     {

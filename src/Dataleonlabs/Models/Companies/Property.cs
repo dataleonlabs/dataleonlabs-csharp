@@ -74,6 +74,9 @@ public sealed record class Property : ModelBase
 
     public Property() { }
 
+    public Property(Property property)
+        : base(property) { }
+
     public Property(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
