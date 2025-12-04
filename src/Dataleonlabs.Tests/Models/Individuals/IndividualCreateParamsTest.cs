@@ -221,7 +221,7 @@ public class TechnicalDataTest : TestBase
                 PortalStep.Selfie,
                 PortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         bool expectedActiveAmlSuspicions = false;
@@ -235,7 +235,7 @@ public class TechnicalDataTest : TestBase
             PortalStep.Selfie,
             PortalStep.FaceMatch,
         ];
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
         Assert.Equal(expectedCallbackURL, model.CallbackURL);
@@ -247,7 +247,7 @@ public class TechnicalDataTest : TestBase
         {
             Assert.Equal(expectedPortalSteps[i], model.PortalSteps[i]);
         }
-        Assert.Equal(expectedRawData1, model.RawData1);
+        Assert.Equal(expectedRawDataValue, model.RawDataValue);
     }
 
     [Fact]
@@ -266,7 +266,7 @@ public class TechnicalDataTest : TestBase
                 PortalStep.Selfie,
                 PortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -291,7 +291,7 @@ public class TechnicalDataTest : TestBase
                 PortalStep.Selfie,
                 PortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -309,7 +309,7 @@ public class TechnicalDataTest : TestBase
             PortalStep.Selfie,
             PortalStep.FaceMatch,
         ];
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
         Assert.Equal(expectedCallbackURL, deserialized.CallbackURL);
@@ -321,7 +321,7 @@ public class TechnicalDataTest : TestBase
         {
             Assert.Equal(expectedPortalSteps[i], deserialized.PortalSteps[i]);
         }
-        Assert.Equal(expectedRawData1, deserialized.RawData1);
+        Assert.Equal(expectedRawDataValue, deserialized.RawDataValue);
     }
 
     [Fact]
@@ -340,7 +340,7 @@ public class TechnicalDataTest : TestBase
                 PortalStep.Selfie,
                 PortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         model.Validate();
@@ -363,7 +363,7 @@ public class TechnicalDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.PortalSteps);
         Assert.False(model.RawData.ContainsKey("portal_steps"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
     }
 
@@ -387,7 +387,7 @@ public class TechnicalDataTest : TestBase
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
-            RawData1 = null,
+            RawDataValue = null,
         };
 
         Assert.Null(model.ActiveAmlSuspicions);
@@ -402,7 +402,7 @@ public class TechnicalDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.PortalSteps);
         Assert.False(model.RawData.ContainsKey("portal_steps"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
     }
 
@@ -418,7 +418,7 @@ public class TechnicalDataTest : TestBase
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
-            RawData1 = null,
+            RawDataValue = null,
         };
 
         model.Validate();

@@ -36,9 +36,15 @@ public sealed record class IndividualUpdateParams : ParamsBase
     /// <summary>
     /// Personal information about the individual.
     /// </summary>
-    public PersonModel? Person
+    public IndividualUpdateParamsPerson? Person
     {
-        get { return ModelBase.GetNullableClass<PersonModel>(this.RawBodyData, "person"); }
+        get
+        {
+            return ModelBase.GetNullableClass<IndividualUpdateParamsPerson>(
+                this.RawBodyData,
+                "person"
+            );
+        }
         init
         {
             if (value == null)
@@ -70,11 +76,11 @@ public sealed record class IndividualUpdateParams : ParamsBase
     /// <summary>
     /// Technical metadata related to the request or processing.
     /// </summary>
-    public TechnicalDataModel? TechnicalData
+    public IndividualUpdateParamsTechnicalData? TechnicalData
     {
         get
         {
-            return ModelBase.GetNullableClass<TechnicalDataModel>(
+            return ModelBase.GetNullableClass<IndividualUpdateParamsTechnicalData>(
                 this.RawBodyData,
                 "technical_data"
             );
@@ -159,8 +165,10 @@ public sealed record class IndividualUpdateParams : ParamsBase
 /// <summary>
 /// Personal information about the individual.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<PersonModel, PersonModelFromRaw>))]
-public sealed record class PersonModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<IndividualUpdateParamsPerson, IndividualUpdateParamsPersonFromRaw>)
+)]
+public sealed record class IndividualUpdateParamsPerson : ModelBase
 {
     /// <summary>
     /// Date of birth in DD/MM/YYYY format.
@@ -216,11 +224,11 @@ public sealed record class PersonModel : ModelBase
     /// <summary>
     /// Gender of the individual (M for male, F for female).
     /// </summary>
-    public ApiEnum<string, PersonModelGender>? Gender
+    public ApiEnum<string, IndividualUpdateParamsPersonGender>? Gender
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, PersonModelGender>>(
+            return ModelBase.GetNullableClass<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
                 this.RawData,
                 "gender"
             );
@@ -316,46 +324,50 @@ public sealed record class PersonModel : ModelBase
         _ = this.PhoneNumber;
     }
 
-    public PersonModel() { }
+    public IndividualUpdateParamsPerson() { }
 
-    public PersonModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public IndividualUpdateParamsPerson(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    PersonModel(FrozenDictionary<string, JsonElement> rawData)
+    IndividualUpdateParamsPerson(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static PersonModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static IndividualUpdateParamsPerson FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class PersonModelFromRaw : IFromRaw<PersonModel>
+class IndividualUpdateParamsPersonFromRaw : IFromRaw<IndividualUpdateParamsPerson>
 {
-    public PersonModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        PersonModel.FromRawUnchecked(rawData);
+    public IndividualUpdateParamsPerson FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => IndividualUpdateParamsPerson.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Gender of the individual (M for male, F for female).
 /// </summary>
-[JsonConverter(typeof(PersonModelGenderConverter))]
-public enum PersonModelGender
+[JsonConverter(typeof(IndividualUpdateParamsPersonGenderConverter))]
+public enum IndividualUpdateParamsPersonGender
 {
     M,
     F,
 }
 
-sealed class PersonModelGenderConverter : JsonConverter<PersonModelGender>
+sealed class IndividualUpdateParamsPersonGenderConverter
+    : JsonConverter<IndividualUpdateParamsPersonGender>
 {
-    public override PersonModelGender Read(
+    public override IndividualUpdateParamsPersonGender Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -363,15 +375,15 @@ sealed class PersonModelGenderConverter : JsonConverter<PersonModelGender>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "M" => PersonModelGender.M,
-            "F" => PersonModelGender.F,
-            _ => (PersonModelGender)(-1),
+            "M" => IndividualUpdateParamsPersonGender.M,
+            "F" => IndividualUpdateParamsPersonGender.F,
+            _ => (IndividualUpdateParamsPersonGender)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PersonModelGender value,
+        IndividualUpdateParamsPersonGender value,
         JsonSerializerOptions options
     )
     {
@@ -379,8 +391,8 @@ sealed class PersonModelGenderConverter : JsonConverter<PersonModelGender>
             writer,
             value switch
             {
-                PersonModelGender.M => "M",
-                PersonModelGender.F => "F",
+                IndividualUpdateParamsPersonGender.M => "M",
+                IndividualUpdateParamsPersonGender.F => "F",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -393,8 +405,13 @@ sealed class PersonModelGenderConverter : JsonConverter<PersonModelGender>
 /// <summary>
 /// Technical metadata related to the request or processing.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalDataModel, TechnicalDataModelFromRaw>))]
-public sealed record class TechnicalDataModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        IndividualUpdateParamsTechnicalData,
+        IndividualUpdateParamsTechnicalDataFromRaw
+    >)
+)]
+public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -494,14 +511,15 @@ public sealed record class TechnicalDataModel : ModelBase
     /// <summary>
     /// List of steps to include in the portal workflow.
     /// </summary>
-    public IReadOnlyList<ApiEnum<string, PortalStepModel>>? PortalSteps
+    public IReadOnlyList<
+        ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
+    >? PortalSteps
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, PortalStepModel>>>(
-                this.RawData,
-                "portal_steps"
-            );
+            return ModelBase.GetNullableClass<
+                List<ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>>
+            >(this.RawData, "portal_steps");
         }
         init
         {
@@ -517,7 +535,7 @@ public sealed record class TechnicalDataModel : ModelBase
     /// <summary>
     /// Flag indicating whether to include raw data in the response.
     /// </summary>
-    public bool? RawData1
+    public bool? RawDataValue
     {
         get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
@@ -542,25 +560,25 @@ public sealed record class TechnicalDataModel : ModelBase
         {
             item.Validate();
         }
-        _ = this.RawData1;
+        _ = this.RawDataValue;
     }
 
-    public TechnicalDataModel() { }
+    public IndividualUpdateParamsTechnicalData() { }
 
-    public TechnicalDataModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public IndividualUpdateParamsTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TechnicalDataModel(FrozenDictionary<string, JsonElement> rawData)
+    IndividualUpdateParamsTechnicalData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static TechnicalDataModel FromRawUnchecked(
+    public static IndividualUpdateParamsTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -568,14 +586,15 @@ public sealed record class TechnicalDataModel : ModelBase
     }
 }
 
-class TechnicalDataModelFromRaw : IFromRaw<TechnicalDataModel>
+class IndividualUpdateParamsTechnicalDataFromRaw : IFromRaw<IndividualUpdateParamsTechnicalData>
 {
-    public TechnicalDataModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        TechnicalDataModel.FromRawUnchecked(rawData);
+    public IndividualUpdateParamsTechnicalData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => IndividualUpdateParamsTechnicalData.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(PortalStepModelConverter))]
-public enum PortalStepModel
+[JsonConverter(typeof(IndividualUpdateParamsTechnicalDataPortalStepConverter))]
+public enum IndividualUpdateParamsTechnicalDataPortalStep
 {
     IdentityVerification,
     DocumentSigning,
@@ -584,9 +603,10 @@ public enum PortalStepModel
     FaceMatch,
 }
 
-sealed class PortalStepModelConverter : JsonConverter<PortalStepModel>
+sealed class IndividualUpdateParamsTechnicalDataPortalStepConverter
+    : JsonConverter<IndividualUpdateParamsTechnicalDataPortalStep>
 {
-    public override PortalStepModel Read(
+    public override IndividualUpdateParamsTechnicalDataPortalStep Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -594,18 +614,19 @@ sealed class PortalStepModelConverter : JsonConverter<PortalStepModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "identity_verification" => PortalStepModel.IdentityVerification,
-            "document_signing" => PortalStepModel.DocumentSigning,
-            "proof_of_address" => PortalStepModel.ProofOfAddress,
-            "selfie" => PortalStepModel.Selfie,
-            "face_match" => PortalStepModel.FaceMatch,
-            _ => (PortalStepModel)(-1),
+            "identity_verification" =>
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+            "document_signing" => IndividualUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            "proof_of_address" => IndividualUpdateParamsTechnicalDataPortalStep.ProofOfAddress,
+            "selfie" => IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+            "face_match" => IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
+            _ => (IndividualUpdateParamsTechnicalDataPortalStep)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PortalStepModel value,
+        IndividualUpdateParamsTechnicalDataPortalStep value,
         JsonSerializerOptions options
     )
     {
@@ -613,11 +634,12 @@ sealed class PortalStepModelConverter : JsonConverter<PortalStepModel>
             writer,
             value switch
             {
-                PortalStepModel.IdentityVerification => "identity_verification",
-                PortalStepModel.DocumentSigning => "document_signing",
-                PortalStepModel.ProofOfAddress => "proof_of_address",
-                PortalStepModel.Selfie => "selfie",
-                PortalStepModel.FaceMatch => "face_match",
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification =>
+                    "identity_verification",
+                IndividualUpdateParamsTechnicalDataPortalStep.DocumentSigning => "document_signing",
+                IndividualUpdateParamsTechnicalDataPortalStep.ProofOfAddress => "proof_of_address",
+                IndividualUpdateParamsTechnicalDataPortalStep.Selfie => "selfie",
+                IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch => "face_match",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

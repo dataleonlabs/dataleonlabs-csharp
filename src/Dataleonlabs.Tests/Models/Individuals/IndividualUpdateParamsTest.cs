@@ -5,17 +5,17 @@ using Dataleonlabs.Models.Individuals;
 
 namespace Dataleonlabs.Tests.Models.Individuals;
 
-public class PersonModelTest : TestBase
+public class IndividualUpdateParamsPersonTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new PersonModel
+        var model = new IndividualUpdateParamsPerson
         {
             Birthday = "15/05/1985",
             Email = "john.doe@example.com",
             FirstName = "John",
-            Gender = PersonModelGender.M,
+            Gender = IndividualUpdateParamsPersonGender.M,
             LastName = "Doe",
             MaidenName = "John Doe",
             Nationality = "FRA",
@@ -25,7 +25,8 @@ public class PersonModelTest : TestBase
         string expectedBirthday = "15/05/1985";
         string expectedEmail = "john.doe@example.com";
         string expectedFirstName = "John";
-        ApiEnum<string, PersonModelGender> expectedGender = PersonModelGender.M;
+        ApiEnum<string, IndividualUpdateParamsPersonGender> expectedGender =
+            IndividualUpdateParamsPersonGender.M;
         string expectedLastName = "Doe";
         string expectedMaidenName = "John Doe";
         string expectedNationality = "FRA";
@@ -44,12 +45,12 @@ public class PersonModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new PersonModel
+        var model = new IndividualUpdateParamsPerson
         {
             Birthday = "15/05/1985",
             Email = "john.doe@example.com",
             FirstName = "John",
-            Gender = PersonModelGender.M,
+            Gender = IndividualUpdateParamsPersonGender.M,
             LastName = "Doe",
             MaidenName = "John Doe",
             Nationality = "FRA",
@@ -57,7 +58,7 @@ public class PersonModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PersonModel>(json);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -65,12 +66,12 @@ public class PersonModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new PersonModel
+        var model = new IndividualUpdateParamsPerson
         {
             Birthday = "15/05/1985",
             Email = "john.doe@example.com",
             FirstName = "John",
-            Gender = PersonModelGender.M,
+            Gender = IndividualUpdateParamsPersonGender.M,
             LastName = "Doe",
             MaidenName = "John Doe",
             Nationality = "FRA",
@@ -78,13 +79,14 @@ public class PersonModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PersonModel>(json);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(json);
         Assert.NotNull(deserialized);
 
         string expectedBirthday = "15/05/1985";
         string expectedEmail = "john.doe@example.com";
         string expectedFirstName = "John";
-        ApiEnum<string, PersonModelGender> expectedGender = PersonModelGender.M;
+        ApiEnum<string, IndividualUpdateParamsPersonGender> expectedGender =
+            IndividualUpdateParamsPersonGender.M;
         string expectedLastName = "Doe";
         string expectedMaidenName = "John Doe";
         string expectedNationality = "FRA";
@@ -103,12 +105,12 @@ public class PersonModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new PersonModel
+        var model = new IndividualUpdateParamsPerson
         {
             Birthday = "15/05/1985",
             Email = "john.doe@example.com",
             FirstName = "John",
-            Gender = PersonModelGender.M,
+            Gender = IndividualUpdateParamsPersonGender.M,
             LastName = "Doe",
             MaidenName = "John Doe",
             Nationality = "FRA",
@@ -121,7 +123,7 @@ public class PersonModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new PersonModel { };
+        var model = new IndividualUpdateParamsPerson { };
 
         Assert.Null(model.Birthday);
         Assert.False(model.RawData.ContainsKey("birthday"));
@@ -144,7 +146,7 @@ public class PersonModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new PersonModel { };
+        var model = new IndividualUpdateParamsPerson { };
 
         model.Validate();
     }
@@ -152,7 +154,7 @@ public class PersonModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new PersonModel
+        var model = new IndividualUpdateParamsPerson
         {
             // Null should be interpreted as omitted for these properties
             Birthday = null,
@@ -186,7 +188,7 @@ public class PersonModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new PersonModel
+        var model = new IndividualUpdateParamsPerson
         {
             // Null should be interpreted as omitted for these properties
             Birthday = null,
@@ -203,12 +205,12 @@ public class PersonModelTest : TestBase
     }
 }
 
-public class TechnicalDataModelTest : TestBase
+public class IndividualUpdateParamsTechnicalDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new IndividualUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
@@ -217,11 +219,11 @@ public class TechnicalDataModelTest : TestBase
             Language = "fra",
             PortalSteps =
             [
-                PortalStepModel.IdentityVerification,
-                PortalStepModel.Selfie,
-                PortalStepModel.FaceMatch,
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         bool expectedActiveAmlSuspicions = false;
@@ -229,13 +231,13 @@ public class TechnicalDataModelTest : TestBase
         string expectedCallbackURLNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75;
         string expectedLanguage = "fra";
-        List<ApiEnum<string, PortalStepModel>> expectedPortalSteps =
+        List<ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
-            PortalStepModel.IdentityVerification,
-            PortalStepModel.Selfie,
-            PortalStepModel.FaceMatch,
+            IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+            IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+            IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
         ];
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
         Assert.Equal(expectedCallbackURL, model.CallbackURL);
@@ -247,13 +249,13 @@ public class TechnicalDataModelTest : TestBase
         {
             Assert.Equal(expectedPortalSteps[i], model.PortalSteps[i]);
         }
-        Assert.Equal(expectedRawData1, model.RawData1);
+        Assert.Equal(expectedRawDataValue, model.RawDataValue);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new IndividualUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
@@ -262,15 +264,15 @@ public class TechnicalDataModelTest : TestBase
             Language = "fra",
             PortalSteps =
             [
-                PortalStepModel.IdentityVerification,
-                PortalStepModel.Selfie,
-                PortalStepModel.FaceMatch,
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<TechnicalDataModel>(json);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -278,7 +280,7 @@ public class TechnicalDataModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new IndividualUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
@@ -287,15 +289,15 @@ public class TechnicalDataModelTest : TestBase
             Language = "fra",
             PortalSteps =
             [
-                PortalStepModel.IdentityVerification,
-                PortalStepModel.Selfie,
-                PortalStepModel.FaceMatch,
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<TechnicalDataModel>(json);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(json);
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
@@ -303,13 +305,13 @@ public class TechnicalDataModelTest : TestBase
         string expectedCallbackURLNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75;
         string expectedLanguage = "fra";
-        List<ApiEnum<string, PortalStepModel>> expectedPortalSteps =
+        List<ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
-            PortalStepModel.IdentityVerification,
-            PortalStepModel.Selfie,
-            PortalStepModel.FaceMatch,
+            IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+            IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+            IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
         ];
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
         Assert.Equal(expectedCallbackURL, deserialized.CallbackURL);
@@ -321,13 +323,13 @@ public class TechnicalDataModelTest : TestBase
         {
             Assert.Equal(expectedPortalSteps[i], deserialized.PortalSteps[i]);
         }
-        Assert.Equal(expectedRawData1, deserialized.RawData1);
+        Assert.Equal(expectedRawDataValue, deserialized.RawDataValue);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new IndividualUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
@@ -336,11 +338,11 @@ public class TechnicalDataModelTest : TestBase
             Language = "fra",
             PortalSteps =
             [
-                PortalStepModel.IdentityVerification,
-                PortalStepModel.Selfie,
-                PortalStepModel.FaceMatch,
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
             ],
-            RawData1 = true,
+            RawDataValue = true,
         };
 
         model.Validate();
@@ -349,7 +351,7 @@ public class TechnicalDataModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new TechnicalDataModel { };
+        var model = new IndividualUpdateParamsTechnicalData { };
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
@@ -363,14 +365,14 @@ public class TechnicalDataModelTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.PortalSteps);
         Assert.False(model.RawData.ContainsKey("portal_steps"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new TechnicalDataModel { };
+        var model = new IndividualUpdateParamsTechnicalData { };
 
         model.Validate();
     }
@@ -378,7 +380,7 @@ public class TechnicalDataModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new IndividualUpdateParamsTechnicalData
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
@@ -387,7 +389,7 @@ public class TechnicalDataModelTest : TestBase
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
-            RawData1 = null,
+            RawDataValue = null,
         };
 
         Assert.Null(model.ActiveAmlSuspicions);
@@ -402,14 +404,14 @@ public class TechnicalDataModelTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.PortalSteps);
         Assert.False(model.RawData.ContainsKey("portal_steps"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new IndividualUpdateParamsTechnicalData
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
@@ -418,7 +420,7 @@ public class TechnicalDataModelTest : TestBase
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
-            RawData1 = null,
+            RawDataValue = null,
         };
 
         model.Validate();

@@ -285,14 +285,13 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// <summary>
     /// List of steps to include in the portal workflow.
     /// </summary>
-    public IReadOnlyList<ApiEnum<string, PortalStep1>>? PortalSteps
+    public IReadOnlyList<ApiEnum<string, CompanyTechnicalDataPortalStep>>? PortalSteps
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, PortalStep1>>>(
-                this.RawData,
-                "portal_steps"
-            );
+            return ModelBase.GetNullableClass<
+                List<ApiEnum<string, CompanyTechnicalDataPortalStep>>
+            >(this.RawData, "portal_steps");
         }
         init
         {
@@ -325,7 +324,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// <summary>
     /// Flag indicating whether to include raw data in the response.
     /// </summary>
-    public bool? RawData1
+    public bool? RawDataValue
     {
         get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
@@ -447,7 +446,7 @@ public sealed record class CompanyTechnicalData : ModelBase
             item.Validate();
         }
         _ = this.QrCode;
-        _ = this.RawData1;
+        _ = this.RawDataValue;
         _ = this.RejectedAt;
         _ = this.SessionDuration;
         _ = this.StartedAt;
@@ -485,8 +484,8 @@ class CompanyTechnicalDataFromRaw : IFromRaw<CompanyTechnicalData>
     ) => CompanyTechnicalData.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(PortalStep1Converter))]
-public enum PortalStep1
+[JsonConverter(typeof(CompanyTechnicalDataPortalStepConverter))]
+public enum CompanyTechnicalDataPortalStep
 {
     IdentityVerification,
     DocumentSigning,
@@ -495,9 +494,9 @@ public enum PortalStep1
     FaceMatch,
 }
 
-sealed class PortalStep1Converter : JsonConverter<PortalStep1>
+sealed class CompanyTechnicalDataPortalStepConverter : JsonConverter<CompanyTechnicalDataPortalStep>
 {
-    public override PortalStep1 Read(
+    public override CompanyTechnicalDataPortalStep Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -505,18 +504,18 @@ sealed class PortalStep1Converter : JsonConverter<PortalStep1>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "identity_verification" => PortalStep1.IdentityVerification,
-            "document_signing" => PortalStep1.DocumentSigning,
-            "proof_of_address" => PortalStep1.ProofOfAddress,
-            "selfie" => PortalStep1.Selfie,
-            "face_match" => PortalStep1.FaceMatch,
-            _ => (PortalStep1)(-1),
+            "identity_verification" => CompanyTechnicalDataPortalStep.IdentityVerification,
+            "document_signing" => CompanyTechnicalDataPortalStep.DocumentSigning,
+            "proof_of_address" => CompanyTechnicalDataPortalStep.ProofOfAddress,
+            "selfie" => CompanyTechnicalDataPortalStep.Selfie,
+            "face_match" => CompanyTechnicalDataPortalStep.FaceMatch,
+            _ => (CompanyTechnicalDataPortalStep)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PortalStep1 value,
+        CompanyTechnicalDataPortalStep value,
         JsonSerializerOptions options
     )
     {
@@ -524,11 +523,11 @@ sealed class PortalStep1Converter : JsonConverter<PortalStep1>
             writer,
             value switch
             {
-                PortalStep1.IdentityVerification => "identity_verification",
-                PortalStep1.DocumentSigning => "document_signing",
-                PortalStep1.ProofOfAddress => "proof_of_address",
-                PortalStep1.Selfie => "selfie",
-                PortalStep1.FaceMatch => "face_match",
+                CompanyTechnicalDataPortalStep.IdentityVerification => "identity_verification",
+                CompanyTechnicalDataPortalStep.DocumentSigning => "document_signing",
+                CompanyTechnicalDataPortalStep.ProofOfAddress => "proof_of_address",
+                CompanyTechnicalDataPortalStep.Selfie => "selfie",
+                CompanyTechnicalDataPortalStep.FaceMatch => "face_match",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

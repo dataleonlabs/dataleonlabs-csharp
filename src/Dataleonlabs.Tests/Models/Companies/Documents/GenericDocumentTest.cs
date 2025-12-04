@@ -21,7 +21,7 @@ public class GenericDocumentTest : TestBase
                     Masked = false,
                     Message = "Name matched successfully",
                     Name = "name_match",
-                    Validate1 = true,
+                    ValidateValue = true,
                     Weight = 1,
                 },
             ],
@@ -38,7 +38,7 @@ public class GenericDocumentTest : TestBase
                 {
                     Confidence = 0.95,
                     Name = "Full Name",
-                    Value1 = [100, 200],
+                    ValueValue = [100, 200],
                 },
             ],
         };
@@ -51,7 +51,7 @@ public class GenericDocumentTest : TestBase
                 Masked = false,
                 Message = "Name matched successfully",
                 Name = "name_match",
-                Validate1 = true,
+                ValidateValue = true,
                 Weight = 1,
             },
         ];
@@ -71,7 +71,7 @@ public class GenericDocumentTest : TestBase
             {
                 Confidence = 0.95,
                 Name = "Full Name",
-                Value1 = [100, 200],
+                ValueValue = [100, 200],
             },
         ];
 
@@ -112,7 +112,7 @@ public class GenericDocumentTest : TestBase
                     Masked = false,
                     Message = "Name matched successfully",
                     Name = "name_match",
-                    Validate1 = true,
+                    ValidateValue = true,
                     Weight = 1,
                 },
             ],
@@ -129,7 +129,7 @@ public class GenericDocumentTest : TestBase
                 {
                     Confidence = 0.95,
                     Name = "Full Name",
-                    Value1 = [100, 200],
+                    ValueValue = [100, 200],
                 },
             ],
         };
@@ -153,7 +153,7 @@ public class GenericDocumentTest : TestBase
                     Masked = false,
                     Message = "Name matched successfully",
                     Name = "name_match",
-                    Validate1 = true,
+                    ValidateValue = true,
                     Weight = 1,
                 },
             ],
@@ -170,7 +170,7 @@ public class GenericDocumentTest : TestBase
                 {
                     Confidence = 0.95,
                     Name = "Full Name",
-                    Value1 = [100, 200],
+                    ValueValue = [100, 200],
                 },
             ],
         };
@@ -187,7 +187,7 @@ public class GenericDocumentTest : TestBase
                 Masked = false,
                 Message = "Name matched successfully",
                 Name = "name_match",
-                Validate1 = true,
+                ValidateValue = true,
                 Weight = 1,
             },
         ];
@@ -207,7 +207,7 @@ public class GenericDocumentTest : TestBase
             {
                 Confidence = 0.95,
                 Name = "Full Name",
-                Value1 = [100, 200],
+                ValueValue = [100, 200],
             },
         ];
 
@@ -248,7 +248,7 @@ public class GenericDocumentTest : TestBase
                     Masked = false,
                     Message = "Name matched successfully",
                     Name = "name_match",
-                    Validate1 = true,
+                    ValidateValue = true,
                     Weight = 1,
                 },
             ],
@@ -265,7 +265,7 @@ public class GenericDocumentTest : TestBase
                 {
                     Confidence = 0.95,
                     Name = "Full Name",
-                    Value1 = [100, 200],
+                    ValueValue = [100, 200],
                 },
             ],
         };
@@ -475,19 +475,19 @@ public class ValueTest : TestBase
         {
             Confidence = 0.95,
             Name = "Full Name",
-            Value1 = [100, 200],
+            ValueValue = [100, 200],
         };
 
         double expectedConfidence = 0.95;
         string expectedName = "Full Name";
-        List<long> expectedValue1 = [100, 200];
+        List<long> expectedValueValue = [100, 200];
 
         Assert.Equal(expectedConfidence, model.Confidence);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedValue1.Count, model.Value1.Count);
-        for (int i = 0; i < expectedValue1.Count; i++)
+        Assert.Equal(expectedValueValue.Count, model.ValueValue.Count);
+        for (int i = 0; i < expectedValueValue.Count; i++)
         {
-            Assert.Equal(expectedValue1[i], model.Value1[i]);
+            Assert.Equal(expectedValueValue[i], model.ValueValue[i]);
         }
     }
 
@@ -498,7 +498,7 @@ public class ValueTest : TestBase
         {
             Confidence = 0.95,
             Name = "Full Name",
-            Value1 = [100, 200],
+            ValueValue = [100, 200],
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -514,7 +514,7 @@ public class ValueTest : TestBase
         {
             Confidence = 0.95,
             Name = "Full Name",
-            Value1 = [100, 200],
+            ValueValue = [100, 200],
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -523,14 +523,14 @@ public class ValueTest : TestBase
 
         double expectedConfidence = 0.95;
         string expectedName = "Full Name";
-        List<long> expectedValue1 = [100, 200];
+        List<long> expectedValueValue = [100, 200];
 
         Assert.Equal(expectedConfidence, deserialized.Confidence);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedValue1.Count, deserialized.Value1.Count);
-        for (int i = 0; i < expectedValue1.Count; i++)
+        Assert.Equal(expectedValueValue.Count, deserialized.ValueValue.Count);
+        for (int i = 0; i < expectedValueValue.Count; i++)
         {
-            Assert.Equal(expectedValue1[i], deserialized.Value1[i]);
+            Assert.Equal(expectedValueValue[i], deserialized.ValueValue[i]);
         }
     }
 
@@ -541,7 +541,7 @@ public class ValueTest : TestBase
         {
             Confidence = 0.95,
             Name = "Full Name",
-            Value1 = [100, 200],
+            ValueValue = [100, 200],
         };
 
         model.Validate();
@@ -556,7 +556,7 @@ public class ValueTest : TestBase
         Assert.False(model.RawData.ContainsKey("confidence"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.Value1);
+        Assert.Null(model.ValueValue);
         Assert.False(model.RawData.ContainsKey("value"));
     }
 
@@ -576,14 +576,14 @@ public class ValueTest : TestBase
             // Null should be interpreted as omitted for these properties
             Confidence = null,
             Name = null,
-            Value1 = null,
+            ValueValue = null,
         };
 
         Assert.Null(model.Confidence);
         Assert.False(model.RawData.ContainsKey("confidence"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.Value1);
+        Assert.Null(model.ValueValue);
         Assert.False(model.RawData.ContainsKey("value"));
     }
 
@@ -595,7 +595,7 @@ public class ValueTest : TestBase
             // Null should be interpreted as omitted for these properties
             Confidence = null,
             Name = null,
-            Value1 = null,
+            ValueValue = null,
         };
 
         model.Validate();

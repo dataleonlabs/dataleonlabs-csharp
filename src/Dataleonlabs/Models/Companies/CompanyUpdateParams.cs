@@ -27,9 +27,15 @@ public sealed record class CompanyUpdateParams : ParamsBase
     /// <summary>
     /// Main information about the company being registered.
     /// </summary>
-    public required CompanyModel Company
+    public required CompanyUpdateParamsCompany Company
     {
-        get { return ModelBase.GetNotNullClass<CompanyModel>(this.RawBodyData, "company"); }
+        get
+        {
+            return ModelBase.GetNotNullClass<CompanyUpdateParamsCompany>(
+                this.RawBodyData,
+                "company"
+            );
+        }
         init { ModelBase.Set(this._rawBodyData, "company", value); }
     }
 
@@ -63,11 +69,11 @@ public sealed record class CompanyUpdateParams : ParamsBase
     /// <summary>
     /// Technical metadata and callback configuration.
     /// </summary>
-    public TechnicalDataModel? TechnicalData
+    public CompanyUpdateParamsTechnicalData? TechnicalData
     {
         get
         {
-            return ModelBase.GetNullableClass<TechnicalDataModel>(
+            return ModelBase.GetNullableClass<CompanyUpdateParamsTechnicalData>(
                 this.RawBodyData,
                 "technical_data"
             );
@@ -152,8 +158,10 @@ public sealed record class CompanyUpdateParams : ParamsBase
 /// <summary>
 /// Main information about the company being registered.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CompanyModel, CompanyModelFromRaw>))]
-public sealed record class CompanyModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<CompanyUpdateParamsCompany, CompanyUpdateParamsCompanyFromRaw>)
+)]
+public sealed record class CompanyUpdateParamsCompany : ModelBase
 {
     /// <summary>
     /// Legal name of the company.
@@ -430,45 +438,53 @@ public sealed record class CompanyModel : ModelBase
         _ = this.WebsiteURL;
     }
 
-    public CompanyModel() { }
+    public CompanyUpdateParamsCompany() { }
 
-    public CompanyModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CompanyUpdateParamsCompany(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CompanyModel(FrozenDictionary<string, JsonElement> rawData)
+    CompanyUpdateParamsCompany(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static CompanyModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static CompanyUpdateParamsCompany FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
-    public CompanyModel(string name)
+    public CompanyUpdateParamsCompany(string name)
         : this()
     {
         this.Name = name;
     }
 }
 
-class CompanyModelFromRaw : IFromRaw<CompanyModel>
+class CompanyUpdateParamsCompanyFromRaw : IFromRaw<CompanyUpdateParamsCompany>
 {
-    public CompanyModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        CompanyModel.FromRawUnchecked(rawData);
+    public CompanyUpdateParamsCompany FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CompanyUpdateParamsCompany.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Technical metadata and callback configuration.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<TechnicalDataModel, TechnicalDataModelFromRaw>))]
-public sealed record class TechnicalDataModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        CompanyUpdateParamsTechnicalData,
+        CompanyUpdateParamsTechnicalDataFromRaw
+    >)
+)]
+public sealed record class CompanyUpdateParamsTechnicalData : ModelBase
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -568,14 +584,13 @@ public sealed record class TechnicalDataModel : ModelBase
     /// <summary>
     /// List of steps to include in the portal workflow.
     /// </summary>
-    public IReadOnlyList<ApiEnum<string, PortalStepModel>>? PortalSteps
+    public IReadOnlyList<ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>>? PortalSteps
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, PortalStepModel>>>(
-                this.RawData,
-                "portal_steps"
-            );
+            return ModelBase.GetNullableClass<
+                List<ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>>
+            >(this.RawData, "portal_steps");
         }
         init
         {
@@ -591,7 +606,7 @@ public sealed record class TechnicalDataModel : ModelBase
     /// <summary>
     /// Flag indicating whether to include raw data in the response.
     /// </summary>
-    public bool? RawData1
+    public bool? RawDataValue
     {
         get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
@@ -616,25 +631,25 @@ public sealed record class TechnicalDataModel : ModelBase
         {
             item.Validate();
         }
-        _ = this.RawData1;
+        _ = this.RawDataValue;
     }
 
-    public TechnicalDataModel() { }
+    public CompanyUpdateParamsTechnicalData() { }
 
-    public TechnicalDataModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CompanyUpdateParamsTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TechnicalDataModel(FrozenDictionary<string, JsonElement> rawData)
+    CompanyUpdateParamsTechnicalData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static TechnicalDataModel FromRawUnchecked(
+    public static CompanyUpdateParamsTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -642,14 +657,15 @@ public sealed record class TechnicalDataModel : ModelBase
     }
 }
 
-class TechnicalDataModelFromRaw : IFromRaw<TechnicalDataModel>
+class CompanyUpdateParamsTechnicalDataFromRaw : IFromRaw<CompanyUpdateParamsTechnicalData>
 {
-    public TechnicalDataModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        TechnicalDataModel.FromRawUnchecked(rawData);
+    public CompanyUpdateParamsTechnicalData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CompanyUpdateParamsTechnicalData.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(PortalStepModelConverter))]
-public enum PortalStepModel
+[JsonConverter(typeof(CompanyUpdateParamsTechnicalDataPortalStepConverter))]
+public enum CompanyUpdateParamsTechnicalDataPortalStep
 {
     IdentityVerification,
     DocumentSigning,
@@ -658,9 +674,10 @@ public enum PortalStepModel
     FaceMatch,
 }
 
-sealed class PortalStepModelConverter : JsonConverter<PortalStepModel>
+sealed class CompanyUpdateParamsTechnicalDataPortalStepConverter
+    : JsonConverter<CompanyUpdateParamsTechnicalDataPortalStep>
 {
-    public override PortalStepModel Read(
+    public override CompanyUpdateParamsTechnicalDataPortalStep Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -668,18 +685,19 @@ sealed class PortalStepModelConverter : JsonConverter<PortalStepModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "identity_verification" => PortalStepModel.IdentityVerification,
-            "document_signing" => PortalStepModel.DocumentSigning,
-            "proof_of_address" => PortalStepModel.ProofOfAddress,
-            "selfie" => PortalStepModel.Selfie,
-            "face_match" => PortalStepModel.FaceMatch,
-            _ => (PortalStepModel)(-1),
+            "identity_verification" =>
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+            "document_signing" => CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            "proof_of_address" => CompanyUpdateParamsTechnicalDataPortalStep.ProofOfAddress,
+            "selfie" => CompanyUpdateParamsTechnicalDataPortalStep.Selfie,
+            "face_match" => CompanyUpdateParamsTechnicalDataPortalStep.FaceMatch,
+            _ => (CompanyUpdateParamsTechnicalDataPortalStep)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PortalStepModel value,
+        CompanyUpdateParamsTechnicalDataPortalStep value,
         JsonSerializerOptions options
     )
     {
@@ -687,11 +705,12 @@ sealed class PortalStepModelConverter : JsonConverter<PortalStepModel>
             writer,
             value switch
             {
-                PortalStepModel.IdentityVerification => "identity_verification",
-                PortalStepModel.DocumentSigning => "document_signing",
-                PortalStepModel.ProofOfAddress => "proof_of_address",
-                PortalStepModel.Selfie => "selfie",
-                PortalStepModel.FaceMatch => "face_match",
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification =>
+                    "identity_verification",
+                CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning => "document_signing",
+                CompanyUpdateParamsTechnicalDataPortalStep.ProofOfAddress => "proof_of_address",
+                CompanyUpdateParamsTechnicalDataPortalStep.Selfie => "selfie",
+                CompanyUpdateParamsTechnicalDataPortalStep.FaceMatch => "face_match",
                 _ => throw new DataleonlabsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

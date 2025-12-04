@@ -30,12 +30,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             RejectedAt = null,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
@@ -60,14 +60,14 @@ public class CompanyTechnicalDataTest : TestBase
         string expectedLocationIP = "203.0.113.45";
         DateTimeOffset expectedNeedReviewAt = null;
         bool expectedNotificationConfirmation = false;
-        List<ApiEnum<string, PortalStep1>> expectedPortalSteps =
+        List<ApiEnum<string, CompanyTechnicalDataPortalStep>> expectedPortalSteps =
         [
-            PortalStep1.IdentityVerification,
-            PortalStep1.Selfie,
-            PortalStep1.FaceMatch,
+            CompanyTechnicalDataPortalStep.IdentityVerification,
+            CompanyTechnicalDataPortalStep.Selfie,
+            CompanyTechnicalDataPortalStep.FaceMatch,
         ];
         string expectedQrCode = "false";
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
         DateTimeOffset expectedRejectedAt = null;
         long expectedSessionDuration = 45;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z");
@@ -95,7 +95,7 @@ public class CompanyTechnicalDataTest : TestBase
             Assert.Equal(expectedPortalSteps[i], model.PortalSteps[i]);
         }
         Assert.Equal(expectedQrCode, model.QrCode);
-        Assert.Equal(expectedRawData1, model.RawData1);
+        Assert.Equal(expectedRawDataValue, model.RawDataValue);
         Assert.Equal(expectedRejectedAt, model.RejectedAt);
         Assert.Equal(expectedSessionDuration, model.SessionDuration);
         Assert.Equal(expectedStartedAt, model.StartedAt);
@@ -125,12 +125,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             RejectedAt = null,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
@@ -166,12 +166,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             RejectedAt = null,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
@@ -200,14 +200,14 @@ public class CompanyTechnicalDataTest : TestBase
         string expectedLocationIP = "203.0.113.45";
         DateTimeOffset expectedNeedReviewAt = null;
         bool expectedNotificationConfirmation = false;
-        List<ApiEnum<string, PortalStep1>> expectedPortalSteps =
+        List<ApiEnum<string, CompanyTechnicalDataPortalStep>> expectedPortalSteps =
         [
-            PortalStep1.IdentityVerification,
-            PortalStep1.Selfie,
-            PortalStep1.FaceMatch,
+            CompanyTechnicalDataPortalStep.IdentityVerification,
+            CompanyTechnicalDataPortalStep.Selfie,
+            CompanyTechnicalDataPortalStep.FaceMatch,
         ];
         string expectedQrCode = "false";
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
         DateTimeOffset expectedRejectedAt = null;
         long expectedSessionDuration = 45;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z");
@@ -235,7 +235,7 @@ public class CompanyTechnicalDataTest : TestBase
             Assert.Equal(expectedPortalSteps[i], deserialized.PortalSteps[i]);
         }
         Assert.Equal(expectedQrCode, deserialized.QrCode);
-        Assert.Equal(expectedRawData1, deserialized.RawData1);
+        Assert.Equal(expectedRawDataValue, deserialized.RawDataValue);
         Assert.Equal(expectedRejectedAt, deserialized.RejectedAt);
         Assert.Equal(expectedSessionDuration, deserialized.SessionDuration);
         Assert.Equal(expectedStartedAt, deserialized.StartedAt);
@@ -265,12 +265,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             RejectedAt = null,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
@@ -321,7 +321,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("portal_steps"));
         Assert.Null(model.QrCode);
         Assert.False(model.RawData.ContainsKey("qr_code"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
         Assert.Null(model.SessionDuration);
         Assert.False(model.RawData.ContainsKey("session_duration"));
@@ -371,7 +371,7 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = null,
             PortalSteps = null,
             QrCode = null,
-            RawData1 = null,
+            RawDataValue = null,
             SessionDuration = null,
             StartedAt = null,
             TransferAt = null,
@@ -408,7 +408,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("portal_steps"));
         Assert.Null(model.QrCode);
         Assert.False(model.RawData.ContainsKey("qr_code"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
         Assert.Null(model.SessionDuration);
         Assert.False(model.RawData.ContainsKey("session_duration"));
@@ -445,7 +445,7 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = null,
             PortalSteps = null,
             QrCode = null,
-            RawData1 = null,
+            RawDataValue = null,
             SessionDuration = null,
             StartedAt = null,
             TransferAt = null,
@@ -475,12 +475,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -515,12 +515,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -550,12 +550,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -594,12 +594,12 @@ public class CompanyTechnicalDataTest : TestBase
             NotificationConfirmation = false,
             PortalSteps =
             [
-                PortalStep1.IdentityVerification,
-                PortalStep1.Selfie,
-                PortalStep1.FaceMatch,
+                CompanyTechnicalDataPortalStep.IdentityVerification,
+                CompanyTechnicalDataPortalStep.Selfie,
+                CompanyTechnicalDataPortalStep.FaceMatch,
             ],
             QrCode = "false",
-            RawData1 = true,
+            RawDataValue = true,
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),

@@ -326,7 +326,7 @@ public sealed record class Value : ModelBase
     /// <summary>
     /// List of integer values related to the field (e.g., bounding box coordinates).
     /// </summary>
-    public IReadOnlyList<long>? Value1
+    public IReadOnlyList<long>? ValueValue
     {
         get { return ModelBase.GetNullableClass<List<long>>(this.RawData, "value"); }
         init
@@ -344,7 +344,7 @@ public sealed record class Value : ModelBase
     {
         _ = this.Confidence;
         _ = this.Name;
-        _ = this.Value1;
+        _ = this.ValueValue;
     }
 
     public Value() { }

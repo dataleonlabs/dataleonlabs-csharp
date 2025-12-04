@@ -67,7 +67,7 @@ public sealed record class Check : ModelBase
     /// <summary>
     /// Result of the check, true if passed.
     /// </summary>
-    public bool? Validate1
+    public bool? ValidateValue
     {
         get { return ModelBase.GetNullableStruct<bool>(this.RawData, "validate"); }
         init
@@ -103,7 +103,7 @@ public sealed record class Check : ModelBase
         _ = this.Masked;
         _ = this.Message;
         _ = this.Name;
-        _ = this.Validate1;
+        _ = this.ValidateValue;
         _ = this.Weight;
     }
 

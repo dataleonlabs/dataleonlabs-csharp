@@ -5,12 +5,12 @@ using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
 
-public class CompanyModelTest : TestBase
+public class CompanyUpdateParamsCompanyTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CompanyModel
+        var model = new CompanyUpdateParamsCompany
         {
             Name = "ACME Corp",
             Address = "123 rue Exemple, Paris",
@@ -65,7 +65,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CompanyModel
+        var model = new CompanyUpdateParamsCompany
         {
             Name = "ACME Corp",
             Address = "123 rue Exemple, Paris",
@@ -85,7 +85,7 @@ public class CompanyModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyModel>(json);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -93,7 +93,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CompanyModel
+        var model = new CompanyUpdateParamsCompany
         {
             Name = "ACME Corp",
             Address = "123 rue Exemple, Paris",
@@ -113,7 +113,7 @@ public class CompanyModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyModel>(json);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(json);
         Assert.NotNull(deserialized);
 
         string expectedName = "ACME Corp";
@@ -155,7 +155,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CompanyModel
+        var model = new CompanyUpdateParamsCompany
         {
             Name = "ACME Corp",
             Address = "123 rue Exemple, Paris",
@@ -180,7 +180,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new CompanyModel { Name = "ACME Corp" };
+        var model = new CompanyUpdateParamsCompany { Name = "ACME Corp" };
 
         Assert.Null(model.Address);
         Assert.False(model.RawData.ContainsKey("address"));
@@ -215,7 +215,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new CompanyModel { Name = "ACME Corp" };
+        var model = new CompanyUpdateParamsCompany { Name = "ACME Corp" };
 
         model.Validate();
     }
@@ -223,7 +223,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new CompanyModel
+        var model = new CompanyUpdateParamsCompany
         {
             Name = "ACME Corp",
 
@@ -277,7 +277,7 @@ public class CompanyModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new CompanyModel
+        var model = new CompanyUpdateParamsCompany
         {
             Name = "ACME Corp",
 
@@ -302,20 +302,24 @@ public class CompanyModelTest : TestBase
     }
 }
 
-public class TechnicalDataModelTest : TestBase
+public class CompanyUpdateParamsTechnicalDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new CompanyUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75,
             Language = "fra",
-            PortalSteps = [PortalStepModel.IdentityVerification, PortalStepModel.DocumentSigning],
-            RawData1 = true,
+            PortalSteps =
+            [
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            ],
+            RawDataValue = true,
         };
 
         bool expectedActiveAmlSuspicions = false;
@@ -323,12 +327,12 @@ public class TechnicalDataModelTest : TestBase
         string expectedCallbackURLNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75;
         string expectedLanguage = "fra";
-        List<ApiEnum<string, PortalStepModel>> expectedPortalSteps =
+        List<ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
-            PortalStepModel.IdentityVerification,
-            PortalStepModel.DocumentSigning,
+            CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+            CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
         ];
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
         Assert.Equal(expectedCallbackURL, model.CallbackURL);
@@ -340,25 +344,29 @@ public class TechnicalDataModelTest : TestBase
         {
             Assert.Equal(expectedPortalSteps[i], model.PortalSteps[i]);
         }
-        Assert.Equal(expectedRawData1, model.RawData1);
+        Assert.Equal(expectedRawDataValue, model.RawDataValue);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new CompanyUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75,
             Language = "fra",
-            PortalSteps = [PortalStepModel.IdentityVerification, PortalStepModel.DocumentSigning],
-            RawData1 = true,
+            PortalSteps =
+            [
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            ],
+            RawDataValue = true,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<TechnicalDataModel>(json);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -366,19 +374,23 @@ public class TechnicalDataModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new CompanyUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75,
             Language = "fra",
-            PortalSteps = [PortalStepModel.IdentityVerification, PortalStepModel.DocumentSigning],
-            RawData1 = true,
+            PortalSteps =
+            [
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            ],
+            RawDataValue = true,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<TechnicalDataModel>(json);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(json);
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
@@ -386,12 +398,12 @@ public class TechnicalDataModelTest : TestBase
         string expectedCallbackURLNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75;
         string expectedLanguage = "fra";
-        List<ApiEnum<string, PortalStepModel>> expectedPortalSteps =
+        List<ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
-            PortalStepModel.IdentityVerification,
-            PortalStepModel.DocumentSigning,
+            CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+            CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
         ];
-        bool expectedRawData1 = true;
+        bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
         Assert.Equal(expectedCallbackURL, deserialized.CallbackURL);
@@ -403,21 +415,25 @@ public class TechnicalDataModelTest : TestBase
         {
             Assert.Equal(expectedPortalSteps[i], deserialized.PortalSteps[i]);
         }
-        Assert.Equal(expectedRawData1, deserialized.RawData1);
+        Assert.Equal(expectedRawDataValue, deserialized.RawDataValue);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new CompanyUpdateParamsTechnicalData
         {
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75,
             Language = "fra",
-            PortalSteps = [PortalStepModel.IdentityVerification, PortalStepModel.DocumentSigning],
-            RawData1 = true,
+            PortalSteps =
+            [
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            ],
+            RawDataValue = true,
         };
 
         model.Validate();
@@ -426,7 +442,7 @@ public class TechnicalDataModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new TechnicalDataModel { };
+        var model = new CompanyUpdateParamsTechnicalData { };
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
@@ -440,14 +456,14 @@ public class TechnicalDataModelTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.PortalSteps);
         Assert.False(model.RawData.ContainsKey("portal_steps"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new TechnicalDataModel { };
+        var model = new CompanyUpdateParamsTechnicalData { };
 
         model.Validate();
     }
@@ -455,7 +471,7 @@ public class TechnicalDataModelTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new CompanyUpdateParamsTechnicalData
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
@@ -464,7 +480,7 @@ public class TechnicalDataModelTest : TestBase
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
-            RawData1 = null,
+            RawDataValue = null,
         };
 
         Assert.Null(model.ActiveAmlSuspicions);
@@ -479,14 +495,14 @@ public class TechnicalDataModelTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.PortalSteps);
         Assert.False(model.RawData.ContainsKey("portal_steps"));
-        Assert.Null(model.RawData1);
+        Assert.Null(model.RawDataValue);
         Assert.False(model.RawData.ContainsKey("raw_data"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new TechnicalDataModel
+        var model = new CompanyUpdateParamsTechnicalData
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
@@ -495,7 +511,7 @@ public class TechnicalDataModelTest : TestBase
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
-            RawData1 = null,
+            RawDataValue = null,
         };
 
         model.Validate();

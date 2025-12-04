@@ -499,7 +499,7 @@ public sealed record class TechnicalData : ModelBase
     /// <summary>
     /// Flag indicating whether to include raw data in the response.
     /// </summary>
-    public bool? RawData1
+    public bool? RawDataValue
     {
         get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
@@ -524,7 +524,7 @@ public sealed record class TechnicalData : ModelBase
         {
             item.Validate();
         }
-        _ = this.RawData1;
+        _ = this.RawDataValue;
     }
 
     public TechnicalData() { }

@@ -13,20 +13,20 @@ public class CheckTest : TestBase
             Masked = false,
             Message = "Name matched successfully",
             Name = "name_match",
-            Validate1 = true,
+            ValidateValue = true,
             Weight = 1,
         };
 
         bool expectedMasked = false;
         string expectedMessage = "Name matched successfully";
         string expectedName = "name_match";
-        bool expectedValidate1 = true;
+        bool expectedValidateValue = true;
         long expectedWeight = 1;
 
         Assert.Equal(expectedMasked, model.Masked);
         Assert.Equal(expectedMessage, model.Message);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedValidate1, model.Validate1);
+        Assert.Equal(expectedValidateValue, model.ValidateValue);
         Assert.Equal(expectedWeight, model.Weight);
     }
 
@@ -38,7 +38,7 @@ public class CheckTest : TestBase
             Masked = false,
             Message = "Name matched successfully",
             Name = "name_match",
-            Validate1 = true,
+            ValidateValue = true,
             Weight = 1,
         };
 
@@ -56,7 +56,7 @@ public class CheckTest : TestBase
             Masked = false,
             Message = "Name matched successfully",
             Name = "name_match",
-            Validate1 = true,
+            ValidateValue = true,
             Weight = 1,
         };
 
@@ -67,13 +67,13 @@ public class CheckTest : TestBase
         bool expectedMasked = false;
         string expectedMessage = "Name matched successfully";
         string expectedName = "name_match";
-        bool expectedValidate1 = true;
+        bool expectedValidateValue = true;
         long expectedWeight = 1;
 
         Assert.Equal(expectedMasked, deserialized.Masked);
         Assert.Equal(expectedMessage, deserialized.Message);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedValidate1, deserialized.Validate1);
+        Assert.Equal(expectedValidateValue, deserialized.ValidateValue);
         Assert.Equal(expectedWeight, deserialized.Weight);
     }
 
@@ -85,7 +85,7 @@ public class CheckTest : TestBase
             Masked = false,
             Message = "Name matched successfully",
             Name = "name_match",
-            Validate1 = true,
+            ValidateValue = true,
             Weight = 1,
         };
 
@@ -103,7 +103,7 @@ public class CheckTest : TestBase
         Assert.False(model.RawData.ContainsKey("message"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.Validate1);
+        Assert.Null(model.ValidateValue);
         Assert.False(model.RawData.ContainsKey("validate"));
         Assert.Null(model.Weight);
         Assert.False(model.RawData.ContainsKey("weight"));
@@ -126,7 +126,7 @@ public class CheckTest : TestBase
             Masked = null,
             Message = null,
             Name = null,
-            Validate1 = null,
+            ValidateValue = null,
             Weight = null,
         };
 
@@ -136,7 +136,7 @@ public class CheckTest : TestBase
         Assert.False(model.RawData.ContainsKey("message"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.Validate1);
+        Assert.Null(model.ValidateValue);
         Assert.False(model.RawData.ContainsKey("validate"));
         Assert.Null(model.Weight);
         Assert.False(model.RawData.ContainsKey("weight"));
@@ -151,7 +151,7 @@ public class CheckTest : TestBase
             Masked = null,
             Message = null,
             Name = null,
-            Validate1 = null,
+            ValidateValue = null,
             Weight = null,
         };
 
