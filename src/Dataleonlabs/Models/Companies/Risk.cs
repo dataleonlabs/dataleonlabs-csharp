@@ -65,6 +65,7 @@ public sealed record class Risk : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Code;
@@ -87,6 +88,7 @@ public sealed record class Risk : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="RiskFromRaw.FromRawUnchecked"/>
     public static Risk FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -95,6 +97,7 @@ public sealed record class Risk : ModelBase
 
 class RiskFromRaw : IFromRaw<Risk>
 {
+    /// <inheritdoc/>
     public Risk FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Risk.FromRawUnchecked(rawData);
 }

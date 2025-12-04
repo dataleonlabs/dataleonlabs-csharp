@@ -116,6 +116,7 @@ public sealed record class CompanyUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static CompanyUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -419,6 +420,7 @@ public sealed record class CompanyUpdateParamsCompany : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Name;
@@ -453,6 +455,7 @@ public sealed record class CompanyUpdateParamsCompany : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CompanyUpdateParamsCompanyFromRaw.FromRawUnchecked"/>
     public static CompanyUpdateParamsCompany FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -470,6 +473,7 @@ public sealed record class CompanyUpdateParamsCompany : ModelBase
 
 class CompanyUpdateParamsCompanyFromRaw : IFromRaw<CompanyUpdateParamsCompany>
 {
+    /// <inheritdoc/>
     public CompanyUpdateParamsCompany FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CompanyUpdateParamsCompany.FromRawUnchecked(rawData);
@@ -620,6 +624,7 @@ public sealed record class CompanyUpdateParamsTechnicalData : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
@@ -649,6 +654,7 @@ public sealed record class CompanyUpdateParamsTechnicalData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CompanyUpdateParamsTechnicalDataFromRaw.FromRawUnchecked"/>
     public static CompanyUpdateParamsTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -659,6 +665,7 @@ public sealed record class CompanyUpdateParamsTechnicalData : ModelBase
 
 class CompanyUpdateParamsTechnicalDataFromRaw : IFromRaw<CompanyUpdateParamsTechnicalData>
 {
+    /// <inheritdoc/>
     public CompanyUpdateParamsTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CompanyUpdateParamsTechnicalData.FromRawUnchecked(rawData);

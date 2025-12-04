@@ -8,7 +8,7 @@ using Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Companies;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class DocumentService : IDocumentService
 {
     /// <inheritdoc/>

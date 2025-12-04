@@ -183,6 +183,7 @@ public sealed record class AmlSuspicion : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Caption;
@@ -211,6 +212,7 @@ public sealed record class AmlSuspicion : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AmlSuspicionFromRaw.FromRawUnchecked"/>
     public static AmlSuspicion FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -219,6 +221,7 @@ public sealed record class AmlSuspicion : ModelBase
 
 class AmlSuspicionFromRaw : IFromRaw<AmlSuspicion>
 {
+    /// <inheritdoc/>
     public AmlSuspicion FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         AmlSuspicion.FromRawUnchecked(rawData);
 }

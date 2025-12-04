@@ -424,6 +424,7 @@ public sealed record class CompanyTechnicalData : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
@@ -469,6 +470,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CompanyTechnicalDataFromRaw.FromRawUnchecked"/>
     public static CompanyTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -479,6 +481,7 @@ public sealed record class CompanyTechnicalData : ModelBase
 
 class CompanyTechnicalDataFromRaw : IFromRaw<CompanyTechnicalData>
 {
+    /// <inheritdoc/>
     public CompanyTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CompanyTechnicalData.FromRawUnchecked(rawData);

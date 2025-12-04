@@ -235,6 +235,7 @@ public sealed record class CompanyCompany : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.AmlSuspicions ?? [])
@@ -281,6 +282,7 @@ public sealed record class CompanyCompany : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CompanyCompanyFromRaw.FromRawUnchecked"/>
     public static CompanyCompany FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -289,6 +291,7 @@ public sealed record class CompanyCompany : ModelBase
 
 class CompanyCompanyFromRaw : IFromRaw<CompanyCompany>
 {
+    /// <inheritdoc/>
     public CompanyCompany FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CompanyCompany.FromRawUnchecked(rawData);
 }
@@ -676,6 +679,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Address;
@@ -715,6 +719,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CompanyCompanyCompanyFromRaw.FromRawUnchecked"/>
     public static CompanyCompanyCompany FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -725,6 +730,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
 
 class CompanyCompanyCompanyFromRaw : IFromRaw<CompanyCompanyCompany>
 {
+    /// <inheritdoc/>
     public CompanyCompanyCompany FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CompanyCompanyCompany.FromRawUnchecked(rawData);
@@ -821,6 +827,7 @@ public sealed record class Contact : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Department;
@@ -845,6 +852,7 @@ public sealed record class Contact : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ContactFromRaw.FromRawUnchecked"/>
     public static Contact FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -853,6 +861,7 @@ public sealed record class Contact : ModelBase
 
 class ContactFromRaw : IFromRaw<Contact>
 {
+    /// <inheritdoc/>
     public Contact FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Contact.FromRawUnchecked(rawData);
 }
@@ -1287,6 +1296,7 @@ public sealed record class Member : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -1333,6 +1343,7 @@ public sealed record class Member : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MemberFromRaw.FromRawUnchecked"/>
     public static Member FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -1341,6 +1352,7 @@ public sealed record class Member : ModelBase
 
 class MemberFromRaw : IFromRaw<Member>
 {
+    /// <inheritdoc/>
     public Member FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Member.FromRawUnchecked(rawData);
 }

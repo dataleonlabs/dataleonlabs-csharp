@@ -184,6 +184,7 @@ public sealed record class GenericDocument : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -222,6 +223,7 @@ public sealed record class GenericDocument : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="GenericDocumentFromRaw.FromRawUnchecked"/>
     public static GenericDocument FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -230,6 +232,7 @@ public sealed record class GenericDocument : ModelBase
 
 class GenericDocumentFromRaw : IFromRaw<GenericDocument>
 {
+    /// <inheritdoc/>
     public GenericDocument FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         GenericDocument.FromRawUnchecked(rawData);
 }
@@ -254,6 +257,7 @@ public sealed record class Table : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Operation;
@@ -274,6 +278,7 @@ public sealed record class Table : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="TableFromRaw.FromRawUnchecked"/>
     public static Table FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -282,6 +287,7 @@ public sealed record class Table : ModelBase
 
 class TableFromRaw : IFromRaw<Table>
 {
+    /// <inheritdoc/>
     public Table FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Table.FromRawUnchecked(rawData);
 }
@@ -340,6 +346,7 @@ public sealed record class Value : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Confidence;
@@ -362,6 +369,7 @@ public sealed record class Value : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ValueFromRaw.FromRawUnchecked"/>
     public static Value FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -370,6 +378,7 @@ public sealed record class Value : ModelBase
 
 class ValueFromRaw : IFromRaw<Value>
 {
+    /// <inheritdoc/>
     public Value FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Value.FromRawUnchecked(rawData);
 }

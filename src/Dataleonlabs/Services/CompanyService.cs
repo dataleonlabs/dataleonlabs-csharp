@@ -10,7 +10,7 @@ using Dataleonlabs.Services.Companies;
 
 namespace Dataleonlabs.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class CompanyService : ICompanyService
 {
     /// <inheritdoc/>

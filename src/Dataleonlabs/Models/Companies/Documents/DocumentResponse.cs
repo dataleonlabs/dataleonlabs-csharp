@@ -44,6 +44,7 @@ public sealed record class DocumentResponse : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Documents ?? [])
@@ -68,6 +69,7 @@ public sealed record class DocumentResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DocumentResponseFromRaw.FromRawUnchecked"/>
     public static DocumentResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -78,6 +80,7 @@ public sealed record class DocumentResponse : ModelBase
 
 class DocumentResponseFromRaw : IFromRaw<DocumentResponse>
 {
+    /// <inheritdoc/>
     public DocumentResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         DocumentResponse.FromRawUnchecked(rawData);
 }
@@ -225,6 +228,7 @@ public sealed record class Document : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -252,6 +256,7 @@ public sealed record class Document : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DocumentFromRaw.FromRawUnchecked"/>
     public static Document FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -260,6 +265,7 @@ public sealed record class Document : ModelBase
 
 class DocumentFromRaw : IFromRaw<Document>
 {
+    /// <inheritdoc/>
     public Document FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Document.FromRawUnchecked(rawData);
 }

@@ -10,7 +10,7 @@ using Dataleonlabs.Services.Individuals;
 
 namespace Dataleonlabs.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class IndividualService : IIndividualService
 {
     /// <inheritdoc/>

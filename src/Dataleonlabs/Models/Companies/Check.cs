@@ -98,6 +98,7 @@ public sealed record class Check : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Masked;
@@ -122,6 +123,7 @@ public sealed record class Check : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckFromRaw.FromRawUnchecked"/>
     public static Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -130,6 +132,7 @@ public sealed record class Check : ModelBase
 
 class CheckFromRaw : IFromRaw<Check>
 {
+    /// <inheritdoc/>
     public Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Check.FromRawUnchecked(rawData);
 }

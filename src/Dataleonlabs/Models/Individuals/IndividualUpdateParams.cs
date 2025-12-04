@@ -123,6 +123,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static IndividualUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -312,6 +313,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Birthday;
@@ -339,6 +341,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IndividualUpdateParamsPersonFromRaw.FromRawUnchecked"/>
     public static IndividualUpdateParamsPerson FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -349,6 +352,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
 
 class IndividualUpdateParamsPersonFromRaw : IFromRaw<IndividualUpdateParamsPerson>
 {
+    /// <inheritdoc/>
     public IndividualUpdateParamsPerson FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => IndividualUpdateParamsPerson.FromRawUnchecked(rawData);
@@ -549,6 +553,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
@@ -578,6 +583,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IndividualUpdateParamsTechnicalDataFromRaw.FromRawUnchecked"/>
     public static IndividualUpdateParamsTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -588,6 +594,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
 
 class IndividualUpdateParamsTechnicalDataFromRaw : IFromRaw<IndividualUpdateParamsTechnicalData>
 {
+    /// <inheritdoc/>
     public IndividualUpdateParamsTechnicalData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => IndividualUpdateParamsTechnicalData.FromRawUnchecked(rawData);

@@ -112,6 +112,7 @@ public sealed record class IndividualCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static IndividualCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -290,6 +291,7 @@ public sealed record class Person : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Birthday;
@@ -317,6 +319,7 @@ public sealed record class Person : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PersonFromRaw.FromRawUnchecked"/>
     public static Person FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -325,6 +328,7 @@ public sealed record class Person : ModelBase
 
 class PersonFromRaw : IFromRaw<Person>
 {
+    /// <inheritdoc/>
     public Person FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Person.FromRawUnchecked(rawData);
 }
@@ -513,6 +517,7 @@ public sealed record class TechnicalData : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
@@ -542,6 +547,7 @@ public sealed record class TechnicalData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="TechnicalDataFromRaw.FromRawUnchecked"/>
     public static TechnicalData FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -550,6 +556,7 @@ public sealed record class TechnicalData : ModelBase
 
 class TechnicalDataFromRaw : IFromRaw<TechnicalData>
 {
+    /// <inheritdoc/>
     public TechnicalData FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         TechnicalData.FromRawUnchecked(rawData);
 }

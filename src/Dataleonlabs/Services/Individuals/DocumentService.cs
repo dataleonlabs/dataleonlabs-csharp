@@ -9,7 +9,7 @@ using Documents = Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Services.Individuals;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class DocumentService : IDocumentService
 {
     /// <inheritdoc/>

@@ -64,6 +64,7 @@ public sealed record class Property : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Name;
@@ -86,6 +87,7 @@ public sealed record class Property : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PropertyFromRaw.FromRawUnchecked"/>
     public static Property FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -94,6 +96,7 @@ public sealed record class Property : ModelBase
 
 class PropertyFromRaw : IFromRaw<Property>
 {
+    /// <inheritdoc/>
     public Property FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Property.FromRawUnchecked(rawData);
 }

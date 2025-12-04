@@ -362,6 +362,7 @@ public sealed record class Individual : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -416,6 +417,7 @@ public sealed record class Individual : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IndividualFromRaw.FromRawUnchecked"/>
     public static Individual FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -424,6 +426,7 @@ public sealed record class Individual : ModelBase
 
 class IndividualFromRaw : IFromRaw<Individual>
 {
+    /// <inheritdoc/>
     public Individual FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Individual.FromRawUnchecked(rawData);
 }
@@ -684,6 +687,7 @@ public sealed record class IdentityCard : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -718,6 +722,7 @@ public sealed record class IdentityCard : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IdentityCardFromRaw.FromRawUnchecked"/>
     public static IdentityCard FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -726,6 +731,7 @@ public sealed record class IdentityCard : ModelBase
 
 class IdentityCardFromRaw : IFromRaw<IdentityCard>
 {
+    /// <inheritdoc/>
     public IdentityCard FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         IdentityCard.FromRawUnchecked(rawData);
 }
@@ -906,6 +912,7 @@ public sealed record class IndividualPerson : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Birthday;
@@ -935,6 +942,7 @@ public sealed record class IndividualPerson : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IndividualPersonFromRaw.FromRawUnchecked"/>
     public static IndividualPerson FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -945,6 +953,7 @@ public sealed record class IndividualPerson : ModelBase
 
 class IndividualPersonFromRaw : IFromRaw<IndividualPerson>
 {
+    /// <inheritdoc/>
     public IndividualPerson FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         IndividualPerson.FromRawUnchecked(rawData);
 }
@@ -1024,6 +1033,7 @@ public sealed record class Tag : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Key;
@@ -1047,6 +1057,7 @@ public sealed record class Tag : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="TagFromRaw.FromRawUnchecked"/>
     public static Tag FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -1055,6 +1066,7 @@ public sealed record class Tag : ModelBase
 
 class TagFromRaw : IFromRaw<Tag>
 {
+    /// <inheritdoc/>
     public Tag FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Tag.FromRawUnchecked(rawData);
 }
