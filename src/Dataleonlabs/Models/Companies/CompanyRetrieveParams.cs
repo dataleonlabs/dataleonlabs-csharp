@@ -20,7 +20,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     /// </summary>
     public bool? Document
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "document"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawQueryData, "document"); }
         init
         {
             if (value == null)
@@ -28,7 +28,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "document", value);
+            JsonModel.Set(this._rawQueryData, "document", value);
         }
     }
 
@@ -37,7 +37,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     /// </summary>
     public string? Scope
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "scope"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "scope"); }
         init
         {
             if (value == null)
@@ -45,7 +45,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "scope", value);
+            JsonModel.Set(this._rawQueryData, "scope", value);
         }
     }
 
@@ -75,7 +75,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static CompanyRetrieveParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

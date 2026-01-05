@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -21,7 +22,7 @@ public class CompanyTechnicalDataTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -53,12 +54,11 @@ public class CompanyTechnicalDataTest : TestBase
             "2025-07-12T13:10:00Z"
         );
         string expectedExportType = "json";
-        float expectedFilteringScoreAmlSuspicions = 0.75;
+        float expectedFilteringScoreAmlSuspicions = 0.75f;
         DateTimeOffset expectedFinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z");
         string expectedIP = "192.168.1.1";
         string expectedLanguage = "fra";
         string expectedLocationIP = "203.0.113.45";
-        DateTimeOffset expectedNeedReviewAt = null;
         bool expectedNotificationConfirmation = false;
         List<ApiEnum<string, CompanyTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -68,7 +68,6 @@ public class CompanyTechnicalDataTest : TestBase
         ];
         string expectedQrCode = "false";
         bool expectedRawDataValue = true;
-        DateTimeOffset expectedRejectedAt = null;
         long expectedSessionDuration = 45;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z");
         DateTimeOffset expectedTransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z");
@@ -87,8 +86,9 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedIP, model.IP);
         Assert.Equal(expectedLanguage, model.Language);
         Assert.Equal(expectedLocationIP, model.LocationIP);
-        Assert.Equal(expectedNeedReviewAt, model.NeedReviewAt);
+        Assert.Null(model.NeedReviewAt);
         Assert.Equal(expectedNotificationConfirmation, model.NotificationConfirmation);
+        Assert.NotNull(model.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, model.PortalSteps.Count);
         for (int i = 0; i < expectedPortalSteps.Count; i++)
         {
@@ -96,7 +96,7 @@ public class CompanyTechnicalDataTest : TestBase
         }
         Assert.Equal(expectedQrCode, model.QrCode);
         Assert.Equal(expectedRawDataValue, model.RawDataValue);
-        Assert.Equal(expectedRejectedAt, model.RejectedAt);
+        Assert.Null(model.RejectedAt);
         Assert.Equal(expectedSessionDuration, model.SessionDuration);
         Assert.Equal(expectedStartedAt, model.StartedAt);
         Assert.Equal(expectedTransferAt, model.TransferAt);
@@ -116,7 +116,7 @@ public class CompanyTechnicalDataTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -157,7 +157,7 @@ public class CompanyTechnicalDataTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -179,8 +179,8 @@ public class CompanyTechnicalDataTest : TestBase
             TransferMode = "API",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyTechnicalData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CompanyTechnicalData>(element);
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
@@ -193,12 +193,11 @@ public class CompanyTechnicalDataTest : TestBase
             "2025-07-12T13:10:00Z"
         );
         string expectedExportType = "json";
-        float expectedFilteringScoreAmlSuspicions = 0.75;
+        float expectedFilteringScoreAmlSuspicions = 0.75f;
         DateTimeOffset expectedFinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z");
         string expectedIP = "192.168.1.1";
         string expectedLanguage = "fra";
         string expectedLocationIP = "203.0.113.45";
-        DateTimeOffset expectedNeedReviewAt = null;
         bool expectedNotificationConfirmation = false;
         List<ApiEnum<string, CompanyTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -208,7 +207,6 @@ public class CompanyTechnicalDataTest : TestBase
         ];
         string expectedQrCode = "false";
         bool expectedRawDataValue = true;
-        DateTimeOffset expectedRejectedAt = null;
         long expectedSessionDuration = 45;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z");
         DateTimeOffset expectedTransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z");
@@ -227,8 +225,9 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedIP, deserialized.IP);
         Assert.Equal(expectedLanguage, deserialized.Language);
         Assert.Equal(expectedLocationIP, deserialized.LocationIP);
-        Assert.Equal(expectedNeedReviewAt, deserialized.NeedReviewAt);
+        Assert.Null(deserialized.NeedReviewAt);
         Assert.Equal(expectedNotificationConfirmation, deserialized.NotificationConfirmation);
+        Assert.NotNull(deserialized.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, deserialized.PortalSteps.Count);
         for (int i = 0; i < expectedPortalSteps.Count; i++)
         {
@@ -236,7 +235,7 @@ public class CompanyTechnicalDataTest : TestBase
         }
         Assert.Equal(expectedQrCode, deserialized.QrCode);
         Assert.Equal(expectedRawDataValue, deserialized.RawDataValue);
-        Assert.Equal(expectedRejectedAt, deserialized.RejectedAt);
+        Assert.Null(deserialized.RejectedAt);
         Assert.Equal(expectedSessionDuration, deserialized.SessionDuration);
         Assert.Equal(expectedStartedAt, deserialized.StartedAt);
         Assert.Equal(expectedTransferAt, deserialized.TransferAt);
@@ -256,7 +255,7 @@ public class CompanyTechnicalDataTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -467,7 +466,7 @@ public class CompanyTechnicalDataTest : TestBase
             CallbackURLNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -507,7 +506,7 @@ public class CompanyTechnicalDataTest : TestBase
             CallbackURLNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -542,7 +541,7 @@ public class CompanyTechnicalDataTest : TestBase
             CallbackURLNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -586,7 +585,7 @@ public class CompanyTechnicalDataTest : TestBase
             CallbackURLNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -611,5 +610,67 @@ public class CompanyTechnicalDataTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class CompanyTechnicalDataPortalStepTest : TestBase
+{
+    [Theory]
+    [InlineData(CompanyTechnicalDataPortalStep.IdentityVerification)]
+    [InlineData(CompanyTechnicalDataPortalStep.DocumentSigning)]
+    [InlineData(CompanyTechnicalDataPortalStep.ProofOfAddress)]
+    [InlineData(CompanyTechnicalDataPortalStep.Selfie)]
+    [InlineData(CompanyTechnicalDataPortalStep.FaceMatch)]
+    public void Validation_Works(CompanyTechnicalDataPortalStep rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CompanyTechnicalDataPortalStep> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CompanyTechnicalDataPortalStep>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CompanyTechnicalDataPortalStep.IdentityVerification)]
+    [InlineData(CompanyTechnicalDataPortalStep.DocumentSigning)]
+    [InlineData(CompanyTechnicalDataPortalStep.ProofOfAddress)]
+    [InlineData(CompanyTechnicalDataPortalStep.Selfie)]
+    [InlineData(CompanyTechnicalDataPortalStep.FaceMatch)]
+    public void SerializationRoundtrip_Works(CompanyTechnicalDataPortalStep rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CompanyTechnicalDataPortalStep> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CompanyTechnicalDataPortalStep>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CompanyTechnicalDataPortalStep>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CompanyTechnicalDataPortalStep>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

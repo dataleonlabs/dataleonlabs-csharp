@@ -11,15 +11,15 @@ namespace Dataleonlabs.Models.Companies;
 /// Represents a risk assessment result, including a risk code, explanation, and a
 /// confidence score.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Risk, RiskFromRaw>))]
-public sealed record class Risk : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Risk, RiskFromRaw>))]
+public sealed record class Risk : JsonModel
 {
     /// <summary>
     /// Risk category or code identifier.
     /// </summary>
     public string? Code
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "code"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "code"); }
         init
         {
             if (value == null)
@@ -27,7 +27,7 @@ public sealed record class Risk : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "code", value);
+            JsonModel.Set(this._rawData, "code", value);
         }
     }
 
@@ -36,7 +36,7 @@ public sealed record class Risk : ModelBase
     /// </summary>
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
         init
         {
             if (value == null)
@@ -44,7 +44,7 @@ public sealed record class Risk : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "reason", value);
+            JsonModel.Set(this._rawData, "reason", value);
         }
     }
 
@@ -53,7 +53,7 @@ public sealed record class Risk : ModelBase
     /// </summary>
     public float? Score
     {
-        get { return ModelBase.GetNullableStruct<float>(this.RawData, "score"); }
+        get { return JsonModel.GetNullableStruct<float>(this.RawData, "score"); }
         init
         {
             if (value == null)
@@ -61,7 +61,7 @@ public sealed record class Risk : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "score", value);
+            JsonModel.Set(this._rawData, "score", value);
         }
     }
 
@@ -98,7 +98,7 @@ public sealed record class Risk : ModelBase
     }
 }
 
-class RiskFromRaw : IFromRaw<Risk>
+class RiskFromRaw : IFromRawJson<Risk>
 {
     /// <inheritdoc/>
     public Risk FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

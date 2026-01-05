@@ -2,7 +2,6 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dataleonlabs.Core;
@@ -16,8 +15,8 @@ namespace Dataleonlabs.Models.Companies.Documents;
 /// </summary>
 public sealed record class DocumentUploadParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
-    public IReadOnlyDictionary<string, JsonElement> RawBodyData
+    readonly FreezableDictionary<string, MultipartJsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, MultipartJsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
     }
@@ -31,20 +30,20 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DocumentType>>(
+            return MultipartJsonModel.GetNotNullClass<ApiEnum<string, DocumentType>>(
                 this.RawBodyData,
                 "document_type"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "document_type", value); }
+        init { MultipartJsonModel.Set(this._rawBodyData, "document_type", value); }
     }
 
     /// <summary>
     /// File to upload (required)
     /// </summary>
-    public string? File
+    public BinaryContent? File
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "file"); }
+        get { return MultipartJsonModel.GetNullableClass<BinaryContent>(this.RawBodyData, "file"); }
         init
         {
             if (value == null)
@@ -52,7 +51,7 @@ public sealed record class DocumentUploadParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "file", value);
+            MultipartJsonModel.Set(this._rawBodyData, "file", value);
         }
     }
 
@@ -61,7 +60,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     /// </summary>
     public string? URL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "url"); }
+        get { return MultipartJsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
         init
         {
             if (value == null)
@@ -69,7 +68,7 @@ public sealed record class DocumentUploadParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "url", value);
+            MultipartJsonModel.Set(this._rawBodyData, "url", value);
         }
     }
 
@@ -84,7 +83,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     public DocumentUploadParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData
+        IReadOnlyDictionary<string, MultipartJsonElement> rawBodyData
     )
     {
         this._rawHeaderData = [.. rawHeaderData];
@@ -97,7 +96,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     DocumentUploadParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        FrozenDictionary<string, JsonElement> rawBodyData
+        FrozenDictionary<string, MultipartJsonElement> rawBodyData
     )
     {
         this._rawHeaderData = [.. rawHeaderData];
@@ -106,11 +105,11 @@ public sealed record class DocumentUploadParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static DocumentUploadParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData
+        IReadOnlyDictionary<string, MultipartJsonElement> rawBodyData
     )
     {
         return new(
@@ -131,9 +130,9 @@ public sealed record class DocumentUploadParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return MultipartJsonSerializer.Serialize(RawBodyData);
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

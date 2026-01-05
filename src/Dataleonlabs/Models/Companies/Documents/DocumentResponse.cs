@@ -7,15 +7,15 @@ using Dataleonlabs.Core;
 
 namespace Dataleonlabs.Models.Companies.Documents;
 
-[JsonConverter(typeof(ModelConverter<DocumentResponse, DocumentResponseFromRaw>))]
-public sealed record class DocumentResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<DocumentResponse, DocumentResponseFromRaw>))]
+public sealed record class DocumentResponse : JsonModel
 {
     /// <summary>
     /// List of documents associated with the response.
     /// </summary>
     public IReadOnlyList<Document>? Documents
     {
-        get { return ModelBase.GetNullableClass<List<Document>>(this.RawData, "documents"); }
+        get { return JsonModel.GetNullableClass<List<Document>>(this.RawData, "documents"); }
         init
         {
             if (value == null)
@@ -23,7 +23,7 @@ public sealed record class DocumentResponse : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "documents", value);
+            JsonModel.Set(this._rawData, "documents", value);
         }
     }
 
@@ -32,7 +32,7 @@ public sealed record class DocumentResponse : ModelBase
     /// </summary>
     public long? TotalDocument
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "total_document"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "total_document"); }
         init
         {
             if (value == null)
@@ -40,7 +40,7 @@ public sealed record class DocumentResponse : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "total_document", value);
+            JsonModel.Set(this._rawData, "total_document", value);
         }
     }
 
@@ -81,7 +81,7 @@ public sealed record class DocumentResponse : ModelBase
     }
 }
 
-class DocumentResponseFromRaw : IFromRaw<DocumentResponse>
+class DocumentResponseFromRaw : IFromRawJson<DocumentResponse>
 {
     /// <inheritdoc/>
     public DocumentResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -92,15 +92,15 @@ class DocumentResponseFromRaw : IFromRaw<DocumentResponse>
 /// Represents a document stored and processed by the system, such as an identity
 /// card or a PDF contract.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Document, DocumentFromRaw>))]
-public sealed record class Document : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Document, DocumentFromRaw>))]
+public sealed record class Document : JsonModel
 {
     /// <summary>
     /// Unique identifier of the document.
     /// </summary>
     public string? ID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "id"); }
         init
         {
             if (value == null)
@@ -108,7 +108,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "id", value);
+            JsonModel.Set(this._rawData, "id", value);
         }
     }
 
@@ -117,7 +117,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? DocumentType
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "document_type"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "document_type"); }
         init
         {
             if (value == null)
@@ -125,7 +125,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "document_type", value);
+            JsonModel.Set(this._rawData, "document_type", value);
         }
     }
 
@@ -134,7 +134,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? Filename
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "filename"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "filename"); }
         init
         {
             if (value == null)
@@ -142,7 +142,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "filename", value);
+            JsonModel.Set(this._rawData, "filename", value);
         }
     }
 
@@ -151,7 +151,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -159,7 +159,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -168,7 +168,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? SignedURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "signed_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "signed_url"); }
         init
         {
             if (value == null)
@@ -176,7 +176,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "signed_url", value);
+            JsonModel.Set(this._rawData, "signed_url", value);
         }
     }
 
@@ -185,7 +185,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? State
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "state"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
         init
         {
             if (value == null)
@@ -193,7 +193,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "state", value);
+            JsonModel.Set(this._rawData, "state", value);
         }
     }
 
@@ -202,7 +202,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? Status
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "status"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "status"); }
         init
         {
             if (value == null)
@@ -210,7 +210,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "status", value);
+            JsonModel.Set(this._rawData, "status", value);
         }
     }
 
@@ -219,7 +219,7 @@ public sealed record class Document : ModelBase
     /// </summary>
     public string? WorkspaceID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "workspace_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "workspace_id"); }
         init
         {
             if (value == null)
@@ -227,7 +227,7 @@ public sealed record class Document : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "workspace_id", value);
+            JsonModel.Set(this._rawData, "workspace_id", value);
         }
     }
 
@@ -269,7 +269,7 @@ public sealed record class Document : ModelBase
     }
 }
 
-class DocumentFromRaw : IFromRaw<Document>
+class DocumentFromRaw : IFromRawJson<Document>
 {
     /// <inheritdoc/>
     public Document FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

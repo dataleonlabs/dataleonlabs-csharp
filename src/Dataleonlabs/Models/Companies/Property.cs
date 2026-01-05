@@ -10,15 +10,15 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Represents a generic property key-value pair with a specified type.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Property, PropertyFromRaw>))]
-public sealed record class Property : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Property, PropertyFromRaw>))]
+public sealed record class Property : JsonModel
 {
     /// <summary>
     /// Name/key of the property.
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -26,7 +26,7 @@ public sealed record class Property : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -35,7 +35,7 @@ public sealed record class Property : ModelBase
     /// </summary>
     public string? Type
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "type"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "type"); }
         init
         {
             if (value == null)
@@ -43,7 +43,7 @@ public sealed record class Property : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "type", value);
+            JsonModel.Set(this._rawData, "type", value);
         }
     }
 
@@ -52,7 +52,7 @@ public sealed record class Property : ModelBase
     /// </summary>
     public string? Value
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "value"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "value"); }
         init
         {
             if (value == null)
@@ -60,7 +60,7 @@ public sealed record class Property : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "value", value);
+            JsonModel.Set(this._rawData, "value", value);
         }
     }
 
@@ -97,7 +97,7 @@ public sealed record class Property : ModelBase
     }
 }
 
-class PropertyFromRaw : IFromRaw<Property>
+class PropertyFromRaw : IFromRawJson<Property>
 {
     /// <inheritdoc/>
     public Property FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

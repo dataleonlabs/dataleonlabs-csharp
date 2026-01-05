@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -16,7 +17,7 @@ public class AmlSuspicionTest : TestBase
             Gender = "M",
             Relation = "linked",
             Schema = "v1",
-            Score = 0.85,
+            Score = 0.85f,
             Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
             Status = AmlSuspicionStatus.Pending,
             Type = Type.Pep,
@@ -27,7 +28,7 @@ public class AmlSuspicionTest : TestBase
         string expectedGender = "M";
         string expectedRelation = "linked";
         string expectedSchema = "v1";
-        float expectedScore = 0.85;
+        float expectedScore = 0.85f;
         string expectedSource = "https://aml-checker.example.com/api/v1/suspicion/12345";
         ApiEnum<string, AmlSuspicionStatus> expectedStatus = AmlSuspicionStatus.Pending;
         ApiEnum<string, Type> expectedType = Type.Pep;
@@ -53,7 +54,7 @@ public class AmlSuspicionTest : TestBase
             Gender = "M",
             Relation = "linked",
             Schema = "v1",
-            Score = 0.85,
+            Score = 0.85f,
             Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
             Status = AmlSuspicionStatus.Pending,
             Type = Type.Pep,
@@ -75,14 +76,14 @@ public class AmlSuspicionTest : TestBase
             Gender = "M",
             Relation = "linked",
             Schema = "v1",
-            Score = 0.85,
+            Score = 0.85f,
             Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
             Status = AmlSuspicionStatus.Pending,
             Type = Type.Pep,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AmlSuspicion>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AmlSuspicion>(element);
         Assert.NotNull(deserialized);
 
         string expectedCaption = "Suspicious activity";
@@ -90,7 +91,7 @@ public class AmlSuspicionTest : TestBase
         string expectedGender = "M";
         string expectedRelation = "linked";
         string expectedSchema = "v1";
-        float expectedScore = 0.85;
+        float expectedScore = 0.85f;
         string expectedSource = "https://aml-checker.example.com/api/v1/suspicion/12345";
         ApiEnum<string, AmlSuspicionStatus> expectedStatus = AmlSuspicionStatus.Pending;
         ApiEnum<string, Type> expectedType = Type.Pep;
@@ -116,7 +117,7 @@ public class AmlSuspicionTest : TestBase
             Gender = "M",
             Relation = "linked",
             Schema = "v1",
-            Score = 0.85,
+            Score = 0.85f,
             Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
             Status = AmlSuspicionStatus.Pending,
             Type = Type.Pep,
@@ -213,5 +214,129 @@ public class AmlSuspicionTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class AmlSuspicionStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(AmlSuspicionStatus.TruePositive)]
+    [InlineData(AmlSuspicionStatus.FalsePositive)]
+    [InlineData(AmlSuspicionStatus.Pending)]
+    public void Validation_Works(AmlSuspicionStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, AmlSuspicionStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(AmlSuspicionStatus.TruePositive)]
+    [InlineData(AmlSuspicionStatus.FalsePositive)]
+    [InlineData(AmlSuspicionStatus.Pending)]
+    public void SerializationRoundtrip_Works(AmlSuspicionStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, AmlSuspicionStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AmlSuspicionStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class TypeTest : TestBase
+{
+    [Theory]
+    [InlineData(Type.Crime)]
+    [InlineData(Type.Sanction)]
+    [InlineData(Type.Pep)]
+    [InlineData(Type.AdverseNews)]
+    [InlineData(Type.Other)]
+    public void Validation_Works(Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Type> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Type.Crime)]
+    [InlineData(Type.Sanction)]
+    [InlineData(Type.Pep)]
+    [InlineData(Type.AdverseNews)]
+    [InlineData(Type.Other)]
+    public void SerializationRoundtrip_Works(Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Type> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

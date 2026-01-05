@@ -1,9 +1,125 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Individuals;
 
 namespace Dataleonlabs.Tests.Models.Individuals;
+
+public class IndividualUpdateParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new IndividualUpdateParams
+        {
+            IndividualID = "individual_id",
+            WorkspaceID = "wk_123",
+            Person = new()
+            {
+                Birthday = "15/05/1985",
+                Email = "john.doe@example.com",
+                FirstName = "John",
+                Gender = IndividualUpdateParamsPersonGender.M,
+                LastName = "Doe",
+                MaidenName = "John Doe",
+                Nationality = "FRA",
+                PhoneNumber = "+33 1 23 45 67 89",
+            },
+            SourceID = "ID54410069066",
+            TechnicalData = new()
+            {
+                ActiveAmlSuspicions = false,
+                CallbackURL = "https://example.com/callback",
+                CallbackURLNotification = "https://example.com/notify",
+                FilteringScoreAmlSuspicions = 0.75f,
+                Language = "fra",
+                PortalSteps =
+                [
+                    IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                    IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                    IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
+                ],
+                RawDataValue = true,
+            },
+        };
+
+        string expectedIndividualID = "individual_id";
+        string expectedWorkspaceID = "wk_123";
+        IndividualUpdateParamsPerson expectedPerson = new()
+        {
+            Birthday = "15/05/1985",
+            Email = "john.doe@example.com",
+            FirstName = "John",
+            Gender = IndividualUpdateParamsPersonGender.M,
+            LastName = "Doe",
+            MaidenName = "John Doe",
+            Nationality = "FRA",
+            PhoneNumber = "+33 1 23 45 67 89",
+        };
+        string expectedSourceID = "ID54410069066";
+        IndividualUpdateParamsTechnicalData expectedTechnicalData = new()
+        {
+            ActiveAmlSuspicions = false,
+            CallbackURL = "https://example.com/callback",
+            CallbackURLNotification = "https://example.com/notify",
+            FilteringScoreAmlSuspicions = 0.75f,
+            Language = "fra",
+            PortalSteps =
+            [
+                IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
+            ],
+            RawDataValue = true,
+        };
+
+        Assert.Equal(expectedIndividualID, parameters.IndividualID);
+        Assert.Equal(expectedWorkspaceID, parameters.WorkspaceID);
+        Assert.Equal(expectedPerson, parameters.Person);
+        Assert.Equal(expectedSourceID, parameters.SourceID);
+        Assert.Equal(expectedTechnicalData, parameters.TechnicalData);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new IndividualUpdateParams
+        {
+            IndividualID = "individual_id",
+            WorkspaceID = "wk_123",
+        };
+
+        Assert.Null(parameters.Person);
+        Assert.False(parameters.RawBodyData.ContainsKey("person"));
+        Assert.Null(parameters.SourceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("source_id"));
+        Assert.Null(parameters.TechnicalData);
+        Assert.False(parameters.RawBodyData.ContainsKey("technical_data"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new IndividualUpdateParams
+        {
+            IndividualID = "individual_id",
+            WorkspaceID = "wk_123",
+
+            // Null should be interpreted as omitted for these properties
+            Person = null,
+            SourceID = null,
+            TechnicalData = null,
+        };
+
+        Assert.Null(parameters.Person);
+        Assert.False(parameters.RawBodyData.ContainsKey("person"));
+        Assert.Null(parameters.SourceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("source_id"));
+        Assert.Null(parameters.TechnicalData);
+        Assert.False(parameters.RawBodyData.ContainsKey("technical_data"));
+    }
+}
 
 public class IndividualUpdateParamsPersonTest : TestBase
 {
@@ -78,8 +194,8 @@ public class IndividualUpdateParamsPersonTest : TestBase
             PhoneNumber = "+33 1 23 45 67 89",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(element);
         Assert.NotNull(deserialized);
 
         string expectedBirthday = "15/05/1985";
@@ -205,6 +321,62 @@ public class IndividualUpdateParamsPersonTest : TestBase
     }
 }
 
+public class IndividualUpdateParamsPersonGenderTest : TestBase
+{
+    [Theory]
+    [InlineData(IndividualUpdateParamsPersonGender.M)]
+    [InlineData(IndividualUpdateParamsPersonGender.F)]
+    public void Validation_Works(IndividualUpdateParamsPersonGender rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, IndividualUpdateParamsPersonGender> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(IndividualUpdateParamsPersonGender.M)]
+    [InlineData(IndividualUpdateParamsPersonGender.F)]
+    public void SerializationRoundtrip_Works(IndividualUpdateParamsPersonGender rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, IndividualUpdateParamsPersonGender> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IndividualUpdateParamsPersonGender>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IndividualUpdateParamsPersonGender>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class IndividualUpdateParamsTechnicalDataTest : TestBase
 {
     [Fact]
@@ -215,7 +387,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -229,7 +401,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
         bool expectedActiveAmlSuspicions = false;
         string expectedCallbackURL = "https://example.com/callback";
         string expectedCallbackURLNotification = "https://example.com/notify";
-        float expectedFilteringScoreAmlSuspicions = 0.75;
+        float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -244,6 +416,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
         Assert.Equal(expectedCallbackURLNotification, model.CallbackURLNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, model.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, model.Language);
+        Assert.NotNull(model.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, model.PortalSteps.Count);
         for (int i = 0; i < expectedPortalSteps.Count; i++)
         {
@@ -260,7 +433,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -285,7 +458,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -296,14 +469,14 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             RawDataValue = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(element);
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
         string expectedCallbackURL = "https://example.com/callback";
         string expectedCallbackURLNotification = "https://example.com/notify";
-        float expectedFilteringScoreAmlSuspicions = 0.75;
+        float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -318,6 +491,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
         Assert.Equal(expectedCallbackURLNotification, deserialized.CallbackURLNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, deserialized.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, deserialized.Language);
+        Assert.NotNull(deserialized.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, deserialized.PortalSteps.Count);
         for (int i = 0; i < expectedPortalSteps.Count; i++)
         {
@@ -334,7 +508,7 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -424,5 +598,71 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class IndividualUpdateParamsTechnicalDataPortalStepTest : TestBase
+{
+    [Theory]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.DocumentSigning)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.ProofOfAddress)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.Selfie)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch)]
+    public void Validation_Works(IndividualUpdateParamsTechnicalDataPortalStep rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.DocumentSigning)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.ProofOfAddress)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.Selfie)]
+    [InlineData(IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch)]
+    public void SerializationRoundtrip_Works(IndividualUpdateParamsTechnicalDataPortalStep rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

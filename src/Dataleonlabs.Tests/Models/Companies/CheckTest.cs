@@ -60,8 +60,8 @@ public class CheckTest : TestBase
             Weight = 1,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Check>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Check>(element);
         Assert.NotNull(deserialized);
 
         bool expectedMasked = false;

@@ -50,8 +50,8 @@ public class PropertyTest : TestBase
             Value = "property_value",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Property>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Property>(element);
         Assert.NotNull(deserialized);
 
         string expectedName = "property_name";

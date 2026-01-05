@@ -19,7 +19,7 @@ namespace Dataleonlabs;
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public interface IDataleonlabsClient
+public interface IDataleonlabsClient : IDisposable
 {
     /// <summary>
     /// The HTTP client to use for making requests in the SDK.
@@ -29,9 +29,9 @@ public interface IDataleonlabsClient
     /// <summary>
     /// The base URL to use for every request.
     ///
-    /// <para>Defaults to the production environment: https://inference.eu-west-1.dataleon.ai</para>
+    /// <para>Defaults to the production environment: <see cref="EnvironmentUrl.Production"/></para>
     /// </summary>
-    Uri BaseUrl { get; init; }
+    string BaseUrl { get; init; }
 
     /// <summary>
     /// Whether to validate every response before returning it.

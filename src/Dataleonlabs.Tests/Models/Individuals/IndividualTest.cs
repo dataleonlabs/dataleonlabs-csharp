@@ -24,7 +24,7 @@ public class IndividualTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -93,6 +93,7 @@ public class IndividualTest : TestBase
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
+                EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
                 FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -132,7 +133,7 @@ public class IndividualTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "ID54410069066",
             State = "WAITING",
@@ -157,7 +158,7 @@ public class IndividualTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -192,7 +193,7 @@ public class IndividualTest : TestBase
                 Gender = "M",
                 Relation = "linked",
                 Schema = "v1",
-                Score = 0.85,
+                Score = 0.85f,
                 Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                 Status = Companies::AmlSuspicionStatus.Pending,
                 Type = Companies::Type.Pep,
@@ -258,6 +259,7 @@ public class IndividualTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -297,7 +299,7 @@ public class IndividualTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
         string expectedSourceID = "ID54410069066";
         string expectedState = "WAITING";
@@ -322,7 +324,7 @@ public class IndividualTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -347,6 +349,7 @@ public class IndividualTest : TestBase
         string expectedWorkspaceID = "wk_123";
 
         Assert.Equal(expectedID, model.ID);
+        Assert.NotNull(model.AmlSuspicions);
         Assert.Equal(expectedAmlSuspicions.Count, model.AmlSuspicions.Count);
         for (int i = 0; i < expectedAmlSuspicions.Count; i++)
         {
@@ -354,12 +357,14 @@ public class IndividualTest : TestBase
         }
         Assert.Equal(expectedAuthURL, model.AuthURL);
         Assert.Equal(expectedCertificat, model.Certificat);
+        Assert.NotNull(model.Checks);
         Assert.Equal(expectedChecks.Count, model.Checks.Count);
         for (int i = 0; i < expectedChecks.Count; i++)
         {
             Assert.Equal(expectedChecks[i], model.Checks[i]);
         }
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.NotNull(model.Documents);
         Assert.Equal(expectedDocuments.Count, model.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
@@ -369,6 +374,7 @@ public class IndividualTest : TestBase
         Assert.Equal(expectedNumber, model.Number);
         Assert.Equal(expectedPerson, model.Person);
         Assert.Equal(expectedPortalURL, model.PortalURL);
+        Assert.NotNull(model.Properties);
         Assert.Equal(expectedProperties.Count, model.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
         {
@@ -378,6 +384,7 @@ public class IndividualTest : TestBase
         Assert.Equal(expectedSourceID, model.SourceID);
         Assert.Equal(expectedState, model.State);
         Assert.Equal(expectedStatus, model.Status);
+        Assert.NotNull(model.Tags);
         Assert.Equal(expectedTags.Count, model.Tags.Count);
         for (int i = 0; i < expectedTags.Count; i++)
         {
@@ -403,7 +410,7 @@ public class IndividualTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -472,6 +479,7 @@ public class IndividualTest : TestBase
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
+                EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
                 FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -511,7 +519,7 @@ public class IndividualTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "ID54410069066",
             State = "WAITING",
@@ -536,7 +544,7 @@ public class IndividualTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -582,7 +590,7 @@ public class IndividualTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -651,6 +659,7 @@ public class IndividualTest : TestBase
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
+                EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
                 FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -690,7 +699,7 @@ public class IndividualTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "ID54410069066",
             State = "WAITING",
@@ -715,7 +724,7 @@ public class IndividualTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -740,8 +749,8 @@ public class IndividualTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Individual>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Individual>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "123e4567-e89b-12d3-a456-426614174000";
@@ -754,7 +763,7 @@ public class IndividualTest : TestBase
                 Gender = "M",
                 Relation = "linked",
                 Schema = "v1",
-                Score = 0.85,
+                Score = 0.85f,
                 Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                 Status = Companies::AmlSuspicionStatus.Pending,
                 Type = Companies::Type.Pep,
@@ -820,6 +829,7 @@ public class IndividualTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -859,7 +869,7 @@ public class IndividualTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
         string expectedSourceID = "ID54410069066";
         string expectedState = "WAITING";
@@ -884,7 +894,7 @@ public class IndividualTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -909,6 +919,7 @@ public class IndividualTest : TestBase
         string expectedWorkspaceID = "wk_123";
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.NotNull(deserialized.AmlSuspicions);
         Assert.Equal(expectedAmlSuspicions.Count, deserialized.AmlSuspicions.Count);
         for (int i = 0; i < expectedAmlSuspicions.Count; i++)
         {
@@ -916,12 +927,14 @@ public class IndividualTest : TestBase
         }
         Assert.Equal(expectedAuthURL, deserialized.AuthURL);
         Assert.Equal(expectedCertificat, deserialized.Certificat);
+        Assert.NotNull(deserialized.Checks);
         Assert.Equal(expectedChecks.Count, deserialized.Checks.Count);
         for (int i = 0; i < expectedChecks.Count; i++)
         {
             Assert.Equal(expectedChecks[i], deserialized.Checks[i]);
         }
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.NotNull(deserialized.Documents);
         Assert.Equal(expectedDocuments.Count, deserialized.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
@@ -931,6 +944,7 @@ public class IndividualTest : TestBase
         Assert.Equal(expectedNumber, deserialized.Number);
         Assert.Equal(expectedPerson, deserialized.Person);
         Assert.Equal(expectedPortalURL, deserialized.PortalURL);
+        Assert.NotNull(deserialized.Properties);
         Assert.Equal(expectedProperties.Count, deserialized.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
         {
@@ -940,6 +954,7 @@ public class IndividualTest : TestBase
         Assert.Equal(expectedSourceID, deserialized.SourceID);
         Assert.Equal(expectedState, deserialized.State);
         Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.NotNull(deserialized.Tags);
         Assert.Equal(expectedTags.Count, deserialized.Tags.Count);
         for (int i = 0; i < expectedTags.Count; i++)
         {
@@ -965,7 +980,7 @@ public class IndividualTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -1034,6 +1049,7 @@ public class IndividualTest : TestBase
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
+                EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
                 FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1073,7 +1089,7 @@ public class IndividualTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "ID54410069066",
             State = "WAITING",
@@ -1098,7 +1114,7 @@ public class IndividualTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -1295,6 +1311,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1312,6 +1329,7 @@ public class IdentityCardTest : TestBase
         string expectedBirthPlace = "Paris";
         string expectedBirthday = "01/01/1990";
         string expectedCountry = "FR";
+        string expectedEntitlementDate = "entitlement_date";
         string expectedExpirationDate = "2030-01-01";
         string expectedFirstName = "John";
         string expectedFrontDocumentSignedURL = "https://cdn.example.com/front.jpg";
@@ -1320,7 +1338,6 @@ public class IdentityCardTest : TestBase
         string expectedLastName = "Doe";
         string expectedMrzLine1 = "P<FRADOE<<JOHN<<<<<<<<<<<<<<<<<<<";
         string expectedMrzLine2 = "1234567890FRA9001019M2301012<<<<<<<<<<<<<<04";
-        string expectedMrzLine3 = null;
         string expectedType = "passport";
 
         Assert.Equal(expectedID, model.ID);
@@ -1328,6 +1345,7 @@ public class IdentityCardTest : TestBase
         Assert.Equal(expectedBirthPlace, model.BirthPlace);
         Assert.Equal(expectedBirthday, model.Birthday);
         Assert.Equal(expectedCountry, model.Country);
+        Assert.Equal(expectedEntitlementDate, model.EntitlementDate);
         Assert.Equal(expectedExpirationDate, model.ExpirationDate);
         Assert.Equal(expectedFirstName, model.FirstName);
         Assert.Equal(expectedFrontDocumentSignedURL, model.FrontDocumentSignedURL);
@@ -1336,7 +1354,7 @@ public class IdentityCardTest : TestBase
         Assert.Equal(expectedLastName, model.LastName);
         Assert.Equal(expectedMrzLine1, model.MrzLine1);
         Assert.Equal(expectedMrzLine2, model.MrzLine2);
-        Assert.Equal(expectedMrzLine3, model.MrzLine3);
+        Assert.Null(model.MrzLine3);
         Assert.Equal(expectedType, model.Type);
     }
 
@@ -1350,6 +1368,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1378,6 +1397,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1390,8 +1410,8 @@ public class IdentityCardTest : TestBase
             Type = "passport",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IdentityCard>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<IdentityCard>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "doc_001";
@@ -1399,6 +1419,7 @@ public class IdentityCardTest : TestBase
         string expectedBirthPlace = "Paris";
         string expectedBirthday = "01/01/1990";
         string expectedCountry = "FR";
+        string expectedEntitlementDate = "entitlement_date";
         string expectedExpirationDate = "2030-01-01";
         string expectedFirstName = "John";
         string expectedFrontDocumentSignedURL = "https://cdn.example.com/front.jpg";
@@ -1407,7 +1428,6 @@ public class IdentityCardTest : TestBase
         string expectedLastName = "Doe";
         string expectedMrzLine1 = "P<FRADOE<<JOHN<<<<<<<<<<<<<<<<<<<";
         string expectedMrzLine2 = "1234567890FRA9001019M2301012<<<<<<<<<<<<<<04";
-        string expectedMrzLine3 = null;
         string expectedType = "passport";
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -1415,6 +1435,7 @@ public class IdentityCardTest : TestBase
         Assert.Equal(expectedBirthPlace, deserialized.BirthPlace);
         Assert.Equal(expectedBirthday, deserialized.Birthday);
         Assert.Equal(expectedCountry, deserialized.Country);
+        Assert.Equal(expectedEntitlementDate, deserialized.EntitlementDate);
         Assert.Equal(expectedExpirationDate, deserialized.ExpirationDate);
         Assert.Equal(expectedFirstName, deserialized.FirstName);
         Assert.Equal(expectedFrontDocumentSignedURL, deserialized.FrontDocumentSignedURL);
@@ -1423,7 +1444,7 @@ public class IdentityCardTest : TestBase
         Assert.Equal(expectedLastName, deserialized.LastName);
         Assert.Equal(expectedMrzLine1, deserialized.MrzLine1);
         Assert.Equal(expectedMrzLine2, deserialized.MrzLine2);
-        Assert.Equal(expectedMrzLine3, deserialized.MrzLine3);
+        Assert.Null(deserialized.MrzLine3);
         Assert.Equal(expectedType, deserialized.Type);
     }
 
@@ -1437,6 +1458,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1467,6 +1489,8 @@ public class IdentityCardTest : TestBase
         Assert.False(model.RawData.ContainsKey("birthday"));
         Assert.Null(model.Country);
         Assert.False(model.RawData.ContainsKey("country"));
+        Assert.Null(model.EntitlementDate);
+        Assert.False(model.RawData.ContainsKey("entitlement_date"));
         Assert.Null(model.ExpirationDate);
         Assert.False(model.RawData.ContainsKey("expiration_date"));
         Assert.Null(model.FirstName);
@@ -1508,6 +1532,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = null,
             Birthday = null,
             Country = null,
+            EntitlementDate = null,
             ExpirationDate = null,
             FirstName = null,
             FrontDocumentSignedURL = null,
@@ -1529,6 +1554,8 @@ public class IdentityCardTest : TestBase
         Assert.False(model.RawData.ContainsKey("birthday"));
         Assert.Null(model.Country);
         Assert.False(model.RawData.ContainsKey("country"));
+        Assert.Null(model.EntitlementDate);
+        Assert.False(model.RawData.ContainsKey("entitlement_date"));
         Assert.Null(model.ExpirationDate);
         Assert.False(model.RawData.ContainsKey("expiration_date"));
         Assert.Null(model.FirstName);
@@ -1562,6 +1589,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = null,
             Birthday = null,
             Country = null,
+            EntitlementDate = null,
             ExpirationDate = null,
             FirstName = null,
             FrontDocumentSignedURL = null,
@@ -1586,6 +1614,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1611,6 +1640,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1635,6 +1665,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1662,6 +1693,7 @@ public class IdentityCardTest : TestBase
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
+            EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
             FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
@@ -1761,8 +1793,8 @@ public class IndividualPersonTest : TestBase
             PhoneNumber = "+33612345678",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualPerson>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<IndividualPerson>(element);
         Assert.NotNull(deserialized);
 
         string expectedBirthday = "01/01/1990";
@@ -1957,8 +1989,8 @@ public class TagTest : TestBase
             Value = "tag_value",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Tag>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Tag>(element);
         Assert.NotNull(deserialized);
 
         string expectedKey = "tag_name";

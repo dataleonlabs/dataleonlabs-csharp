@@ -11,15 +11,15 @@ namespace Dataleonlabs.Models.Companies.Documents;
 /// <summary>
 /// Represents a general document with metadata, verification checks, and extracted data.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<GenericDocument, GenericDocumentFromRaw>))]
-public sealed record class GenericDocument : ModelBase
+[JsonConverter(typeof(JsonModelConverter<GenericDocument, GenericDocumentFromRaw>))]
+public sealed record class GenericDocument : JsonModel
 {
     /// <summary>
     /// Unique identifier of the document.
     /// </summary>
     public string? ID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "id"); }
         init
         {
             if (value == null)
@@ -27,7 +27,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "id", value);
+            JsonModel.Set(this._rawData, "id", value);
         }
     }
 
@@ -36,7 +36,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public IReadOnlyList<Check>? Checks
     {
-        get { return ModelBase.GetNullableClass<List<Check>>(this.RawData, "checks"); }
+        get { return JsonModel.GetNullableClass<List<Check>>(this.RawData, "checks"); }
         init
         {
             if (value == null)
@@ -44,7 +44,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "checks", value);
+            JsonModel.Set(this._rawData, "checks", value);
         }
     }
 
@@ -53,7 +53,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public DateTimeOffset? CreatedAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "created_at"); }
         init
         {
             if (value == null)
@@ -61,7 +61,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "created_at", value);
+            JsonModel.Set(this._rawData, "created_at", value);
         }
     }
 
@@ -70,7 +70,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public string? DocumentType
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "document_type"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "document_type"); }
         init
         {
             if (value == null)
@@ -78,7 +78,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "document_type", value);
+            JsonModel.Set(this._rawData, "document_type", value);
         }
     }
 
@@ -87,7 +87,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -95,7 +95,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -104,7 +104,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public string? SignedURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "signed_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "signed_url"); }
         init
         {
             if (value == null)
@@ -112,7 +112,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "signed_url", value);
+            JsonModel.Set(this._rawData, "signed_url", value);
         }
     }
 
@@ -121,7 +121,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public string? State
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "state"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
         init
         {
             if (value == null)
@@ -129,7 +129,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "state", value);
+            JsonModel.Set(this._rawData, "state", value);
         }
     }
 
@@ -138,7 +138,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public string? Status
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "status"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "status"); }
         init
         {
             if (value == null)
@@ -146,7 +146,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "status", value);
+            JsonModel.Set(this._rawData, "status", value);
         }
     }
 
@@ -155,7 +155,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public IReadOnlyList<Table>? Tables
     {
-        get { return ModelBase.GetNullableClass<List<Table>>(this.RawData, "tables"); }
+        get { return JsonModel.GetNullableClass<List<Table>>(this.RawData, "tables"); }
         init
         {
             if (value == null)
@@ -163,7 +163,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "tables", value);
+            JsonModel.Set(this._rawData, "tables", value);
         }
     }
 
@@ -172,7 +172,7 @@ public sealed record class GenericDocument : ModelBase
     /// </summary>
     public IReadOnlyList<Value>? Values
     {
-        get { return ModelBase.GetNullableClass<List<Value>>(this.RawData, "values"); }
+        get { return JsonModel.GetNullableClass<List<Value>>(this.RawData, "values"); }
         init
         {
             if (value == null)
@@ -180,7 +180,7 @@ public sealed record class GenericDocument : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "values", value);
+            JsonModel.Set(this._rawData, "values", value);
         }
     }
 
@@ -233,22 +233,22 @@ public sealed record class GenericDocument : ModelBase
     }
 }
 
-class GenericDocumentFromRaw : IFromRaw<GenericDocument>
+class GenericDocumentFromRaw : IFromRawJson<GenericDocument>
 {
     /// <inheritdoc/>
     public GenericDocument FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         GenericDocument.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<Table, TableFromRaw>))]
-public sealed record class Table : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Table, TableFromRaw>))]
+public sealed record class Table : JsonModel
 {
     /// <summary>
     /// List of operations or actions associated with the table.
     /// </summary>
     public IReadOnlyList<JsonElement>? Operation
     {
-        get { return ModelBase.GetNullableClass<List<JsonElement>>(this.RawData, "operation"); }
+        get { return JsonModel.GetNullableClass<List<JsonElement>>(this.RawData, "operation"); }
         init
         {
             if (value == null)
@@ -256,7 +256,7 @@ public sealed record class Table : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "operation", value);
+            JsonModel.Set(this._rawData, "operation", value);
         }
     }
 
@@ -291,22 +291,22 @@ public sealed record class Table : ModelBase
     }
 }
 
-class TableFromRaw : IFromRaw<Table>
+class TableFromRaw : IFromRawJson<Table>
 {
     /// <inheritdoc/>
     public Table FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Table.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<Value, ValueFromRaw>))]
-public sealed record class Value : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Value, ValueFromRaw>))]
+public sealed record class Value : JsonModel
 {
     /// <summary>
     /// Confidence score (between 0 and 1) for the extracted value.
     /// </summary>
     public double? Confidence
     {
-        get { return ModelBase.GetNullableStruct<double>(this.RawData, "confidence"); }
+        get { return JsonModel.GetNullableStruct<double>(this.RawData, "confidence"); }
         init
         {
             if (value == null)
@@ -314,7 +314,7 @@ public sealed record class Value : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "confidence", value);
+            JsonModel.Set(this._rawData, "confidence", value);
         }
     }
 
@@ -323,7 +323,7 @@ public sealed record class Value : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -331,7 +331,7 @@ public sealed record class Value : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -340,7 +340,7 @@ public sealed record class Value : ModelBase
     /// </summary>
     public IReadOnlyList<long>? ValueValue
     {
-        get { return ModelBase.GetNullableClass<List<long>>(this.RawData, "value"); }
+        get { return JsonModel.GetNullableClass<List<long>>(this.RawData, "value"); }
         init
         {
             if (value == null)
@@ -348,7 +348,7 @@ public sealed record class Value : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "value", value);
+            JsonModel.Set(this._rawData, "value", value);
         }
     }
 
@@ -385,7 +385,7 @@ public sealed record class Value : ModelBase
     }
 }
 
-class ValueFromRaw : IFromRaw<Value>
+class ValueFromRaw : IFromRawJson<Value>
 {
     /// <inheritdoc/>
     public Value FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

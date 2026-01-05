@@ -12,8 +12,8 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Contains technical metadata related to processing and communication of an entity.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CompanyTechnicalData, CompanyTechnicalDataFromRaw>))]
-public sealed record class CompanyTechnicalData : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CompanyTechnicalData, CompanyTechnicalDataFromRaw>))]
+public sealed record class CompanyTechnicalData : JsonModel
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -21,7 +21,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? ActiveAmlSuspicions
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "active_aml_suspicions"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "active_aml_suspicions"); }
         init
         {
             if (value == null)
@@ -29,7 +29,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "active_aml_suspicions", value);
+            JsonModel.Set(this._rawData, "active_aml_suspicions", value);
         }
     }
 
@@ -38,7 +38,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public long? APIVersion
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "api_version"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "api_version"); }
         init
         {
             if (value == null)
@@ -46,7 +46,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "api_version", value);
+            JsonModel.Set(this._rawData, "api_version", value);
         }
     }
 
@@ -57,7 +57,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "approved_at");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "approved_at");
         }
         init
         {
@@ -66,7 +66,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "approved_at", value);
+            JsonModel.Set(this._rawData, "approved_at", value);
         }
     }
 
@@ -75,7 +75,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? CallbackURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "callback_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "callback_url"); }
         init
         {
             if (value == null)
@@ -83,7 +83,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "callback_url", value);
+            JsonModel.Set(this._rawData, "callback_url", value);
         }
     }
 
@@ -94,7 +94,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<string>(this.RawData, "callback_url_notification");
+            return JsonModel.GetNullableClass<string>(this.RawData, "callback_url_notification");
         }
         init
         {
@@ -103,7 +103,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "callback_url_notification", value);
+            JsonModel.Set(this._rawData, "callback_url_notification", value);
         }
     }
 
@@ -112,7 +112,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? DisableNotification
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "disable_notification"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "disable_notification"); }
         init
         {
             if (value == null)
@@ -120,7 +120,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "disable_notification", value);
+            JsonModel.Set(this._rawData, "disable_notification", value);
         }
     }
 
@@ -131,12 +131,12 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(
                 this.RawData,
                 "disable_notification_date"
             );
         }
-        init { ModelBase.Set(this._rawData, "disable_notification_date", value); }
+        init { JsonModel.Set(this._rawData, "disable_notification_date", value); }
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? ExportType
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "export_type"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "export_type"); }
         init
         {
             if (value == null)
@@ -152,7 +152,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "export_type", value);
+            JsonModel.Set(this._rawData, "export_type", value);
         }
     }
 
@@ -163,7 +163,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<float>(
+            return JsonModel.GetNullableStruct<float>(
                 this.RawData,
                 "filtering_score_aml_suspicions"
             );
@@ -175,7 +175,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "filtering_score_aml_suspicions", value);
+            JsonModel.Set(this._rawData, "filtering_score_aml_suspicions", value);
         }
     }
 
@@ -186,7 +186,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "finished_at");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "finished_at");
         }
         init
         {
@@ -195,7 +195,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "finished_at", value);
+            JsonModel.Set(this._rawData, "finished_at", value);
         }
     }
 
@@ -204,7 +204,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? IP
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "ip"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "ip"); }
         init
         {
             if (value == null)
@@ -212,7 +212,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "ip", value);
+            JsonModel.Set(this._rawData, "ip", value);
         }
     }
 
@@ -221,7 +221,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? Language
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "language"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "language"); }
         init
         {
             if (value == null)
@@ -229,7 +229,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "language", value);
+            JsonModel.Set(this._rawData, "language", value);
         }
     }
 
@@ -238,7 +238,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? LocationIP
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "location_ip"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "location_ip"); }
         init
         {
             if (value == null)
@@ -246,7 +246,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "location_ip", value);
+            JsonModel.Set(this._rawData, "location_ip", value);
         }
     }
 
@@ -257,12 +257,12 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(
                 this.RawData,
                 "need_review_at"
             );
         }
-        init { ModelBase.Set(this._rawData, "need_review_at", value); }
+        init { JsonModel.Set(this._rawData, "need_review_at", value); }
     }
 
     /// <summary>
@@ -270,7 +270,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? NotificationConfirmation
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "notification_confirmation"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "notification_confirmation"); }
         init
         {
             if (value == null)
@@ -278,7 +278,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "notification_confirmation", value);
+            JsonModel.Set(this._rawData, "notification_confirmation", value);
         }
     }
 
@@ -289,7 +289,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 List<ApiEnum<string, CompanyTechnicalDataPortalStep>>
             >(this.RawData, "portal_steps");
         }
@@ -300,7 +300,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "portal_steps", value);
+            JsonModel.Set(this._rawData, "portal_steps", value);
         }
     }
 
@@ -309,7 +309,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? QrCode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "qr_code"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "qr_code"); }
         init
         {
             if (value == null)
@@ -317,7 +317,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "qr_code", value);
+            JsonModel.Set(this._rawData, "qr_code", value);
         }
     }
 
@@ -326,7 +326,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public bool? RawDataValue
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
         {
             if (value == null)
@@ -334,7 +334,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "raw_data", value);
+            JsonModel.Set(this._rawData, "raw_data", value);
         }
     }
 
@@ -345,9 +345,9 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "rejected_at");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "rejected_at");
         }
-        init { ModelBase.Set(this._rawData, "rejected_at", value); }
+        init { JsonModel.Set(this._rawData, "rejected_at", value); }
     }
 
     /// <summary>
@@ -355,7 +355,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public long? SessionDuration
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "session_duration"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "session_duration"); }
         init
         {
             if (value == null)
@@ -363,7 +363,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "session_duration", value);
+            JsonModel.Set(this._rawData, "session_duration", value);
         }
     }
 
@@ -374,7 +374,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "started_at");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "started_at");
         }
         init
         {
@@ -383,7 +383,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "started_at", value);
+            JsonModel.Set(this._rawData, "started_at", value);
         }
     }
 
@@ -394,7 +394,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "transfer_at");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "transfer_at");
         }
         init
         {
@@ -403,7 +403,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "transfer_at", value);
+            JsonModel.Set(this._rawData, "transfer_at", value);
         }
     }
 
@@ -412,7 +412,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     /// </summary>
     public string? TransferMode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "transfer_mode"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "transfer_mode"); }
         init
         {
             if (value == null)
@@ -420,7 +420,7 @@ public sealed record class CompanyTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "transfer_mode", value);
+            JsonModel.Set(this._rawData, "transfer_mode", value);
         }
     }
 
@@ -482,7 +482,7 @@ public sealed record class CompanyTechnicalData : ModelBase
     }
 }
 
-class CompanyTechnicalDataFromRaw : IFromRaw<CompanyTechnicalData>
+class CompanyTechnicalDataFromRaw : IFromRawJson<CompanyTechnicalData>
 {
     /// <inheritdoc/>
     public CompanyTechnicalData FromRawUnchecked(

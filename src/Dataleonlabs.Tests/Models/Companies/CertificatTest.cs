@@ -51,8 +51,8 @@ public class CertificatTest : TestBase
             Filename = "certificate.pdf",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Certificat>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Certificat>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "cert_123";

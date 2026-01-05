@@ -10,15 +10,15 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Represents a verification check result.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Check, CheckFromRaw>))]
-public sealed record class Check : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Check, CheckFromRaw>))]
+public sealed record class Check : JsonModel
 {
     /// <summary>
     /// Indicates whether the result or data is masked/hidden.
     /// </summary>
     public bool? Masked
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "masked"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "masked"); }
         init
         {
             if (value == null)
@@ -26,7 +26,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "masked", value);
+            JsonModel.Set(this._rawData, "masked", value);
         }
     }
 
@@ -35,7 +35,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public string? Message
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "message"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "message"); }
         init
         {
             if (value == null)
@@ -43,7 +43,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "message", value);
+            JsonModel.Set(this._rawData, "message", value);
         }
     }
 
@@ -52,7 +52,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -60,7 +60,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -69,7 +69,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public bool? ValidateValue
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "validate"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "validate"); }
         init
         {
             if (value == null)
@@ -77,7 +77,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "validate", value);
+            JsonModel.Set(this._rawData, "validate", value);
         }
     }
 
@@ -86,7 +86,7 @@ public sealed record class Check : ModelBase
     /// </summary>
     public long? Weight
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "weight"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "weight"); }
         init
         {
             if (value == null)
@@ -94,7 +94,7 @@ public sealed record class Check : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "weight", value);
+            JsonModel.Set(this._rawData, "weight", value);
         }
     }
 
@@ -133,7 +133,7 @@ public sealed record class Check : ModelBase
     }
 }
 
-class CheckFromRaw : IFromRaw<Check>
+class CheckFromRaw : IFromRawJson<Check>
 {
     /// <inheritdoc/>
     public Check FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

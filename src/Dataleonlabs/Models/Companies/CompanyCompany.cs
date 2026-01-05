@@ -10,8 +10,8 @@ using System = System;
 
 namespace Dataleonlabs.Models.Companies;
 
-[JsonConverter(typeof(ModelConverter<CompanyCompany, CompanyCompanyFromRaw>))]
-public sealed record class CompanyCompany : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CompanyCompany, CompanyCompanyFromRaw>))]
+public sealed record class CompanyCompany : JsonModel
 {
     /// <summary>
     /// List of AML (Anti-Money Laundering) suspicion entries linked to the company,
@@ -21,7 +21,7 @@ public sealed record class CompanyCompany : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<AmlSuspicion>>(this.RawData, "aml_suspicions");
+            return JsonModel.GetNullableClass<List<AmlSuspicion>>(this.RawData, "aml_suspicions");
         }
         init
         {
@@ -30,7 +30,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "aml_suspicions", value);
+            JsonModel.Set(this._rawData, "aml_suspicions", value);
         }
     }
 
@@ -40,7 +40,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public Certificat? Certificat
     {
-        get { return ModelBase.GetNullableClass<Certificat>(this.RawData, "certificat"); }
+        get { return JsonModel.GetNullableClass<Certificat>(this.RawData, "certificat"); }
         init
         {
             if (value == null)
@@ -48,7 +48,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "certificat", value);
+            JsonModel.Set(this._rawData, "certificat", value);
         }
     }
 
@@ -58,7 +58,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public IReadOnlyList<Check>? Checks
     {
-        get { return ModelBase.GetNullableClass<List<Check>>(this.RawData, "checks"); }
+        get { return JsonModel.GetNullableClass<List<Check>>(this.RawData, "checks"); }
         init
         {
             if (value == null)
@@ -66,7 +66,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "checks", value);
+            JsonModel.Set(this._rawData, "checks", value);
         }
     }
 
@@ -76,7 +76,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public CompanyCompanyCompany? Company
     {
-        get { return ModelBase.GetNullableClass<CompanyCompanyCompany>(this.RawData, "company"); }
+        get { return JsonModel.GetNullableClass<CompanyCompanyCompany>(this.RawData, "company"); }
         init
         {
             if (value == null)
@@ -84,7 +84,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "company", value);
+            JsonModel.Set(this._rawData, "company", value);
         }
     }
 
@@ -94,7 +94,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public IReadOnlyList<GenericDocument>? Documents
     {
-        get { return ModelBase.GetNullableClass<List<GenericDocument>>(this.RawData, "documents"); }
+        get { return JsonModel.GetNullableClass<List<GenericDocument>>(this.RawData, "documents"); }
         init
         {
             if (value == null)
@@ -102,7 +102,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "documents", value);
+            JsonModel.Set(this._rawData, "documents", value);
         }
     }
 
@@ -112,7 +112,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public IReadOnlyList<Member>? Members
     {
-        get { return ModelBase.GetNullableClass<List<Member>>(this.RawData, "members"); }
+        get { return JsonModel.GetNullableClass<List<Member>>(this.RawData, "members"); }
         init
         {
             if (value == null)
@@ -120,7 +120,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "members", value);
+            JsonModel.Set(this._rawData, "members", value);
         }
     }
 
@@ -130,7 +130,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public string? PortalURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "portal_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "portal_url"); }
         init
         {
             if (value == null)
@@ -138,7 +138,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "portal_url", value);
+            JsonModel.Set(this._rawData, "portal_url", value);
         }
     }
 
@@ -148,7 +148,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public IReadOnlyList<Property>? Properties
     {
-        get { return ModelBase.GetNullableClass<List<Property>>(this.RawData, "properties"); }
+        get { return JsonModel.GetNullableClass<List<Property>>(this.RawData, "properties"); }
         init
         {
             if (value == null)
@@ -156,7 +156,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "properties", value);
+            JsonModel.Set(this._rawData, "properties", value);
         }
     }
 
@@ -166,7 +166,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public Risk? Risk
     {
-        get { return ModelBase.GetNullableClass<Risk>(this.RawData, "risk"); }
+        get { return JsonModel.GetNullableClass<Risk>(this.RawData, "risk"); }
         init
         {
             if (value == null)
@@ -174,7 +174,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "risk", value);
+            JsonModel.Set(this._rawData, "risk", value);
         }
     }
 
@@ -184,7 +184,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public string? SourceID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "source_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "source_id"); }
         init
         {
             if (value == null)
@@ -192,7 +192,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "source_id", value);
+            JsonModel.Set(this._rawData, "source_id", value);
         }
     }
 
@@ -204,7 +204,7 @@ public sealed record class CompanyCompany : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<CompanyTechnicalData>(this.RawData, "technical_data");
+            return JsonModel.GetNullableClass<CompanyTechnicalData>(this.RawData, "technical_data");
         }
         init
         {
@@ -213,7 +213,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "technical_data", value);
+            JsonModel.Set(this._rawData, "technical_data", value);
         }
     }
 
@@ -223,7 +223,7 @@ public sealed record class CompanyCompany : ModelBase
     /// </summary>
     public string? WebviewURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "webview_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "webview_url"); }
         init
         {
             if (value == null)
@@ -231,7 +231,7 @@ public sealed record class CompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "webview_url", value);
+            JsonModel.Set(this._rawData, "webview_url", value);
         }
     }
 
@@ -292,7 +292,7 @@ public sealed record class CompanyCompany : ModelBase
     }
 }
 
-class CompanyCompanyFromRaw : IFromRaw<CompanyCompany>
+class CompanyCompanyFromRaw : IFromRawJson<CompanyCompany>
 {
     /// <inheritdoc/>
     public CompanyCompany FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -303,15 +303,15 @@ class CompanyCompanyFromRaw : IFromRaw<CompanyCompany>
 /// Main information about the company being registered, including legal name, registration
 /// ID, and address.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CompanyCompanyCompany, CompanyCompanyCompanyFromRaw>))]
-public sealed record class CompanyCompanyCompany : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CompanyCompanyCompany, CompanyCompanyCompanyFromRaw>))]
+public sealed record class CompanyCompanyCompany : JsonModel
 {
     /// <summary>
     /// Full registered address of the company.
     /// </summary>
     public string? Address
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "address"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "address"); }
         init
         {
             if (value == null)
@@ -319,28 +319,16 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "address", value);
+            JsonModel.Set(this._rawData, "address", value);
         }
     }
 
     /// <summary>
     /// Closure date of the company, if applicable.
     /// </summary>
-    public
-#if NET
-    System::DateOnly
-#else
-    System::DateTimeOffset
-#endif
-    ? ClosureDate
+    public string? ClosureDate
     {
-        get { return ModelBase.GetNullableStruct<
-#if NET
-            System::DateOnly
-#else
-            System::DateTimeOffset
-#endif
-            >(this.RawData, "closure_date"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "closure_date"); }
         init
         {
             if (value == null)
@@ -348,7 +336,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "closure_date", value);
+            JsonModel.Set(this._rawData, "closure_date", value);
         }
     }
 
@@ -357,7 +345,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? CommercialName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "commercial_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "commercial_name"); }
         init
         {
             if (value == null)
@@ -365,7 +353,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "commercial_name", value);
+            JsonModel.Set(this._rawData, "commercial_name", value);
         }
     }
 
@@ -374,7 +362,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public Contact? Contact
     {
-        get { return ModelBase.GetNullableClass<Contact>(this.RawData, "contact"); }
+        get { return JsonModel.GetNullableClass<Contact>(this.RawData, "contact"); }
         init
         {
             if (value == null)
@@ -382,7 +370,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "contact", value);
+            JsonModel.Set(this._rawData, "contact", value);
         }
     }
 
@@ -391,7 +379,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? Country
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "country"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "country"); }
         init
         {
             if (value == null)
@@ -399,7 +387,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "country", value);
+            JsonModel.Set(this._rawData, "country", value);
         }
     }
 
@@ -408,7 +396,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? Email
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "email"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "email"); }
         init
         {
             if (value == null)
@@ -416,7 +404,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "email", value);
+            JsonModel.Set(this._rawData, "email", value);
         }
     }
 
@@ -425,7 +413,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public long? Employees
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "employees"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "employees"); }
         init
         {
             if (value == null)
@@ -433,7 +421,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "employees", value);
+            JsonModel.Set(this._rawData, "employees", value);
         }
     }
 
@@ -444,7 +432,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<string>(
+            return JsonModel.GetNullableClass<string>(
                 this.RawData,
                 "employer_identification_number"
             );
@@ -456,7 +444,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "employer_identification_number", value);
+            JsonModel.Set(this._rawData, "employer_identification_number", value);
         }
     }
 
@@ -465,7 +453,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public bool? InsolvencyExists
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "insolvency_exists"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "insolvency_exists"); }
         init
         {
             if (value == null)
@@ -473,7 +461,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "insolvency_exists", value);
+            JsonModel.Set(this._rawData, "insolvency_exists", value);
         }
     }
 
@@ -482,7 +470,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public bool? InsolvencyOngoing
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "insolvency_ongoing"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "insolvency_ongoing"); }
         init
         {
             if (value == null)
@@ -490,7 +478,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "insolvency_ongoing", value);
+            JsonModel.Set(this._rawData, "insolvency_ongoing", value);
         }
     }
 
@@ -499,7 +487,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? LegalForm
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "legal_form"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "legal_form"); }
         init
         {
             if (value == null)
@@ -507,7 +495,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "legal_form", value);
+            JsonModel.Set(this._rawData, "legal_form", value);
         }
     }
 
@@ -516,7 +504,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -524,7 +512,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -533,7 +521,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
         init
         {
             if (value == null)
@@ -541,31 +529,16 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "phone_number", value);
+            JsonModel.Set(this._rawData, "phone_number", value);
         }
     }
 
     /// <summary>
     /// Date when the company was officially registered.
     /// </summary>
-    public
-#if NET
-    System::DateOnly
-#else
-    System::DateTimeOffset
-#endif
-    ? RegistrationDate
+    public string? RegistrationDate
     {
-        get
-        {
-            return ModelBase.GetNullableStruct<
-#if NET
-            System::DateOnly
-#else
-            System::DateTimeOffset
-#endif
-            >(this.RawData, "registration_date");
-        }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "registration_date"); }
         init
         {
             if (value == null)
@@ -573,7 +546,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "registration_date", value);
+            JsonModel.Set(this._rawData, "registration_date", value);
         }
     }
 
@@ -582,7 +555,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? RegistrationID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "registration_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "registration_id"); }
         init
         {
             if (value == null)
@@ -590,7 +563,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "registration_id", value);
+            JsonModel.Set(this._rawData, "registration_id", value);
         }
     }
 
@@ -599,7 +572,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? ShareCapital
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "share_capital"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "share_capital"); }
         init
         {
             if (value == null)
@@ -607,7 +580,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "share_capital", value);
+            JsonModel.Set(this._rawData, "share_capital", value);
         }
     }
 
@@ -616,7 +589,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? Status
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "status"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "status"); }
         init
         {
             if (value == null)
@@ -624,7 +597,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "status", value);
+            JsonModel.Set(this._rawData, "status", value);
         }
     }
 
@@ -635,7 +608,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<string>(this.RawData, "tax_identification_number");
+            return JsonModel.GetNullableClass<string>(this.RawData, "tax_identification_number");
         }
         init
         {
@@ -644,7 +617,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "tax_identification_number", value);
+            JsonModel.Set(this._rawData, "tax_identification_number", value);
         }
     }
 
@@ -653,7 +626,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? Type
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "type"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "type"); }
         init
         {
             if (value == null)
@@ -661,7 +634,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "type", value);
+            JsonModel.Set(this._rawData, "type", value);
         }
     }
 
@@ -670,7 +643,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     /// </summary>
     public string? WebsiteURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "website_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "website_url"); }
         init
         {
             if (value == null)
@@ -678,7 +651,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "website_url", value);
+            JsonModel.Set(this._rawData, "website_url", value);
         }
     }
 
@@ -734,7 +707,7 @@ public sealed record class CompanyCompanyCompany : ModelBase
     }
 }
 
-class CompanyCompanyCompanyFromRaw : IFromRaw<CompanyCompanyCompany>
+class CompanyCompanyCompanyFromRaw : IFromRawJson<CompanyCompanyCompany>
 {
     /// <inheritdoc/>
     public CompanyCompanyCompany FromRawUnchecked(
@@ -745,15 +718,15 @@ class CompanyCompanyCompanyFromRaw : IFromRaw<CompanyCompanyCompany>
 /// <summary>
 /// Contact information for the company, including email, phone number, and address.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Contact, ContactFromRaw>))]
-public sealed record class Contact : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Contact, ContactFromRaw>))]
+public sealed record class Contact : JsonModel
 {
     /// <summary>
     /// Department of the contact person.
     /// </summary>
     public string? Department
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "department"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "department"); }
         init
         {
             if (value == null)
@@ -761,7 +734,7 @@ public sealed record class Contact : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "department", value);
+            JsonModel.Set(this._rawData, "department", value);
         }
     }
 
@@ -770,7 +743,7 @@ public sealed record class Contact : ModelBase
     /// </summary>
     public string? Email
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "email"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "email"); }
         init
         {
             if (value == null)
@@ -778,7 +751,7 @@ public sealed record class Contact : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "email", value);
+            JsonModel.Set(this._rawData, "email", value);
         }
     }
 
@@ -787,7 +760,7 @@ public sealed record class Contact : ModelBase
     /// </summary>
     public string? FirstName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "first_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "first_name"); }
         init
         {
             if (value == null)
@@ -795,7 +768,7 @@ public sealed record class Contact : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "first_name", value);
+            JsonModel.Set(this._rawData, "first_name", value);
         }
     }
 
@@ -804,7 +777,7 @@ public sealed record class Contact : ModelBase
     /// </summary>
     public string? LastName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "last_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "last_name"); }
         init
         {
             if (value == null)
@@ -812,7 +785,7 @@ public sealed record class Contact : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "last_name", value);
+            JsonModel.Set(this._rawData, "last_name", value);
         }
     }
 
@@ -821,7 +794,7 @@ public sealed record class Contact : ModelBase
     /// </summary>
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
         init
         {
             if (value == null)
@@ -829,7 +802,7 @@ public sealed record class Contact : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "phone_number", value);
+            JsonModel.Set(this._rawData, "phone_number", value);
         }
     }
 
@@ -868,7 +841,7 @@ public sealed record class Contact : ModelBase
     }
 }
 
-class ContactFromRaw : IFromRaw<Contact>
+class ContactFromRaw : IFromRawJson<Contact>
 {
     /// <inheritdoc/>
     public Contact FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -878,12 +851,12 @@ class ContactFromRaw : IFromRaw<Contact>
 /// <summary>
 /// Represents a member or actor of a company, including personal and ownership information.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Member, MemberFromRaw>))]
-public sealed record class Member : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Member, MemberFromRaw>))]
+public sealed record class Member : JsonModel
 {
     public string? ID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "id"); }
         init
         {
             if (value == null)
@@ -891,7 +864,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "id", value);
+            JsonModel.Set(this._rawData, "id", value);
         }
     }
 
@@ -900,7 +873,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Address
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "address"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "address"); }
         init
         {
             if (value == null)
@@ -908,7 +881,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "address", value);
+            JsonModel.Set(this._rawData, "address", value);
         }
     }
 
@@ -919,7 +892,7 @@ public sealed record class Member : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "birthday");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "birthday");
         }
         init
         {
@@ -928,7 +901,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "birthday", value);
+            JsonModel.Set(this._rawData, "birthday", value);
         }
     }
 
@@ -937,7 +910,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Birthplace
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "birthplace"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "birthplace"); }
         init
         {
             if (value == null)
@@ -945,7 +918,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "birthplace", value);
+            JsonModel.Set(this._rawData, "birthplace", value);
         }
     }
 
@@ -954,7 +927,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Country
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "country"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "country"); }
         init
         {
             if (value == null)
@@ -962,7 +935,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "country", value);
+            JsonModel.Set(this._rawData, "country", value);
         }
     }
 
@@ -972,7 +945,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public IReadOnlyList<GenericDocument>? Documents
     {
-        get { return ModelBase.GetNullableClass<List<GenericDocument>>(this.RawData, "documents"); }
+        get { return JsonModel.GetNullableClass<List<GenericDocument>>(this.RawData, "documents"); }
         init
         {
             if (value == null)
@@ -980,7 +953,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "documents", value);
+            JsonModel.Set(this._rawData, "documents", value);
         }
     }
 
@@ -990,7 +963,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Email
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "email"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "email"); }
         init
         {
             if (value == null)
@@ -998,7 +971,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "email", value);
+            JsonModel.Set(this._rawData, "email", value);
         }
     }
 
@@ -1007,7 +980,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? FirstName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "first_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "first_name"); }
         init
         {
             if (value == null)
@@ -1015,7 +988,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "first_name", value);
+            JsonModel.Set(this._rawData, "first_name", value);
         }
     }
 
@@ -1025,7 +998,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public bool? IsBeneficialOwner
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "is_beneficial_owner"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "is_beneficial_owner"); }
         init
         {
             if (value == null)
@@ -1033,7 +1006,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "is_beneficial_owner", value);
+            JsonModel.Set(this._rawData, "is_beneficial_owner", value);
         }
     }
 
@@ -1043,7 +1016,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public bool? IsDelegator
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "is_delegator"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "is_delegator"); }
         init
         {
             if (value == null)
@@ -1051,7 +1024,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "is_delegator", value);
+            JsonModel.Set(this._rawData, "is_delegator", value);
         }
     }
 
@@ -1060,7 +1033,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? LastName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "last_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "last_name"); }
         init
         {
             if (value == null)
@@ -1068,7 +1041,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "last_name", value);
+            JsonModel.Set(this._rawData, "last_name", value);
         }
     }
 
@@ -1078,7 +1051,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public bool? LivenessVerification
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "liveness_verification"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "liveness_verification"); }
         init
         {
             if (value == null)
@@ -1086,7 +1059,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "liveness_verification", value);
+            JsonModel.Set(this._rawData, "liveness_verification", value);
         }
     }
 
@@ -1095,7 +1068,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
         init
         {
             if (value == null)
@@ -1103,7 +1076,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "name", value);
+            JsonModel.Set(this._rawData, "name", value);
         }
     }
 
@@ -1113,7 +1086,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public long? OwnershipPercentage
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "ownership_percentage"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "ownership_percentage"); }
         init
         {
             if (value == null)
@@ -1121,7 +1094,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "ownership_percentage", value);
+            JsonModel.Set(this._rawData, "ownership_percentage", value);
         }
     }
 
@@ -1130,7 +1103,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
         init
         {
             if (value == null)
@@ -1138,7 +1111,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "phone_number", value);
+            JsonModel.Set(this._rawData, "phone_number", value);
         }
     }
 
@@ -1147,7 +1120,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? PostalCode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "postal_code"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "postal_code"); }
         init
         {
             if (value == null)
@@ -1155,7 +1128,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "postal_code", value);
+            JsonModel.Set(this._rawData, "postal_code", value);
         }
     }
 
@@ -1165,7 +1138,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? RegistrationID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "registration_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "registration_id"); }
         init
         {
             if (value == null)
@@ -1173,7 +1146,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "registration_id", value);
+            JsonModel.Set(this._rawData, "registration_id", value);
         }
     }
 
@@ -1183,7 +1156,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Relation
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "relation"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "relation"); }
         init
         {
             if (value == null)
@@ -1191,7 +1164,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "relation", value);
+            JsonModel.Set(this._rawData, "relation", value);
         }
     }
 
@@ -1201,7 +1174,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Roles
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "roles"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "roles"); }
         init
         {
             if (value == null)
@@ -1209,7 +1182,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "roles", value);
+            JsonModel.Set(this._rawData, "roles", value);
         }
     }
 
@@ -1218,7 +1191,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public ApiEnum<string, Source>? Source
     {
-        get { return ModelBase.GetNullableClass<ApiEnum<string, Source>>(this.RawData, "source"); }
+        get { return JsonModel.GetNullableClass<ApiEnum<string, Source>>(this.RawData, "source"); }
         init
         {
             if (value == null)
@@ -1226,7 +1199,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "source", value);
+            JsonModel.Set(this._rawData, "source", value);
         }
     }
 
@@ -1236,7 +1209,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? State
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "state"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
         init
         {
             if (value == null)
@@ -1244,7 +1217,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "state", value);
+            JsonModel.Set(this._rawData, "state", value);
         }
     }
 
@@ -1255,7 +1228,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? Status
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "status"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "status"); }
         init
         {
             if (value == null)
@@ -1263,7 +1236,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "status", value);
+            JsonModel.Set(this._rawData, "status", value);
         }
     }
 
@@ -1274,7 +1247,7 @@ public sealed record class Member : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, MemberType>>(this.RawData, "type");
+            return JsonModel.GetNullableClass<ApiEnum<string, MemberType>>(this.RawData, "type");
         }
         init
         {
@@ -1283,7 +1256,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "type", value);
+            JsonModel.Set(this._rawData, "type", value);
         }
     }
 
@@ -1293,7 +1266,7 @@ public sealed record class Member : ModelBase
     /// </summary>
     public string? WorkspaceID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "workspace_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "workspace_id"); }
         init
         {
             if (value == null)
@@ -1301,7 +1274,7 @@ public sealed record class Member : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "workspace_id", value);
+            JsonModel.Set(this._rawData, "workspace_id", value);
         }
     }
 
@@ -1362,7 +1335,7 @@ public sealed record class Member : ModelBase
     }
 }
 
-class MemberFromRaw : IFromRaw<Member>
+class MemberFromRaw : IFromRawJson<Member>
 {
     /// <inheritdoc/>
     public Member FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

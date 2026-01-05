@@ -14,12 +14,16 @@ namespace Dataleonlabs;
 /// <inheritdoc/>
 public sealed class DataleonlabsClient : IDataleonlabsClient
 {
+#if NET
+    static readonly Random Random = Random.Shared;
+#else
     static readonly ThreadLocal<Random> _threadLocalRandom = new(() => new Random());
 
     static Random Random
     {
         get { return _threadLocalRandom.Value!; }
     }
+#endif
 
     readonly ClientOptions _options;
 
@@ -31,7 +35,7 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
     }
 
     /// <inheritdoc/>
-    public Uri BaseUrl
+    public string BaseUrl
     {
         get { return this._options.BaseUrl; }
         init { this._options.BaseUrl = value; }
@@ -270,6 +274,8 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
     {
         return e is IOException || e is DataleonlabsIOException;
     }
+
+    public void Dispose() => this.HttpClient.Dispose();
 
     public DataleonlabsClient()
     {

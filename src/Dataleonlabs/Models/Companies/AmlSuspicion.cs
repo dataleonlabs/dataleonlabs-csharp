@@ -13,15 +13,15 @@ namespace Dataleonlabs.Models.Companies;
 /// Represents a record of suspicion raised during Anti-Money Laundering (AML) screening.
 /// Includes metadata such as risk score, origin, and linked watchlist types.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<AmlSuspicion, AmlSuspicionFromRaw>))]
-public sealed record class AmlSuspicion : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AmlSuspicion, AmlSuspicionFromRaw>))]
+public sealed record class AmlSuspicion : JsonModel
 {
     /// <summary>
     /// Human-readable description or title for the suspicious finding.
     /// </summary>
     public string? Caption
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "caption"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "caption"); }
         init
         {
             if (value == null)
@@ -29,7 +29,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "caption", value);
+            JsonModel.Set(this._rawData, "caption", value);
         }
     }
 
@@ -38,7 +38,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Country
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "country"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "country"); }
         init
         {
             if (value == null)
@@ -46,7 +46,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "country", value);
+            JsonModel.Set(this._rawData, "country", value);
         }
     }
 
@@ -55,7 +55,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Gender
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "gender"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "gender"); }
         init
         {
             if (value == null)
@@ -63,7 +63,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "gender", value);
+            JsonModel.Set(this._rawData, "gender", value);
         }
     }
 
@@ -73,7 +73,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Relation
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "relation"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "relation"); }
         init
         {
             if (value == null)
@@ -81,7 +81,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "relation", value);
+            JsonModel.Set(this._rawData, "relation", value);
         }
     }
 
@@ -90,7 +90,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Schema
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "schema"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "schema"); }
         init
         {
             if (value == null)
@@ -98,7 +98,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "schema", value);
+            JsonModel.Set(this._rawData, "schema", value);
         }
     }
 
@@ -107,7 +107,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public float? Score
     {
-        get { return ModelBase.GetNullableStruct<float>(this.RawData, "score"); }
+        get { return JsonModel.GetNullableStruct<float>(this.RawData, "score"); }
         init
         {
             if (value == null)
@@ -115,7 +115,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "score", value);
+            JsonModel.Set(this._rawData, "score", value);
         }
     }
 
@@ -124,7 +124,7 @@ public sealed record class AmlSuspicion : ModelBase
     /// </summary>
     public string? Source
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "source"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "source"); }
         init
         {
             if (value == null)
@@ -132,7 +132,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "source", value);
+            JsonModel.Set(this._rawData, "source", value);
         }
     }
 
@@ -144,7 +144,7 @@ public sealed record class AmlSuspicion : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, AmlSuspicionStatus>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, AmlSuspicionStatus>>(
                 this.RawData,
                 "status"
             );
@@ -156,7 +156,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "status", value);
+            JsonModel.Set(this._rawData, "status", value);
         }
     }
 
@@ -168,7 +168,7 @@ public sealed record class AmlSuspicion : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, global::Dataleonlabs.Models.Companies.Type>
             >(this.RawData, "type");
         }
@@ -179,7 +179,7 @@ public sealed record class AmlSuspicion : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "type", value);
+            JsonModel.Set(this._rawData, "type", value);
         }
     }
 
@@ -222,7 +222,7 @@ public sealed record class AmlSuspicion : ModelBase
     }
 }
 
-class AmlSuspicionFromRaw : IFromRaw<AmlSuspicion>
+class AmlSuspicionFromRaw : IFromRawJson<AmlSuspicion>
 {
     /// <inheritdoc/>
     public AmlSuspicion FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

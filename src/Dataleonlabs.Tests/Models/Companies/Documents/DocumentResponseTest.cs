@@ -45,6 +45,7 @@ public class DocumentResponseTest : TestBase
         ];
         long expectedTotalDocument = 3;
 
+        Assert.NotNull(model.Documents);
         Assert.Equal(expectedDocuments.Count, model.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
@@ -105,8 +106,8 @@ public class DocumentResponseTest : TestBase
             TotalDocument = 3,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DocumentResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DocumentResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Document> expectedDocuments =
@@ -125,6 +126,7 @@ public class DocumentResponseTest : TestBase
         ];
         long expectedTotalDocument = 3;
 
+        Assert.NotNull(deserialized.Documents);
         Assert.Equal(expectedDocuments.Count, deserialized.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
@@ -281,8 +283,8 @@ public class DocumentTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Document>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Document>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "123456";

@@ -1,9 +1,168 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
+
+public class CompanyUpdateParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new CompanyUpdateParams
+        {
+            CompanyID = "company_id",
+            Company = new()
+            {
+                Name = "ACME Corp",
+                Address = "123 rue Exemple, Paris",
+                CommercialName = "ACME",
+                Country = "FR",
+                Email = "info@acme.fr",
+                EmployerIdentificationNumber = "EIN123456",
+                LegalForm = "SARL",
+                PhoneNumber = "+33 1 23 45 67 89",
+                RegistrationDate = "2010-05-15",
+                RegistrationID = "RCS123456",
+                ShareCapital = "100000",
+                Status = "active",
+                TaxIdentificationNumber = "FR123456789",
+                Type = "main",
+                WebsiteURL = "https://acme.fr",
+            },
+            WorkspaceID = "wk_123",
+            SourceID = "ID54410069066",
+            TechnicalData = new()
+            {
+                ActiveAmlSuspicions = false,
+                CallbackURL = "https://example.com/callback",
+                CallbackURLNotification = "https://example.com/notify",
+                FilteringScoreAmlSuspicions = 0.75f,
+                Language = "fra",
+                PortalSteps =
+                [
+                    CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                    CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+                ],
+                RawDataValue = true,
+            },
+        };
+
+        string expectedCompanyID = "company_id";
+        CompanyUpdateParamsCompany expectedCompany = new()
+        {
+            Name = "ACME Corp",
+            Address = "123 rue Exemple, Paris",
+            CommercialName = "ACME",
+            Country = "FR",
+            Email = "info@acme.fr",
+            EmployerIdentificationNumber = "EIN123456",
+            LegalForm = "SARL",
+            PhoneNumber = "+33 1 23 45 67 89",
+            RegistrationDate = "2010-05-15",
+            RegistrationID = "RCS123456",
+            ShareCapital = "100000",
+            Status = "active",
+            TaxIdentificationNumber = "FR123456789",
+            Type = "main",
+            WebsiteURL = "https://acme.fr",
+        };
+        string expectedWorkspaceID = "wk_123";
+        string expectedSourceID = "ID54410069066";
+        CompanyUpdateParamsTechnicalData expectedTechnicalData = new()
+        {
+            ActiveAmlSuspicions = false,
+            CallbackURL = "https://example.com/callback",
+            CallbackURLNotification = "https://example.com/notify",
+            FilteringScoreAmlSuspicions = 0.75f,
+            Language = "fra",
+            PortalSteps =
+            [
+                CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning,
+            ],
+            RawDataValue = true,
+        };
+
+        Assert.Equal(expectedCompanyID, parameters.CompanyID);
+        Assert.Equal(expectedCompany, parameters.Company);
+        Assert.Equal(expectedWorkspaceID, parameters.WorkspaceID);
+        Assert.Equal(expectedSourceID, parameters.SourceID);
+        Assert.Equal(expectedTechnicalData, parameters.TechnicalData);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new CompanyUpdateParams
+        {
+            CompanyID = "company_id",
+            Company = new()
+            {
+                Name = "ACME Corp",
+                Address = "123 rue Exemple, Paris",
+                CommercialName = "ACME",
+                Country = "FR",
+                Email = "info@acme.fr",
+                EmployerIdentificationNumber = "EIN123456",
+                LegalForm = "SARL",
+                PhoneNumber = "+33 1 23 45 67 89",
+                RegistrationDate = "2010-05-15",
+                RegistrationID = "RCS123456",
+                ShareCapital = "100000",
+                Status = "active",
+                TaxIdentificationNumber = "FR123456789",
+                Type = "main",
+                WebsiteURL = "https://acme.fr",
+            },
+            WorkspaceID = "wk_123",
+        };
+
+        Assert.Null(parameters.SourceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("source_id"));
+        Assert.Null(parameters.TechnicalData);
+        Assert.False(parameters.RawBodyData.ContainsKey("technical_data"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new CompanyUpdateParams
+        {
+            CompanyID = "company_id",
+            Company = new()
+            {
+                Name = "ACME Corp",
+                Address = "123 rue Exemple, Paris",
+                CommercialName = "ACME",
+                Country = "FR",
+                Email = "info@acme.fr",
+                EmployerIdentificationNumber = "EIN123456",
+                LegalForm = "SARL",
+                PhoneNumber = "+33 1 23 45 67 89",
+                RegistrationDate = "2010-05-15",
+                RegistrationID = "RCS123456",
+                ShareCapital = "100000",
+                Status = "active",
+                TaxIdentificationNumber = "FR123456789",
+                Type = "main",
+                WebsiteURL = "https://acme.fr",
+            },
+            WorkspaceID = "wk_123",
+
+            // Null should be interpreted as omitted for these properties
+            SourceID = null,
+            TechnicalData = null,
+        };
+
+        Assert.Null(parameters.SourceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("source_id"));
+        Assert.Null(parameters.TechnicalData);
+        Assert.False(parameters.RawBodyData.ContainsKey("technical_data"));
+    }
+}
 
 public class CompanyUpdateParamsCompanyTest : TestBase
 {
@@ -112,8 +271,8 @@ public class CompanyUpdateParamsCompanyTest : TestBase
             WebsiteURL = "https://acme.fr",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(element);
         Assert.NotNull(deserialized);
 
         string expectedName = "ACME Corp";
@@ -312,7 +471,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -325,7 +484,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
         bool expectedActiveAmlSuspicions = false;
         string expectedCallbackURL = "https://example.com/callback";
         string expectedCallbackURLNotification = "https://example.com/notify";
-        float expectedFilteringScoreAmlSuspicions = 0.75;
+        float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -339,6 +498,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
         Assert.Equal(expectedCallbackURLNotification, model.CallbackURLNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, model.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, model.Language);
+        Assert.NotNull(model.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, model.PortalSteps.Count);
         for (int i = 0; i < expectedPortalSteps.Count; i++)
         {
@@ -355,7 +515,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -379,7 +539,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -389,14 +549,14 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             RawDataValue = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(element);
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
         string expectedCallbackURL = "https://example.com/callback";
         string expectedCallbackURLNotification = "https://example.com/notify";
-        float expectedFilteringScoreAmlSuspicions = 0.75;
+        float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -410,6 +570,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
         Assert.Equal(expectedCallbackURLNotification, deserialized.CallbackURLNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, deserialized.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, deserialized.Language);
+        Assert.NotNull(deserialized.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, deserialized.PortalSteps.Count);
         for (int i = 0; i < expectedPortalSteps.Count; i++)
         {
@@ -426,7 +587,7 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             CallbackURL = "https://example.com/callback",
             CallbackURLNotification = "https://example.com/notify",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
             [
@@ -515,5 +676,71 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class CompanyUpdateParamsTechnicalDataPortalStepTest : TestBase
+{
+    [Theory]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.ProofOfAddress)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.Selfie)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.FaceMatch)]
+    public void Validation_Works(CompanyUpdateParamsTechnicalDataPortalStep rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.IdentityVerification)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.DocumentSigning)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.ProofOfAddress)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.Selfie)]
+    [InlineData(CompanyUpdateParamsTechnicalDataPortalStep.FaceMatch)]
+    public void SerializationRoundtrip_Works(CompanyUpdateParamsTechnicalDataPortalStep rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

@@ -18,21 +18,9 @@ public sealed record class IndividualListParams : ParamsBase
     /// <summary>
     /// Filter individuals created before this date (format YYYY-MM-DD)
     /// </summary>
-    public
-#if NET
-    DateOnly
-#else
-    DateTimeOffset
-#endif
-    ? EndDate
+    public string? EndDate
     {
-        get { return ModelBase.GetNullableStruct<
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            >(this.RawQueryData, "end_date"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "end_date"); }
         init
         {
             if (value == null)
@@ -40,7 +28,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "end_date", value);
+            JsonModel.Set(this._rawQueryData, "end_date", value);
         }
     }
 
@@ -49,7 +37,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public long? Limit
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawQueryData, "limit"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawQueryData, "limit"); }
         init
         {
             if (value == null)
@@ -57,7 +45,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "limit", value);
+            JsonModel.Set(this._rawQueryData, "limit", value);
         }
     }
 
@@ -66,7 +54,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public long? Offset
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawQueryData, "offset"); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawQueryData, "offset"); }
         init
         {
             if (value == null)
@@ -74,7 +62,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "offset", value);
+            JsonModel.Set(this._rawQueryData, "offset", value);
         }
     }
 
@@ -83,7 +71,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? SourceID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "source_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "source_id"); }
         init
         {
             if (value == null)
@@ -91,28 +79,16 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "source_id", value);
+            JsonModel.Set(this._rawQueryData, "source_id", value);
         }
     }
 
     /// <summary>
     /// Filter individuals created after this date (format YYYY-MM-DD)
     /// </summary>
-    public
-#if NET
-    DateOnly
-#else
-    DateTimeOffset
-#endif
-    ? StartDate
+    public string? StartDate
     {
-        get { return ModelBase.GetNullableStruct<
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            >(this.RawQueryData, "start_date"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "start_date"); }
         init
         {
             if (value == null)
@@ -120,7 +96,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "start_date", value);
+            JsonModel.Set(this._rawQueryData, "start_date", value);
         }
     }
 
@@ -131,7 +107,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, State>>(this.RawQueryData, "state");
+            return JsonModel.GetNullableClass<ApiEnum<string, State>>(this.RawQueryData, "state");
         }
         init
         {
@@ -140,7 +116,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "state", value);
+            JsonModel.Set(this._rawQueryData, "state", value);
         }
     }
 
@@ -151,7 +127,7 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
+            return JsonModel.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
         }
         init
         {
@@ -160,7 +136,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "status", value);
+            JsonModel.Set(this._rawQueryData, "status", value);
         }
     }
 
@@ -169,7 +145,7 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? WorkspaceID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "workspace_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "workspace_id"); }
         init
         {
             if (value == null)
@@ -177,7 +153,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "workspace_id", value);
+            JsonModel.Set(this._rawQueryData, "workspace_id", value);
         }
     }
 
@@ -207,7 +183,7 @@ public sealed record class IndividualListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static IndividualListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

@@ -29,7 +29,8 @@ public class CompanyServiceTest : TestBase
                     WebsiteURL = "https://acme.fr",
                 },
                 WorkspaceID = "wk_123",
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         company.Validate();
     }
@@ -37,7 +38,11 @@ public class CompanyServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Retrieve_Works()
     {
-        var company = await this.client.Companies.Retrieve("company_id");
+        var company = await this.client.Companies.Retrieve(
+            "company_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         company.Validate();
     }
 
@@ -67,7 +72,8 @@ public class CompanyServiceTest : TestBase
                     WebsiteURL = "https://acme.fr",
                 },
                 WorkspaceID = "wk_123",
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         company.Validate();
     }
@@ -75,7 +81,10 @@ public class CompanyServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task List_Works()
     {
-        var companies = await this.client.Companies.List();
+        var companies = await this.client.Companies.List(
+            new(),
+            TestContext.Current.CancellationToken
+        );
         foreach (var item in companies)
         {
             item.Validate();
@@ -85,6 +94,10 @@ public class CompanyServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Delete_Works()
     {
-        await this.client.Companies.Delete("company_id");
+        await this.client.Companies.Delete(
+            "company_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 }

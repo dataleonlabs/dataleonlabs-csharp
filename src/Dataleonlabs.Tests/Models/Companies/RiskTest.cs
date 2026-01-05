@@ -12,12 +12,12 @@ public class RiskTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
 
         string expectedCode = "20030";
         string expectedReason = "Document mismatch";
-        float expectedScore = 0.92;
+        float expectedScore = 0.92f;
 
         Assert.Equal(expectedCode, model.Code);
         Assert.Equal(expectedReason, model.Reason);
@@ -31,7 +31,7 @@ public class RiskTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -47,16 +47,16 @@ public class RiskTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Risk>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Risk>(element);
         Assert.NotNull(deserialized);
 
         string expectedCode = "20030";
         string expectedReason = "Document mismatch";
-        float expectedScore = 0.92;
+        float expectedScore = 0.92f;
 
         Assert.Equal(expectedCode, deserialized.Code);
         Assert.Equal(expectedReason, deserialized.Reason);
@@ -70,7 +70,7 @@ public class RiskTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
 
         model.Validate();

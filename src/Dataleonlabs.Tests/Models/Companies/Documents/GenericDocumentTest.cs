@@ -76,6 +76,7 @@ public class GenericDocumentTest : TestBase
         ];
 
         Assert.Equal(expectedID, model.ID);
+        Assert.NotNull(model.Checks);
         Assert.Equal(expectedChecks.Count, model.Checks.Count);
         for (int i = 0; i < expectedChecks.Count; i++)
         {
@@ -87,11 +88,13 @@ public class GenericDocumentTest : TestBase
         Assert.Equal(expectedSignedURL, model.SignedURL);
         Assert.Equal(expectedState, model.State);
         Assert.Equal(expectedStatus, model.Status);
+        Assert.NotNull(model.Tables);
         Assert.Equal(expectedTables.Count, model.Tables.Count);
         for (int i = 0; i < expectedTables.Count; i++)
         {
             Assert.Equal(expectedTables[i], model.Tables[i]);
         }
+        Assert.NotNull(model.Values);
         Assert.Equal(expectedValues.Count, model.Values.Count);
         for (int i = 0; i < expectedValues.Count; i++)
         {
@@ -175,8 +178,8 @@ public class GenericDocumentTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<GenericDocument>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<GenericDocument>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "doc_123";
@@ -212,6 +215,7 @@ public class GenericDocumentTest : TestBase
         ];
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.NotNull(deserialized.Checks);
         Assert.Equal(expectedChecks.Count, deserialized.Checks.Count);
         for (int i = 0; i < expectedChecks.Count; i++)
         {
@@ -223,11 +227,13 @@ public class GenericDocumentTest : TestBase
         Assert.Equal(expectedSignedURL, deserialized.SignedURL);
         Assert.Equal(expectedState, deserialized.State);
         Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.NotNull(deserialized.Tables);
         Assert.Equal(expectedTables.Count, deserialized.Tables.Count);
         for (int i = 0; i < expectedTables.Count; i++)
         {
             Assert.Equal(expectedTables[i], deserialized.Tables[i]);
         }
+        Assert.NotNull(deserialized.Values);
         Assert.Equal(expectedValues.Count, deserialized.Values.Count);
         for (int i = 0; i < expectedValues.Count; i++)
         {
@@ -379,6 +385,7 @@ public class TableTest : TestBase
 
         List<JsonElement> expectedOperation = [JsonSerializer.Deserialize<JsonElement>("{}")];
 
+        Assert.NotNull(model.Operation);
         Assert.Equal(expectedOperation.Count, model.Operation.Count);
         for (int i = 0; i < expectedOperation.Count; i++)
         {
@@ -402,12 +409,13 @@ public class TableTest : TestBase
     {
         var model = new Table { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Table>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Table>(element);
         Assert.NotNull(deserialized);
 
         List<JsonElement> expectedOperation = [JsonSerializer.Deserialize<JsonElement>("{}")];
 
+        Assert.NotNull(deserialized.Operation);
         Assert.Equal(expectedOperation.Count, deserialized.Operation.Count);
         for (int i = 0; i < expectedOperation.Count; i++)
         {
@@ -484,6 +492,7 @@ public class ValueTest : TestBase
 
         Assert.Equal(expectedConfidence, model.Confidence);
         Assert.Equal(expectedName, model.Name);
+        Assert.NotNull(model.ValueValue);
         Assert.Equal(expectedValueValue.Count, model.ValueValue.Count);
         for (int i = 0; i < expectedValueValue.Count; i++)
         {
@@ -517,8 +526,8 @@ public class ValueTest : TestBase
             ValueValue = [100, 200],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Value>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Value>(element);
         Assert.NotNull(deserialized);
 
         double expectedConfidence = 0.95;
@@ -527,6 +536,7 @@ public class ValueTest : TestBase
 
         Assert.Equal(expectedConfidence, deserialized.Confidence);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.NotNull(deserialized.ValueValue);
         Assert.Equal(expectedValueValue.Count, deserialized.ValueValue.Count);
         for (int i = 0; i < expectedValueValue.Count; i++)
         {

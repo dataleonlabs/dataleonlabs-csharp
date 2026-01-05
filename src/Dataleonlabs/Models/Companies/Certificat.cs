@@ -11,15 +11,15 @@ namespace Dataleonlabs.Models.Companies;
 /// <summary>
 /// Represents a certificate file associated with an individual or company.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Certificat, CertificatFromRaw>))]
-public sealed record class Certificat : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Certificat, CertificatFromRaw>))]
+public sealed record class Certificat : JsonModel
 {
     /// <summary>
     /// Unique identifier for the certificate.
     /// </summary>
     public string? ID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "id"); }
         init
         {
             if (value == null)
@@ -27,7 +27,7 @@ public sealed record class Certificat : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "id", value);
+            JsonModel.Set(this._rawData, "id", value);
         }
     }
 
@@ -36,7 +36,7 @@ public sealed record class Certificat : ModelBase
     /// </summary>
     public DateTimeOffset? CreatedAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "created_at"); }
         init
         {
             if (value == null)
@@ -44,7 +44,7 @@ public sealed record class Certificat : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "created_at", value);
+            JsonModel.Set(this._rawData, "created_at", value);
         }
     }
 
@@ -53,7 +53,7 @@ public sealed record class Certificat : ModelBase
     /// </summary>
     public string? Filename
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "filename"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "filename"); }
         init
         {
             if (value == null)
@@ -61,7 +61,7 @@ public sealed record class Certificat : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "filename", value);
+            JsonModel.Set(this._rawData, "filename", value);
         }
     }
 
@@ -98,7 +98,7 @@ public sealed record class Certificat : ModelBase
     }
 }
 
-class CertificatFromRaw : IFromRaw<Certificat>
+class CertificatFromRaw : IFromRawJson<Certificat>
 {
     /// <inheritdoc/>
     public Certificat FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

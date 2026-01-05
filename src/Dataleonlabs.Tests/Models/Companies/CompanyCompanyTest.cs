@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Dataleonlabs.Core;
+using Dataleonlabs.Exceptions;
 using Dataleonlabs.Models.Companies.Documents;
 using Companies = Dataleonlabs.Models.Companies;
 
@@ -23,7 +24,7 @@ public class CompanyCompanyTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -49,13 +50,7 @@ public class CompanyCompanyTest : TestBase
             Company = new()
             {
                 Address = "123 Rue de Paris, 75001 Paris, France",
-                ClosureDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2025-12-31"),
+                ClosureDate = "2025-12-31",
                 CommercialName = "ACME",
                 Contact = new()
                 {
@@ -74,13 +69,7 @@ public class CompanyCompanyTest : TestBase
                 LegalForm = "LLC",
                 Name = "ACME Corp",
                 PhoneNumber = "+33 1 23 45 67 89",
-                RegistrationDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2010-05-20"),
+                RegistrationDate = "2010-05-20",
                 RegistrationID = "123456789",
                 ShareCapital = "100000 EUR",
                 Status = "active",
@@ -208,7 +197,7 @@ public class CompanyCompanyTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "src-001",
             TechnicalData = new()
@@ -221,7 +210,7 @@ public class CompanyCompanyTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -254,7 +243,7 @@ public class CompanyCompanyTest : TestBase
                 Gender = "M",
                 Relation = "linked",
                 Schema = "v1",
-                Score = 0.85,
+                Score = 0.85f,
                 Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                 Status = Companies::AmlSuspicionStatus.Pending,
                 Type = Companies::Type.Pep,
@@ -280,13 +269,7 @@ public class CompanyCompanyTest : TestBase
         Companies::CompanyCompanyCompany expectedCompany = new()
         {
             Address = "123 Rue de Paris, 75001 Paris, France",
-            ClosureDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2025-12-31"),
+            ClosureDate = "2025-12-31",
             CommercialName = "ACME",
             Contact = new()
             {
@@ -305,13 +288,7 @@ public class CompanyCompanyTest : TestBase
             LegalForm = "LLC",
             Name = "ACME Corp",
             PhoneNumber = "+33 1 23 45 67 89",
-            RegistrationDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2010-05-20"),
+            RegistrationDate = "2010-05-20",
             RegistrationID = "123456789",
             ShareCapital = "100000 EUR",
             Status = "active",
@@ -433,7 +410,7 @@ public class CompanyCompanyTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
         string expectedSourceID = "src-001";
         Companies::CompanyTechnicalData expectedTechnicalData = new()
@@ -446,7 +423,7 @@ public class CompanyCompanyTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -469,29 +446,34 @@ public class CompanyCompanyTest : TestBase
         };
         string expectedWebviewURL = "https://id.dataleon.ai/e/123";
 
+        Assert.NotNull(model.AmlSuspicions);
         Assert.Equal(expectedAmlSuspicions.Count, model.AmlSuspicions.Count);
         for (int i = 0; i < expectedAmlSuspicions.Count; i++)
         {
             Assert.Equal(expectedAmlSuspicions[i], model.AmlSuspicions[i]);
         }
         Assert.Equal(expectedCertificat, model.Certificat);
+        Assert.NotNull(model.Checks);
         Assert.Equal(expectedChecks.Count, model.Checks.Count);
         for (int i = 0; i < expectedChecks.Count; i++)
         {
             Assert.Equal(expectedChecks[i], model.Checks[i]);
         }
         Assert.Equal(expectedCompany, model.Company);
+        Assert.NotNull(model.Documents);
         Assert.Equal(expectedDocuments.Count, model.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
             Assert.Equal(expectedDocuments[i], model.Documents[i]);
         }
+        Assert.NotNull(model.Members);
         Assert.Equal(expectedMembers.Count, model.Members.Count);
         for (int i = 0; i < expectedMembers.Count; i++)
         {
             Assert.Equal(expectedMembers[i], model.Members[i]);
         }
         Assert.Equal(expectedPortalURL, model.PortalURL);
+        Assert.NotNull(model.Properties);
         Assert.Equal(expectedProperties.Count, model.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
         {
@@ -517,7 +499,7 @@ public class CompanyCompanyTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -543,13 +525,7 @@ public class CompanyCompanyTest : TestBase
             Company = new()
             {
                 Address = "123 Rue de Paris, 75001 Paris, France",
-                ClosureDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2025-12-31"),
+                ClosureDate = "2025-12-31",
                 CommercialName = "ACME",
                 Contact = new()
                 {
@@ -568,13 +544,7 @@ public class CompanyCompanyTest : TestBase
                 LegalForm = "LLC",
                 Name = "ACME Corp",
                 PhoneNumber = "+33 1 23 45 67 89",
-                RegistrationDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2010-05-20"),
+                RegistrationDate = "2010-05-20",
                 RegistrationID = "123456789",
                 ShareCapital = "100000 EUR",
                 Status = "active",
@@ -702,7 +672,7 @@ public class CompanyCompanyTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "src-001",
             TechnicalData = new()
@@ -715,7 +685,7 @@ public class CompanyCompanyTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -759,7 +729,7 @@ public class CompanyCompanyTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -785,13 +755,7 @@ public class CompanyCompanyTest : TestBase
             Company = new()
             {
                 Address = "123 Rue de Paris, 75001 Paris, France",
-                ClosureDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2025-12-31"),
+                ClosureDate = "2025-12-31",
                 CommercialName = "ACME",
                 Contact = new()
                 {
@@ -810,13 +774,7 @@ public class CompanyCompanyTest : TestBase
                 LegalForm = "LLC",
                 Name = "ACME Corp",
                 PhoneNumber = "+33 1 23 45 67 89",
-                RegistrationDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2010-05-20"),
+                RegistrationDate = "2010-05-20",
                 RegistrationID = "123456789",
                 ShareCapital = "100000 EUR",
                 Status = "active",
@@ -944,7 +902,7 @@ public class CompanyCompanyTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "src-001",
             TechnicalData = new()
@@ -957,7 +915,7 @@ public class CompanyCompanyTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -981,8 +939,8 @@ public class CompanyCompanyTest : TestBase
             WebviewURL = "https://id.dataleon.ai/e/123",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Companies::CompanyCompany>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Companies::CompanyCompany>(element);
         Assert.NotNull(deserialized);
 
         List<Companies::AmlSuspicion> expectedAmlSuspicions =
@@ -994,7 +952,7 @@ public class CompanyCompanyTest : TestBase
                 Gender = "M",
                 Relation = "linked",
                 Schema = "v1",
-                Score = 0.85,
+                Score = 0.85f,
                 Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                 Status = Companies::AmlSuspicionStatus.Pending,
                 Type = Companies::Type.Pep,
@@ -1020,13 +978,7 @@ public class CompanyCompanyTest : TestBase
         Companies::CompanyCompanyCompany expectedCompany = new()
         {
             Address = "123 Rue de Paris, 75001 Paris, France",
-            ClosureDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2025-12-31"),
+            ClosureDate = "2025-12-31",
             CommercialName = "ACME",
             Contact = new()
             {
@@ -1045,13 +997,7 @@ public class CompanyCompanyTest : TestBase
             LegalForm = "LLC",
             Name = "ACME Corp",
             PhoneNumber = "+33 1 23 45 67 89",
-            RegistrationDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2010-05-20"),
+            RegistrationDate = "2010-05-20",
             RegistrationID = "123456789",
             ShareCapital = "100000 EUR",
             Status = "active",
@@ -1173,7 +1119,7 @@ public class CompanyCompanyTest : TestBase
         {
             Code = "20030",
             Reason = "Document mismatch",
-            Score = 0.92,
+            Score = 0.92f,
         };
         string expectedSourceID = "src-001";
         Companies::CompanyTechnicalData expectedTechnicalData = new()
@@ -1186,7 +1132,7 @@ public class CompanyCompanyTest : TestBase
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
-            FilteringScoreAmlSuspicions = 0.75,
+            FilteringScoreAmlSuspicions = 0.75f,
             FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
             IP = "192.168.1.1",
             Language = "fra",
@@ -1209,29 +1155,34 @@ public class CompanyCompanyTest : TestBase
         };
         string expectedWebviewURL = "https://id.dataleon.ai/e/123";
 
+        Assert.NotNull(deserialized.AmlSuspicions);
         Assert.Equal(expectedAmlSuspicions.Count, deserialized.AmlSuspicions.Count);
         for (int i = 0; i < expectedAmlSuspicions.Count; i++)
         {
             Assert.Equal(expectedAmlSuspicions[i], deserialized.AmlSuspicions[i]);
         }
         Assert.Equal(expectedCertificat, deserialized.Certificat);
+        Assert.NotNull(deserialized.Checks);
         Assert.Equal(expectedChecks.Count, deserialized.Checks.Count);
         for (int i = 0; i < expectedChecks.Count; i++)
         {
             Assert.Equal(expectedChecks[i], deserialized.Checks[i]);
         }
         Assert.Equal(expectedCompany, deserialized.Company);
+        Assert.NotNull(deserialized.Documents);
         Assert.Equal(expectedDocuments.Count, deserialized.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
             Assert.Equal(expectedDocuments[i], deserialized.Documents[i]);
         }
+        Assert.NotNull(deserialized.Members);
         Assert.Equal(expectedMembers.Count, deserialized.Members.Count);
         for (int i = 0; i < expectedMembers.Count; i++)
         {
             Assert.Equal(expectedMembers[i], deserialized.Members[i]);
         }
         Assert.Equal(expectedPortalURL, deserialized.PortalURL);
+        Assert.NotNull(deserialized.Properties);
         Assert.Equal(expectedProperties.Count, deserialized.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
         {
@@ -1257,7 +1208,7 @@ public class CompanyCompanyTest : TestBase
                     Gender = "M",
                     Relation = "linked",
                     Schema = "v1",
-                    Score = 0.85,
+                    Score = 0.85f,
                     Source = "https://aml-checker.example.com/api/v1/suspicion/12345",
                     Status = Companies::AmlSuspicionStatus.Pending,
                     Type = Companies::Type.Pep,
@@ -1283,13 +1234,7 @@ public class CompanyCompanyTest : TestBase
             Company = new()
             {
                 Address = "123 Rue de Paris, 75001 Paris, France",
-                ClosureDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2025-12-31"),
+                ClosureDate = "2025-12-31",
                 CommercialName = "ACME",
                 Contact = new()
                 {
@@ -1308,13 +1253,7 @@ public class CompanyCompanyTest : TestBase
                 LegalForm = "LLC",
                 Name = "ACME Corp",
                 PhoneNumber = "+33 1 23 45 67 89",
-                RegistrationDate =
-#if NET
-                DateOnly
-#else
-                DateTimeOffset
-#endif
-                .Parse("2010-05-20"),
+                RegistrationDate = "2010-05-20",
                 RegistrationID = "123456789",
                 ShareCapital = "100000 EUR",
                 Status = "active",
@@ -1442,7 +1381,7 @@ public class CompanyCompanyTest : TestBase
             {
                 Code = "20030",
                 Reason = "Document mismatch",
-                Score = 0.92,
+                Score = 0.92f,
             },
             SourceID = "src-001",
             TechnicalData = new()
@@ -1455,7 +1394,7 @@ public class CompanyCompanyTest : TestBase
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
-                FilteringScoreAmlSuspicions = 0.75,
+                FilteringScoreAmlSuspicions = 0.75f,
                 FinishedAt = DateTimeOffset.Parse("2025-05-05T13:10:00Z"),
                 IP = "192.168.1.1",
                 Language = "fra",
@@ -1599,13 +1538,7 @@ public class CompanyCompanyCompanyTest : TestBase
         var model = new Companies::CompanyCompanyCompany
         {
             Address = "123 Rue de Paris, 75001 Paris, France",
-            ClosureDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2025-12-31"),
+            ClosureDate = "2025-12-31",
             CommercialName = "ACME",
             Contact = new()
             {
@@ -1624,13 +1557,7 @@ public class CompanyCompanyCompanyTest : TestBase
             LegalForm = "LLC",
             Name = "ACME Corp",
             PhoneNumber = "+33 1 23 45 67 89",
-            RegistrationDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2010-05-20"),
+            RegistrationDate = "2010-05-20",
             RegistrationID = "123456789",
             ShareCapital = "100000 EUR",
             Status = "active",
@@ -1640,19 +1567,7 @@ public class CompanyCompanyCompanyTest : TestBase
         };
 
         string expectedAddress = "123 Rue de Paris, 75001 Paris, France";
-
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        expectedClosureDate =
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        .Parse("2025-12-31");
+        string expectedClosureDate = "2025-12-31";
         string expectedCommercialName = "ACME";
         Companies::Contact expectedContact = new()
         {
@@ -1671,19 +1586,7 @@ public class CompanyCompanyCompanyTest : TestBase
         string expectedLegalForm = "LLC";
         string expectedName = "ACME Corp";
         string expectedPhoneNumber = "+33 1 23 45 67 89";
-
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        expectedRegistrationDate =
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        .Parse("2010-05-20");
+        string expectedRegistrationDate = "2010-05-20";
         string expectedRegistrationID = "123456789";
         string expectedShareCapital = "100000 EUR";
         string expectedStatus = "active";
@@ -1719,13 +1622,7 @@ public class CompanyCompanyCompanyTest : TestBase
         var model = new Companies::CompanyCompanyCompany
         {
             Address = "123 Rue de Paris, 75001 Paris, France",
-            ClosureDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2025-12-31"),
+            ClosureDate = "2025-12-31",
             CommercialName = "ACME",
             Contact = new()
             {
@@ -1744,13 +1641,7 @@ public class CompanyCompanyCompanyTest : TestBase
             LegalForm = "LLC",
             Name = "ACME Corp",
             PhoneNumber = "+33 1 23 45 67 89",
-            RegistrationDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2010-05-20"),
+            RegistrationDate = "2010-05-20",
             RegistrationID = "123456789",
             ShareCapital = "100000 EUR",
             Status = "active",
@@ -1771,13 +1662,7 @@ public class CompanyCompanyCompanyTest : TestBase
         var model = new Companies::CompanyCompanyCompany
         {
             Address = "123 Rue de Paris, 75001 Paris, France",
-            ClosureDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2025-12-31"),
+            ClosureDate = "2025-12-31",
             CommercialName = "ACME",
             Contact = new()
             {
@@ -1796,13 +1681,7 @@ public class CompanyCompanyCompanyTest : TestBase
             LegalForm = "LLC",
             Name = "ACME Corp",
             PhoneNumber = "+33 1 23 45 67 89",
-            RegistrationDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2010-05-20"),
+            RegistrationDate = "2010-05-20",
             RegistrationID = "123456789",
             ShareCapital = "100000 EUR",
             Status = "active",
@@ -1811,24 +1690,12 @@ public class CompanyCompanyCompanyTest : TestBase
             WebsiteURL = "https://www.acme.com",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Companies::CompanyCompanyCompany>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Companies::CompanyCompanyCompany>(element);
         Assert.NotNull(deserialized);
 
         string expectedAddress = "123 Rue de Paris, 75001 Paris, France";
-
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        expectedClosureDate =
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        .Parse("2025-12-31");
+        string expectedClosureDate = "2025-12-31";
         string expectedCommercialName = "ACME";
         Companies::Contact expectedContact = new()
         {
@@ -1847,19 +1714,7 @@ public class CompanyCompanyCompanyTest : TestBase
         string expectedLegalForm = "LLC";
         string expectedName = "ACME Corp";
         string expectedPhoneNumber = "+33 1 23 45 67 89";
-
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        expectedRegistrationDate =
-#if NET
-        DateOnly
-#else
-        DateTimeOffset
-#endif
-        .Parse("2010-05-20");
+        string expectedRegistrationDate = "2010-05-20";
         string expectedRegistrationID = "123456789";
         string expectedShareCapital = "100000 EUR";
         string expectedStatus = "active";
@@ -1898,13 +1753,7 @@ public class CompanyCompanyCompanyTest : TestBase
         var model = new Companies::CompanyCompanyCompany
         {
             Address = "123 Rue de Paris, 75001 Paris, France",
-            ClosureDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2025-12-31"),
+            ClosureDate = "2025-12-31",
             CommercialName = "ACME",
             Contact = new()
             {
@@ -1923,13 +1772,7 @@ public class CompanyCompanyCompanyTest : TestBase
             LegalForm = "LLC",
             Name = "ACME Corp",
             PhoneNumber = "+33 1 23 45 67 89",
-            RegistrationDate =
-#if NET
-            DateOnly
-#else
-            DateTimeOffset
-#endif
-            .Parse("2010-05-20"),
+            RegistrationDate = "2010-05-20",
             RegistrationID = "123456789",
             ShareCapital = "100000 EUR",
             Status = "active",
@@ -2155,8 +1998,8 @@ public class ContactTest : TestBase
             PhoneNumber = "+33 1 23 45 67 89",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Companies::Contact>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Companies::Contact>(element);
         Assert.NotNull(deserialized);
 
         string expectedDepartment = "Finance";
@@ -2386,6 +2229,7 @@ public class MemberTest : TestBase
         Assert.Equal(expectedBirthday, model.Birthday);
         Assert.Equal(expectedBirthplace, model.Birthplace);
         Assert.Equal(expectedCountry, model.Country);
+        Assert.NotNull(model.Documents);
         Assert.Equal(expectedDocuments.Count, model.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
@@ -2551,8 +2395,8 @@ public class MemberTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Companies::Member>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Companies::Member>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "123e4567-e89b-12d3-a456-426614174000";
@@ -2618,6 +2462,7 @@ public class MemberTest : TestBase
         Assert.Equal(expectedBirthday, deserialized.Birthday);
         Assert.Equal(expectedBirthplace, deserialized.Birthplace);
         Assert.Equal(expectedCountry, deserialized.Country);
+        Assert.NotNull(deserialized.Documents);
         Assert.Equal(expectedDocuments.Count, deserialized.Documents.Count);
         for (int i = 0; i < expectedDocuments.Count; i++)
         {
@@ -2891,5 +2736,123 @@ public class MemberTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class SourceTest : TestBase
+{
+    [Theory]
+    [InlineData(Companies::Source.Gouve)]
+    [InlineData(Companies::Source.User)]
+    [InlineData(Companies::Source.Company)]
+    public void Validation_Works(Companies::Source rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Companies::Source> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Companies::Source>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Companies::Source.Gouve)]
+    [InlineData(Companies::Source.User)]
+    [InlineData(Companies::Source.Company)]
+    public void SerializationRoundtrip_Works(Companies::Source rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Companies::Source> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Companies::Source>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Companies::Source>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Companies::Source>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class MemberTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(Companies::MemberType.Person)]
+    [InlineData(Companies::MemberType.Company)]
+    public void Validation_Works(Companies::MemberType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Companies::MemberType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Companies::MemberType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Companies::MemberType.Person)]
+    [InlineData(Companies::MemberType.Company)]
+    public void SerializationRoundtrip_Works(Companies::MemberType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Companies::MemberType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Companies::MemberType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Companies::MemberType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Companies::MemberType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

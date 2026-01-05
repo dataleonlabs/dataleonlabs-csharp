@@ -29,8 +29,8 @@ public sealed record class IndividualUpdateParams : ParamsBase
     /// </summary>
     public required string WorkspaceID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "workspace_id"); }
-        init { ModelBase.Set(this._rawBodyData, "workspace_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "workspace_id"); }
+        init { JsonModel.Set(this._rawBodyData, "workspace_id", value); }
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<IndividualUpdateParamsPerson>(
+            return JsonModel.GetNullableClass<IndividualUpdateParamsPerson>(
                 this.RawBodyData,
                 "person"
             );
@@ -52,7 +52,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "person", value);
+            JsonModel.Set(this._rawBodyData, "person", value);
         }
     }
 
@@ -61,7 +61,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
     /// </summary>
     public string? SourceID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "source_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "source_id"); }
         init
         {
             if (value == null)
@@ -69,7 +69,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "source_id", value);
+            JsonModel.Set(this._rawBodyData, "source_id", value);
         }
     }
 
@@ -80,7 +80,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<IndividualUpdateParamsTechnicalData>(
+            return JsonModel.GetNullableClass<IndividualUpdateParamsTechnicalData>(
                 this.RawBodyData,
                 "technical_data"
             );
@@ -92,7 +92,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "technical_data", value);
+            JsonModel.Set(this._rawBodyData, "technical_data", value);
         }
     }
 
@@ -129,7 +129,7 @@ public sealed record class IndividualUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static IndividualUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -154,9 +154,13 @@ public sealed record class IndividualUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
@@ -173,16 +177,16 @@ public sealed record class IndividualUpdateParams : ParamsBase
 /// Personal information about the individual.
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<IndividualUpdateParamsPerson, IndividualUpdateParamsPersonFromRaw>)
+    typeof(JsonModelConverter<IndividualUpdateParamsPerson, IndividualUpdateParamsPersonFromRaw>)
 )]
-public sealed record class IndividualUpdateParamsPerson : ModelBase
+public sealed record class IndividualUpdateParamsPerson : JsonModel
 {
     /// <summary>
     /// Date of birth in DD/MM/YYYY format.
     /// </summary>
     public string? Birthday
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "birthday"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "birthday"); }
         init
         {
             if (value == null)
@@ -190,7 +194,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "birthday", value);
+            JsonModel.Set(this._rawData, "birthday", value);
         }
     }
 
@@ -199,7 +203,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     /// </summary>
     public string? Email
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "email"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "email"); }
         init
         {
             if (value == null)
@@ -207,7 +211,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "email", value);
+            JsonModel.Set(this._rawData, "email", value);
         }
     }
 
@@ -216,7 +220,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     /// </summary>
     public string? FirstName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "first_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "first_name"); }
         init
         {
             if (value == null)
@@ -224,7 +228,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "first_name", value);
+            JsonModel.Set(this._rawData, "first_name", value);
         }
     }
 
@@ -235,7 +239,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
                 this.RawData,
                 "gender"
             );
@@ -247,7 +251,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "gender", value);
+            JsonModel.Set(this._rawData, "gender", value);
         }
     }
 
@@ -256,7 +260,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     /// </summary>
     public string? LastName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "last_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "last_name"); }
         init
         {
             if (value == null)
@@ -264,7 +268,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "last_name", value);
+            JsonModel.Set(this._rawData, "last_name", value);
         }
     }
 
@@ -273,7 +277,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     /// </summary>
     public string? MaidenName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "maiden_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "maiden_name"); }
         init
         {
             if (value == null)
@@ -281,7 +285,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "maiden_name", value);
+            JsonModel.Set(this._rawData, "maiden_name", value);
         }
     }
 
@@ -290,7 +294,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     /// </summary>
     public string? Nationality
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "nationality"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "nationality"); }
         init
         {
             if (value == null)
@@ -298,7 +302,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "nationality", value);
+            JsonModel.Set(this._rawData, "nationality", value);
         }
     }
 
@@ -307,7 +311,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     /// </summary>
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
         init
         {
             if (value == null)
@@ -315,7 +319,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "phone_number", value);
+            JsonModel.Set(this._rawData, "phone_number", value);
         }
     }
 
@@ -359,7 +363,7 @@ public sealed record class IndividualUpdateParamsPerson : ModelBase
     }
 }
 
-class IndividualUpdateParamsPersonFromRaw : IFromRaw<IndividualUpdateParamsPerson>
+class IndividualUpdateParamsPersonFromRaw : IFromRawJson<IndividualUpdateParamsPerson>
 {
     /// <inheritdoc/>
     public IndividualUpdateParamsPerson FromRawUnchecked(
@@ -419,12 +423,12 @@ sealed class IndividualUpdateParamsPersonGenderConverter
 /// Technical metadata related to the request or processing.
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         IndividualUpdateParamsTechnicalData,
         IndividualUpdateParamsTechnicalDataFromRaw
     >)
 )]
-public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
+public sealed record class IndividualUpdateParamsTechnicalData : JsonModel
 {
     /// <summary>
     /// Flag indicating whether there are active research AML (Anti-Money Laundering)
@@ -432,7 +436,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     /// </summary>
     public bool? ActiveAmlSuspicions
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "active_aml_suspicions"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "active_aml_suspicions"); }
         init
         {
             if (value == null)
@@ -440,7 +444,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "active_aml_suspicions", value);
+            JsonModel.Set(this._rawData, "active_aml_suspicions", value);
         }
     }
 
@@ -449,7 +453,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     /// </summary>
     public string? CallbackURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "callback_url"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "callback_url"); }
         init
         {
             if (value == null)
@@ -457,7 +461,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "callback_url", value);
+            JsonModel.Set(this._rawData, "callback_url", value);
         }
     }
 
@@ -468,7 +472,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<string>(this.RawData, "callback_url_notification");
+            return JsonModel.GetNullableClass<string>(this.RawData, "callback_url_notification");
         }
         init
         {
@@ -477,7 +481,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "callback_url_notification", value);
+            JsonModel.Set(this._rawData, "callback_url_notification", value);
         }
     }
 
@@ -488,7 +492,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<float>(
+            return JsonModel.GetNullableStruct<float>(
                 this.RawData,
                 "filtering_score_aml_suspicions"
             );
@@ -500,7 +504,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "filtering_score_aml_suspicions", value);
+            JsonModel.Set(this._rawData, "filtering_score_aml_suspicions", value);
         }
     }
 
@@ -509,7 +513,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     /// </summary>
     public string? Language
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "language"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "language"); }
         init
         {
             if (value == null)
@@ -517,7 +521,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "language", value);
+            JsonModel.Set(this._rawData, "language", value);
         }
     }
 
@@ -530,7 +534,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 List<ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>>
             >(this.RawData, "portal_steps");
         }
@@ -541,7 +545,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "portal_steps", value);
+            JsonModel.Set(this._rawData, "portal_steps", value);
         }
     }
 
@@ -550,7 +554,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     /// </summary>
     public bool? RawDataValue
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "raw_data"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "raw_data"); }
         init
         {
             if (value == null)
@@ -558,7 +562,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "raw_data", value);
+            JsonModel.Set(this._rawData, "raw_data", value);
         }
     }
 
@@ -606,7 +610,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : ModelBase
     }
 }
 
-class IndividualUpdateParamsTechnicalDataFromRaw : IFromRaw<IndividualUpdateParamsTechnicalData>
+class IndividualUpdateParamsTechnicalDataFromRaw : IFromRawJson<IndividualUpdateParamsTechnicalData>
 {
     /// <inheritdoc/>
     public IndividualUpdateParamsTechnicalData FromRawUnchecked(
