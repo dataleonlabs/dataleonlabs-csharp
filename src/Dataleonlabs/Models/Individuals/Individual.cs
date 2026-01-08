@@ -56,7 +56,7 @@ public sealed record class Individual : JsonModel
     /// <summary>
     /// URL to authenticate the individual, usually for document signing or onboarding.
     /// </summary>
-    public string? AuthURL
+    public string? AuthUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "auth_url"); }
         init
@@ -192,7 +192,7 @@ public sealed record class Individual : JsonModel
     /// <summary>
     /// Admin or internal portal URL for viewing the individual's details.
     /// </summary>
-    public string? PortalURL
+    public string? PortalUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "portal_url"); }
         init
@@ -331,7 +331,7 @@ public sealed record class Individual : JsonModel
     /// <summary>
     /// Public-facing webview URL for the individual’s identification process.
     /// </summary>
-    public string? WebviewURL
+    public string? WebviewUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "webview_url"); }
         init
@@ -370,7 +370,7 @@ public sealed record class Individual : JsonModel
         {
             item.Validate();
         }
-        _ = this.AuthURL;
+        _ = this.AuthUrl;
         this.Certificat?.Validate();
         foreach (var item in this.Checks ?? [])
         {
@@ -384,7 +384,7 @@ public sealed record class Individual : JsonModel
         this.IdentityCard?.Validate();
         _ = this.Number;
         this.Person?.Validate();
-        _ = this.PortalURL;
+        _ = this.PortalUrl;
         foreach (var item in this.Properties ?? [])
         {
             item.Validate();
@@ -398,7 +398,7 @@ public sealed record class Individual : JsonModel
             item.Validate();
         }
         this.TechnicalData?.Validate();
-        _ = this.WebviewURL;
+        _ = this.WebviewUrl;
         _ = this.WorkspaceID;
     }
 
@@ -460,7 +460,7 @@ public sealed record class IdentityCard : JsonModel
     /// <summary>
     /// Signed URL linking to the back image of the document.
     /// </summary>
-    public string? BackDocumentSignedURL
+    public string? BackDocumentSignedUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "back_document_signed_url"); }
         init
@@ -579,7 +579,7 @@ public sealed record class IdentityCard : JsonModel
     /// <summary>
     /// Signed URL linking to the front image of the document.
     /// </summary>
-    public string? FrontDocumentSignedURL
+    public string? FrontDocumentSignedUrl
     {
         get
         {
@@ -711,14 +711,14 @@ public sealed record class IdentityCard : JsonModel
     public override void Validate()
     {
         _ = this.ID;
-        _ = this.BackDocumentSignedURL;
+        _ = this.BackDocumentSignedUrl;
         _ = this.BirthPlace;
         _ = this.Birthday;
         _ = this.Country;
         _ = this.EntitlementDate;
         _ = this.ExpirationDate;
         _ = this.FirstName;
-        _ = this.FrontDocumentSignedURL;
+        _ = this.FrontDocumentSignedUrl;
         _ = this.Gender;
         _ = this.IssueDate;
         _ = this.LastName;
@@ -803,7 +803,7 @@ public sealed record class IndividualPerson : JsonModel
     /// <summary>
     /// Signed URL linking to the person’s face image.
     /// </summary>
-    public string? FaceImageSignedURL
+    public string? FaceImageSignedUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "face_image_signed_url"); }
         init
@@ -941,7 +941,7 @@ public sealed record class IndividualPerson : JsonModel
     {
         _ = this.Birthday;
         _ = this.Email;
-        _ = this.FaceImageSignedURL;
+        _ = this.FaceImageSignedUrl;
         _ = this.FirstName;
         _ = this.FullName;
         _ = this.Gender;

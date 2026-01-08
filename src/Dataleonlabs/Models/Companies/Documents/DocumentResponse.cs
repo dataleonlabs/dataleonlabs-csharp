@@ -166,7 +166,7 @@ public sealed record class Document : JsonModel
     /// <summary>
     /// Secure URL to access the document.
     /// </summary>
-    public string? SignedURL
+    public string? SignedUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "signed_url"); }
         init
@@ -238,7 +238,7 @@ public sealed record class Document : JsonModel
         _ = this.DocumentType;
         _ = this.Filename;
         _ = this.Name;
-        _ = this.SignedURL;
+        _ = this.SignedUrl;
         _ = this.State;
         _ = this.Status;
         _ = this.WorkspaceID;

@@ -400,7 +400,7 @@ public sealed record class Company : JsonModel
     /// <summary>
     /// Company’s official website URL.
     /// </summary>
-    public string? WebsiteURL
+    public string? WebsiteUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "website_url"); }
         init
@@ -431,7 +431,7 @@ public sealed record class Company : JsonModel
         _ = this.Status;
         _ = this.TaxIdentificationNumber;
         _ = this.Type;
-        _ = this.WebsiteURL;
+        _ = this.WebsiteUrl;
     }
 
     public Company() { }
@@ -500,7 +500,7 @@ public sealed record class TechnicalData : JsonModel
     /// <summary>
     /// URL to receive a callback once the company is processed.
     /// </summary>
-    public string? CallbackURL
+    public string? CallbackUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "callback_url"); }
         init
@@ -517,7 +517,7 @@ public sealed record class TechnicalData : JsonModel
     /// <summary>
     /// URL to receive notifications about the processing state and status.
     /// </summary>
-    public string? CallbackURLNotification
+    public string? CallbackUrlNotification
     {
         get
         {
@@ -618,8 +618,8 @@ public sealed record class TechnicalData : JsonModel
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
-        _ = this.CallbackURL;
-        _ = this.CallbackURLNotification;
+        _ = this.CallbackUrl;
+        _ = this.CallbackUrlNotification;
         _ = this.FilteringScoreAmlSuspicions;
         _ = this.Language;
         foreach (var item in this.PortalSteps ?? [])

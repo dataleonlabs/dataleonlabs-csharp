@@ -75,7 +75,7 @@ public class CompanyCompanyTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://www.acme.com",
+                WebsiteUrl = "https://www.acme.com",
             },
             Documents =
             [
@@ -96,7 +96,7 @@ public class CompanyCompanyTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -142,7 +142,7 @@ public class CompanyCompanyTest : TestBase
                             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                             DocumentType = "generic",
                             Name = "generic_doc",
-                            SignedURL = "https://cdn.example.com/doc.pdf",
+                            SignedUrl = "https://cdn.example.com/doc.pdf",
                             State = "SUBMITTED",
                             Status = "approved",
                             Tables =
@@ -183,7 +183,7 @@ public class CompanyCompanyTest : TestBase
                     WorkspaceID = "wk_123",
                 },
             ],
-            PortalURL = "https://portal.dataleon.ai/e/123",
+            PortalUrl = "https://portal.dataleon.ai/e/123",
             Properties =
             [
                 new()
@@ -203,10 +203,10 @@ public class CompanyCompanyTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -231,7 +231,7 @@ public class CompanyCompanyTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/e/123",
+            WebviewUrl = "https://id.dataleon.ai/e/123",
         };
 
         List<Companies::AmlSuspicion> expectedAmlSuspicions =
@@ -294,7 +294,7 @@ public class CompanyCompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://www.acme.com",
+            WebsiteUrl = "https://www.acme.com",
         };
         List<GenericDocument> expectedDocuments =
         [
@@ -315,7 +315,7 @@ public class CompanyCompanyTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                 DocumentType = "generic",
                 Name = "generic_doc",
-                SignedURL = "https://cdn.example.com/doc.pdf",
+                SignedUrl = "https://cdn.example.com/doc.pdf",
                 State = "SUBMITTED",
                 Status = "approved",
                 Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -358,7 +358,7 @@ public class CompanyCompanyTest : TestBase
                         CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                         DocumentType = "generic",
                         Name = "generic_doc",
-                        SignedURL = "https://cdn.example.com/doc.pdf",
+                        SignedUrl = "https://cdn.example.com/doc.pdf",
                         State = "SUBMITTED",
                         Status = "approved",
                         Tables =
@@ -396,7 +396,7 @@ public class CompanyCompanyTest : TestBase
                 WorkspaceID = "wk_123",
             },
         ];
-        string expectedPortalURL = "https://portal.dataleon.ai/e/123";
+        string expectedPortalUrl = "https://portal.dataleon.ai/e/123";
         List<Companies::Property> expectedProperties =
         [
             new()
@@ -416,10 +416,10 @@ public class CompanyCompanyTest : TestBase
         Companies::CompanyTechnicalData expectedTechnicalData = new()
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -444,7 +444,7 @@ public class CompanyCompanyTest : TestBase
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
             TransferMode = "API",
         };
-        string expectedWebviewURL = "https://id.dataleon.ai/e/123";
+        string expectedWebviewUrl = "https://id.dataleon.ai/e/123";
 
         Assert.NotNull(model.AmlSuspicions);
         Assert.Equal(expectedAmlSuspicions.Count, model.AmlSuspicions.Count);
@@ -472,7 +472,7 @@ public class CompanyCompanyTest : TestBase
         {
             Assert.Equal(expectedMembers[i], model.Members[i]);
         }
-        Assert.Equal(expectedPortalURL, model.PortalURL);
+        Assert.Equal(expectedPortalUrl, model.PortalUrl);
         Assert.NotNull(model.Properties);
         Assert.Equal(expectedProperties.Count, model.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
@@ -482,7 +482,7 @@ public class CompanyCompanyTest : TestBase
         Assert.Equal(expectedRisk, model.Risk);
         Assert.Equal(expectedSourceID, model.SourceID);
         Assert.Equal(expectedTechnicalData, model.TechnicalData);
-        Assert.Equal(expectedWebviewURL, model.WebviewURL);
+        Assert.Equal(expectedWebviewUrl, model.WebviewUrl);
     }
 
     [Fact]
@@ -550,7 +550,7 @@ public class CompanyCompanyTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://www.acme.com",
+                WebsiteUrl = "https://www.acme.com",
             },
             Documents =
             [
@@ -571,7 +571,7 @@ public class CompanyCompanyTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -617,7 +617,7 @@ public class CompanyCompanyTest : TestBase
                             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                             DocumentType = "generic",
                             Name = "generic_doc",
-                            SignedURL = "https://cdn.example.com/doc.pdf",
+                            SignedUrl = "https://cdn.example.com/doc.pdf",
                             State = "SUBMITTED",
                             Status = "approved",
                             Tables =
@@ -658,7 +658,7 @@ public class CompanyCompanyTest : TestBase
                     WorkspaceID = "wk_123",
                 },
             ],
-            PortalURL = "https://portal.dataleon.ai/e/123",
+            PortalUrl = "https://portal.dataleon.ai/e/123",
             Properties =
             [
                 new()
@@ -678,10 +678,10 @@ public class CompanyCompanyTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -706,7 +706,7 @@ public class CompanyCompanyTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/e/123",
+            WebviewUrl = "https://id.dataleon.ai/e/123",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -780,7 +780,7 @@ public class CompanyCompanyTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://www.acme.com",
+                WebsiteUrl = "https://www.acme.com",
             },
             Documents =
             [
@@ -801,7 +801,7 @@ public class CompanyCompanyTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -847,7 +847,7 @@ public class CompanyCompanyTest : TestBase
                             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                             DocumentType = "generic",
                             Name = "generic_doc",
-                            SignedURL = "https://cdn.example.com/doc.pdf",
+                            SignedUrl = "https://cdn.example.com/doc.pdf",
                             State = "SUBMITTED",
                             Status = "approved",
                             Tables =
@@ -888,7 +888,7 @@ public class CompanyCompanyTest : TestBase
                     WorkspaceID = "wk_123",
                 },
             ],
-            PortalURL = "https://portal.dataleon.ai/e/123",
+            PortalUrl = "https://portal.dataleon.ai/e/123",
             Properties =
             [
                 new()
@@ -908,10 +908,10 @@ public class CompanyCompanyTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -936,7 +936,7 @@ public class CompanyCompanyTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/e/123",
+            WebviewUrl = "https://id.dataleon.ai/e/123",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -1003,7 +1003,7 @@ public class CompanyCompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://www.acme.com",
+            WebsiteUrl = "https://www.acme.com",
         };
         List<GenericDocument> expectedDocuments =
         [
@@ -1024,7 +1024,7 @@ public class CompanyCompanyTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                 DocumentType = "generic",
                 Name = "generic_doc",
-                SignedURL = "https://cdn.example.com/doc.pdf",
+                SignedUrl = "https://cdn.example.com/doc.pdf",
                 State = "SUBMITTED",
                 Status = "approved",
                 Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -1067,7 +1067,7 @@ public class CompanyCompanyTest : TestBase
                         CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                         DocumentType = "generic",
                         Name = "generic_doc",
-                        SignedURL = "https://cdn.example.com/doc.pdf",
+                        SignedUrl = "https://cdn.example.com/doc.pdf",
                         State = "SUBMITTED",
                         Status = "approved",
                         Tables =
@@ -1105,7 +1105,7 @@ public class CompanyCompanyTest : TestBase
                 WorkspaceID = "wk_123",
             },
         ];
-        string expectedPortalURL = "https://portal.dataleon.ai/e/123";
+        string expectedPortalUrl = "https://portal.dataleon.ai/e/123";
         List<Companies::Property> expectedProperties =
         [
             new()
@@ -1125,10 +1125,10 @@ public class CompanyCompanyTest : TestBase
         Companies::CompanyTechnicalData expectedTechnicalData = new()
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -1153,7 +1153,7 @@ public class CompanyCompanyTest : TestBase
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
             TransferMode = "API",
         };
-        string expectedWebviewURL = "https://id.dataleon.ai/e/123";
+        string expectedWebviewUrl = "https://id.dataleon.ai/e/123";
 
         Assert.NotNull(deserialized.AmlSuspicions);
         Assert.Equal(expectedAmlSuspicions.Count, deserialized.AmlSuspicions.Count);
@@ -1181,7 +1181,7 @@ public class CompanyCompanyTest : TestBase
         {
             Assert.Equal(expectedMembers[i], deserialized.Members[i]);
         }
-        Assert.Equal(expectedPortalURL, deserialized.PortalURL);
+        Assert.Equal(expectedPortalUrl, deserialized.PortalUrl);
         Assert.NotNull(deserialized.Properties);
         Assert.Equal(expectedProperties.Count, deserialized.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
@@ -1191,7 +1191,7 @@ public class CompanyCompanyTest : TestBase
         Assert.Equal(expectedRisk, deserialized.Risk);
         Assert.Equal(expectedSourceID, deserialized.SourceID);
         Assert.Equal(expectedTechnicalData, deserialized.TechnicalData);
-        Assert.Equal(expectedWebviewURL, deserialized.WebviewURL);
+        Assert.Equal(expectedWebviewUrl, deserialized.WebviewUrl);
     }
 
     [Fact]
@@ -1259,7 +1259,7 @@ public class CompanyCompanyTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://www.acme.com",
+                WebsiteUrl = "https://www.acme.com",
             },
             Documents =
             [
@@ -1280,7 +1280,7 @@ public class CompanyCompanyTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -1326,7 +1326,7 @@ public class CompanyCompanyTest : TestBase
                             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                             DocumentType = "generic",
                             Name = "generic_doc",
-                            SignedURL = "https://cdn.example.com/doc.pdf",
+                            SignedUrl = "https://cdn.example.com/doc.pdf",
                             State = "SUBMITTED",
                             Status = "approved",
                             Tables =
@@ -1367,7 +1367,7 @@ public class CompanyCompanyTest : TestBase
                     WorkspaceID = "wk_123",
                 },
             ],
-            PortalURL = "https://portal.dataleon.ai/e/123",
+            PortalUrl = "https://portal.dataleon.ai/e/123",
             Properties =
             [
                 new()
@@ -1387,10 +1387,10 @@ public class CompanyCompanyTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -1415,7 +1415,7 @@ public class CompanyCompanyTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/e/123",
+            WebviewUrl = "https://id.dataleon.ai/e/123",
         };
 
         model.Validate();
@@ -1438,7 +1438,7 @@ public class CompanyCompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("documents"));
         Assert.Null(model.Members);
         Assert.False(model.RawData.ContainsKey("members"));
-        Assert.Null(model.PortalURL);
+        Assert.Null(model.PortalUrl);
         Assert.False(model.RawData.ContainsKey("portal_url"));
         Assert.Null(model.Properties);
         Assert.False(model.RawData.ContainsKey("properties"));
@@ -1448,7 +1448,7 @@ public class CompanyCompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("source_id"));
         Assert.Null(model.TechnicalData);
         Assert.False(model.RawData.ContainsKey("technical_data"));
-        Assert.Null(model.WebviewURL);
+        Assert.Null(model.WebviewUrl);
         Assert.False(model.RawData.ContainsKey("webview_url"));
     }
 
@@ -1472,12 +1472,12 @@ public class CompanyCompanyTest : TestBase
             Company = null,
             Documents = null,
             Members = null,
-            PortalURL = null,
+            PortalUrl = null,
             Properties = null,
             Risk = null,
             SourceID = null,
             TechnicalData = null,
-            WebviewURL = null,
+            WebviewUrl = null,
         };
 
         Assert.Null(model.AmlSuspicions);
@@ -1492,7 +1492,7 @@ public class CompanyCompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("documents"));
         Assert.Null(model.Members);
         Assert.False(model.RawData.ContainsKey("members"));
-        Assert.Null(model.PortalURL);
+        Assert.Null(model.PortalUrl);
         Assert.False(model.RawData.ContainsKey("portal_url"));
         Assert.Null(model.Properties);
         Assert.False(model.RawData.ContainsKey("properties"));
@@ -1502,7 +1502,7 @@ public class CompanyCompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("source_id"));
         Assert.Null(model.TechnicalData);
         Assert.False(model.RawData.ContainsKey("technical_data"));
-        Assert.Null(model.WebviewURL);
+        Assert.Null(model.WebviewUrl);
         Assert.False(model.RawData.ContainsKey("webview_url"));
     }
 
@@ -1518,12 +1518,12 @@ public class CompanyCompanyTest : TestBase
             Company = null,
             Documents = null,
             Members = null,
-            PortalURL = null,
+            PortalUrl = null,
             Properties = null,
             Risk = null,
             SourceID = null,
             TechnicalData = null,
-            WebviewURL = null,
+            WebviewUrl = null,
         };
 
         model.Validate();
@@ -1563,7 +1563,7 @@ public class CompanyCompanyCompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://www.acme.com",
+            WebsiteUrl = "https://www.acme.com",
         };
 
         string expectedAddress = "123 Rue de Paris, 75001 Paris, France";
@@ -1592,7 +1592,7 @@ public class CompanyCompanyCompanyTest : TestBase
         string expectedStatus = "active";
         string expectedTaxIdentificationNumber = "FR123456789";
         string expectedType = "main";
-        string expectedWebsiteURL = "https://www.acme.com";
+        string expectedWebsiteUrl = "https://www.acme.com";
 
         Assert.Equal(expectedAddress, model.Address);
         Assert.Equal(expectedClosureDate, model.ClosureDate);
@@ -1613,7 +1613,7 @@ public class CompanyCompanyCompanyTest : TestBase
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedTaxIdentificationNumber, model.TaxIdentificationNumber);
         Assert.Equal(expectedType, model.Type);
-        Assert.Equal(expectedWebsiteURL, model.WebsiteURL);
+        Assert.Equal(expectedWebsiteUrl, model.WebsiteUrl);
     }
 
     [Fact]
@@ -1647,7 +1647,7 @@ public class CompanyCompanyCompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://www.acme.com",
+            WebsiteUrl = "https://www.acme.com",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -1687,7 +1687,7 @@ public class CompanyCompanyCompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://www.acme.com",
+            WebsiteUrl = "https://www.acme.com",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -1720,7 +1720,7 @@ public class CompanyCompanyCompanyTest : TestBase
         string expectedStatus = "active";
         string expectedTaxIdentificationNumber = "FR123456789";
         string expectedType = "main";
-        string expectedWebsiteURL = "https://www.acme.com";
+        string expectedWebsiteUrl = "https://www.acme.com";
 
         Assert.Equal(expectedAddress, deserialized.Address);
         Assert.Equal(expectedClosureDate, deserialized.ClosureDate);
@@ -1744,7 +1744,7 @@ public class CompanyCompanyCompanyTest : TestBase
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedTaxIdentificationNumber, deserialized.TaxIdentificationNumber);
         Assert.Equal(expectedType, deserialized.Type);
-        Assert.Equal(expectedWebsiteURL, deserialized.WebsiteURL);
+        Assert.Equal(expectedWebsiteUrl, deserialized.WebsiteUrl);
     }
 
     [Fact]
@@ -1778,7 +1778,7 @@ public class CompanyCompanyCompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://www.acme.com",
+            WebsiteUrl = "https://www.acme.com",
         };
 
         model.Validate();
@@ -1827,7 +1827,7 @@ public class CompanyCompanyCompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("tax_identification_number"));
         Assert.Null(model.Type);
         Assert.False(model.RawData.ContainsKey("type"));
-        Assert.Null(model.WebsiteURL);
+        Assert.Null(model.WebsiteUrl);
         Assert.False(model.RawData.ContainsKey("website_url"));
     }
 
@@ -1864,7 +1864,7 @@ public class CompanyCompanyCompanyTest : TestBase
             Status = null,
             TaxIdentificationNumber = null,
             Type = null,
-            WebsiteURL = null,
+            WebsiteUrl = null,
         };
 
         Assert.Null(model.Address);
@@ -1905,7 +1905,7 @@ public class CompanyCompanyCompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("tax_identification_number"));
         Assert.Null(model.Type);
         Assert.False(model.RawData.ContainsKey("type"));
-        Assert.Null(model.WebsiteURL);
+        Assert.Null(model.WebsiteUrl);
         Assert.False(model.RawData.ContainsKey("website_url"));
     }
 
@@ -1934,7 +1934,7 @@ public class CompanyCompanyCompanyTest : TestBase
             Status = null,
             TaxIdentificationNumber = null,
             Type = null,
-            WebsiteURL = null,
+            WebsiteUrl = null,
         };
 
         model.Validate();
@@ -2128,7 +2128,7 @@ public class MemberTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -2190,7 +2190,7 @@ public class MemberTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                 DocumentType = "generic",
                 Name = "generic_doc",
-                SignedURL = "https://cdn.example.com/doc.pdf",
+                SignedUrl = "https://cdn.example.com/doc.pdf",
                 State = "SUBMITTED",
                 Status = "approved",
                 Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -2284,7 +2284,7 @@ public class MemberTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -2357,7 +2357,7 @@ public class MemberTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -2423,7 +2423,7 @@ public class MemberTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                 DocumentType = "generic",
                 Name = "generic_doc",
-                SignedURL = "https://cdn.example.com/doc.pdf",
+                SignedUrl = "https://cdn.example.com/doc.pdf",
                 State = "SUBMITTED",
                 Status = "approved",
                 Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -2517,7 +2517,7 @@ public class MemberTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =

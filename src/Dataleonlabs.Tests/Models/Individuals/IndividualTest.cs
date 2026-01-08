@@ -30,7 +30,7 @@ public class IndividualTest : TestBase
                     Type = Companies::Type.Pep,
                 },
             ],
-            AuthURL = "https://id.dataleon.ai/a/123",
+            AuthUrl = "https://id.dataleon.ai/a/123",
             Certificat = new()
             {
                 ID = "cert_123",
@@ -68,7 +68,7 @@ public class IndividualTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -89,14 +89,14 @@ public class IndividualTest : TestBase
             IdentityCard = new()
             {
                 ID = "doc_001",
-                BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+                BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
                 EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
-                FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+                FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
                 Gender = "M",
                 IssueDate = "2020-01-01",
                 LastName = "Doe",
@@ -110,7 +110,7 @@ public class IndividualTest : TestBase
             {
                 Birthday = "01/01/1990",
                 Email = "john.doe@example.com",
-                FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+                FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
                 FirstName = "John",
                 FullName = "John Doe",
                 Gender = "M",
@@ -119,7 +119,7 @@ public class IndividualTest : TestBase
                 Nationality = "FRA",
                 PhoneNumber = "+33612345678",
             },
-            PortalURL = "https://portal.dataleon.ai/w/123",
+            PortalUrl = "https://portal.dataleon.ai/w/123",
             Properties =
             [
                 new()
@@ -151,10 +151,10 @@ public class IndividualTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -179,7 +179,7 @@ public class IndividualTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/w/123",
+            WebviewUrl = "https://id.dataleon.ai/w/123",
             WorkspaceID = "wk_123",
         };
 
@@ -199,7 +199,7 @@ public class IndividualTest : TestBase
                 Type = Companies::Type.Pep,
             },
         ];
-        string expectedAuthURL = "https://id.dataleon.ai/a/123";
+        string expectedAuthUrl = "https://id.dataleon.ai/a/123";
         Companies::Certificat expectedCertificat = new()
         {
             ID = "cert_123",
@@ -237,7 +237,7 @@ public class IndividualTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                 DocumentType = "generic",
                 Name = "generic_doc",
-                SignedURL = "https://cdn.example.com/doc.pdf",
+                SignedUrl = "https://cdn.example.com/doc.pdf",
                 State = "SUBMITTED",
                 Status = "approved",
                 Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -255,14 +255,14 @@ public class IndividualTest : TestBase
         IdentityCard expectedIdentityCard = new()
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -276,7 +276,7 @@ public class IndividualTest : TestBase
         {
             Birthday = "01/01/1990",
             Email = "john.doe@example.com",
-            FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+            FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
             FirstName = "John",
             FullName = "John Doe",
             Gender = "M",
@@ -285,7 +285,7 @@ public class IndividualTest : TestBase
             Nationality = "FRA",
             PhoneNumber = "+33612345678",
         };
-        string expectedPortalURL = "https://portal.dataleon.ai/w/123";
+        string expectedPortalUrl = "https://portal.dataleon.ai/w/123";
         List<Companies::Property> expectedProperties =
         [
             new()
@@ -317,10 +317,10 @@ public class IndividualTest : TestBase
         Companies::CompanyTechnicalData expectedTechnicalData = new()
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -345,7 +345,7 @@ public class IndividualTest : TestBase
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
             TransferMode = "API",
         };
-        string expectedWebviewURL = "https://id.dataleon.ai/w/123";
+        string expectedWebviewUrl = "https://id.dataleon.ai/w/123";
         string expectedWorkspaceID = "wk_123";
 
         Assert.Equal(expectedID, model.ID);
@@ -355,7 +355,7 @@ public class IndividualTest : TestBase
         {
             Assert.Equal(expectedAmlSuspicions[i], model.AmlSuspicions[i]);
         }
-        Assert.Equal(expectedAuthURL, model.AuthURL);
+        Assert.Equal(expectedAuthUrl, model.AuthUrl);
         Assert.Equal(expectedCertificat, model.Certificat);
         Assert.NotNull(model.Checks);
         Assert.Equal(expectedChecks.Count, model.Checks.Count);
@@ -373,7 +373,7 @@ public class IndividualTest : TestBase
         Assert.Equal(expectedIdentityCard, model.IdentityCard);
         Assert.Equal(expectedNumber, model.Number);
         Assert.Equal(expectedPerson, model.Person);
-        Assert.Equal(expectedPortalURL, model.PortalURL);
+        Assert.Equal(expectedPortalUrl, model.PortalUrl);
         Assert.NotNull(model.Properties);
         Assert.Equal(expectedProperties.Count, model.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
@@ -391,7 +391,7 @@ public class IndividualTest : TestBase
             Assert.Equal(expectedTags[i], model.Tags[i]);
         }
         Assert.Equal(expectedTechnicalData, model.TechnicalData);
-        Assert.Equal(expectedWebviewURL, model.WebviewURL);
+        Assert.Equal(expectedWebviewUrl, model.WebviewUrl);
         Assert.Equal(expectedWorkspaceID, model.WorkspaceID);
     }
 
@@ -416,7 +416,7 @@ public class IndividualTest : TestBase
                     Type = Companies::Type.Pep,
                 },
             ],
-            AuthURL = "https://id.dataleon.ai/a/123",
+            AuthUrl = "https://id.dataleon.ai/a/123",
             Certificat = new()
             {
                 ID = "cert_123",
@@ -454,7 +454,7 @@ public class IndividualTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -475,14 +475,14 @@ public class IndividualTest : TestBase
             IdentityCard = new()
             {
                 ID = "doc_001",
-                BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+                BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
                 EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
-                FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+                FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
                 Gender = "M",
                 IssueDate = "2020-01-01",
                 LastName = "Doe",
@@ -496,7 +496,7 @@ public class IndividualTest : TestBase
             {
                 Birthday = "01/01/1990",
                 Email = "john.doe@example.com",
-                FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+                FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
                 FirstName = "John",
                 FullName = "John Doe",
                 Gender = "M",
@@ -505,7 +505,7 @@ public class IndividualTest : TestBase
                 Nationality = "FRA",
                 PhoneNumber = "+33612345678",
             },
-            PortalURL = "https://portal.dataleon.ai/w/123",
+            PortalUrl = "https://portal.dataleon.ai/w/123",
             Properties =
             [
                 new()
@@ -537,10 +537,10 @@ public class IndividualTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -565,7 +565,7 @@ public class IndividualTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/w/123",
+            WebviewUrl = "https://id.dataleon.ai/w/123",
             WorkspaceID = "wk_123",
         };
 
@@ -596,7 +596,7 @@ public class IndividualTest : TestBase
                     Type = Companies::Type.Pep,
                 },
             ],
-            AuthURL = "https://id.dataleon.ai/a/123",
+            AuthUrl = "https://id.dataleon.ai/a/123",
             Certificat = new()
             {
                 ID = "cert_123",
@@ -634,7 +634,7 @@ public class IndividualTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -655,14 +655,14 @@ public class IndividualTest : TestBase
             IdentityCard = new()
             {
                 ID = "doc_001",
-                BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+                BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
                 EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
-                FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+                FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
                 Gender = "M",
                 IssueDate = "2020-01-01",
                 LastName = "Doe",
@@ -676,7 +676,7 @@ public class IndividualTest : TestBase
             {
                 Birthday = "01/01/1990",
                 Email = "john.doe@example.com",
-                FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+                FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
                 FirstName = "John",
                 FullName = "John Doe",
                 Gender = "M",
@@ -685,7 +685,7 @@ public class IndividualTest : TestBase
                 Nationality = "FRA",
                 PhoneNumber = "+33612345678",
             },
-            PortalURL = "https://portal.dataleon.ai/w/123",
+            PortalUrl = "https://portal.dataleon.ai/w/123",
             Properties =
             [
                 new()
@@ -717,10 +717,10 @@ public class IndividualTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -745,7 +745,7 @@ public class IndividualTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/w/123",
+            WebviewUrl = "https://id.dataleon.ai/w/123",
             WorkspaceID = "wk_123",
         };
 
@@ -769,7 +769,7 @@ public class IndividualTest : TestBase
                 Type = Companies::Type.Pep,
             },
         ];
-        string expectedAuthURL = "https://id.dataleon.ai/a/123";
+        string expectedAuthUrl = "https://id.dataleon.ai/a/123";
         Companies::Certificat expectedCertificat = new()
         {
             ID = "cert_123",
@@ -807,7 +807,7 @@ public class IndividualTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                 DocumentType = "generic",
                 Name = "generic_doc",
-                SignedURL = "https://cdn.example.com/doc.pdf",
+                SignedUrl = "https://cdn.example.com/doc.pdf",
                 State = "SUBMITTED",
                 Status = "approved",
                 Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -825,14 +825,14 @@ public class IndividualTest : TestBase
         IdentityCard expectedIdentityCard = new()
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -846,7 +846,7 @@ public class IndividualTest : TestBase
         {
             Birthday = "01/01/1990",
             Email = "john.doe@example.com",
-            FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+            FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
             FirstName = "John",
             FullName = "John Doe",
             Gender = "M",
@@ -855,7 +855,7 @@ public class IndividualTest : TestBase
             Nationality = "FRA",
             PhoneNumber = "+33612345678",
         };
-        string expectedPortalURL = "https://portal.dataleon.ai/w/123";
+        string expectedPortalUrl = "https://portal.dataleon.ai/w/123";
         List<Companies::Property> expectedProperties =
         [
             new()
@@ -887,10 +887,10 @@ public class IndividualTest : TestBase
         Companies::CompanyTechnicalData expectedTechnicalData = new()
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -915,7 +915,7 @@ public class IndividualTest : TestBase
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
             TransferMode = "API",
         };
-        string expectedWebviewURL = "https://id.dataleon.ai/w/123";
+        string expectedWebviewUrl = "https://id.dataleon.ai/w/123";
         string expectedWorkspaceID = "wk_123";
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -925,7 +925,7 @@ public class IndividualTest : TestBase
         {
             Assert.Equal(expectedAmlSuspicions[i], deserialized.AmlSuspicions[i]);
         }
-        Assert.Equal(expectedAuthURL, deserialized.AuthURL);
+        Assert.Equal(expectedAuthUrl, deserialized.AuthUrl);
         Assert.Equal(expectedCertificat, deserialized.Certificat);
         Assert.NotNull(deserialized.Checks);
         Assert.Equal(expectedChecks.Count, deserialized.Checks.Count);
@@ -943,7 +943,7 @@ public class IndividualTest : TestBase
         Assert.Equal(expectedIdentityCard, deserialized.IdentityCard);
         Assert.Equal(expectedNumber, deserialized.Number);
         Assert.Equal(expectedPerson, deserialized.Person);
-        Assert.Equal(expectedPortalURL, deserialized.PortalURL);
+        Assert.Equal(expectedPortalUrl, deserialized.PortalUrl);
         Assert.NotNull(deserialized.Properties);
         Assert.Equal(expectedProperties.Count, deserialized.Properties.Count);
         for (int i = 0; i < expectedProperties.Count; i++)
@@ -961,7 +961,7 @@ public class IndividualTest : TestBase
             Assert.Equal(expectedTags[i], deserialized.Tags[i]);
         }
         Assert.Equal(expectedTechnicalData, deserialized.TechnicalData);
-        Assert.Equal(expectedWebviewURL, deserialized.WebviewURL);
+        Assert.Equal(expectedWebviewUrl, deserialized.WebviewUrl);
         Assert.Equal(expectedWorkspaceID, deserialized.WorkspaceID);
     }
 
@@ -986,7 +986,7 @@ public class IndividualTest : TestBase
                     Type = Companies::Type.Pep,
                 },
             ],
-            AuthURL = "https://id.dataleon.ai/a/123",
+            AuthUrl = "https://id.dataleon.ai/a/123",
             Certificat = new()
             {
                 ID = "cert_123",
@@ -1024,7 +1024,7 @@ public class IndividualTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
                     DocumentType = "generic",
                     Name = "generic_doc",
-                    SignedURL = "https://cdn.example.com/doc.pdf",
+                    SignedUrl = "https://cdn.example.com/doc.pdf",
                     State = "SUBMITTED",
                     Status = "approved",
                     Tables =
@@ -1045,14 +1045,14 @@ public class IndividualTest : TestBase
             IdentityCard = new()
             {
                 ID = "doc_001",
-                BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+                BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
                 BirthPlace = "Paris",
                 Birthday = "01/01/1990",
                 Country = "FR",
                 EntitlementDate = "entitlement_date",
                 ExpirationDate = "2030-01-01",
                 FirstName = "John",
-                FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+                FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
                 Gender = "M",
                 IssueDate = "2020-01-01",
                 LastName = "Doe",
@@ -1066,7 +1066,7 @@ public class IndividualTest : TestBase
             {
                 Birthday = "01/01/1990",
                 Email = "john.doe@example.com",
-                FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+                FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
                 FirstName = "John",
                 FullName = "John Doe",
                 Gender = "M",
@@ -1075,7 +1075,7 @@ public class IndividualTest : TestBase
                 Nationality = "FRA",
                 PhoneNumber = "+33612345678",
             },
-            PortalURL = "https://portal.dataleon.ai/w/123",
+            PortalUrl = "https://portal.dataleon.ai/w/123",
             Properties =
             [
                 new()
@@ -1107,10 +1107,10 @@ public class IndividualTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                APIVersion = 2,
+                ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
                 DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
                 ExportType = "json",
@@ -1135,7 +1135,7 @@ public class IndividualTest : TestBase
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
                 TransferMode = "API",
             },
-            WebviewURL = "https://id.dataleon.ai/w/123",
+            WebviewUrl = "https://id.dataleon.ai/w/123",
             WorkspaceID = "wk_123",
         };
 
@@ -1151,7 +1151,7 @@ public class IndividualTest : TestBase
         Assert.False(model.RawData.ContainsKey("id"));
         Assert.Null(model.AmlSuspicions);
         Assert.False(model.RawData.ContainsKey("aml_suspicions"));
-        Assert.Null(model.AuthURL);
+        Assert.Null(model.AuthUrl);
         Assert.False(model.RawData.ContainsKey("auth_url"));
         Assert.Null(model.Certificat);
         Assert.False(model.RawData.ContainsKey("certificat"));
@@ -1167,7 +1167,7 @@ public class IndividualTest : TestBase
         Assert.False(model.RawData.ContainsKey("number"));
         Assert.Null(model.Person);
         Assert.False(model.RawData.ContainsKey("person"));
-        Assert.Null(model.PortalURL);
+        Assert.Null(model.PortalUrl);
         Assert.False(model.RawData.ContainsKey("portal_url"));
         Assert.Null(model.Properties);
         Assert.False(model.RawData.ContainsKey("properties"));
@@ -1183,7 +1183,7 @@ public class IndividualTest : TestBase
         Assert.False(model.RawData.ContainsKey("tags"));
         Assert.Null(model.TechnicalData);
         Assert.False(model.RawData.ContainsKey("technical_data"));
-        Assert.Null(model.WebviewURL);
+        Assert.Null(model.WebviewUrl);
         Assert.False(model.RawData.ContainsKey("webview_url"));
         Assert.Null(model.WorkspaceID);
         Assert.False(model.RawData.ContainsKey("workspace_id"));
@@ -1205,7 +1205,7 @@ public class IndividualTest : TestBase
             // Null should be interpreted as omitted for these properties
             ID = null,
             AmlSuspicions = null,
-            AuthURL = null,
+            AuthUrl = null,
             Certificat = null,
             Checks = null,
             CreatedAt = null,
@@ -1213,7 +1213,7 @@ public class IndividualTest : TestBase
             IdentityCard = null,
             Number = null,
             Person = null,
-            PortalURL = null,
+            PortalUrl = null,
             Properties = null,
             Risk = null,
             SourceID = null,
@@ -1221,7 +1221,7 @@ public class IndividualTest : TestBase
             Status = null,
             Tags = null,
             TechnicalData = null,
-            WebviewURL = null,
+            WebviewUrl = null,
             WorkspaceID = null,
         };
 
@@ -1229,7 +1229,7 @@ public class IndividualTest : TestBase
         Assert.False(model.RawData.ContainsKey("id"));
         Assert.Null(model.AmlSuspicions);
         Assert.False(model.RawData.ContainsKey("aml_suspicions"));
-        Assert.Null(model.AuthURL);
+        Assert.Null(model.AuthUrl);
         Assert.False(model.RawData.ContainsKey("auth_url"));
         Assert.Null(model.Certificat);
         Assert.False(model.RawData.ContainsKey("certificat"));
@@ -1245,7 +1245,7 @@ public class IndividualTest : TestBase
         Assert.False(model.RawData.ContainsKey("number"));
         Assert.Null(model.Person);
         Assert.False(model.RawData.ContainsKey("person"));
-        Assert.Null(model.PortalURL);
+        Assert.Null(model.PortalUrl);
         Assert.False(model.RawData.ContainsKey("portal_url"));
         Assert.Null(model.Properties);
         Assert.False(model.RawData.ContainsKey("properties"));
@@ -1261,7 +1261,7 @@ public class IndividualTest : TestBase
         Assert.False(model.RawData.ContainsKey("tags"));
         Assert.Null(model.TechnicalData);
         Assert.False(model.RawData.ContainsKey("technical_data"));
-        Assert.Null(model.WebviewURL);
+        Assert.Null(model.WebviewUrl);
         Assert.False(model.RawData.ContainsKey("webview_url"));
         Assert.Null(model.WorkspaceID);
         Assert.False(model.RawData.ContainsKey("workspace_id"));
@@ -1275,7 +1275,7 @@ public class IndividualTest : TestBase
             // Null should be interpreted as omitted for these properties
             ID = null,
             AmlSuspicions = null,
-            AuthURL = null,
+            AuthUrl = null,
             Certificat = null,
             Checks = null,
             CreatedAt = null,
@@ -1283,7 +1283,7 @@ public class IndividualTest : TestBase
             IdentityCard = null,
             Number = null,
             Person = null,
-            PortalURL = null,
+            PortalUrl = null,
             Properties = null,
             Risk = null,
             SourceID = null,
@@ -1291,7 +1291,7 @@ public class IndividualTest : TestBase
             Status = null,
             Tags = null,
             TechnicalData = null,
-            WebviewURL = null,
+            WebviewUrl = null,
             WorkspaceID = null,
         };
 
@@ -1307,14 +1307,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1325,14 +1325,14 @@ public class IdentityCardTest : TestBase
         };
 
         string expectedID = "doc_001";
-        string expectedBackDocumentSignedURL = "https://cdn.example.com/back.jpg";
+        string expectedBackDocumentSignedUrl = "https://cdn.example.com/back.jpg";
         string expectedBirthPlace = "Paris";
         string expectedBirthday = "01/01/1990";
         string expectedCountry = "FR";
         string expectedEntitlementDate = "entitlement_date";
         string expectedExpirationDate = "2030-01-01";
         string expectedFirstName = "John";
-        string expectedFrontDocumentSignedURL = "https://cdn.example.com/front.jpg";
+        string expectedFrontDocumentSignedUrl = "https://cdn.example.com/front.jpg";
         string expectedGender = "M";
         string expectedIssueDate = "2020-01-01";
         string expectedLastName = "Doe";
@@ -1341,14 +1341,14 @@ public class IdentityCardTest : TestBase
         string expectedType = "passport";
 
         Assert.Equal(expectedID, model.ID);
-        Assert.Equal(expectedBackDocumentSignedURL, model.BackDocumentSignedURL);
+        Assert.Equal(expectedBackDocumentSignedUrl, model.BackDocumentSignedUrl);
         Assert.Equal(expectedBirthPlace, model.BirthPlace);
         Assert.Equal(expectedBirthday, model.Birthday);
         Assert.Equal(expectedCountry, model.Country);
         Assert.Equal(expectedEntitlementDate, model.EntitlementDate);
         Assert.Equal(expectedExpirationDate, model.ExpirationDate);
         Assert.Equal(expectedFirstName, model.FirstName);
-        Assert.Equal(expectedFrontDocumentSignedURL, model.FrontDocumentSignedURL);
+        Assert.Equal(expectedFrontDocumentSignedUrl, model.FrontDocumentSignedUrl);
         Assert.Equal(expectedGender, model.Gender);
         Assert.Equal(expectedIssueDate, model.IssueDate);
         Assert.Equal(expectedLastName, model.LastName);
@@ -1364,14 +1364,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1393,14 +1393,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1415,14 +1415,14 @@ public class IdentityCardTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "doc_001";
-        string expectedBackDocumentSignedURL = "https://cdn.example.com/back.jpg";
+        string expectedBackDocumentSignedUrl = "https://cdn.example.com/back.jpg";
         string expectedBirthPlace = "Paris";
         string expectedBirthday = "01/01/1990";
         string expectedCountry = "FR";
         string expectedEntitlementDate = "entitlement_date";
         string expectedExpirationDate = "2030-01-01";
         string expectedFirstName = "John";
-        string expectedFrontDocumentSignedURL = "https://cdn.example.com/front.jpg";
+        string expectedFrontDocumentSignedUrl = "https://cdn.example.com/front.jpg";
         string expectedGender = "M";
         string expectedIssueDate = "2020-01-01";
         string expectedLastName = "Doe";
@@ -1431,14 +1431,14 @@ public class IdentityCardTest : TestBase
         string expectedType = "passport";
 
         Assert.Equal(expectedID, deserialized.ID);
-        Assert.Equal(expectedBackDocumentSignedURL, deserialized.BackDocumentSignedURL);
+        Assert.Equal(expectedBackDocumentSignedUrl, deserialized.BackDocumentSignedUrl);
         Assert.Equal(expectedBirthPlace, deserialized.BirthPlace);
         Assert.Equal(expectedBirthday, deserialized.Birthday);
         Assert.Equal(expectedCountry, deserialized.Country);
         Assert.Equal(expectedEntitlementDate, deserialized.EntitlementDate);
         Assert.Equal(expectedExpirationDate, deserialized.ExpirationDate);
         Assert.Equal(expectedFirstName, deserialized.FirstName);
-        Assert.Equal(expectedFrontDocumentSignedURL, deserialized.FrontDocumentSignedURL);
+        Assert.Equal(expectedFrontDocumentSignedUrl, deserialized.FrontDocumentSignedUrl);
         Assert.Equal(expectedGender, deserialized.Gender);
         Assert.Equal(expectedIssueDate, deserialized.IssueDate);
         Assert.Equal(expectedLastName, deserialized.LastName);
@@ -1454,14 +1454,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1481,7 +1481,7 @@ public class IdentityCardTest : TestBase
 
         Assert.Null(model.ID);
         Assert.False(model.RawData.ContainsKey("id"));
-        Assert.Null(model.BackDocumentSignedURL);
+        Assert.Null(model.BackDocumentSignedUrl);
         Assert.False(model.RawData.ContainsKey("back_document_signed_url"));
         Assert.Null(model.BirthPlace);
         Assert.False(model.RawData.ContainsKey("birth_place"));
@@ -1495,7 +1495,7 @@ public class IdentityCardTest : TestBase
         Assert.False(model.RawData.ContainsKey("expiration_date"));
         Assert.Null(model.FirstName);
         Assert.False(model.RawData.ContainsKey("first_name"));
-        Assert.Null(model.FrontDocumentSignedURL);
+        Assert.Null(model.FrontDocumentSignedUrl);
         Assert.False(model.RawData.ContainsKey("front_document_signed_url"));
         Assert.Null(model.Gender);
         Assert.False(model.RawData.ContainsKey("gender"));
@@ -1528,14 +1528,14 @@ public class IdentityCardTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ID = null,
-            BackDocumentSignedURL = null,
+            BackDocumentSignedUrl = null,
             BirthPlace = null,
             Birthday = null,
             Country = null,
             EntitlementDate = null,
             ExpirationDate = null,
             FirstName = null,
-            FrontDocumentSignedURL = null,
+            FrontDocumentSignedUrl = null,
             Gender = null,
             IssueDate = null,
             LastName = null,
@@ -1546,7 +1546,7 @@ public class IdentityCardTest : TestBase
 
         Assert.Null(model.ID);
         Assert.False(model.RawData.ContainsKey("id"));
-        Assert.Null(model.BackDocumentSignedURL);
+        Assert.Null(model.BackDocumentSignedUrl);
         Assert.False(model.RawData.ContainsKey("back_document_signed_url"));
         Assert.Null(model.BirthPlace);
         Assert.False(model.RawData.ContainsKey("birth_place"));
@@ -1560,7 +1560,7 @@ public class IdentityCardTest : TestBase
         Assert.False(model.RawData.ContainsKey("expiration_date"));
         Assert.Null(model.FirstName);
         Assert.False(model.RawData.ContainsKey("first_name"));
-        Assert.Null(model.FrontDocumentSignedURL);
+        Assert.Null(model.FrontDocumentSignedUrl);
         Assert.False(model.RawData.ContainsKey("front_document_signed_url"));
         Assert.Null(model.Gender);
         Assert.False(model.RawData.ContainsKey("gender"));
@@ -1585,14 +1585,14 @@ public class IdentityCardTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ID = null,
-            BackDocumentSignedURL = null,
+            BackDocumentSignedUrl = null,
             BirthPlace = null,
             Birthday = null,
             Country = null,
             EntitlementDate = null,
             ExpirationDate = null,
             FirstName = null,
-            FrontDocumentSignedURL = null,
+            FrontDocumentSignedUrl = null,
             Gender = null,
             IssueDate = null,
             LastName = null,
@@ -1610,14 +1610,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1636,14 +1636,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1661,14 +1661,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1689,14 +1689,14 @@ public class IdentityCardTest : TestBase
         var model = new IdentityCard
         {
             ID = "doc_001",
-            BackDocumentSignedURL = "https://cdn.example.com/back.jpg",
+            BackDocumentSignedUrl = "https://cdn.example.com/back.jpg",
             BirthPlace = "Paris",
             Birthday = "01/01/1990",
             Country = "FR",
             EntitlementDate = "entitlement_date",
             ExpirationDate = "2030-01-01",
             FirstName = "John",
-            FrontDocumentSignedURL = "https://cdn.example.com/front.jpg",
+            FrontDocumentSignedUrl = "https://cdn.example.com/front.jpg",
             Gender = "M",
             IssueDate = "2020-01-01",
             LastName = "Doe",
@@ -1720,7 +1720,7 @@ public class IndividualPersonTest : TestBase
         {
             Birthday = "01/01/1990",
             Email = "john.doe@example.com",
-            FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+            FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
             FirstName = "John",
             FullName = "John Doe",
             Gender = "M",
@@ -1732,7 +1732,7 @@ public class IndividualPersonTest : TestBase
 
         string expectedBirthday = "01/01/1990";
         string expectedEmail = "john.doe@example.com";
-        string expectedFaceImageSignedURL = "https://cdn.example.com/face.jpg";
+        string expectedFaceImageSignedUrl = "https://cdn.example.com/face.jpg";
         string expectedFirstName = "John";
         string expectedFullName = "John Doe";
         string expectedGender = "M";
@@ -1743,7 +1743,7 @@ public class IndividualPersonTest : TestBase
 
         Assert.Equal(expectedBirthday, model.Birthday);
         Assert.Equal(expectedEmail, model.Email);
-        Assert.Equal(expectedFaceImageSignedURL, model.FaceImageSignedURL);
+        Assert.Equal(expectedFaceImageSignedUrl, model.FaceImageSignedUrl);
         Assert.Equal(expectedFirstName, model.FirstName);
         Assert.Equal(expectedFullName, model.FullName);
         Assert.Equal(expectedGender, model.Gender);
@@ -1760,7 +1760,7 @@ public class IndividualPersonTest : TestBase
         {
             Birthday = "01/01/1990",
             Email = "john.doe@example.com",
-            FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+            FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
             FirstName = "John",
             FullName = "John Doe",
             Gender = "M",
@@ -1783,7 +1783,7 @@ public class IndividualPersonTest : TestBase
         {
             Birthday = "01/01/1990",
             Email = "john.doe@example.com",
-            FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+            FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
             FirstName = "John",
             FullName = "John Doe",
             Gender = "M",
@@ -1799,7 +1799,7 @@ public class IndividualPersonTest : TestBase
 
         string expectedBirthday = "01/01/1990";
         string expectedEmail = "john.doe@example.com";
-        string expectedFaceImageSignedURL = "https://cdn.example.com/face.jpg";
+        string expectedFaceImageSignedUrl = "https://cdn.example.com/face.jpg";
         string expectedFirstName = "John";
         string expectedFullName = "John Doe";
         string expectedGender = "M";
@@ -1810,7 +1810,7 @@ public class IndividualPersonTest : TestBase
 
         Assert.Equal(expectedBirthday, deserialized.Birthday);
         Assert.Equal(expectedEmail, deserialized.Email);
-        Assert.Equal(expectedFaceImageSignedURL, deserialized.FaceImageSignedURL);
+        Assert.Equal(expectedFaceImageSignedUrl, deserialized.FaceImageSignedUrl);
         Assert.Equal(expectedFirstName, deserialized.FirstName);
         Assert.Equal(expectedFullName, deserialized.FullName);
         Assert.Equal(expectedGender, deserialized.Gender);
@@ -1827,7 +1827,7 @@ public class IndividualPersonTest : TestBase
         {
             Birthday = "01/01/1990",
             Email = "john.doe@example.com",
-            FaceImageSignedURL = "https://cdn.example.com/face.jpg",
+            FaceImageSignedUrl = "https://cdn.example.com/face.jpg",
             FirstName = "John",
             FullName = "John Doe",
             Gender = "M",
@@ -1849,7 +1849,7 @@ public class IndividualPersonTest : TestBase
         Assert.False(model.RawData.ContainsKey("birthday"));
         Assert.Null(model.Email);
         Assert.False(model.RawData.ContainsKey("email"));
-        Assert.Null(model.FaceImageSignedURL);
+        Assert.Null(model.FaceImageSignedUrl);
         Assert.False(model.RawData.ContainsKey("face_image_signed_url"));
         Assert.Null(model.FirstName);
         Assert.False(model.RawData.ContainsKey("first_name"));
@@ -1883,7 +1883,7 @@ public class IndividualPersonTest : TestBase
             // Null should be interpreted as omitted for these properties
             Birthday = null,
             Email = null,
-            FaceImageSignedURL = null,
+            FaceImageSignedUrl = null,
             FirstName = null,
             FullName = null,
             Gender = null,
@@ -1897,7 +1897,7 @@ public class IndividualPersonTest : TestBase
         Assert.False(model.RawData.ContainsKey("birthday"));
         Assert.Null(model.Email);
         Assert.False(model.RawData.ContainsKey("email"));
-        Assert.Null(model.FaceImageSignedURL);
+        Assert.Null(model.FaceImageSignedUrl);
         Assert.False(model.RawData.ContainsKey("face_image_signed_url"));
         Assert.Null(model.FirstName);
         Assert.False(model.RawData.ContainsKey("first_name"));
@@ -1923,7 +1923,7 @@ public class IndividualPersonTest : TestBase
             // Null should be interpreted as omitted for these properties
             Birthday = null,
             Email = null,
-            FaceImageSignedURL = null,
+            FaceImageSignedUrl = null,
             FirstName = null,
             FullName = null,
             Gender = null,

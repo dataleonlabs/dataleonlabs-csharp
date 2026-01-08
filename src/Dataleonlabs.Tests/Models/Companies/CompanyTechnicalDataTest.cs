@@ -15,10 +15,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -45,10 +45,10 @@ public class CompanyTechnicalDataTest : TestBase
         };
 
         bool expectedActiveAmlSuspicions = false;
-        long expectedAPIVersion = 2;
+        long expectedApiVersion = 2;
         DateTimeOffset expectedApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z");
-        string expectedCallbackURL = "https://example.com/callback";
-        string expectedCallbackURLNotification = "https://example.com/notify";
+        string expectedCallbackUrl = "https://example.com/callback";
+        string expectedCallbackUrlNotification = "https://example.com/notify";
         bool expectedDisableNotification = false;
         DateTimeOffset expectedDisableNotificationDate = DateTimeOffset.Parse(
             "2025-07-12T13:10:00Z"
@@ -74,10 +74,10 @@ public class CompanyTechnicalDataTest : TestBase
         string expectedTransferMode = "API";
 
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
-        Assert.Equal(expectedAPIVersion, model.APIVersion);
+        Assert.Equal(expectedApiVersion, model.ApiVersion);
         Assert.Equal(expectedApprovedAt, model.ApprovedAt);
-        Assert.Equal(expectedCallbackURL, model.CallbackURL);
-        Assert.Equal(expectedCallbackURLNotification, model.CallbackURLNotification);
+        Assert.Equal(expectedCallbackUrl, model.CallbackUrl);
+        Assert.Equal(expectedCallbackUrlNotification, model.CallbackUrlNotification);
         Assert.Equal(expectedDisableNotification, model.DisableNotification);
         Assert.Equal(expectedDisableNotificationDate, model.DisableNotificationDate);
         Assert.Equal(expectedExportType, model.ExportType);
@@ -109,10 +109,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -150,10 +150,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -184,10 +184,10 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
-        long expectedAPIVersion = 2;
+        long expectedApiVersion = 2;
         DateTimeOffset expectedApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z");
-        string expectedCallbackURL = "https://example.com/callback";
-        string expectedCallbackURLNotification = "https://example.com/notify";
+        string expectedCallbackUrl = "https://example.com/callback";
+        string expectedCallbackUrlNotification = "https://example.com/notify";
         bool expectedDisableNotification = false;
         DateTimeOffset expectedDisableNotificationDate = DateTimeOffset.Parse(
             "2025-07-12T13:10:00Z"
@@ -213,10 +213,10 @@ public class CompanyTechnicalDataTest : TestBase
         string expectedTransferMode = "API";
 
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
-        Assert.Equal(expectedAPIVersion, deserialized.APIVersion);
+        Assert.Equal(expectedApiVersion, deserialized.ApiVersion);
         Assert.Equal(expectedApprovedAt, deserialized.ApprovedAt);
-        Assert.Equal(expectedCallbackURL, deserialized.CallbackURL);
-        Assert.Equal(expectedCallbackURLNotification, deserialized.CallbackURLNotification);
+        Assert.Equal(expectedCallbackUrl, deserialized.CallbackUrl);
+        Assert.Equal(expectedCallbackUrlNotification, deserialized.CallbackUrlNotification);
         Assert.Equal(expectedDisableNotification, deserialized.DisableNotification);
         Assert.Equal(expectedDisableNotificationDate, deserialized.DisableNotificationDate);
         Assert.Equal(expectedExportType, deserialized.ExportType);
@@ -248,10 +248,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             ExportType = "json",
@@ -292,13 +292,13 @@ public class CompanyTechnicalDataTest : TestBase
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
-        Assert.Null(model.APIVersion);
+        Assert.Null(model.ApiVersion);
         Assert.False(model.RawData.ContainsKey("api_version"));
         Assert.Null(model.ApprovedAt);
         Assert.False(model.RawData.ContainsKey("approved_at"));
-        Assert.Null(model.CallbackURL);
+        Assert.Null(model.CallbackUrl);
         Assert.False(model.RawData.ContainsKey("callback_url"));
-        Assert.Null(model.CallbackURLNotification);
+        Assert.Null(model.CallbackUrlNotification);
         Assert.False(model.RawData.ContainsKey("callback_url_notification"));
         Assert.Null(model.DisableNotification);
         Assert.False(model.RawData.ContainsKey("disable_notification"));
@@ -356,10 +356,10 @@ public class CompanyTechnicalDataTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
-            APIVersion = null,
+            ApiVersion = null,
             ApprovedAt = null,
-            CallbackURL = null,
-            CallbackURLNotification = null,
+            CallbackUrl = null,
+            CallbackUrlNotification = null,
             DisableNotification = null,
             ExportType = null,
             FilteringScoreAmlSuspicions = null,
@@ -379,13 +379,13 @@ public class CompanyTechnicalDataTest : TestBase
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
-        Assert.Null(model.APIVersion);
+        Assert.Null(model.ApiVersion);
         Assert.False(model.RawData.ContainsKey("api_version"));
         Assert.Null(model.ApprovedAt);
         Assert.False(model.RawData.ContainsKey("approved_at"));
-        Assert.Null(model.CallbackURL);
+        Assert.Null(model.CallbackUrl);
         Assert.False(model.RawData.ContainsKey("callback_url"));
-        Assert.Null(model.CallbackURLNotification);
+        Assert.Null(model.CallbackUrlNotification);
         Assert.False(model.RawData.ContainsKey("callback_url_notification"));
         Assert.Null(model.DisableNotification);
         Assert.False(model.RawData.ContainsKey("disable_notification"));
@@ -430,10 +430,10 @@ public class CompanyTechnicalDataTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
-            APIVersion = null,
+            ApiVersion = null,
             ApprovedAt = null,
-            CallbackURL = null,
-            CallbackURLNotification = null,
+            CallbackUrl = null,
+            CallbackUrlNotification = null,
             DisableNotification = null,
             ExportType = null,
             FilteringScoreAmlSuspicions = null,
@@ -460,10 +460,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
             FilteringScoreAmlSuspicions = 0.75f,
@@ -500,10 +500,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
             FilteringScoreAmlSuspicions = 0.75f,
@@ -535,10 +535,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
             FilteringScoreAmlSuspicions = 0.75f,
@@ -579,10 +579,10 @@ public class CompanyTechnicalDataTest : TestBase
         var model = new CompanyTechnicalData
         {
             ActiveAmlSuspicions = false,
-            APIVersion = 2,
+            ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
             ExportType = "json",
             FilteringScoreAmlSuspicions = 0.75f,

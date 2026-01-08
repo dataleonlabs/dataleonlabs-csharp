@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Dataleonlabs.Core;
@@ -29,8 +30,8 @@ public class IndividualCreateParamsTest : TestBase
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 FilteringScoreAmlSuspicions = 0.75f,
                 Language = "fra",
                 PortalSteps =
@@ -59,8 +60,8 @@ public class IndividualCreateParamsTest : TestBase
         TechnicalData expectedTechnicalData = new()
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
@@ -110,6 +111,16 @@ public class IndividualCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("source_id"));
         Assert.Null(parameters.TechnicalData);
         Assert.False(parameters.RawBodyData.ContainsKey("technical_data"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        IndividualCreateParams parameters = new() { WorkspaceID = "wk_123" };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.Equal(new Uri("https://inference.eu-west-1.dataleon.ai/individuals"), url);
     }
 }
 
@@ -377,8 +388,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
@@ -391,8 +402,8 @@ public class TechnicalDataTest : TestBase
         };
 
         bool expectedActiveAmlSuspicions = false;
-        string expectedCallbackURL = "https://example.com/callback";
-        string expectedCallbackURLNotification = "https://example.com/notify";
+        string expectedCallbackUrl = "https://example.com/callback";
+        string expectedCallbackUrlNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, PortalStep>> expectedPortalSteps =
@@ -404,8 +415,8 @@ public class TechnicalDataTest : TestBase
         bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
-        Assert.Equal(expectedCallbackURL, model.CallbackURL);
-        Assert.Equal(expectedCallbackURLNotification, model.CallbackURLNotification);
+        Assert.Equal(expectedCallbackUrl, model.CallbackUrl);
+        Assert.Equal(expectedCallbackUrlNotification, model.CallbackUrlNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, model.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, model.Language);
         Assert.NotNull(model.PortalSteps);
@@ -423,8 +434,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
@@ -448,8 +459,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
@@ -466,8 +477,8 @@ public class TechnicalDataTest : TestBase
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
-        string expectedCallbackURL = "https://example.com/callback";
-        string expectedCallbackURLNotification = "https://example.com/notify";
+        string expectedCallbackUrl = "https://example.com/callback";
+        string expectedCallbackUrlNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, PortalStep>> expectedPortalSteps =
@@ -479,8 +490,8 @@ public class TechnicalDataTest : TestBase
         bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
-        Assert.Equal(expectedCallbackURL, deserialized.CallbackURL);
-        Assert.Equal(expectedCallbackURLNotification, deserialized.CallbackURLNotification);
+        Assert.Equal(expectedCallbackUrl, deserialized.CallbackUrl);
+        Assert.Equal(expectedCallbackUrlNotification, deserialized.CallbackUrlNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, deserialized.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, deserialized.Language);
         Assert.NotNull(deserialized.PortalSteps);
@@ -498,8 +509,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps =
@@ -521,9 +532,9 @@ public class TechnicalDataTest : TestBase
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
-        Assert.Null(model.CallbackURL);
+        Assert.Null(model.CallbackUrl);
         Assert.False(model.RawData.ContainsKey("callback_url"));
-        Assert.Null(model.CallbackURLNotification);
+        Assert.Null(model.CallbackUrlNotification);
         Assert.False(model.RawData.ContainsKey("callback_url_notification"));
         Assert.Null(model.FilteringScoreAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("filtering_score_aml_suspicions"));
@@ -550,8 +561,8 @@ public class TechnicalDataTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
-            CallbackURL = null,
-            CallbackURLNotification = null,
+            CallbackUrl = null,
+            CallbackUrlNotification = null,
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
@@ -560,9 +571,9 @@ public class TechnicalDataTest : TestBase
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
-        Assert.Null(model.CallbackURL);
+        Assert.Null(model.CallbackUrl);
         Assert.False(model.RawData.ContainsKey("callback_url"));
-        Assert.Null(model.CallbackURLNotification);
+        Assert.Null(model.CallbackUrlNotification);
         Assert.False(model.RawData.ContainsKey("callback_url_notification"));
         Assert.Null(model.FilteringScoreAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("filtering_score_aml_suspicions"));
@@ -581,8 +592,8 @@ public class TechnicalDataTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
-            CallbackURL = null,
-            CallbackURLNotification = null,
+            CallbackUrl = null,
+            CallbackUrlNotification = null,
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,

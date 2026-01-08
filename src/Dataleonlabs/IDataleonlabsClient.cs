@@ -77,7 +77,7 @@ public interface IDataleonlabsClient : IDisposable
     /// API key needed to authorize requests.  You must provide a valid API key in
     /// the `Api-Key` header. Get your API key from the Dataleon dashboard.
     /// </summary>
-    string APIKey { get; init; }
+    string ApiKey { get; init; }
 
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.

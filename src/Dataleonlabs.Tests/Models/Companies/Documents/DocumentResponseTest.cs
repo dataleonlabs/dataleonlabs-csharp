@@ -19,7 +19,7 @@ public class DocumentResponseTest : TestBase
                     DocumentType = "identity_document_card",
                     Filename = "document.pdf",
                     Name = "Identity Document Card Back",
-                    SignedURL =
+                    SignedUrl =
                         "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
                     State = "PROCESSED",
                     Status = "approved",
@@ -37,7 +37,7 @@ public class DocumentResponseTest : TestBase
                 DocumentType = "identity_document_card",
                 Filename = "document.pdf",
                 Name = "Identity Document Card Back",
-                SignedURL = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
+                SignedUrl = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
                 State = "PROCESSED",
                 Status = "approved",
                 WorkspaceID = "wk_123",
@@ -67,7 +67,7 @@ public class DocumentResponseTest : TestBase
                     DocumentType = "identity_document_card",
                     Filename = "document.pdf",
                     Name = "Identity Document Card Back",
-                    SignedURL =
+                    SignedUrl =
                         "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
                     State = "PROCESSED",
                     Status = "approved",
@@ -96,7 +96,7 @@ public class DocumentResponseTest : TestBase
                     DocumentType = "identity_document_card",
                     Filename = "document.pdf",
                     Name = "Identity Document Card Back",
-                    SignedURL =
+                    SignedUrl =
                         "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
                     State = "PROCESSED",
                     Status = "approved",
@@ -118,7 +118,7 @@ public class DocumentResponseTest : TestBase
                 DocumentType = "identity_document_card",
                 Filename = "document.pdf",
                 Name = "Identity Document Card Back",
-                SignedURL = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
+                SignedUrl = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
                 State = "PROCESSED",
                 Status = "approved",
                 WorkspaceID = "wk_123",
@@ -148,7 +148,7 @@ public class DocumentResponseTest : TestBase
                     DocumentType = "identity_document_card",
                     Filename = "document.pdf",
                     Name = "Identity Document Card Back",
-                    SignedURL =
+                    SignedUrl =
                         "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
                     State = "PROCESSED",
                     Status = "approved",
@@ -221,7 +221,7 @@ public class DocumentTest : TestBase
             DocumentType = "identity_document_card",
             Filename = "document.pdf",
             Name = "Identity Document Card Back",
-            SignedURL = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
+            SignedUrl = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
             State = "PROCESSED",
             Status = "approved",
             WorkspaceID = "wk_123",
@@ -231,7 +231,7 @@ public class DocumentTest : TestBase
         string expectedDocumentType = "identity_document_card";
         string expectedFilename = "document.pdf";
         string expectedName = "Identity Document Card Back";
-        string expectedSignedURL =
+        string expectedSignedUrl =
             "https://storage.googleapis.com/bucket-name/document.pdf?signature=...";
         string expectedState = "PROCESSED";
         string expectedStatus = "approved";
@@ -241,7 +241,7 @@ public class DocumentTest : TestBase
         Assert.Equal(expectedDocumentType, model.DocumentType);
         Assert.Equal(expectedFilename, model.Filename);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedSignedURL, model.SignedURL);
+        Assert.Equal(expectedSignedUrl, model.SignedUrl);
         Assert.Equal(expectedState, model.State);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedWorkspaceID, model.WorkspaceID);
@@ -256,7 +256,7 @@ public class DocumentTest : TestBase
             DocumentType = "identity_document_card",
             Filename = "document.pdf",
             Name = "Identity Document Card Back",
-            SignedURL = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
+            SignedUrl = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
             State = "PROCESSED",
             Status = "approved",
             WorkspaceID = "wk_123",
@@ -277,7 +277,7 @@ public class DocumentTest : TestBase
             DocumentType = "identity_document_card",
             Filename = "document.pdf",
             Name = "Identity Document Card Back",
-            SignedURL = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
+            SignedUrl = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
             State = "PROCESSED",
             Status = "approved",
             WorkspaceID = "wk_123",
@@ -291,7 +291,7 @@ public class DocumentTest : TestBase
         string expectedDocumentType = "identity_document_card";
         string expectedFilename = "document.pdf";
         string expectedName = "Identity Document Card Back";
-        string expectedSignedURL =
+        string expectedSignedUrl =
             "https://storage.googleapis.com/bucket-name/document.pdf?signature=...";
         string expectedState = "PROCESSED";
         string expectedStatus = "approved";
@@ -301,7 +301,7 @@ public class DocumentTest : TestBase
         Assert.Equal(expectedDocumentType, deserialized.DocumentType);
         Assert.Equal(expectedFilename, deserialized.Filename);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedSignedURL, deserialized.SignedURL);
+        Assert.Equal(expectedSignedUrl, deserialized.SignedUrl);
         Assert.Equal(expectedState, deserialized.State);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedWorkspaceID, deserialized.WorkspaceID);
@@ -316,7 +316,7 @@ public class DocumentTest : TestBase
             DocumentType = "identity_document_card",
             Filename = "document.pdf",
             Name = "Identity Document Card Back",
-            SignedURL = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
+            SignedUrl = "https://storage.googleapis.com/bucket-name/document.pdf?signature=...",
             State = "PROCESSED",
             Status = "approved",
             WorkspaceID = "wk_123",
@@ -338,7 +338,7 @@ public class DocumentTest : TestBase
         Assert.False(model.RawData.ContainsKey("filename"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.SignedURL);
+        Assert.Null(model.SignedUrl);
         Assert.False(model.RawData.ContainsKey("signed_url"));
         Assert.Null(model.State);
         Assert.False(model.RawData.ContainsKey("state"));
@@ -366,7 +366,7 @@ public class DocumentTest : TestBase
             DocumentType = null,
             Filename = null,
             Name = null,
-            SignedURL = null,
+            SignedUrl = null,
             State = null,
             Status = null,
             WorkspaceID = null,
@@ -380,7 +380,7 @@ public class DocumentTest : TestBase
         Assert.False(model.RawData.ContainsKey("filename"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.SignedURL);
+        Assert.Null(model.SignedUrl);
         Assert.False(model.RawData.ContainsKey("signed_url"));
         Assert.Null(model.State);
         Assert.False(model.RawData.ContainsKey("state"));
@@ -400,7 +400,7 @@ public class DocumentTest : TestBase
             DocumentType = null,
             Filename = null,
             Name = null,
-            SignedURL = null,
+            SignedUrl = null,
             State = null,
             Status = null,
             WorkspaceID = null,

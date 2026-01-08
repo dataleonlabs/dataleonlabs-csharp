@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Dataleonlabs.Core;
@@ -29,15 +30,15 @@ public class CompanyCreateParamsTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://acme.fr",
+                WebsiteUrl = "https://acme.fr",
             },
             WorkspaceID = "wk_123",
             SourceID = "ID54410069066",
             TechnicalData = new()
             {
                 ActiveAmlSuspicions = false,
-                CallbackURL = "https://example.com/callback",
-                CallbackURLNotification = "https://example.com/notify",
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
                 FilteringScoreAmlSuspicions = 0.75f,
                 Language = "fra",
                 PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
@@ -61,15 +62,15 @@ public class CompanyCreateParamsTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://acme.fr",
+            WebsiteUrl = "https://acme.fr",
         };
         string expectedWorkspaceID = "wk_123";
         string expectedSourceID = "ID54410069066";
         TechnicalData expectedTechnicalData = new()
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
@@ -103,7 +104,7 @@ public class CompanyCreateParamsTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://acme.fr",
+                WebsiteUrl = "https://acme.fr",
             },
             WorkspaceID = "wk_123",
         };
@@ -135,7 +136,7 @@ public class CompanyCreateParamsTest : TestBase
                 Status = "active",
                 TaxIdentificationNumber = "FR123456789",
                 Type = "main",
-                WebsiteURL = "https://acme.fr",
+                WebsiteUrl = "https://acme.fr",
             },
             WorkspaceID = "wk_123",
 
@@ -148,6 +149,37 @@ public class CompanyCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("source_id"));
         Assert.Null(parameters.TechnicalData);
         Assert.False(parameters.RawBodyData.ContainsKey("technical_data"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        CompanyCreateParams parameters = new()
+        {
+            Company = new()
+            {
+                Name = "ACME Corp",
+                Address = "123 rue Exemple, Paris",
+                CommercialName = "ACME",
+                Country = "FR",
+                Email = "info@acme.fr",
+                EmployerIdentificationNumber = "EIN123456",
+                LegalForm = "SARL",
+                PhoneNumber = "+33 1 23 45 67 89",
+                RegistrationDate = "2010-05-15",
+                RegistrationID = "RCS123456",
+                ShareCapital = "100000",
+                Status = "active",
+                TaxIdentificationNumber = "FR123456789",
+                Type = "main",
+                WebsiteUrl = "https://acme.fr",
+            },
+            WorkspaceID = "wk_123",
+        };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.Equal(new Uri("https://inference.eu-west-1.dataleon.ai/companies"), url);
     }
 }
 
@@ -172,7 +204,7 @@ public class CompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://acme.fr",
+            WebsiteUrl = "https://acme.fr",
         };
 
         string expectedName = "ACME Corp";
@@ -189,7 +221,7 @@ public class CompanyTest : TestBase
         string expectedStatus = "active";
         string expectedTaxIdentificationNumber = "FR123456789";
         string expectedType = "main";
-        string expectedWebsiteURL = "https://acme.fr";
+        string expectedWebsiteUrl = "https://acme.fr";
 
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedAddress, model.Address);
@@ -205,7 +237,7 @@ public class CompanyTest : TestBase
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedTaxIdentificationNumber, model.TaxIdentificationNumber);
         Assert.Equal(expectedType, model.Type);
-        Assert.Equal(expectedWebsiteURL, model.WebsiteURL);
+        Assert.Equal(expectedWebsiteUrl, model.WebsiteUrl);
     }
 
     [Fact]
@@ -227,7 +259,7 @@ public class CompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://acme.fr",
+            WebsiteUrl = "https://acme.fr",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -255,7 +287,7 @@ public class CompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://acme.fr",
+            WebsiteUrl = "https://acme.fr",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -276,7 +308,7 @@ public class CompanyTest : TestBase
         string expectedStatus = "active";
         string expectedTaxIdentificationNumber = "FR123456789";
         string expectedType = "main";
-        string expectedWebsiteURL = "https://acme.fr";
+        string expectedWebsiteUrl = "https://acme.fr";
 
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedAddress, deserialized.Address);
@@ -295,7 +327,7 @@ public class CompanyTest : TestBase
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedTaxIdentificationNumber, deserialized.TaxIdentificationNumber);
         Assert.Equal(expectedType, deserialized.Type);
-        Assert.Equal(expectedWebsiteURL, deserialized.WebsiteURL);
+        Assert.Equal(expectedWebsiteUrl, deserialized.WebsiteUrl);
     }
 
     [Fact]
@@ -317,7 +349,7 @@ public class CompanyTest : TestBase
             Status = "active",
             TaxIdentificationNumber = "FR123456789",
             Type = "main",
-            WebsiteURL = "https://acme.fr",
+            WebsiteUrl = "https://acme.fr",
         };
 
         model.Validate();
@@ -354,7 +386,7 @@ public class CompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("tax_identification_number"));
         Assert.Null(model.Type);
         Assert.False(model.RawData.ContainsKey("type"));
-        Assert.Null(model.WebsiteURL);
+        Assert.Null(model.WebsiteUrl);
         Assert.False(model.RawData.ContainsKey("website_url"));
     }
 
@@ -387,7 +419,7 @@ public class CompanyTest : TestBase
             Status = null,
             TaxIdentificationNumber = null,
             Type = null,
-            WebsiteURL = null,
+            WebsiteUrl = null,
         };
 
         Assert.Null(model.Address);
@@ -416,7 +448,7 @@ public class CompanyTest : TestBase
         Assert.False(model.RawData.ContainsKey("tax_identification_number"));
         Assert.Null(model.Type);
         Assert.False(model.RawData.ContainsKey("type"));
-        Assert.Null(model.WebsiteURL);
+        Assert.Null(model.WebsiteUrl);
         Assert.False(model.RawData.ContainsKey("website_url"));
     }
 
@@ -441,7 +473,7 @@ public class CompanyTest : TestBase
             Status = null,
             TaxIdentificationNumber = null,
             Type = null,
-            WebsiteURL = null,
+            WebsiteUrl = null,
         };
 
         model.Validate();
@@ -456,8 +488,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
@@ -465,8 +497,8 @@ public class TechnicalDataTest : TestBase
         };
 
         bool expectedActiveAmlSuspicions = false;
-        string expectedCallbackURL = "https://example.com/callback";
-        string expectedCallbackURLNotification = "https://example.com/notify";
+        string expectedCallbackUrl = "https://example.com/callback";
+        string expectedCallbackUrlNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, PortalStep>> expectedPortalSteps =
@@ -477,8 +509,8 @@ public class TechnicalDataTest : TestBase
         bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
-        Assert.Equal(expectedCallbackURL, model.CallbackURL);
-        Assert.Equal(expectedCallbackURLNotification, model.CallbackURLNotification);
+        Assert.Equal(expectedCallbackUrl, model.CallbackUrl);
+        Assert.Equal(expectedCallbackUrlNotification, model.CallbackUrlNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, model.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, model.Language);
         Assert.NotNull(model.PortalSteps);
@@ -496,8 +528,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
@@ -516,8 +548,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
@@ -529,8 +561,8 @@ public class TechnicalDataTest : TestBase
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
-        string expectedCallbackURL = "https://example.com/callback";
-        string expectedCallbackURLNotification = "https://example.com/notify";
+        string expectedCallbackUrl = "https://example.com/callback";
+        string expectedCallbackUrlNotification = "https://example.com/notify";
         float expectedFilteringScoreAmlSuspicions = 0.75f;
         string expectedLanguage = "fra";
         List<ApiEnum<string, PortalStep>> expectedPortalSteps =
@@ -541,8 +573,8 @@ public class TechnicalDataTest : TestBase
         bool expectedRawDataValue = true;
 
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
-        Assert.Equal(expectedCallbackURL, deserialized.CallbackURL);
-        Assert.Equal(expectedCallbackURLNotification, deserialized.CallbackURLNotification);
+        Assert.Equal(expectedCallbackUrl, deserialized.CallbackUrl);
+        Assert.Equal(expectedCallbackUrlNotification, deserialized.CallbackUrlNotification);
         Assert.Equal(expectedFilteringScoreAmlSuspicions, deserialized.FilteringScoreAmlSuspicions);
         Assert.Equal(expectedLanguage, deserialized.Language);
         Assert.NotNull(deserialized.PortalSteps);
@@ -560,8 +592,8 @@ public class TechnicalDataTest : TestBase
         var model = new TechnicalData
         {
             ActiveAmlSuspicions = false,
-            CallbackURL = "https://example.com/callback",
-            CallbackURLNotification = "https://example.com/notify",
+            CallbackUrl = "https://example.com/callback",
+            CallbackUrlNotification = "https://example.com/notify",
             FilteringScoreAmlSuspicions = 0.75f,
             Language = "fra",
             PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
@@ -578,9 +610,9 @@ public class TechnicalDataTest : TestBase
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
-        Assert.Null(model.CallbackURL);
+        Assert.Null(model.CallbackUrl);
         Assert.False(model.RawData.ContainsKey("callback_url"));
-        Assert.Null(model.CallbackURLNotification);
+        Assert.Null(model.CallbackUrlNotification);
         Assert.False(model.RawData.ContainsKey("callback_url_notification"));
         Assert.Null(model.FilteringScoreAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("filtering_score_aml_suspicions"));
@@ -607,8 +639,8 @@ public class TechnicalDataTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
-            CallbackURL = null,
-            CallbackURLNotification = null,
+            CallbackUrl = null,
+            CallbackUrlNotification = null,
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,
@@ -617,9 +649,9 @@ public class TechnicalDataTest : TestBase
 
         Assert.Null(model.ActiveAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("active_aml_suspicions"));
-        Assert.Null(model.CallbackURL);
+        Assert.Null(model.CallbackUrl);
         Assert.False(model.RawData.ContainsKey("callback_url"));
-        Assert.Null(model.CallbackURLNotification);
+        Assert.Null(model.CallbackUrlNotification);
         Assert.False(model.RawData.ContainsKey("callback_url_notification"));
         Assert.Null(model.FilteringScoreAmlSuspicions);
         Assert.False(model.RawData.ContainsKey("filtering_score_aml_suspicions"));
@@ -638,8 +670,8 @@ public class TechnicalDataTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
-            CallbackURL = null,
-            CallbackURLNotification = null,
+            CallbackUrl = null,
+            CallbackUrlNotification = null,
             FilteringScoreAmlSuspicions = null,
             Language = null,
             PortalSteps = null,

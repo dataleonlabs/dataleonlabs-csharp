@@ -128,7 +128,7 @@ public sealed record class CompanyCompany : JsonModel
     /// Admin or internal portal URL for viewing the company's details, typically
     /// used by internal users.
     /// </summary>
-    public string? PortalURL
+    public string? PortalUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "portal_url"); }
         init
@@ -221,7 +221,7 @@ public sealed record class CompanyCompany : JsonModel
     /// Public-facing webview URL for the company’s identification process, allowing
     /// external access to the company data.
     /// </summary>
-    public string? WebviewURL
+    public string? WebviewUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "webview_url"); }
         init
@@ -256,7 +256,7 @@ public sealed record class CompanyCompany : JsonModel
         {
             item.Validate();
         }
-        _ = this.PortalURL;
+        _ = this.PortalUrl;
         foreach (var item in this.Properties ?? [])
         {
             item.Validate();
@@ -264,7 +264,7 @@ public sealed record class CompanyCompany : JsonModel
         this.Risk?.Validate();
         _ = this.SourceID;
         this.TechnicalData?.Validate();
-        _ = this.WebviewURL;
+        _ = this.WebviewUrl;
     }
 
     public CompanyCompany() { }
@@ -641,7 +641,7 @@ public sealed record class CompanyCompanyCompany : JsonModel
     /// <summary>
     /// Official website URL of the company.
     /// </summary>
-    public string? WebsiteURL
+    public string? WebsiteUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "website_url"); }
         init
@@ -677,7 +677,7 @@ public sealed record class CompanyCompanyCompany : JsonModel
         _ = this.Status;
         _ = this.TaxIdentificationNumber;
         _ = this.Type;
-        _ = this.WebsiteURL;
+        _ = this.WebsiteUrl;
     }
 
     public CompanyCompanyCompany() { }

@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.Json;
 using Dataleonlabs.Core;
@@ -16,18 +17,18 @@ public class DocumentUploadParamsTest : TestBase
             CompanyID = "company_id",
             DocumentType = DocumentType.LiasseFiscale,
             File = Encoding.UTF8.GetBytes("text"),
-            URL = "https://example.com/sample.pdf",
+            UrlValue = "https://example.com/sample.pdf",
         };
 
         string expectedCompanyID = "company_id";
         ApiEnum<string, DocumentType> expectedDocumentType = DocumentType.LiasseFiscale;
         BinaryContent expectedFile = Encoding.UTF8.GetBytes("text");
-        string expectedURL = "https://example.com/sample.pdf";
+        string expectedUrlValue = "https://example.com/sample.pdf";
 
         Assert.Equal(expectedCompanyID, parameters.CompanyID);
         Assert.Equal(expectedDocumentType, parameters.DocumentType);
         Assert.Equal(expectedFile, parameters.File);
-        Assert.Equal(expectedURL, parameters.URL);
+        Assert.Equal(expectedUrlValue, parameters.UrlValue);
     }
 
     [Fact]
@@ -41,7 +42,7 @@ public class DocumentUploadParamsTest : TestBase
 
         Assert.Null(parameters.File);
         Assert.False(parameters.RawBodyData.ContainsKey("file"));
-        Assert.Null(parameters.URL);
+        Assert.Null(parameters.UrlValue);
         Assert.False(parameters.RawBodyData.ContainsKey("url"));
     }
 
@@ -55,13 +56,30 @@ public class DocumentUploadParamsTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             File = null,
-            URL = null,
+            UrlValue = null,
         };
 
         Assert.Null(parameters.File);
         Assert.False(parameters.RawBodyData.ContainsKey("file"));
-        Assert.Null(parameters.URL);
+        Assert.Null(parameters.UrlValue);
         Assert.False(parameters.RawBodyData.ContainsKey("url"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        DocumentUploadParams parameters = new()
+        {
+            CompanyID = "company_id",
+            DocumentType = DocumentType.LiasseFiscale,
+        };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.Equal(
+            new Uri("https://inference.eu-west-1.dataleon.ai/companies/company_id/documents"),
+            url
+        );
     }
 }
 

@@ -28,7 +28,7 @@ public class GenericDocumentTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
             DocumentType = "generic",
             Name = "generic_doc",
-            SignedURL = "https://cdn.example.com/doc.pdf",
+            SignedUrl = "https://cdn.example.com/doc.pdf",
             State = "SUBMITTED",
             Status = "approved",
             Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -58,7 +58,7 @@ public class GenericDocumentTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z");
         string expectedDocumentType = "generic";
         string expectedName = "generic_doc";
-        string expectedSignedURL = "https://cdn.example.com/doc.pdf";
+        string expectedSignedUrl = "https://cdn.example.com/doc.pdf";
         string expectedState = "SUBMITTED";
         string expectedStatus = "approved";
         List<Table> expectedTables =
@@ -85,7 +85,7 @@ public class GenericDocumentTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedDocumentType, model.DocumentType);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedSignedURL, model.SignedURL);
+        Assert.Equal(expectedSignedUrl, model.SignedUrl);
         Assert.Equal(expectedState, model.State);
         Assert.Equal(expectedStatus, model.Status);
         Assert.NotNull(model.Tables);
@@ -122,7 +122,7 @@ public class GenericDocumentTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
             DocumentType = "generic",
             Name = "generic_doc",
-            SignedURL = "https://cdn.example.com/doc.pdf",
+            SignedUrl = "https://cdn.example.com/doc.pdf",
             State = "SUBMITTED",
             Status = "approved",
             Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -163,7 +163,7 @@ public class GenericDocumentTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
             DocumentType = "generic",
             Name = "generic_doc",
-            SignedURL = "https://cdn.example.com/doc.pdf",
+            SignedUrl = "https://cdn.example.com/doc.pdf",
             State = "SUBMITTED",
             Status = "approved",
             Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -197,7 +197,7 @@ public class GenericDocumentTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z");
         string expectedDocumentType = "generic";
         string expectedName = "generic_doc";
-        string expectedSignedURL = "https://cdn.example.com/doc.pdf";
+        string expectedSignedUrl = "https://cdn.example.com/doc.pdf";
         string expectedState = "SUBMITTED";
         string expectedStatus = "approved";
         List<Table> expectedTables =
@@ -224,7 +224,7 @@ public class GenericDocumentTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedDocumentType, deserialized.DocumentType);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedSignedURL, deserialized.SignedURL);
+        Assert.Equal(expectedSignedUrl, deserialized.SignedUrl);
         Assert.Equal(expectedState, deserialized.State);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.NotNull(deserialized.Tables);
@@ -261,7 +261,7 @@ public class GenericDocumentTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
             DocumentType = "generic",
             Name = "generic_doc",
-            SignedURL = "https://cdn.example.com/doc.pdf",
+            SignedUrl = "https://cdn.example.com/doc.pdf",
             State = "SUBMITTED",
             Status = "approved",
             Tables = [new() { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] }],
@@ -294,7 +294,7 @@ public class GenericDocumentTest : TestBase
         Assert.False(model.RawData.ContainsKey("document_type"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.SignedURL);
+        Assert.Null(model.SignedUrl);
         Assert.False(model.RawData.ContainsKey("signed_url"));
         Assert.Null(model.State);
         Assert.False(model.RawData.ContainsKey("state"));
@@ -325,7 +325,7 @@ public class GenericDocumentTest : TestBase
             CreatedAt = null,
             DocumentType = null,
             Name = null,
-            SignedURL = null,
+            SignedUrl = null,
             State = null,
             Status = null,
             Tables = null,
@@ -342,7 +342,7 @@ public class GenericDocumentTest : TestBase
         Assert.False(model.RawData.ContainsKey("document_type"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.SignedURL);
+        Assert.Null(model.SignedUrl);
         Assert.False(model.RawData.ContainsKey("signed_url"));
         Assert.Null(model.State);
         Assert.False(model.RawData.ContainsKey("state"));
@@ -365,7 +365,7 @@ public class GenericDocumentTest : TestBase
             CreatedAt = null,
             DocumentType = null,
             Name = null,
-            SignedURL = null,
+            SignedUrl = null,
             State = null,
             Status = null,
             Tables = null,

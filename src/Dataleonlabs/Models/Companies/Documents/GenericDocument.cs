@@ -102,7 +102,7 @@ public sealed record class GenericDocument : JsonModel
     /// <summary>
     /// Signed URL for accessing the document file.
     /// </summary>
-    public string? SignedURL
+    public string? SignedUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "signed_url"); }
         init
@@ -195,7 +195,7 @@ public sealed record class GenericDocument : JsonModel
         _ = this.CreatedAt;
         _ = this.DocumentType;
         _ = this.Name;
-        _ = this.SignedURL;
+        _ = this.SignedUrl;
         _ = this.State;
         _ = this.Status;
         foreach (var item in this.Tables ?? [])

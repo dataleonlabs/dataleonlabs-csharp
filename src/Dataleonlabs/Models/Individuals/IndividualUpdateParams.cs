@@ -451,7 +451,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : JsonModel
     /// <summary>
     /// URL to call back upon completion of processing.
     /// </summary>
-    public string? CallbackURL
+    public string? CallbackUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "callback_url"); }
         init
@@ -468,7 +468,7 @@ public sealed record class IndividualUpdateParamsTechnicalData : JsonModel
     /// <summary>
     /// URL for receive notifications about the processing state or status.
     /// </summary>
-    public string? CallbackURLNotification
+    public string? CallbackUrlNotification
     {
         get
         {
@@ -570,8 +570,8 @@ public sealed record class IndividualUpdateParamsTechnicalData : JsonModel
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
-        _ = this.CallbackURL;
-        _ = this.CallbackURLNotification;
+        _ = this.CallbackUrl;
+        _ = this.CallbackUrlNotification;
         _ = this.FilteringScoreAmlSuspicions;
         _ = this.Language;
         foreach (var item in this.PortalSteps ?? [])

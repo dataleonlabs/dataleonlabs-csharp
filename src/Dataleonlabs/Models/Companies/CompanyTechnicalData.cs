@@ -36,7 +36,7 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// <summary>
     /// Version number of the API used.
     /// </summary>
-    public long? APIVersion
+    public long? ApiVersion
     {
         get { return JsonModel.GetNullableStruct<long>(this.RawData, "api_version"); }
         init
@@ -73,7 +73,7 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// <summary>
     /// URL to receive callback data from the AML system.
     /// </summary>
-    public string? CallbackURL
+    public string? CallbackUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "callback_url"); }
         init
@@ -90,7 +90,7 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// <summary>
     /// URL to receive notification updates about the processing status.
     /// </summary>
-    public string? CallbackURLNotification
+    public string? CallbackUrlNotification
     {
         get
         {
@@ -428,10 +428,10 @@ public sealed record class CompanyTechnicalData : JsonModel
     public override void Validate()
     {
         _ = this.ActiveAmlSuspicions;
-        _ = this.APIVersion;
+        _ = this.ApiVersion;
         _ = this.ApprovedAt;
-        _ = this.CallbackURL;
-        _ = this.CallbackURLNotification;
+        _ = this.CallbackUrl;
+        _ = this.CallbackUrlNotification;
         _ = this.DisableNotification;
         _ = this.DisableNotificationDate;
         _ = this.ExportType;

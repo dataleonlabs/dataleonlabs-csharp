@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using Dataleonlabs.Core;
 using Dataleonlabs.Exceptions;
@@ -96,6 +97,31 @@ public class CompanyListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
         Assert.Null(parameters.WorkspaceID);
         Assert.False(parameters.RawQueryData.ContainsKey("workspace_id"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        CompanyListParams parameters = new()
+        {
+            EndDate = "2019-12-27",
+            Limit = 1,
+            Offset = 0,
+            SourceID = "source_id",
+            StartDate = "2019-12-27",
+            State = State.Void,
+            Status = Status.Rejected,
+            WorkspaceID = "workspace_id",
+        };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.Equal(
+            new Uri(
+                "https://inference.eu-west-1.dataleon.ai/companies?end_date=2019-12-27&limit=1&offset=0&source_id=source_id&start_date=2019-12-27&state=VOID&status=rejected&workspace_id=workspace_id"
+            ),
+            url
+        );
     }
 }
 

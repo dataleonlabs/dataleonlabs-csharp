@@ -56,7 +56,7 @@ Or manually:
 ```csharp
 using Dataleonlabs;
 
-DataleonlabsClient client = new() { APIKey = "My API Key" };
+DataleonlabsClient client = new() { ApiKey = "My API Key" };
 ```
 
 Or using a combination of the two approaches.
@@ -65,7 +65,7 @@ See this table for the available options:
 
 | Property  | Environment variable    | Required | Default value                               |
 | --------- | ----------------------- | -------- | ------------------------------------------- |
-| `APIKey`  | `DATALEONLABS_API_KEY`  | true     | -                                           |
+| `ApiKey`  | `DATALEONLABS_API_KEY`  | true     | -                                           |
 | `BaseUrl` | `DATALEONLABS_BASE_URL` | true     | `"https://inference.eu-west-1.dataleon.ai"` |
 
 ### Modifying configuration

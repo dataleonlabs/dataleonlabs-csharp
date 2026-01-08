@@ -58,7 +58,7 @@ public sealed record class DocumentUploadParams : ParamsBase
     /// <summary>
     /// URL of the file to upload (either `file` or `url` is required)
     /// </summary>
-    public string? URL
+    public string? UrlValue
     {
         get { return MultipartJsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
         init

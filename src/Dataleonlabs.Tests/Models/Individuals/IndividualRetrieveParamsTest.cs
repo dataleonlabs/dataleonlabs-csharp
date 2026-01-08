@@ -1,3 +1,4 @@
+using System;
 using Dataleonlabs.Models.Individuals;
 
 namespace Dataleonlabs.Tests.Models.Individuals;
@@ -50,5 +51,25 @@ public class IndividualRetrieveParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("document"));
         Assert.Null(parameters.Scope);
         Assert.False(parameters.RawQueryData.ContainsKey("scope"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        IndividualRetrieveParams parameters = new()
+        {
+            IndividualID = "individual_id",
+            Document = true,
+            Scope = "scope",
+        };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.Equal(
+            new Uri(
+                "https://inference.eu-west-1.dataleon.ai/individuals/individual_id?document=true&scope=scope"
+            ),
+            url
+        );
     }
 }
