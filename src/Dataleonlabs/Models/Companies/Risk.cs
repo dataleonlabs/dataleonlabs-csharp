@@ -19,7 +19,11 @@ public sealed record class Risk : JsonModel
     /// </summary>
     public string? Code
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "code"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("code");
+        }
         init
         {
             if (value == null)
@@ -27,7 +31,7 @@ public sealed record class Risk : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "code", value);
+            this._rawData.Set("code", value);
         }
     }
 
@@ -36,7 +40,11 @@ public sealed record class Risk : JsonModel
     /// </summary>
     public string? Reason
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reason");
+        }
         init
         {
             if (value == null)
@@ -44,7 +52,7 @@ public sealed record class Risk : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "reason", value);
+            this._rawData.Set("reason", value);
         }
     }
 
@@ -53,7 +61,11 @@ public sealed record class Risk : JsonModel
     /// </summary>
     public float? Score
     {
-        get { return JsonModel.GetNullableStruct<float>(this.RawData, "score"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<float>("score");
+        }
         init
         {
             if (value == null)
@@ -61,7 +73,7 @@ public sealed record class Risk : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "score", value);
+            this._rawData.Set("score", value);
         }
     }
 
@@ -80,14 +92,14 @@ public sealed record class Risk : JsonModel
 
     public Risk(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Risk(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

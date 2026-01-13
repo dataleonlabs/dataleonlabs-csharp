@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -21,7 +22,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public bool? ActiveAmlSuspicions
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "active_aml_suspicions"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("active_aml_suspicions");
+        }
         init
         {
             if (value == null)
@@ -29,7 +34,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "active_aml_suspicions", value);
+            this._rawData.Set("active_aml_suspicions", value);
         }
     }
 
@@ -38,7 +43,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public long? ApiVersion
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawData, "api_version"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("api_version");
+        }
         init
         {
             if (value == null)
@@ -46,7 +55,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "api_version", value);
+            this._rawData.Set("api_version", value);
         }
     }
 
@@ -57,7 +66,8 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "approved_at");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("approved_at");
         }
         init
         {
@@ -66,7 +76,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "approved_at", value);
+            this._rawData.Set("approved_at", value);
         }
     }
 
@@ -75,7 +85,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? CallbackUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "callback_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("callback_url");
+        }
         init
         {
             if (value == null)
@@ -83,7 +97,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "callback_url", value);
+            this._rawData.Set("callback_url", value);
         }
     }
 
@@ -94,7 +108,8 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<string>(this.RawData, "callback_url_notification");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("callback_url_notification");
         }
         init
         {
@@ -103,7 +118,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "callback_url_notification", value);
+            this._rawData.Set("callback_url_notification", value);
         }
     }
 
@@ -112,7 +127,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public bool? DisableNotification
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "disable_notification"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("disable_notification");
+        }
         init
         {
             if (value == null)
@@ -120,7 +139,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "disable_notification", value);
+            this._rawData.Set("disable_notification", value);
         }
     }
 
@@ -131,12 +150,12 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(
-                this.RawData,
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>(
                 "disable_notification_date"
             );
         }
-        init { JsonModel.Set(this._rawData, "disable_notification_date", value); }
+        init { this._rawData.Set("disable_notification_date", value); }
     }
 
     /// <summary>
@@ -144,7 +163,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? ExportType
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "export_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("export_type");
+        }
         init
         {
             if (value == null)
@@ -152,7 +175,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "export_type", value);
+            this._rawData.Set("export_type", value);
         }
     }
 
@@ -163,10 +186,8 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<float>(
-                this.RawData,
-                "filtering_score_aml_suspicions"
-            );
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<float>("filtering_score_aml_suspicions");
         }
         init
         {
@@ -175,7 +196,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "filtering_score_aml_suspicions", value);
+            this._rawData.Set("filtering_score_aml_suspicions", value);
         }
     }
 
@@ -186,7 +207,8 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "finished_at");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("finished_at");
         }
         init
         {
@@ -195,7 +217,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "finished_at", value);
+            this._rawData.Set("finished_at", value);
         }
     }
 
@@ -204,7 +226,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? IP
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "ip"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("ip");
+        }
         init
         {
             if (value == null)
@@ -212,7 +238,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "ip", value);
+            this._rawData.Set("ip", value);
         }
     }
 
@@ -221,7 +247,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? Language
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "language"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("language");
+        }
         init
         {
             if (value == null)
@@ -229,7 +259,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "language", value);
+            this._rawData.Set("language", value);
         }
     }
 
@@ -238,7 +268,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? LocationIP
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "location_ip"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("location_ip");
+        }
         init
         {
             if (value == null)
@@ -246,7 +280,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "location_ip", value);
+            this._rawData.Set("location_ip", value);
         }
     }
 
@@ -257,12 +291,10 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(
-                this.RawData,
-                "need_review_at"
-            );
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("need_review_at");
         }
-        init { JsonModel.Set(this._rawData, "need_review_at", value); }
+        init { this._rawData.Set("need_review_at", value); }
     }
 
     /// <summary>
@@ -270,7 +302,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public bool? NotificationConfirmation
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "notification_confirmation"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("notification_confirmation");
+        }
         init
         {
             if (value == null)
@@ -278,7 +314,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "notification_confirmation", value);
+            this._rawData.Set("notification_confirmation", value);
         }
     }
 
@@ -289,9 +325,10 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<
-                List<ApiEnum<string, CompanyTechnicalDataPortalStep>>
-            >(this.RawData, "portal_steps");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, CompanyTechnicalDataPortalStep>>
+            >("portal_steps");
         }
         init
         {
@@ -300,7 +337,10 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "portal_steps", value);
+            this._rawData.Set<ImmutableArray<ApiEnum<string, CompanyTechnicalDataPortalStep>>?>(
+                "portal_steps",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -309,7 +349,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? QrCode
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "qr_code"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("qr_code");
+        }
         init
         {
             if (value == null)
@@ -317,7 +361,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "qr_code", value);
+            this._rawData.Set("qr_code", value);
         }
     }
 
@@ -326,7 +370,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public bool? RawDataValue
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "raw_data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("raw_data");
+        }
         init
         {
             if (value == null)
@@ -334,7 +382,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "raw_data", value);
+            this._rawData.Set("raw_data", value);
         }
     }
 
@@ -345,9 +393,10 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "rejected_at");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("rejected_at");
         }
-        init { JsonModel.Set(this._rawData, "rejected_at", value); }
+        init { this._rawData.Set("rejected_at", value); }
     }
 
     /// <summary>
@@ -355,7 +404,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public long? SessionDuration
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawData, "session_duration"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("session_duration");
+        }
         init
         {
             if (value == null)
@@ -363,7 +416,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "session_duration", value);
+            this._rawData.Set("session_duration", value);
         }
     }
 
@@ -374,7 +427,8 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "started_at");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("started_at");
         }
         init
         {
@@ -383,7 +437,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "started_at", value);
+            this._rawData.Set("started_at", value);
         }
     }
 
@@ -394,7 +448,8 @@ public sealed record class CompanyTechnicalData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "transfer_at");
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("transfer_at");
         }
         init
         {
@@ -403,7 +458,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "transfer_at", value);
+            this._rawData.Set("transfer_at", value);
         }
     }
 
@@ -412,7 +467,11 @@ public sealed record class CompanyTechnicalData : JsonModel
     /// </summary>
     public string? TransferMode
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "transfer_mode"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("transfer_mode");
+        }
         init
         {
             if (value == null)
@@ -420,7 +479,7 @@ public sealed record class CompanyTechnicalData : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "transfer_mode", value);
+            this._rawData.Set("transfer_mode", value);
         }
     }
 
@@ -462,14 +521,14 @@ public sealed record class CompanyTechnicalData : JsonModel
 
     public CompanyTechnicalData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CompanyTechnicalData(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

@@ -276,8 +276,11 @@ public class CompanyUpdateParamsCompanyTest : TestBase
             WebsiteUrl = "https://acme.fr",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -304,8 +307,11 @@ public class CompanyUpdateParamsCompanyTest : TestBase
             WebsiteUrl = "https://acme.fr",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsCompany>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedName = "ACME Corp";
@@ -558,8 +564,11 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             RawDataValue = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -582,8 +591,11 @@ public class CompanyUpdateParamsTechnicalDataTest : TestBase
             RawDataValue = true,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CompanyUpdateParamsTechnicalData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
@@ -732,10 +744,7 @@ public class CompanyUpdateParamsTechnicalDataPortalStepTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
@@ -765,10 +774,7 @@ public class CompanyUpdateParamsTechnicalDataPortalStepTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, CompanyUpdateParamsTechnicalDataPortalStep>

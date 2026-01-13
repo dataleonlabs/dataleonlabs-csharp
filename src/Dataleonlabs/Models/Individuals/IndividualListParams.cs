@@ -20,7 +20,11 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? EndDate
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "end_date"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("end_date");
+        }
         init
         {
             if (value == null)
@@ -28,7 +32,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "end_date", value);
+            this._rawQueryData.Set("end_date", value);
         }
     }
 
@@ -37,7 +41,11 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public long? Limit
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawQueryData, "limit"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<long>("limit");
+        }
         init
         {
             if (value == null)
@@ -45,7 +53,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "limit", value);
+            this._rawQueryData.Set("limit", value);
         }
     }
 
@@ -54,7 +62,11 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public long? Offset
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawQueryData, "offset"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<long>("offset");
+        }
         init
         {
             if (value == null)
@@ -62,7 +74,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "offset", value);
+            this._rawQueryData.Set("offset", value);
         }
     }
 
@@ -71,7 +83,11 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? SourceID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "source_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("source_id");
+        }
         init
         {
             if (value == null)
@@ -79,7 +95,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "source_id", value);
+            this._rawQueryData.Set("source_id", value);
         }
     }
 
@@ -88,7 +104,11 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? StartDate
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "start_date"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("start_date");
+        }
         init
         {
             if (value == null)
@@ -96,7 +116,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "start_date", value);
+            this._rawQueryData.Set("start_date", value);
         }
     }
 
@@ -107,7 +127,8 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, State>>(this.RawQueryData, "state");
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, State>>("state");
         }
         init
         {
@@ -116,7 +137,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "state", value);
+            this._rawQueryData.Set("state", value);
         }
     }
 
@@ -127,7 +148,8 @@ public sealed record class IndividualListParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Status>>("status");
         }
         init
         {
@@ -136,7 +158,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "status", value);
+            this._rawQueryData.Set("status", value);
         }
     }
 
@@ -145,7 +167,11 @@ public sealed record class IndividualListParams : ParamsBase
     /// </summary>
     public string? WorkspaceID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "workspace_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("workspace_id");
+        }
         init
         {
             if (value == null)
@@ -153,7 +179,7 @@ public sealed record class IndividualListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "workspace_id", value);
+            this._rawQueryData.Set("workspace_id", value);
         }
     }
 
@@ -167,8 +193,8 @@ public sealed record class IndividualListParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -178,8 +204,8 @@ public sealed record class IndividualListParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

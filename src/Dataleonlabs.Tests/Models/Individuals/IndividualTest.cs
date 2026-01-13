@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
 using Dataleonlabs.Models.Individuals;
 using Companies = Dataleonlabs.Models.Companies;
@@ -569,8 +570,11 @@ public class IndividualTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Individual>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Individual>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -749,8 +753,11 @@ public class IndividualTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Individual>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Individual>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "123e4567-e89b-12d3-a456-426614174000";
@@ -1381,8 +1388,11 @@ public class IdentityCardTest : TestBase
             Type = "passport",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IdentityCard>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IdentityCard>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -1410,8 +1420,11 @@ public class IdentityCardTest : TestBase
             Type = "passport",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IdentityCard>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IdentityCard>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "doc_001";
@@ -1770,8 +1783,11 @@ public class IndividualPersonTest : TestBase
             PhoneNumber = "+33612345678",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualPerson>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IndividualPerson>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -1793,8 +1809,11 @@ public class IndividualPersonTest : TestBase
             PhoneNumber = "+33612345678",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualPerson>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IndividualPerson>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBirthday = "01/01/1990";
@@ -1972,8 +1991,8 @@ public class TagTest : TestBase
             Value = "tag_value",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Tag>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Tag>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -1989,8 +2008,8 @@ public class TagTest : TestBase
             Value = "tag_value",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Tag>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Tag>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedKey = "tag_name";

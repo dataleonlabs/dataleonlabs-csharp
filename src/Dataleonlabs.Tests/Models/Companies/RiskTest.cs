@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -34,8 +35,8 @@ public class RiskTest : TestBase
             Score = 0.92f,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Risk>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Risk>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -50,8 +51,8 @@ public class RiskTest : TestBase
             Score = 0.92f,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Risk>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Risk>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedCode = "20030";

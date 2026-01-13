@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -42,8 +43,8 @@ public class CheckTest : TestBase
             Weight = 1,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Check>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Check>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -60,8 +61,8 @@ public class CheckTest : TestBase
             Weight = 1,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Check>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Check>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         bool expectedMasked = false;

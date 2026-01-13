@@ -19,7 +19,11 @@ public sealed record class Certificat : JsonModel
     /// </summary>
     public string? ID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("id");
+        }
         init
         {
             if (value == null)
@@ -27,7 +31,7 @@ public sealed record class Certificat : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "id", value);
+            this._rawData.Set("id", value);
         }
     }
 
@@ -36,7 +40,11 @@ public sealed record class Certificat : JsonModel
     /// </summary>
     public DateTimeOffset? CreatedAt
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("created_at");
+        }
         init
         {
             if (value == null)
@@ -44,7 +52,7 @@ public sealed record class Certificat : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "created_at", value);
+            this._rawData.Set("created_at", value);
         }
     }
 
@@ -53,7 +61,11 @@ public sealed record class Certificat : JsonModel
     /// </summary>
     public string? Filename
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "filename"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("filename");
+        }
         init
         {
             if (value == null)
@@ -61,7 +73,7 @@ public sealed record class Certificat : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "filename", value);
+            this._rawData.Set("filename", value);
         }
     }
 
@@ -80,14 +92,14 @@ public sealed record class Certificat : JsonModel
 
     public Certificat(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Certificat(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

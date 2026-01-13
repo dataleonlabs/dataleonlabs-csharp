@@ -15,7 +15,7 @@ namespace Dataleonlabs.Models.Individuals.Documents;
 /// </summary>
 public sealed record class DocumentUploadParams : ParamsBase
 {
-    readonly FreezableDictionary<string, MultipartJsonElement> _rawBodyData = [];
+    readonly MultipartJsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, MultipartJsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -30,12 +30,12 @@ public sealed record class DocumentUploadParams : ParamsBase
     {
         get
         {
-            return MultipartJsonModel.GetNotNullClass<ApiEnum<string, DocumentType>>(
-                this.RawBodyData,
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, DocumentType>>(
                 "document_type"
             );
         }
-        init { MultipartJsonModel.Set(this._rawBodyData, "document_type", value); }
+        init { this._rawBodyData.Set("document_type", value); }
     }
 
     /// <summary>
@@ -43,7 +43,11 @@ public sealed record class DocumentUploadParams : ParamsBase
     /// </summary>
     public BinaryContent? File
     {
-        get { return MultipartJsonModel.GetNullableClass<BinaryContent>(this.RawBodyData, "file"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<BinaryContent>("file");
+        }
         init
         {
             if (value == null)
@@ -51,7 +55,7 @@ public sealed record class DocumentUploadParams : ParamsBase
                 return;
             }
 
-            MultipartJsonModel.Set(this._rawBodyData, "file", value);
+            this._rawBodyData.Set("file", value);
         }
     }
 
@@ -60,7 +64,11 @@ public sealed record class DocumentUploadParams : ParamsBase
     /// </summary>
     public string? UrlValue
     {
-        get { return MultipartJsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("url");
+        }
         init
         {
             if (value == null)
@@ -68,7 +76,7 @@ public sealed record class DocumentUploadParams : ParamsBase
                 return;
             }
 
-            MultipartJsonModel.Set(this._rawBodyData, "url", value);
+            this._rawBodyData.Set("url", value);
         }
     }
 
@@ -77,7 +85,9 @@ public sealed record class DocumentUploadParams : ParamsBase
     public DocumentUploadParams(DocumentUploadParams documentUploadParams)
         : base(documentUploadParams)
     {
-        this._rawBodyData = [.. documentUploadParams._rawBodyData];
+        this.IndividualID = documentUploadParams.IndividualID;
+
+        this._rawBodyData = new(documentUploadParams._rawBodyData);
     }
 
     public DocumentUploadParams(
@@ -86,9 +96,9 @@ public sealed record class DocumentUploadParams : ParamsBase
         IReadOnlyDictionary<string, MultipartJsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -99,9 +109,9 @@ public sealed record class DocumentUploadParams : ParamsBase
         FrozenDictionary<string, MultipartJsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

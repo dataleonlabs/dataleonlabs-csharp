@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
 using Dataleonlabs.Models.Companies.Documents;
 
@@ -137,8 +138,11 @@ public class GenericDocumentTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<GenericDocument>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<GenericDocument>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -178,8 +182,11 @@ public class GenericDocumentTest : TestBase
             ],
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<GenericDocument>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<GenericDocument>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "doc_123";
@@ -398,8 +405,8 @@ public class TableTest : TestBase
     {
         var model = new Table { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Table>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Table>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -409,8 +416,8 @@ public class TableTest : TestBase
     {
         var model = new Table { Operation = [JsonSerializer.Deserialize<JsonElement>("{}")] };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Table>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Table>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         List<JsonElement> expectedOperation = [JsonSerializer.Deserialize<JsonElement>("{}")];
@@ -510,8 +517,8 @@ public class ValueTest : TestBase
             ValueValue = [100, 200],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Value>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Value>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -526,8 +533,8 @@ public class ValueTest : TestBase
             ValueValue = [100, 200],
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Value>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Value>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         double expectedConfidence = 0.95;

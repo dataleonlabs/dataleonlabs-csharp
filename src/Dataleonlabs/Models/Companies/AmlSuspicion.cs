@@ -21,7 +21,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public string? Caption
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "caption"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("caption");
+        }
         init
         {
             if (value == null)
@@ -29,7 +33,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "caption", value);
+            this._rawData.Set("caption", value);
         }
     }
 
@@ -38,7 +42,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public string? Country
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "country"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("country");
+        }
         init
         {
             if (value == null)
@@ -46,7 +54,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "country", value);
+            this._rawData.Set("country", value);
         }
     }
 
@@ -55,7 +63,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public string? Gender
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "gender"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("gender");
+        }
         init
         {
             if (value == null)
@@ -63,7 +75,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "gender", value);
+            this._rawData.Set("gender", value);
         }
     }
 
@@ -73,7 +85,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public string? Relation
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "relation"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("relation");
+        }
         init
         {
             if (value == null)
@@ -81,7 +97,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "relation", value);
+            this._rawData.Set("relation", value);
         }
     }
 
@@ -90,7 +106,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public string? Schema
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "schema"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("schema");
+        }
         init
         {
             if (value == null)
@@ -98,7 +118,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "schema", value);
+            this._rawData.Set("schema", value);
         }
     }
 
@@ -107,7 +127,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public float? Score
     {
-        get { return JsonModel.GetNullableStruct<float>(this.RawData, "score"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<float>("score");
+        }
         init
         {
             if (value == null)
@@ -115,7 +139,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "score", value);
+            this._rawData.Set("score", value);
         }
     }
 
@@ -124,7 +148,11 @@ public sealed record class AmlSuspicion : JsonModel
     /// </summary>
     public string? Source
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "source"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("source");
+        }
         init
         {
             if (value == null)
@@ -132,7 +160,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "source", value);
+            this._rawData.Set("source", value);
         }
     }
 
@@ -144,10 +172,8 @@ public sealed record class AmlSuspicion : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, AmlSuspicionStatus>>(
-                this.RawData,
-                "status"
-            );
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, AmlSuspicionStatus>>("status");
         }
         init
         {
@@ -156,7 +182,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "status", value);
+            this._rawData.Set("status", value);
         }
     }
 
@@ -168,9 +194,10 @@ public sealed record class AmlSuspicion : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
                 ApiEnum<string, global::Dataleonlabs.Models.Companies.Type>
-            >(this.RawData, "type");
+            >("type");
         }
         init
         {
@@ -179,7 +206,7 @@ public sealed record class AmlSuspicion : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "type", value);
+            this._rawData.Set("type", value);
         }
     }
 
@@ -204,14 +231,14 @@ public sealed record class AmlSuspicion : JsonModel
 
     public AmlSuspicion(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     AmlSuspicion(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

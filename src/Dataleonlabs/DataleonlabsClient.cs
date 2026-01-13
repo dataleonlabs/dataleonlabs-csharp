@@ -14,6 +14,97 @@ namespace Dataleonlabs;
 /// <inheritdoc/>
 public sealed class DataleonlabsClient : IDataleonlabsClient
 {
+    readonly ClientOptions _options;
+
+    /// <inheritdoc/>
+    public HttpClient HttpClient
+    {
+        get { return this._options.HttpClient; }
+        init { this._options.HttpClient = value; }
+    }
+
+    /// <inheritdoc/>
+    public string BaseUrl
+    {
+        get { return this._options.BaseUrl; }
+        init { this._options.BaseUrl = value; }
+    }
+
+    /// <inheritdoc/>
+    public bool ResponseValidation
+    {
+        get { return this._options.ResponseValidation; }
+        init { this._options.ResponseValidation = value; }
+    }
+
+    /// <inheritdoc/>
+    public int? MaxRetries
+    {
+        get { return this._options.MaxRetries; }
+        init { this._options.MaxRetries = value; }
+    }
+
+    /// <inheritdoc/>
+    public TimeSpan? Timeout
+    {
+        get { return this._options.Timeout; }
+        init { this._options.Timeout = value; }
+    }
+
+    /// <inheritdoc/>
+    public string ApiKey
+    {
+        get { return this._options.ApiKey; }
+        init { this._options.ApiKey = value; }
+    }
+
+    readonly Lazy<IDataleonlabsClientWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IDataleonlabsClientWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    /// <inheritdoc/>
+    public IDataleonlabsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new DataleonlabsClient(modifier(this._options));
+    }
+
+    readonly Lazy<ICompanyService> _companies;
+    public ICompanyService Companies
+    {
+        get { return _companies.Value; }
+    }
+
+    readonly Lazy<IIndividualService> _individuals;
+    public IIndividualService Individuals
+    {
+        get { return _individuals.Value; }
+    }
+
+    public void Dispose() => this.HttpClient.Dispose();
+
+    public DataleonlabsClient()
+    {
+        _options = new();
+
+        _withRawResponse = new(() => new DataleonlabsClientWithRawResponse(this._options));
+        _companies = new(() => new CompanyService(this));
+        _individuals = new(() => new IndividualService(this));
+    }
+
+    public DataleonlabsClient(ClientOptions options)
+        : this()
+    {
+        _options = options;
+    }
+}
+
+/// <inheritdoc/>
+public sealed class DataleonlabsClientWithRawResponse : IDataleonlabsClientWithRawResponse
+{
 #if NET
     static readonly Random Random = Random.Shared;
 #else
@@ -70,19 +161,21 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
     }
 
     /// <inheritdoc/>
-    public IDataleonlabsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    public IDataleonlabsClientWithRawResponse WithOptions(
+        Func<ClientOptions, ClientOptions> modifier
+    )
     {
-        return new DataleonlabsClient(modifier(this._options));
+        return new DataleonlabsClientWithRawResponse(modifier(this._options));
     }
 
-    readonly Lazy<ICompanyService> _companies;
-    public ICompanyService Companies
+    readonly Lazy<ICompanyServiceWithRawResponse> _companies;
+    public ICompanyServiceWithRawResponse Companies
     {
         get { return _companies.Value; }
     }
 
-    readonly Lazy<IIndividualService> _individuals;
-    public IIndividualService Individuals
+    readonly Lazy<IIndividualServiceWithRawResponse> _individuals;
+    public IIndividualServiceWithRawResponse Individuals
     {
         get { return _individuals.Value; }
     }
@@ -277,15 +370,15 @@ public sealed class DataleonlabsClient : IDataleonlabsClient
 
     public void Dispose() => this.HttpClient.Dispose();
 
-    public DataleonlabsClient()
+    public DataleonlabsClientWithRawResponse()
     {
         _options = new();
 
-        _companies = new(() => new CompanyService(this));
-        _individuals = new(() => new IndividualService(this));
+        _companies = new(() => new CompanyServiceWithRawResponse(this));
+        _individuals = new(() => new IndividualServiceWithRawResponse(this));
     }
 
-    public DataleonlabsClient(ClientOptions options)
+    public DataleonlabsClientWithRawResponse(ClientOptions options)
         : this()
     {
         _options = options;

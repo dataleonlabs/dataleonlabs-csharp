@@ -16,6 +16,12 @@ namespace Dataleonlabs.Services;
 public interface ICompanyService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    ICompanyServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -77,6 +83,88 @@ public interface ICompanyService
 
     /// <inheritdoc cref="Delete(CompanyDeleteParams, CancellationToken)"/>
     Task Delete(
+        string companyID,
+        CompanyDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="ICompanyService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface ICompanyServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    ICompanyServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IDocumentServiceWithRawResponse Documents { get; }
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /companies`, but is otherwise the
+    /// same as <see cref="ICompanyService.Create(CompanyCreateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CompanyCompany>> Create(
+        CompanyCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /companies/{company_id}`, but is otherwise the
+    /// same as <see cref="ICompanyService.Retrieve(CompanyRetrieveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CompanyCompany>> Retrieve(
+        CompanyRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(CompanyRetrieveParams, CancellationToken)"/>
+    Task<HttpResponse<CompanyCompany>> Retrieve(
+        string companyID,
+        CompanyRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `put /companies/{company_id}`, but is otherwise the
+    /// same as <see cref="ICompanyService.Update(CompanyUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CompanyCompany>> Update(
+        CompanyUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(CompanyUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<CompanyCompany>> Update(
+        string companyID,
+        CompanyUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /companies`, but is otherwise the
+    /// same as <see cref="ICompanyService.List(CompanyListParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<List<CompanyCompany>>> List(
+        CompanyListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `delete /companies/{company_id}`, but is otherwise the
+    /// same as <see cref="ICompanyService.Delete(CompanyDeleteParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> Delete(
+        CompanyDeleteParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Delete(CompanyDeleteParams, CancellationToken)"/>
+    Task<HttpResponse> Delete(
         string companyID,
         CompanyDeleteParams? parameters = null,
         CancellationToken cancellationToken = default

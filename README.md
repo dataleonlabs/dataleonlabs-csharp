@@ -98,6 +98,30 @@ To send a request to the Dataleonlabs API, build an instance of some `Params` cl
 
 For example, `client.Companies.List` should be called with an instance of `CompanyListParams`, and it will return an instance of `Task<List<CompanyCompany>>`.
 
+## Raw responses
+
+The SDK defines methods that deserialize responses into instances of C# classes. However, these methods don't provide access to the response headers, status code, or the raw response body.
+
+To access this data, prefix any HTTP method call on a client or service with `WithRawResponse`:
+
+```csharp
+var response = await client.WithRawResponse.Companies.List();
+var statusCode = response.Message.StatusCode;
+var headers = response.Message.Headers;
+```
+
+For non-streaming responses, you can deserialize the response into an instance of a C# class if needed:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using Dataleonlabs.Models.Companies;
+
+var response = await client.WithRawResponse.Companies.List();
+List<CompanyCompany> deserialized = await response.Deserialize();
+Console.WriteLine(deserialized);
+```
+
 ## Error handling
 
 The SDK throws custom unchecked exception types:

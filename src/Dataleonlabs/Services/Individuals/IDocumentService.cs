@@ -15,6 +15,12 @@ namespace Dataleonlabs.Services.Individuals;
 public interface IDocumentService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IDocumentServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -46,6 +52,52 @@ public interface IDocumentService
 
     /// <inheritdoc cref="Upload(DocumentUploadParams, CancellationToken)"/>
     Task<Documents::GenericDocument> Upload(
+        string individualID,
+        DocumentUploadParams parameters,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IDocumentService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IDocumentServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IDocumentServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /individuals/{individual_id}/documents`, but is otherwise the
+    /// same as <see cref="IDocumentService.List(DocumentListParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Documents::DocumentResponse>> List(
+        DocumentListParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="List(DocumentListParams, CancellationToken)"/>
+    Task<HttpResponse<Documents::DocumentResponse>> List(
+        string individualID,
+        DocumentListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /individuals/{individual_id}/documents`, but is otherwise the
+    /// same as <see cref="IDocumentService.Upload(DocumentUploadParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Documents::GenericDocument>> Upload(
+        DocumentUploadParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Upload(DocumentUploadParams, CancellationToken)"/>
+    Task<HttpResponse<Documents::GenericDocument>> Upload(
         string individualID,
         DocumentUploadParams parameters,
         CancellationToken cancellationToken = default

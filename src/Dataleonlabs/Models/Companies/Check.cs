@@ -18,7 +18,11 @@ public sealed record class Check : JsonModel
     /// </summary>
     public bool? Masked
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "masked"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("masked");
+        }
         init
         {
             if (value == null)
@@ -26,7 +30,7 @@ public sealed record class Check : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "masked", value);
+            this._rawData.Set("masked", value);
         }
     }
 
@@ -35,7 +39,11 @@ public sealed record class Check : JsonModel
     /// </summary>
     public string? Message
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "message"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("message");
+        }
         init
         {
             if (value == null)
@@ -43,7 +51,7 @@ public sealed record class Check : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "message", value);
+            this._rawData.Set("message", value);
         }
     }
 
@@ -52,7 +60,11 @@ public sealed record class Check : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init
         {
             if (value == null)
@@ -60,7 +72,7 @@ public sealed record class Check : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "name", value);
+            this._rawData.Set("name", value);
         }
     }
 
@@ -69,7 +81,11 @@ public sealed record class Check : JsonModel
     /// </summary>
     public bool? ValidateValue
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "validate"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("validate");
+        }
         init
         {
             if (value == null)
@@ -77,7 +93,7 @@ public sealed record class Check : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "validate", value);
+            this._rawData.Set("validate", value);
         }
     }
 
@@ -86,7 +102,11 @@ public sealed record class Check : JsonModel
     /// </summary>
     public long? Weight
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawData, "weight"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("weight");
+        }
         init
         {
             if (value == null)
@@ -94,7 +114,7 @@ public sealed record class Check : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "weight", value);
+            this._rawData.Set("weight", value);
         }
     }
 
@@ -115,14 +135,14 @@ public sealed record class Check : JsonModel
 
     public Check(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Check(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

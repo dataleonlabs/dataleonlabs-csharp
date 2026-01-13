@@ -191,8 +191,11 @@ public class IndividualUpdateParamsPersonTest : TestBase
             PhoneNumber = "+33 1 23 45 67 89",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -212,8 +215,11 @@ public class IndividualUpdateParamsPersonTest : TestBase
             PhoneNumber = "+33 1 23 45 67 89",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsPerson>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBirthday = "15/05/1985";
@@ -355,7 +361,7 @@ public class IndividualUpdateParamsPersonGenderTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
 
@@ -383,7 +389,7 @@ public class IndividualUpdateParamsPersonGenderTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<ApiEnum<string, IndividualUpdateParamsPersonGender>>(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -462,8 +468,11 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             RawDataValue = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -487,8 +496,11 @@ public class IndividualUpdateParamsTechnicalDataTest : TestBase
             RawDataValue = true,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IndividualUpdateParamsTechnicalData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         bool expectedActiveAmlSuspicions = false;
@@ -639,10 +651,7 @@ public class IndividualUpdateParamsTechnicalDataPortalStepTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DataleonlabsInvalidDataException>(() => value.Validate());
@@ -672,10 +681,7 @@ public class IndividualUpdateParamsTechnicalDataPortalStepTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, IndividualUpdateParamsTechnicalDataPortalStep>

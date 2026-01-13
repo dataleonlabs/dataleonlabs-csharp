@@ -18,15 +18,18 @@ public sealed record class DocumentListParams : ParamsBase
     public DocumentListParams() { }
 
     public DocumentListParams(DocumentListParams documentListParams)
-        : base(documentListParams) { }
+        : base(documentListParams)
+    {
+        this.IndividualID = documentListParams.IndividualID;
+    }
 
     public DocumentListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -36,8 +39,8 @@ public sealed record class DocumentListParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

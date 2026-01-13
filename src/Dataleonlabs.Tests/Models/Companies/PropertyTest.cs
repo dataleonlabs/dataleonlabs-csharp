@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -34,8 +35,8 @@ public class PropertyTest : TestBase
             Value = "property_value",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Property>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Property>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -50,8 +51,11 @@ public class PropertyTest : TestBase
             Value = "property_value",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Property>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Property>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedName = "property_name";

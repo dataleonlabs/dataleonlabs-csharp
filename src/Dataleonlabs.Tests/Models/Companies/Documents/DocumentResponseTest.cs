@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies.Documents;
 
 namespace Dataleonlabs.Tests.Models.Companies.Documents;
@@ -77,8 +78,11 @@ public class DocumentResponseTest : TestBase
             TotalDocument = 3,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DocumentResponse>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DocumentResponse>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -106,8 +110,11 @@ public class DocumentResponseTest : TestBase
             TotalDocument = 3,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DocumentResponse>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DocumentResponse>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         List<Document> expectedDocuments =
@@ -262,8 +269,8 @@ public class DocumentTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Document>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Document>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -283,8 +290,11 @@ public class DocumentTest : TestBase
             WorkspaceID = "wk_123",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Document>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Document>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "123456";

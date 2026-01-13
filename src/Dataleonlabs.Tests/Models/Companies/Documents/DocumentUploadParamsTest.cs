@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Text.Json;
 using Dataleonlabs.Core;
 using Dataleonlabs.Exceptions;
@@ -9,28 +8,6 @@ namespace Dataleonlabs.Tests.Models.Companies.Documents;
 
 public class DocumentUploadParamsTest : TestBase
 {
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var parameters = new DocumentUploadParams
-        {
-            CompanyID = "company_id",
-            DocumentType = DocumentType.LiasseFiscale,
-            File = Encoding.UTF8.GetBytes("text"),
-            UrlValue = "https://example.com/sample.pdf",
-        };
-
-        string expectedCompanyID = "company_id";
-        ApiEnum<string, DocumentType> expectedDocumentType = DocumentType.LiasseFiscale;
-        BinaryContent expectedFile = Encoding.UTF8.GetBytes("text");
-        string expectedUrlValue = "https://example.com/sample.pdf";
-
-        Assert.Equal(expectedCompanyID, parameters.CompanyID);
-        Assert.Equal(expectedDocumentType, parameters.DocumentType);
-        Assert.Equal(expectedFile, parameters.File);
-        Assert.Equal(expectedUrlValue, parameters.UrlValue);
-    }
-
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
@@ -130,7 +107,7 @@ public class DocumentTypeTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
 
@@ -190,7 +167,7 @@ public class DocumentTypeTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<ApiEnum<string, DocumentType>>(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);

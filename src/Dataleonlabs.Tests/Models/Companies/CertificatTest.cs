@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json;
+using Dataleonlabs.Core;
 using Dataleonlabs.Models.Companies;
 
 namespace Dataleonlabs.Tests.Models.Companies;
@@ -35,8 +36,11 @@ public class CertificatTest : TestBase
             Filename = "certificate.pdf",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Certificat>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Certificat>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -51,8 +55,11 @@ public class CertificatTest : TestBase
             Filename = "certificate.pdf",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Certificat>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Certificat>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "cert_123";

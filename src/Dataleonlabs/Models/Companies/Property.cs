@@ -18,7 +18,11 @@ public sealed record class Property : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init
         {
             if (value == null)
@@ -26,7 +30,7 @@ public sealed record class Property : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "name", value);
+            this._rawData.Set("name", value);
         }
     }
 
@@ -35,7 +39,11 @@ public sealed record class Property : JsonModel
     /// </summary>
     public string? Type
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("type");
+        }
         init
         {
             if (value == null)
@@ -43,7 +51,7 @@ public sealed record class Property : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "type", value);
+            this._rawData.Set("type", value);
         }
     }
 
@@ -52,7 +60,11 @@ public sealed record class Property : JsonModel
     /// </summary>
     public string? Value
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "value"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("value");
+        }
         init
         {
             if (value == null)
@@ -60,7 +72,7 @@ public sealed record class Property : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "value", value);
+            this._rawData.Set("value", value);
         }
     }
 
@@ -79,14 +91,14 @@ public sealed record class Property : JsonModel
 
     public Property(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Property(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

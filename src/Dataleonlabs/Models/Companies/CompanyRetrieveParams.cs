@@ -20,7 +20,11 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     /// </summary>
     public bool? Document
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawQueryData, "document"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("document");
+        }
         init
         {
             if (value == null)
@@ -28,7 +32,7 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "document", value);
+            this._rawQueryData.Set("document", value);
         }
     }
 
@@ -37,7 +41,11 @@ public sealed record class CompanyRetrieveParams : ParamsBase
     /// </summary>
     public string? Scope
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "scope"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("scope");
+        }
         init
         {
             if (value == null)
@@ -45,22 +53,25 @@ public sealed record class CompanyRetrieveParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "scope", value);
+            this._rawQueryData.Set("scope", value);
         }
     }
 
     public CompanyRetrieveParams() { }
 
     public CompanyRetrieveParams(CompanyRetrieveParams companyRetrieveParams)
-        : base(companyRetrieveParams) { }
+        : base(companyRetrieveParams)
+    {
+        this.CompanyID = companyRetrieveParams.CompanyID;
+    }
 
     public CompanyRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -70,8 +81,8 @@ public sealed record class CompanyRetrieveParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

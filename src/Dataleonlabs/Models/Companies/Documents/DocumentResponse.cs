@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,7 +16,11 @@ public sealed record class DocumentResponse : JsonModel
     /// </summary>
     public IReadOnlyList<Document>? Documents
     {
-        get { return JsonModel.GetNullableClass<List<Document>>(this.RawData, "documents"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Document>>("documents");
+        }
         init
         {
             if (value == null)
@@ -23,7 +28,10 @@ public sealed record class DocumentResponse : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "documents", value);
+            this._rawData.Set<ImmutableArray<Document>?>(
+                "documents",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -32,7 +40,11 @@ public sealed record class DocumentResponse : JsonModel
     /// </summary>
     public long? TotalDocument
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawData, "total_document"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("total_document");
+        }
         init
         {
             if (value == null)
@@ -40,7 +52,7 @@ public sealed record class DocumentResponse : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "total_document", value);
+            this._rawData.Set("total_document", value);
         }
     }
 
@@ -61,14 +73,14 @@ public sealed record class DocumentResponse : JsonModel
 
     public DocumentResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DocumentResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -100,7 +112,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? ID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("id");
+        }
         init
         {
             if (value == null)
@@ -108,7 +124,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "id", value);
+            this._rawData.Set("id", value);
         }
     }
 
@@ -117,7 +133,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? DocumentType
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "document_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("document_type");
+        }
         init
         {
             if (value == null)
@@ -125,7 +145,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "document_type", value);
+            this._rawData.Set("document_type", value);
         }
     }
 
@@ -134,7 +154,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? Filename
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "filename"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("filename");
+        }
         init
         {
             if (value == null)
@@ -142,7 +166,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "filename", value);
+            this._rawData.Set("filename", value);
         }
     }
 
@@ -151,7 +175,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init
         {
             if (value == null)
@@ -159,7 +187,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "name", value);
+            this._rawData.Set("name", value);
         }
     }
 
@@ -168,7 +196,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? SignedUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "signed_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("signed_url");
+        }
         init
         {
             if (value == null)
@@ -176,7 +208,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "signed_url", value);
+            this._rawData.Set("signed_url", value);
         }
     }
 
@@ -185,7 +217,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? State
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("state");
+        }
         init
         {
             if (value == null)
@@ -193,7 +229,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "state", value);
+            this._rawData.Set("state", value);
         }
     }
 
@@ -202,7 +238,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? Status
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "status"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("status");
+        }
         init
         {
             if (value == null)
@@ -210,7 +250,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "status", value);
+            this._rawData.Set("status", value);
         }
     }
 
@@ -219,7 +259,11 @@ public sealed record class Document : JsonModel
     /// </summary>
     public string? WorkspaceID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "workspace_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("workspace_id");
+        }
         init
         {
             if (value == null)
@@ -227,7 +271,7 @@ public sealed record class Document : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "workspace_id", value);
+            this._rawData.Set("workspace_id", value);
         }
     }
 
@@ -251,14 +295,14 @@ public sealed record class Document : JsonModel
 
     public Document(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Document(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
