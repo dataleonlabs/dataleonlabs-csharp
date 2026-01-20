@@ -10,18 +10,25 @@ namespace Dataleonlabs.Models.Companies;
 
 /// <summary>
 /// Delete a company by ID
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class CompanyDeleteParams : ParamsBase
+public record class CompanyDeleteParams : ParamsBase
 {
     public string? CompanyID { get; init; }
 
     public CompanyDeleteParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CompanyDeleteParams(CompanyDeleteParams companyDeleteParams)
         : base(companyDeleteParams)
     {
         this.CompanyID = companyDeleteParams.CompanyID;
     }
+#pragma warning restore CS8618
 
     public CompanyDeleteParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -56,6 +63,28 @@ public sealed record class CompanyDeleteParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["CompanyID"] = this.CompanyID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(CompanyDeleteParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.CompanyID?.Equals(other.CompanyID) ?? other.CompanyID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -74,5 +103,10 @@ public sealed record class CompanyDeleteParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

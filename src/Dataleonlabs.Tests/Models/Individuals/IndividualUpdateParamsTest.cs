@@ -137,6 +137,47 @@ public class IndividualUpdateParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new IndividualUpdateParams
+        {
+            IndividualID = "individual_id",
+            WorkspaceID = "wk_123",
+            Person = new()
+            {
+                Birthday = "15/05/1985",
+                Email = "john.doe@example.com",
+                FirstName = "John",
+                Gender = IndividualUpdateParamsPersonGender.M,
+                LastName = "Doe",
+                MaidenName = "John Doe",
+                Nationality = "FRA",
+                PhoneNumber = "+33 1 23 45 67 89",
+            },
+            SourceID = "ID54410069066",
+            TechnicalData = new()
+            {
+                ActiveAmlSuspicions = false,
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
+                FilteringScoreAmlSuspicions = 0.75f,
+                Language = "fra",
+                PortalSteps =
+                [
+                    IndividualUpdateParamsTechnicalDataPortalStep.IdentityVerification,
+                    IndividualUpdateParamsTechnicalDataPortalStep.Selfie,
+                    IndividualUpdateParamsTechnicalDataPortalStep.FaceMatch,
+                ],
+                RawDataValue = true,
+            },
+        };
+
+        IndividualUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class IndividualUpdateParamsPersonTest : TestBase

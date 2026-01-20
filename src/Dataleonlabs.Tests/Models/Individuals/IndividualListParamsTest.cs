@@ -123,6 +123,26 @@ public class IndividualListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new IndividualListParams
+        {
+            EndDate = "2019-12-27",
+            Limit = 1,
+            Offset = 0,
+            SourceID = "source_id",
+            StartDate = "2019-12-27",
+            State = State.Void,
+            Status = Status.Rejected,
+            WorkspaceID = "workspace_id",
+        };
+
+        IndividualListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class StateTest : TestBase

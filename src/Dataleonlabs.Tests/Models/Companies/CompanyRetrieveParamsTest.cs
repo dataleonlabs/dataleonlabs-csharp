@@ -72,4 +72,19 @@ public class CompanyRetrieveParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CompanyRetrieveParams
+        {
+            CompanyID = "company_id",
+            Document = true,
+            Scope = "scope",
+        };
+
+        CompanyRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

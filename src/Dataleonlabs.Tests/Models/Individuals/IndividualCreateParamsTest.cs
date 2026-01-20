@@ -122,6 +122,46 @@ public class IndividualCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://inference.eu-west-1.dataleon.ai/individuals"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new IndividualCreateParams
+        {
+            WorkspaceID = "wk_123",
+            Person = new()
+            {
+                Birthday = "15/05/1985",
+                Email = "john.doe@example.com",
+                FirstName = "John",
+                Gender = Gender.M,
+                LastName = "Doe",
+                MaidenName = "John Doe",
+                Nationality = "FRA",
+                PhoneNumber = "+33 1 23 45 67 89",
+            },
+            SourceID = "ID54410069066",
+            TechnicalData = new()
+            {
+                ActiveAmlSuspicions = false,
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
+                FilteringScoreAmlSuspicions = 0.75f,
+                Language = "fra",
+                PortalSteps =
+                [
+                    PortalStep.IdentityVerification,
+                    PortalStep.Selfie,
+                    PortalStep.FaceMatch,
+                ],
+                RawDataValue = true,
+            },
+        };
+
+        IndividualCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class PersonTest : TestBase

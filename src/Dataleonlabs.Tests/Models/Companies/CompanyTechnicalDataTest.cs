@@ -17,6 +17,7 @@ public class CompanyTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+            ApprovedBy = "user:john.doe",
             CallbackUrl = "https://example.com/callback",
             CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
@@ -28,6 +29,7 @@ public class CompanyTechnicalDataTest : TestBase
             Language = "fra",
             LocationIP = "203.0.113.45",
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             NotificationConfirmation = false,
             PortalSteps =
             [
@@ -38,6 +40,7 @@ public class CompanyTechnicalDataTest : TestBase
             QrCode = "false",
             RawDataValue = true,
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -47,6 +50,7 @@ public class CompanyTechnicalDataTest : TestBase
         bool expectedActiveAmlSuspicions = false;
         long expectedApiVersion = 2;
         DateTimeOffset expectedApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z");
+        string expectedApprovedBy = "user:john.doe";
         string expectedCallbackUrl = "https://example.com/callback";
         string expectedCallbackUrlNotification = "https://example.com/notify";
         bool expectedDisableNotification = false;
@@ -59,6 +63,7 @@ public class CompanyTechnicalDataTest : TestBase
         string expectedIP = "192.168.1.1";
         string expectedLanguage = "fra";
         string expectedLocationIP = "203.0.113.45";
+        string expectedNeedReviewBy = "user:reviewer01";
         bool expectedNotificationConfirmation = false;
         List<ApiEnum<string, CompanyTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -68,6 +73,7 @@ public class CompanyTechnicalDataTest : TestBase
         ];
         string expectedQrCode = "false";
         bool expectedRawDataValue = true;
+        string expectedRejectedBy = "user:jane.doe";
         long expectedSessionDuration = 45;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z");
         DateTimeOffset expectedTransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z");
@@ -76,6 +82,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedActiveAmlSuspicions, model.ActiveAmlSuspicions);
         Assert.Equal(expectedApiVersion, model.ApiVersion);
         Assert.Equal(expectedApprovedAt, model.ApprovedAt);
+        Assert.Equal(expectedApprovedBy, model.ApprovedBy);
         Assert.Equal(expectedCallbackUrl, model.CallbackUrl);
         Assert.Equal(expectedCallbackUrlNotification, model.CallbackUrlNotification);
         Assert.Equal(expectedDisableNotification, model.DisableNotification);
@@ -87,6 +94,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedLanguage, model.Language);
         Assert.Equal(expectedLocationIP, model.LocationIP);
         Assert.Null(model.NeedReviewAt);
+        Assert.Equal(expectedNeedReviewBy, model.NeedReviewBy);
         Assert.Equal(expectedNotificationConfirmation, model.NotificationConfirmation);
         Assert.NotNull(model.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, model.PortalSteps.Count);
@@ -97,6 +105,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedQrCode, model.QrCode);
         Assert.Equal(expectedRawDataValue, model.RawDataValue);
         Assert.Null(model.RejectedAt);
+        Assert.Equal(expectedRejectedBy, model.RejectedBy);
         Assert.Equal(expectedSessionDuration, model.SessionDuration);
         Assert.Equal(expectedStartedAt, model.StartedAt);
         Assert.Equal(expectedTransferAt, model.TransferAt);
@@ -111,6 +120,7 @@ public class CompanyTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+            ApprovedBy = "user:john.doe",
             CallbackUrl = "https://example.com/callback",
             CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
@@ -122,6 +132,7 @@ public class CompanyTechnicalDataTest : TestBase
             Language = "fra",
             LocationIP = "203.0.113.45",
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             NotificationConfirmation = false,
             PortalSteps =
             [
@@ -132,6 +143,7 @@ public class CompanyTechnicalDataTest : TestBase
             QrCode = "false",
             RawDataValue = true,
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -155,6 +167,7 @@ public class CompanyTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+            ApprovedBy = "user:john.doe",
             CallbackUrl = "https://example.com/callback",
             CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
@@ -166,6 +179,7 @@ public class CompanyTechnicalDataTest : TestBase
             Language = "fra",
             LocationIP = "203.0.113.45",
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             NotificationConfirmation = false,
             PortalSteps =
             [
@@ -176,6 +190,7 @@ public class CompanyTechnicalDataTest : TestBase
             QrCode = "false",
             RawDataValue = true,
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -192,6 +207,7 @@ public class CompanyTechnicalDataTest : TestBase
         bool expectedActiveAmlSuspicions = false;
         long expectedApiVersion = 2;
         DateTimeOffset expectedApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z");
+        string expectedApprovedBy = "user:john.doe";
         string expectedCallbackUrl = "https://example.com/callback";
         string expectedCallbackUrlNotification = "https://example.com/notify";
         bool expectedDisableNotification = false;
@@ -204,6 +220,7 @@ public class CompanyTechnicalDataTest : TestBase
         string expectedIP = "192.168.1.1";
         string expectedLanguage = "fra";
         string expectedLocationIP = "203.0.113.45";
+        string expectedNeedReviewBy = "user:reviewer01";
         bool expectedNotificationConfirmation = false;
         List<ApiEnum<string, CompanyTechnicalDataPortalStep>> expectedPortalSteps =
         [
@@ -213,6 +230,7 @@ public class CompanyTechnicalDataTest : TestBase
         ];
         string expectedQrCode = "false";
         bool expectedRawDataValue = true;
+        string expectedRejectedBy = "user:jane.doe";
         long expectedSessionDuration = 45;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z");
         DateTimeOffset expectedTransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z");
@@ -221,6 +239,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedActiveAmlSuspicions, deserialized.ActiveAmlSuspicions);
         Assert.Equal(expectedApiVersion, deserialized.ApiVersion);
         Assert.Equal(expectedApprovedAt, deserialized.ApprovedAt);
+        Assert.Equal(expectedApprovedBy, deserialized.ApprovedBy);
         Assert.Equal(expectedCallbackUrl, deserialized.CallbackUrl);
         Assert.Equal(expectedCallbackUrlNotification, deserialized.CallbackUrlNotification);
         Assert.Equal(expectedDisableNotification, deserialized.DisableNotification);
@@ -232,6 +251,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedLanguage, deserialized.Language);
         Assert.Equal(expectedLocationIP, deserialized.LocationIP);
         Assert.Null(deserialized.NeedReviewAt);
+        Assert.Equal(expectedNeedReviewBy, deserialized.NeedReviewBy);
         Assert.Equal(expectedNotificationConfirmation, deserialized.NotificationConfirmation);
         Assert.NotNull(deserialized.PortalSteps);
         Assert.Equal(expectedPortalSteps.Count, deserialized.PortalSteps.Count);
@@ -242,6 +262,7 @@ public class CompanyTechnicalDataTest : TestBase
         Assert.Equal(expectedQrCode, deserialized.QrCode);
         Assert.Equal(expectedRawDataValue, deserialized.RawDataValue);
         Assert.Null(deserialized.RejectedAt);
+        Assert.Equal(expectedRejectedBy, deserialized.RejectedBy);
         Assert.Equal(expectedSessionDuration, deserialized.SessionDuration);
         Assert.Equal(expectedStartedAt, deserialized.StartedAt);
         Assert.Equal(expectedTransferAt, deserialized.TransferAt);
@@ -256,6 +277,7 @@ public class CompanyTechnicalDataTest : TestBase
             ActiveAmlSuspicions = false,
             ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+            ApprovedBy = "user:john.doe",
             CallbackUrl = "https://example.com/callback",
             CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
@@ -267,6 +289,7 @@ public class CompanyTechnicalDataTest : TestBase
             Language = "fra",
             LocationIP = "203.0.113.45",
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             NotificationConfirmation = false,
             PortalSteps =
             [
@@ -277,6 +300,7 @@ public class CompanyTechnicalDataTest : TestBase
             QrCode = "false",
             RawDataValue = true,
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -291,9 +315,12 @@ public class CompanyTechnicalDataTest : TestBase
     {
         var model = new CompanyTechnicalData
         {
+            ApprovedBy = "user:john.doe",
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
         };
 
         Assert.Null(model.ActiveAmlSuspicions);
@@ -343,9 +370,12 @@ public class CompanyTechnicalDataTest : TestBase
     {
         var model = new CompanyTechnicalData
         {
+            ApprovedBy = "user:john.doe",
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
         };
 
         model.Validate();
@@ -356,9 +386,12 @@ public class CompanyTechnicalDataTest : TestBase
     {
         var model = new CompanyTechnicalData
         {
+            ApprovedBy = "user:john.doe",
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
 
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
@@ -430,9 +463,12 @@ public class CompanyTechnicalDataTest : TestBase
     {
         var model = new CompanyTechnicalData
         {
+            ApprovedBy = "user:john.doe",
             DisableNotificationDate = DateTimeOffset.Parse("2025-07-12T13:10:00Z"),
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
 
             // Null should be interpreted as omitted for these properties
             ActiveAmlSuspicions = null,
@@ -492,12 +528,18 @@ public class CompanyTechnicalDataTest : TestBase
             TransferMode = "API",
         };
 
+        Assert.Null(model.ApprovedBy);
+        Assert.False(model.RawData.ContainsKey("approved_by"));
         Assert.Null(model.DisableNotificationDate);
         Assert.False(model.RawData.ContainsKey("disable_notification_date"));
         Assert.Null(model.NeedReviewAt);
         Assert.False(model.RawData.ContainsKey("need_review_at"));
+        Assert.Null(model.NeedReviewBy);
+        Assert.False(model.RawData.ContainsKey("need_review_by"));
         Assert.Null(model.RejectedAt);
         Assert.False(model.RawData.ContainsKey("rejected_at"));
+        Assert.Null(model.RejectedBy);
+        Assert.False(model.RawData.ContainsKey("rejected_by"));
     }
 
     [Fact]
@@ -566,17 +608,26 @@ public class CompanyTechnicalDataTest : TestBase
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
             TransferMode = "API",
 
+            ApprovedBy = null,
             DisableNotificationDate = null,
             NeedReviewAt = null,
+            NeedReviewBy = null,
             RejectedAt = null,
+            RejectedBy = null,
         };
 
+        Assert.Null(model.ApprovedBy);
+        Assert.True(model.RawData.ContainsKey("approved_by"));
         Assert.Null(model.DisableNotificationDate);
         Assert.True(model.RawData.ContainsKey("disable_notification_date"));
         Assert.Null(model.NeedReviewAt);
         Assert.True(model.RawData.ContainsKey("need_review_at"));
+        Assert.Null(model.NeedReviewBy);
+        Assert.True(model.RawData.ContainsKey("need_review_by"));
         Assert.Null(model.RejectedAt);
         Assert.True(model.RawData.ContainsKey("rejected_at"));
+        Assert.Null(model.RejectedBy);
+        Assert.True(model.RawData.ContainsKey("rejected_by"));
     }
 
     [Fact]
@@ -610,9 +661,12 @@ public class CompanyTechnicalDataTest : TestBase
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
             TransferMode = "API",
 
+            ApprovedBy = null,
             DisableNotificationDate = null,
             NeedReviewAt = null,
+            NeedReviewBy = null,
             RejectedAt = null,
+            RejectedBy = null,
         };
 
         model.Validate();

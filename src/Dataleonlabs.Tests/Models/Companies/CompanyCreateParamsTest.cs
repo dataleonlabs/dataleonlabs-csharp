@@ -181,6 +181,48 @@ public class CompanyCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://inference.eu-west-1.dataleon.ai/companies"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CompanyCreateParams
+        {
+            Company = new()
+            {
+                Name = "ACME Corp",
+                Address = "123 rue Exemple, Paris",
+                CommercialName = "ACME",
+                Country = "FR",
+                Email = "info@acme.fr",
+                EmployerIdentificationNumber = "EIN123456",
+                LegalForm = "SARL",
+                PhoneNumber = "+33 1 23 45 67 89",
+                RegistrationDate = "2010-05-15",
+                RegistrationID = "RCS123456",
+                ShareCapital = "100000",
+                Status = "active",
+                TaxIdentificationNumber = "FR123456789",
+                Type = "main",
+                WebsiteUrl = "https://acme.fr",
+            },
+            WorkspaceID = "wk_123",
+            SourceID = "ID54410069066",
+            TechnicalData = new()
+            {
+                ActiveAmlSuspicions = false,
+                CallbackUrl = "https://example.com/callback",
+                CallbackUrlNotification = "https://example.com/notify",
+                FilteringScoreAmlSuspicions = 0.75f,
+                Language = "fra",
+                PortalSteps = [PortalStep.IdentityVerification, PortalStep.DocumentSigning],
+                RawDataValue = true,
+            },
+        };
+
+        CompanyCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class CompanyTest : TestBase

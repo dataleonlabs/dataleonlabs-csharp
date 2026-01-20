@@ -10,18 +10,25 @@ namespace Dataleonlabs.Models.Companies.Documents;
 
 /// <summary>
 /// Get documents to an company
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class DocumentListParams : ParamsBase
+public record class DocumentListParams : ParamsBase
 {
     public string? CompanyID { get; init; }
 
     public DocumentListParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DocumentListParams(DocumentListParams documentListParams)
         : base(documentListParams)
     {
         this.CompanyID = documentListParams.CompanyID;
     }
+#pragma warning restore CS8618
 
     public DocumentListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -56,6 +63,28 @@ public sealed record class DocumentListParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["CompanyID"] = this.CompanyID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(DocumentListParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.CompanyID?.Equals(other.CompanyID) ?? other.CompanyID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -74,5 +103,10 @@ public sealed record class DocumentListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

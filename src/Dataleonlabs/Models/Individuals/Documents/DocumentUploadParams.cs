@@ -12,8 +12,12 @@ namespace Dataleonlabs.Models.Individuals.Documents;
 
 /// <summary>
 /// Upload documents to an individual
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class DocumentUploadParams : ParamsBase
+public record class DocumentUploadParams : ParamsBase
 {
     readonly MultipartJsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, MultipartJsonElement> RawBodyData
@@ -82,6 +86,8 @@ public sealed record class DocumentUploadParams : ParamsBase
 
     public DocumentUploadParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DocumentUploadParams(DocumentUploadParams documentUploadParams)
         : base(documentUploadParams)
     {
@@ -89,6 +95,7 @@ public sealed record class DocumentUploadParams : ParamsBase
 
         this._rawBodyData = new(documentUploadParams._rawBodyData);
     }
+#pragma warning restore CS8618
 
     public DocumentUploadParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -152,6 +159,11 @@ public sealed record class DocumentUploadParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }
 

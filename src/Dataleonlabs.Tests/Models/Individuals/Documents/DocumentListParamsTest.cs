@@ -27,4 +27,14 @@ public class DocumentListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new DocumentListParams { IndividualID = "individual_id" };
+
+        DocumentListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

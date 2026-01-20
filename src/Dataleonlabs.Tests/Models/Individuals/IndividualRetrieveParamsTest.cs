@@ -72,4 +72,19 @@ public class IndividualRetrieveParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new IndividualRetrieveParams
+        {
+            IndividualID = "individual_id",
+            Document = true,
+            Scope = "scope",
+        };
+
+        IndividualRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

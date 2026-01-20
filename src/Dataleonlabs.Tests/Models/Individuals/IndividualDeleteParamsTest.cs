@@ -27,4 +27,14 @@ public class IndividualDeleteParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new IndividualDeleteParams { IndividualID = "individual_id" };
+
+        IndividualDeleteParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

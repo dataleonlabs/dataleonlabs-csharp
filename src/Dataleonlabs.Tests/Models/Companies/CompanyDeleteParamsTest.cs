@@ -24,4 +24,14 @@ public class CompanyDeleteParamsTest : TestBase
 
         Assert.Equal(new Uri("https://inference.eu-west-1.dataleon.ai/companies/company_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CompanyDeleteParams { CompanyID = "company_id" };
+
+        CompanyDeleteParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

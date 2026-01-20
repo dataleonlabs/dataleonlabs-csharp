@@ -81,6 +81,19 @@ public sealed record class CompanyTechnicalData : JsonModel
     }
 
     /// <summary>
+    /// Identifier of the actor who approved (e.g., user id or username).
+    /// </summary>
+    public string? ApprovedBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("approved_by");
+        }
+        init { this._rawData.Set("approved_by", value); }
+    }
+
+    /// <summary>
     /// URL to receive callback data from the AML system.
     /// </summary>
     public string? CallbackUrl
@@ -298,6 +311,19 @@ public sealed record class CompanyTechnicalData : JsonModel
     }
 
     /// <summary>
+    /// Identifier of the actor who requested review (e.g., user id or username).
+    /// </summary>
+    public string? NeedReviewBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("need_review_by");
+        }
+        init { this._rawData.Set("need_review_by", value); }
+    }
+
+    /// <summary>
     /// Flag indicating if notification confirmation is required or received.
     /// </summary>
     public bool? NotificationConfirmation
@@ -400,6 +426,19 @@ public sealed record class CompanyTechnicalData : JsonModel
     }
 
     /// <summary>
+    /// Identifier of the actor who rejected (e.g., user id or username).
+    /// </summary>
+    public string? RejectedBy
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("rejected_by");
+        }
+        init { this._rawData.Set("rejected_by", value); }
+    }
+
+    /// <summary>
     /// Duration of the user session in seconds.
     /// </summary>
     public long? SessionDuration
@@ -489,6 +528,7 @@ public sealed record class CompanyTechnicalData : JsonModel
         _ = this.ActiveAmlSuspicions;
         _ = this.ApiVersion;
         _ = this.ApprovedAt;
+        _ = this.ApprovedBy;
         _ = this.CallbackUrl;
         _ = this.CallbackUrlNotification;
         _ = this.DisableNotification;
@@ -500,6 +540,7 @@ public sealed record class CompanyTechnicalData : JsonModel
         _ = this.Language;
         _ = this.LocationIP;
         _ = this.NeedReviewAt;
+        _ = this.NeedReviewBy;
         _ = this.NotificationConfirmation;
         foreach (var item in this.PortalSteps ?? [])
         {
@@ -508,6 +549,7 @@ public sealed record class CompanyTechnicalData : JsonModel
         _ = this.QrCode;
         _ = this.RawDataValue;
         _ = this.RejectedAt;
+        _ = this.RejectedBy;
         _ = this.SessionDuration;
         _ = this.StartedAt;
         _ = this.TransferAt;

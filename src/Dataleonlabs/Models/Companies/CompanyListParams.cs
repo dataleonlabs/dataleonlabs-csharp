@@ -12,8 +12,12 @@ namespace Dataleonlabs.Models.Companies;
 
 /// <summary>
 /// Get all companies
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class CompanyListParams : ParamsBase
+public record class CompanyListParams : ParamsBase
 {
     /// <summary>
     /// Filter companies created before this date (format YYYY-MM-DD)
@@ -185,8 +189,11 @@ public sealed record class CompanyListParams : ParamsBase
 
     public CompanyListParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CompanyListParams(CompanyListParams companyListParams)
         : base(companyListParams) { }
+#pragma warning restore CS8618
 
     public CompanyListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -221,6 +228,26 @@ public sealed record class CompanyListParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(CompanyListParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override System::Uri Url(ClientOptions options)
     {
         return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/companies")
@@ -236,6 +263,11 @@ public sealed record class CompanyListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }
 

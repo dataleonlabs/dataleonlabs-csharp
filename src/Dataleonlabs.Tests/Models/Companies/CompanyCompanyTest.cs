@@ -205,6 +205,7 @@ public class CompanyCompanyTest : TestBase
                 ActiveAmlSuspicions = false,
                 ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+                ApprovedBy = "user:john.doe",
                 CallbackUrl = "https://example.com/callback",
                 CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
@@ -216,6 +217,7 @@ public class CompanyCompanyTest : TestBase
                 Language = "fra",
                 LocationIP = "203.0.113.45",
                 NeedReviewAt = null,
+                NeedReviewBy = "user:reviewer01",
                 NotificationConfirmation = false,
                 PortalSteps =
                 [
@@ -226,6 +228,7 @@ public class CompanyCompanyTest : TestBase
                 QrCode = "false",
                 RawDataValue = true,
                 RejectedAt = null,
+                RejectedBy = "user:jane.doe",
                 SessionDuration = 45,
                 StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -418,6 +421,7 @@ public class CompanyCompanyTest : TestBase
             ActiveAmlSuspicions = false,
             ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+            ApprovedBy = "user:john.doe",
             CallbackUrl = "https://example.com/callback",
             CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
@@ -429,6 +433,7 @@ public class CompanyCompanyTest : TestBase
             Language = "fra",
             LocationIP = "203.0.113.45",
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             NotificationConfirmation = false,
             PortalSteps =
             [
@@ -439,6 +444,7 @@ public class CompanyCompanyTest : TestBase
             QrCode = "false",
             RawDataValue = true,
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -680,6 +686,7 @@ public class CompanyCompanyTest : TestBase
                 ActiveAmlSuspicions = false,
                 ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+                ApprovedBy = "user:john.doe",
                 CallbackUrl = "https://example.com/callback",
                 CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
@@ -691,6 +698,7 @@ public class CompanyCompanyTest : TestBase
                 Language = "fra",
                 LocationIP = "203.0.113.45",
                 NeedReviewAt = null,
+                NeedReviewBy = "user:reviewer01",
                 NotificationConfirmation = false,
                 PortalSteps =
                 [
@@ -701,6 +709,7 @@ public class CompanyCompanyTest : TestBase
                 QrCode = "false",
                 RawDataValue = true,
                 RejectedAt = null,
+                RejectedBy = "user:jane.doe",
                 SessionDuration = 45,
                 StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -913,6 +922,7 @@ public class CompanyCompanyTest : TestBase
                 ActiveAmlSuspicions = false,
                 ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+                ApprovedBy = "user:john.doe",
                 CallbackUrl = "https://example.com/callback",
                 CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
@@ -924,6 +934,7 @@ public class CompanyCompanyTest : TestBase
                 Language = "fra",
                 LocationIP = "203.0.113.45",
                 NeedReviewAt = null,
+                NeedReviewBy = "user:reviewer01",
                 NotificationConfirmation = false,
                 PortalSteps =
                 [
@@ -934,6 +945,7 @@ public class CompanyCompanyTest : TestBase
                 QrCode = "false",
                 RawDataValue = true,
                 RejectedAt = null,
+                RejectedBy = "user:jane.doe",
                 SessionDuration = 45,
                 StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -1133,6 +1145,7 @@ public class CompanyCompanyTest : TestBase
             ActiveAmlSuspicions = false,
             ApiVersion = 2,
             ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+            ApprovedBy = "user:john.doe",
             CallbackUrl = "https://example.com/callback",
             CallbackUrlNotification = "https://example.com/notify",
             DisableNotification = false,
@@ -1144,6 +1157,7 @@ public class CompanyCompanyTest : TestBase
             Language = "fra",
             LocationIP = "203.0.113.45",
             NeedReviewAt = null,
+            NeedReviewBy = "user:reviewer01",
             NotificationConfirmation = false,
             PortalSteps =
             [
@@ -1154,6 +1168,7 @@ public class CompanyCompanyTest : TestBase
             QrCode = "false",
             RawDataValue = true,
             RejectedAt = null,
+            RejectedBy = "user:jane.doe",
             SessionDuration = 45,
             StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
             TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
@@ -1395,6 +1410,7 @@ public class CompanyCompanyTest : TestBase
                 ActiveAmlSuspicions = false,
                 ApiVersion = 2,
                 ApprovedAt = DateTimeOffset.Parse("2025-05-01T12:00:00Z"),
+                ApprovedBy = "user:john.doe",
                 CallbackUrl = "https://example.com/callback",
                 CallbackUrlNotification = "https://example.com/notify",
                 DisableNotification = false,
@@ -1406,6 +1422,7 @@ public class CompanyCompanyTest : TestBase
                 Language = "fra",
                 LocationIP = "203.0.113.45",
                 NeedReviewAt = null,
+                NeedReviewBy = "user:reviewer01",
                 NotificationConfirmation = false,
                 PortalSteps =
                 [
@@ -1416,6 +1433,7 @@ public class CompanyCompanyTest : TestBase
                 QrCode = "false",
                 RawDataValue = true,
                 RejectedAt = null,
+                RejectedBy = "user:jane.doe",
                 SessionDuration = 45,
                 StartedAt = DateTimeOffset.Parse("2025-05-05T13:00:00Z"),
                 TransferAt = DateTimeOffset.Parse("2025-07-12T14:00:00Z"),
